@@ -12,6 +12,8 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         gradientCard: `linear-gradient(141deg, rgba(181,228,201,1) 0%, rgba(128,186,186,1) 100%, rgba(42,118,162,1) 100%);`,
+        gradientDefault: `linear-gradient(135deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 23%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 100%)`,
+        gradientAccent: `linear-gradient(225deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(219, 242, 229, 1) 80%, rgba(219, 242, 229, 1) 100%)`,
       },
       backgroundColor: {
         "green-overlay": "#11A950",

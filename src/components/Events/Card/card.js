@@ -40,15 +40,15 @@ export default function EventCard({ title, description, img, isGreen }) {
       >
         {size.width >= 1024 && hovering ? (
           <span className={`${isGreen ? "text-green-darker" : "text-white"}`}>
-            <h5 className="text-h5 font-bold">{title}</h5>
-            <p className="lg:text-small xl:text-normal font-medium">
+            <h5 className="antialiased text-h5 font-bold">{title}</h5>
+            <p className="antialiased lg:text-small xl:text-normal font-medium">
               {description}
             </p>
           </span>
         ) : (
           <>
             <h4
-              className={`text-white font-extrabold text-normal lg:text-h4 drop-shadow-xl tracking-wide`}
+              className={`antialiased text-white font-extrabold text-normal lg:text-h4 drop-shadow-xl tracking-wide`}
             >
               {title}
             </h4>

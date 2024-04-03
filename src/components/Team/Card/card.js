@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useWindowSize } from "@uidotdev/usehooks";
 
-export default function EventCard({ imageUrl, title, name, socialLinks }) {
+export default function TeamCard({ imageUrl, title, name, socialLinks }) {
   const size = useWindowSize();
 
   return (
@@ -12,17 +12,17 @@ export default function EventCard({ imageUrl, title, name, socialLinks }) {
     >
       {size.width >= 1024 ? (
         <div
-          className={`absolute inset-0 flex items-center justify-between md:px-[2rem]`}
+          className={` absolute inset-0 space-x-[1rem] flex items-center justify-between md:px-[2rem]`}
         >
           <div className="lg:space-y-[32px] xl:space-y-56">
             <div className="text-blue-darkActive">
               <h5
-                className={`text-[8px] md:text-small lg:text-normal xl:text-large font-medium`}
+                className={`antialiased text-[8px] md:text-small lg:text-normal xl:text-large font-medium`}
               >
                 {title}
               </h5>
               <p
-                className={`text-normal md:text-large lg:text-h5 xl:text-h4 font-bold lg:font-extrabold xl:font-black`}
+                className={`antialiased text-normal md:text-large lg:text-h5 xl:text-h4 font-bold lg:font-extrabold xl:font-black`}
               >
                 {name}
               </p>
@@ -30,7 +30,7 @@ export default function EventCard({ imageUrl, title, name, socialLinks }) {
             <div>
               <Link href={socialLinks}>
                 <Image
-                  src={`.././svgs/linkedin.svg`}
+                  src={`assets/about/svgs/linkedin.svg`}
                   className={`w-[1rem] h-[1rem] lg:w-[2rem] lg:h-[2rem] xl:w-[3rem] xl:h-[3rem]`}
                   width={0}
                   height={0}
@@ -47,14 +47,14 @@ export default function EventCard({ imageUrl, title, name, socialLinks }) {
         </div>
       ) : (
         <div
-          className={`absolute inset-0 space-y-[1rem] justify-between py-[1rem] px-[1rem]`}
+          className={`absolute inset-0 space-y-[1rem] justify-between py-[1rem] px-[1rem] overflow-hidden`}
         >
-          <div className="flex justify-between md:px-16 md:py-[12px]">
+          <div className="flex justify-between space-x-[16px] md:px-16 md:py-[12px]">
             <div className="text-blue-darkActive">
-              <h5 className={`text-[8px] md:text-small font-medium`}>
+              <h5 className={`antialiased text-[8px] md:text-small font-medium`}>
                 {title}
               </h5>
-              <p className={`text-small md:text-medium font-bold`}>{name}</p>
+              <p className={`antialiased break-words text-small md:text-medium font-bold`}>{name}</p>
             </div>
             <Image
               src={imageUrl}
@@ -66,7 +66,7 @@ export default function EventCard({ imageUrl, title, name, socialLinks }) {
           <div className="relative w-fit md:px-16">
             <Link href={socialLinks} target="_blank">
               <Image
-                src={`.././svgs/linkedin.svg`}
+                src={`assets/about/svgs/linkedin.svg`}
                 className={`w-[20px] h-[20px] md:w-[1.5rem] md:h-[1.5rem]`}
                 width={0}
                 height={0}

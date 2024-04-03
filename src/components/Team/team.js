@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import DivisionCard from "./Card/card";
+import TeamCard from "./Card/card";
 import React, { useState } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 
@@ -9,52 +9,52 @@ export default function Divisions() {
   const size = useWindowSize();
   const divisionCards = [
     {
-      imageUrl: ".././images/person.png",
+      imageUrl: "assets/about/images/person.png",
       title: "Anggota",
       name: "Amar Zidan",
-      socialLinks: "https://google.com",
+      socialLinks: "https://linkedin.com/",
     },
     {
-      imageUrl: ".././images/person.png",
+      imageUrl: "assets/about/images/person.png",
       title: "Ketua",
       name: "Abid Zakly",
-      socialLinks: "https://twitter.com",
-    },
-    {
-      imageUrl: ".././images/person.png",
-      title: "Anggota",
-      name: "Sarah Sirih",
-      socialLinks: "https://github.com",
-    },
-    {
-      imageUrl: ".././images/person.png",
-      title: "Anggota",
-      name: "David Gadget",
-      socialLinks: "https://linkedin.com",
-    },
-    {
-      imageUrl: ".././images/person.png",
-      title: "Anggota",
-      name: "Bapa Bipi",
-      socialLinks: "https://google.com",
-    },
-    {
-      imageUrl: ".././images/person.png",
-      title: "Ketua",
-      name: "Mama Mimi",
-      socialLinks: "https://twitter.com",
-    },
-    {
-      imageUrl: ".././images/person.png",
-      title: "Anggota",
-      name: "Ami Lekso",
       socialLinks: "https://github.com/abidzakly",
     },
     {
-      imageUrl: ".././images/person.png",
+      imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Afi Ahmad",
+      name: "Rahman Hakim",
+      socialLinks: "https://linkedin.com/",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Fadia Rizqa",
       socialLinks: "https://linkedin.com",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Muh Darrel",
+      socialLinks: "https://linkedin.com/",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Ketua",
+      name: "Rizky Zaki",
+      socialLinks: "https://linkedin.com/",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Arya Firmansyah",
+      socialLinks: "https://linkedin.com/",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Faiz Elfahad",
+      socialLinks: "https://linkedin.com/",
     },
   ];
 
@@ -79,7 +79,7 @@ export default function Divisions() {
       </div>
       <div className="grid grid-cols-2 mb-32">
         {displayedCards.map((card, index) => (
-          <DivisionCard key={index} {...card} />
+          <TeamCard key={index} {...card} />
         ))}
       </div>
       {size.width >= 768 ? (
@@ -88,7 +88,7 @@ export default function Divisions() {
           onClick={handleNext}
         >
           <Image
-            src={`.././svgs/arrow-next.svg`}
+            src={`assets/about/svgs/arrow-next.svg`}
             className={`${
               size.width >= 768 ? "w-[65px] h-[65px]" : ""
             }w-[] md:w-[65px] md:h-[65px]`}

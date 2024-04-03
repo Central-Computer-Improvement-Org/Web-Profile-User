@@ -16,37 +16,37 @@ export default function Events() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 ">
         <EventCard
-          img={`.././images/cci-summit.png`}
+          img={`assets/about/images/cci-summit.png`}
           title={`CCI SUMMIT`}
           description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
           isGreen={true}
         />
         <EventCard
-          img={`.././images/it-talks.png`}
+          img={`assets/about/images/it-talks.png`}
           title={`IT TALKS`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
           isGreen={false}
         />
         <EventCard
-          img={`.././images/workshop.png`}
+          img={`assets/about/images/workshop.png`}
           title={`WORKSHOP`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
           isGreen={size.width >= 1024 ? false : true}
         />
         <EventCard
-          img={`.././images/bakti-sosial.png`}
+          img={`assets/about/images/bakti-sosial.png`}
           title={`BAKTI SOSIAL`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
           isGreen={size.width >= 1024 ? true : false}
         />
         <EventCard
-          img={`.././images/open-mind.png`}
+          img={`assets/about/images/open-mind.png`}
           title={`OPEN MIND`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
           isGreen={true}
         />
         <EventCard
-          img={`.././images/it-competitions.png`}
+          img={`assets/about/images/it-competitions.png`}
           title={`IT COMPETITION`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
           isGreen={size.width >= 1024 ? false : false}
@@ -55,7 +55,7 @@ export default function Events() {
       <div className="hidden lg:flex justify-center lg:mt-[54px]">
         {/* <button>
           <Image
-            src={`.././svgs/arrow-next.svg`}
+            src={`svgs/arrow-next.svg`}
             alt="arr-next"
             width={65}
             height={65}

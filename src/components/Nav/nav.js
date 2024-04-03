@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
@@ -49,7 +48,7 @@ export default function Nav() {
         className={`relative flex justify-between px-24 h-[70px] md:h-[92px] border-b-[1px] border-blue-lightActive md:px-96`}
       >
         <Image
-          src=".././svgs/logo.svg"
+          src="assets/global/svgs/logo.svg"
           alt="Logo CCI"
           className="my-auto w-[64px] h-[64px] md:w-80 md:h-80"
           width={0}
@@ -69,7 +68,7 @@ export default function Nav() {
           onClick={toggleMenu}
         >
           <Image
-            src={".././svgs/burgermenu.svg"}
+            src={"assets/nav/svgs/burgermenu.svg"}
             alt="menu"
             width={24}
             height={24}
@@ -108,7 +107,7 @@ function Links({
       <div className="flex flex-col gap-[6rem] md:gap-0">
         <button type={`button`} onClick={toggleMenu}>
           <Image
-            src={`.././svgs/arrow-back.svg`}
+            src={`assets/nav/svgs/arrow-back.svg`}
             className={`${sideBar} mt-24 ml-24`}
             alt="dd"
             width={56}
@@ -134,8 +133,12 @@ function Links({
               <Image
                 src={`${
                   isDropdownOpen
-                    ? ".././svgs/dropdown-active.svg"
-                    : ".././svgs/dropdown.svg"
+                    ? isSideBarOpen
+                      ? "assets/nav/svgs/dropdown-white-active.svg"
+                      : "assets/nav/svgs/dropdown-active.svg"
+                    : isSideBarOpen
+                    ? "assets/nav/svgs/dropdown-white.svg"
+                    : "assets/nav/svgs/dropdown.svg"
                 }`}
                 alt="dropdown"
                 width={24}

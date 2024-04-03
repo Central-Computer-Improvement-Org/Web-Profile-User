@@ -1,21 +1,21 @@
 import Header from "@/components/Header/header";
 import Nav from "@/components/Nav/nav";
-import Navbar from "@/components/Nav/navbar";
 import Events from "@/components/Events/events";
-import Divisions from "@/components/Divisions/divisions";
-import Link from "next/link";
+import Divisions from "@/components/Team/team";
+import Footer from "@/components/Footer/footer";
 
 export default function Home() {
   return (
     <>
       <Header />
       <Nav />
+      <span className="block h-full bg-gradientAccent">
       <main
-        className={`bg-gradient-to-tl from-white to-background h-full bg-fixed bg-no-repeat px-[80px] md:px-120 py-120 md:py-[10rem]`}
+        className={`bg-gradientDefault h-full bg-fixed bg-no-repeat px-[80px] md:px-120 py-120 md:py-[10rem] relative`}
       >
         <section
           id="sejarah"
-          className={`container h-full mb-[3rem] lg:mb-[11rem]`}
+          className={`container h-full mb-[3rem] lg:mb-[11rem] text-pretty`}
         >
           <h3 className={`text-h4 md:text-h3 font-bold text-blue-darkActive`}>
             Sejarah CCI
@@ -47,6 +47,8 @@ export default function Home() {
           <Divisions />
         </section>
       </main>
+      </span>
+      <Footer/>
     </>
   );
 }
