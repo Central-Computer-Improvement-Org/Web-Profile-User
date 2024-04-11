@@ -1,0 +1,158 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+/* Division Section */
+.customButtonNext {
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  top: 44%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+@media only screen and (max-width: 1280px) {
+  .customButtonNext {
+    top: 43%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .customButtonNext {
+    top: 47%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .roleDescription {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    word-wrap: break-word;
+  }
+}
+
+@media only screen and (max-width: 352px) {
+  .roleDescription {
+    -webkit-line-clamp: 4;
+  }
+  .roleCard {
+    width: auto !important;
+  }
+}
+
+/* News Section */
+.slide img {
+  width: 100%;
+  height: auto;
+}
+
+.slide {
+  width: 250px;
+  height: auto;
+  transform: scale(0.6);
+  transition: transform 300ms;
+  opacity: 1;
+}
+
+.activeSlide {
+  width: 100% !important;
+  height: auto;
+  margin: 10px 0;
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.newsArrow {
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.newsNextArrow {
+  right: 2%;
+  top: 37%;
+}
+
+.newsPrevArrow {
+  left: 2%;
+  top: 37%;
+}
+
+.newsCustomDot {
+  width: 18px;
+  height: 18px;
+  background-color: #bfd0e8;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.newsCustomDotCenter {
+  width: 20px;
+  height: 20px;
+  background-color: #265290;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.newsCardTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+}
+
+.newsCardBorder {
+  border-right: 2px solid #234d87;
+  border-left: 2px solid #234d87;
+  border-bottom: 2px solid #234d87;
+}
+
+@media only screen and (max-width: 1279px) {
+  .newsNextArrow,
+  .newsPrevArrow {
+    top: 30%;
+  }
+}
+
+@media only screen and (max-width: 1238px) {
+  .newsNextArrow,
+  .newsPrevArrow {
+    top: 40%;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .newsNextArrow,
+  .newsPrevArrow {
+    top: 37%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .newsNextArrow,
+  .newsPrevArrow {
+    top: 40%;
+  }
+  .newsCustomDot {
+    width: 10px;
+    height: 10px;
+  }
+  .newsCustomDotCenter {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .newsCard {
+    width: 100% !important;
+  }
+  .newsKeyCard {
+    margin-right: 50px !important;
+  }
+}

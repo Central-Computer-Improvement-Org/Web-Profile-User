@@ -63,8 +63,8 @@ export const theme = {
       'shadowNav': '10px 0px 5px 1px #bfd0e8'
     },
     backgroundImage: {
-        gradientDefault: "linear-gradient(160deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 23%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 100%)",
-        gradientAccent: "linear-gradient(-100deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(219, 242, 229, 1) 80%, rgba(219, 242,229,1)100%)",
+        gradientDefault: "linear-gradient(150deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 120%)",
+        gradientAccent: "linear-gradient(-110deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 70%, rgba(219, 242,229,1)100%)",
     },
   },
 };

@@ -1,37 +1,105 @@
-/* Responsive Project Section  */
-@media only screen and (max-width: 376px) {
-    .imageThumbnail {
-        max-width: 260px;
-        max-height: 230px;
-    }
-    .outerThumbnail {
-        top: 1690px;
-    }
-    .outerDesc {
-        margin-top: 170px;
-    }
+/* Division Section */
+@media only screen and (max-width: 344px) {
+  .divisionTagline {
+    padding-inline: 30px;
+  }
 }
 
-@media only screen and (max-width: 372px) {
-    .outerThumbnail {
-        top: 1720px;
-    }
+/* Project Section */
+.projectsIcon:hover {
+  border: 2px solid black;
+}
+
+.projectsIconRepo:hover,
+.projectsIcon:hover .projectsIconRepo {
+  fill: #000000; /* Ganti dengan warna yang diinginkan saat dihover */
+}
+
+@media only screen and (max-width: 568px) {
+  .projectsCardThumbnail {
+    top: 2020px !important;
+  }
+}
+
+@media only screen and (max-width: 421px) {
+  .projectsCardThumbnail {
+    top: 2030px !important;
+  }
+}
+
+@media only screen and (max-width: 402px) {
+  .projectsCardThumbnail {
+    top: 2020px !important;
+  }
+}
+
+@media only screen and (max-width: 395px) {
+  .projectsDesc {
+    margin-top: 185px;
+  }
+}
+
+@media only screen and (max-width: 384px) {
+  .projectsDesc {
+    margin-top: 170px;
+  }
+}
+
+@media only screen and (max-width: 382px) {
+  .projectsCardThumbnail {
+    top: 2020px !important;
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  .projectsThumbnailImage {
+    max-width: 260px;
+    max-height: 230px;
+  }
+}
+
+@media only screen and (max-width: 374px) {
+  .projectsCardThumbnail {
+    top: 2060px !important;
+  }
 }
 
 @media only screen and (max-width: 364px) {
-    .outerThumbnail {
-        top: 1760px;
-    }
+  .projectsDesc {
+    margin-top: 165px;
+  }
+}
+
+@media only screen and (max-width: 363px) {
+  .projectsCardThumbnail {
+    top: 2070px !important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .projectsCardThumbnail {
+    top: 2090px !important;
+  }
 }
 
 @media only screen and (max-width: 356px) {
-    .outerDesc {
-        margin-top: 180px;
-    }
+  .projectsDesc {
+    margin-top: 170px;
+  }
+}
+
+@media only screen and (max-width: 348px) {
+  .projectsThumbnailImage {
+    max-width: 240px;
+    max-height: 220px;
+  }
+  .projectsCardThumbnail {
+    /* top: 2000px !important; */
+  }
 }
 
 @media only screen and (max-width: 339px) {
-    .buttonRepository {
-        font-size: 15px;
-    }
+  .projectsButtonRepo {
+    font-size: 15px;
+  }
 }
