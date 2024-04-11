@@ -48,11 +48,10 @@ const Footer = () => {
                         </div>
                         <div className="w-full h-full basis-full lg:basis-2/5 flex flex-col justify-between items-center space-y-5 pl-0 lg:pl-20">
                             <div className="w-[75%] lg:w-full flex flex-row justify-between">
-                                {/* link gmail masih dummy, ini hanya untuk sementara push saja */}
-                                <a href="mailto:contoh@email.com" target="_blank" rel="noopener noreferrer" className="flex items-center p-1 sm:p-3 rounded border-2 border-white">
+                                <a href="mailto:cci.unitel@gmail.com?subject=Subject%20of%20the%20email&body=" target="_blank" rel="noopener noreferrer" className="flex items-center p-1 sm:p-3 rounded border-2 border-white">
                                     <Image
-                                        src="/assets/images/footer/icon-gmail.png"
-                                        alt="Logo Email CCI"
+                                        src="/assets/images/footer/logo-gmail.png"
+                                        alt="Logo Email CCI"    
                                         width={35}
                                         height={35}
                                         className="w-[27px] h-[21px] sm:w-[54px] sm:h-[42px] cursor-pointer"
@@ -60,17 +59,16 @@ const Footer = () => {
                                 </a>
                                 <a href="https://www.instagram.com/cciunitel/" target="_blank" rel="noopener noreferrer" className="flex items-center p-1 sm:p-3 rounded border-2 border-white ">
                                     <Image
-                                        src="/assets/images/footer/icon-instagram.png"
+                                        src="/assets/images/footer/logo-instagram.png"
                                         alt="Logo Instagram CCI"
                                         width={35}
                                         height={35}
                                         className="w-[25px] h-[25px] sm:w-[52px] sm:h-[50px] cursor-pointer"
                                     />
                                 </a>
-                                {/* link line masih dummy, ini hanya untuk sementara push saja */}
-                                <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="flex items-center p-1 sm:p-3 rounded border-2 border-white">
+                                <a href="https://line.me/R/ti/p/~buz0214o" target="_blank" rel="noopener noreferrer" className="flex items-center p-1 sm:p-3 rounded border-2 border-white">
                                     <Image
-                                        src="/assets/images/footer/icon-line.png"
+                                        src="/assets/images/footer/logo-line.png"
                                         alt="Logo Line CCI"
                                         width={35}
                                         height={35}
@@ -79,7 +77,7 @@ const Footer = () => {
                                 </a>
                                 <a href="https://www.linkedin.com/company/cci-telkomuniversity/" target="_blank" rel="noopener noreferrer" className="flex items-center p-1 sm:p-3 rounded border-2 border-white">
                                     <Image
-                                        src="/assets/images/footer/icon-linkedin.png"
+                                        src="/assets/images/footer/logo-linkedin.png"
                                         alt="Logo Linkedin CCI"
                                         width={35}
                                         height={35}
@@ -89,7 +87,7 @@ const Footer = () => {
                             </div>
                             <button className="w-[75%] lg:w-full rounded-lg bg-white">
                                 <p className="sm:text-[20px] text-[12px] font-bold py-1 sm:px-20 sm:py-3 text-bluePallete-700">
-                                    <Link href="/credit">Credit</Link>
+                                    <Link href="/credit" >Credit</Link>
                                 </p>
                             </button>
                         </div>
