@@ -12,7 +12,7 @@
 
 .projectsIconRepo:hover,
 .projectsIcon:hover .projectsIconRepo {
-  fill: #000000; /* Ganti dengan warna yang diinginkan saat dihover */
+  fill: #000000;
 }
 
 @media only screen and (max-width: 568px) {
@@ -92,9 +92,6 @@
   .projectsThumbnailImage {
     max-width: 240px;
     max-height: 220px;
-  }
-  .projectsCardThumbnail {
-    /* top: 2000px !important; */
   }
 }
 

@@ -43,11 +43,11 @@ const Navbar = () => {
           <div className="h-full w-full flex justify-between items-center">
             <Link href="/">
               <Image
-                src="/assets/images/logo.svg"
-                alt="Logo CCI"
-                width={90}
-                height={90}
-                className="w-14 h-8 md:w-20 md:h-12 cursor-pointer"
+                src="/assets/logo/images/logo.svg"
+                alt="Logo Central Computer Improvement"
+                width={131}
+                height={72}
+                className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer"
               />
             </Link>
             <div className="md:flex items-center space-x-16 hidden">

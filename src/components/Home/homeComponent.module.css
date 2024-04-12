@@ -26,7 +26,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .roleDescription {
+  .divisionDesc {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 6;
@@ -35,21 +35,21 @@
 }
 
 @media only screen and (max-width: 352px) {
-  .roleDescription {
+  .divisionDesc {
     -webkit-line-clamp: 4;
   }
-  .roleCard {
+  .divisionCard {
     width: auto !important;
   }
 }
 
 /* News Section */
-.slide img {
+.newsSlide img {
   width: 100%;
   height: auto;
 }
 
-.slide {
+.newsSlide {
   width: 250px;
   height: auto;
   transform: scale(0.6);
@@ -57,7 +57,7 @@
   opacity: 1;
 }
 
-.activeSlide {
+.newsActiveSlide {
   width: 100% !important;
   height: auto;
   margin: 10px 0;
