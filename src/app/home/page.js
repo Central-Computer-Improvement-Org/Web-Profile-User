@@ -49,7 +49,7 @@ export default function Home() {
               <div className="xl:max-w-7xl lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto flex flex-row flex-wrap">
                 <div className="basis-full md:basis-3/5 flex flex-col space-y-10">
                   <Image
-                    src={isLoading ? "/assets/logo/loading.gif" : settingsData?.data[0]?.logo_uri || "/assets/logo/images/logo.svg"}
+                    src={isLoading ? "Loading..." : settingsData?.data[0]?.logo_uri || "assets/logo/images/logo.svg"}
                     alt="Logo Central Computer Improvement"
                     width={300}
                     height={200}
@@ -70,7 +70,7 @@ export default function Home() {
                 </div>
                 <div className="basis-full md:basis-2/5 flex flex-col flex-wrap items-center justify-center pt-10 md:pt-0">
                   <Image
-                    src="/assets/home/images/hero-banner.png"
+                    src="assets/home/images/hero-banner.png"
                     alt="Hero Central Computer Improvement"
                     sizes="100vw"
                     responsive="true"
@@ -104,7 +104,7 @@ export default function Home() {
                           <div class="mb-[40px] md:mb-[80px] w-max-[164px] h-max-[180px] md:w-max-[318px] md:h-max-[412px] rounded-lg rotate-[-5deg] md:rotate-[-8deg] bg-bluePallete-300">
                             <Image
                               className="rounded-t-lg object-cover"
-                              src="/assets/home/images/connect-card.png"
+                              src="assets/home/images/connect-card.png"
                               alt="Achievement Central Computer Improvement"
                               sizes="100vw"
                               responsive="true"
@@ -126,7 +126,7 @@ export default function Home() {
                           <div class="w-max-[164px] h-max-[180px] md:w-max-[318px] md:h-max-[412px] bg-bluePallete-300 rounded-lg">
                             <Image
                               className="rounded-t-lg object-cover"
-                              src="/assets/home/images/connect-card.png"
+                              src="assets/home/images/connect-card.png"
                               alt="Member Central Computer Improvement"
                               sizes="100vw"
                               responsive="true"
@@ -227,7 +227,7 @@ export default function Home() {
                             <a href="#">
                               <Image
                                 className="rounded-t-lg object-cover"
-                                src="/assets/home/images/connect-card.png"
+                                src="assets/home/images/connect-card.png"
                                 alt="Achievement Central Computer Improvement"
                                 sizes="100vw"
                                 responsive="true"
@@ -250,7 +250,7 @@ export default function Home() {
                           <div class="mb-[40px] md:mb-[80px] rotate-[5deg] md:rotate-[8deg] w-max-[164px] h-max-[180px] lg:w-[288px] lg:h-[382px] lg:w-max-[288px] lg:h-max-[382px] xl:w-max-[318px] xl:h-max-[412px] border rounded-lg bg-bluePallete-300">
                             <Image
                               className="rounded-t-lg object-cover"
-                              src="/assets/home/images/connect-card.png"
+                              src="assets/home/images/connect-card.png"
                               alt="Member Central Computer Improvement"
                               sizes="100vw"
                               responsive="true"
@@ -320,7 +320,7 @@ export default function Home() {
                           className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[1980px] sm:top-[2530px] md:top-[3020px] ${styles.projectsCardThumbnail}`}
                         >
                           <Image
-                            src="/assets/home/images/projects-thumbnail.png"
+                            src="assets/home/images/projects-thumbnail.png"
                             alt="Thumbnail Project Central Computer Improvement"
                             width={1000}
                             height={1000}
@@ -333,7 +333,7 @@ export default function Home() {
                           <div className="flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center space-y-2 sm:space-y-0">
                             <div className="flex flex-row items-center space-x-1 sm:space-x-3 px-[10px] sm:px-0 py-[5px] sm:py-0 bg-white sm:bg-none rounded-[15px]">
                               <Image
-                                src="/assets/logo/images/projects-logo.png"
+                                src="assets/logo/images/projects-logo.png"
                                 alt="Logo Project Central Computer Improvement"
                                 width={50}
                                 height={50}

@@ -9,12 +9,12 @@ import "swiper/css/navigation";
 
 import styles from "@/components/Home/homeComponent.module.css";
 
-const divisionWeb = "/assets/logo/images/logo-divisi-web.png";
-const divisionDesign = "/assets/logo/images/logo-divisi-design.png";
-const divisionGNG = "/assets/logo/images/logo-divisi-gng.png";
-const divisionNetwork = "/assets/logo/images/logo-divisi-network.png";
-const divisionMM = "/assets/logo/images/logo-divisi-mm.png";
-const divisionDR = "/assets/logo/images/logo-divisi-ds.png";
+const divisionWeb = "assets/logo/images/logo-divisi-web.png";
+const divisionDesign = "assets/logo/images/logo-divisi-design.png";
+const divisionGNG = "assets/logo/images/logo-divisi-gng.png";
+const divisionNetwork = "assets/logo/images/logo-divisi-network.png";
+const divisionMM = "assets/logo/images/logo-divisi-mm.png";
+const divisionDR = "assets/logo/images/logo-divisi-ds.png";
 
 const dataCard = [
   {
@@ -22,42 +22,42 @@ const dataCard = [
     title: "Web Development",
     description:
       "Divisi yang berfokus pada pembelajaran pengembangan website terbaru dengan memperhatikan beberapa struktur didalamnya.",
-    divisionUrl: "/projects/web-development",
+    divisionUrl: "/division/web-development",
   },
   {
     image: divisionDesign,
     title: "Design",
     description:
       "Divisi yang berfokus mempelajari UI/UX melalui beberapa tahapan didalamnya sehingga divisi design memiliki tujuan atau memberikan output berupa sebuah desain produk sebaik mungkin",
-    divisionUrl: "/projects/design",
+    divisionUrl: "/division/design",
   },
   {
     image: divisionGNG,
     title: "Games and Gadget",
     description:
       "Divisi Games and Gadget merupakan divisi yang berfokus dalam pengembangan games dan juga kegiatan- kegiatan lainnya yang berhubungan dengan video games.",
-    divisionUrl: "/projects/games-and-gadget",
+    divisionUrl: "/division/games-and-gadget",
   },
   {
     image: divisionNetwork,
     title: "Network",
     description:
       "Divisi yang berfokus pada pengaturan dan manajemen jaringan komputer sehingga mencapai hasil yang optimal",
-    divisionUrl: "/projects/network",
+    divisionUrl: "/division/network",
   },
   {
     image: divisionMM,
     title: "Media Management",
     description:
       "Divisi ini yang bergerak di bidang media dari CCI, seperti content creator, content planner, design content, disb. Divisi ini berfokus mempelajari bagaimana mengatur, memanagement dan mendesain sebuah media.",
-    divisionUrl: "/projects/media-management",
+    divisionUrl: "/division/media-management",
   },
   {
     image: divisionDR,
     title: "Data Research",
     description:
       "Divisi yang berfokus pada proses dimana mengumpulkan, mengukur, dan menganalisis data dari berbagai sumber untuk mendapatkan wawasan atau pemahaman terhadap suatu hal.",
-    divisionUrl: "/projects/data-research",
+    divisionUrl: "/division/data-research",
   },
 ];
 

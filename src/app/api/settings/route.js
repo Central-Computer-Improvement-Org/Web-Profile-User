@@ -2,7 +2,7 @@ export async function GET(request) {
     const responseData = {
         code: 200,
         status: "SUCCESS",
-        recordsTotal: 10,
+        recordsTotal: 1,
         data: [
             {
                 id: "STG-458163",

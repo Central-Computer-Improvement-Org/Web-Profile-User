@@ -8,8 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import styles from "@/components/Home/homeComponent.module.css";
 
-const newsImageOne = "/assets/home/images/news-thumbnail-1.png";
-const newsImageTwo = "/assets/home/images/news-thumbnail-2.png";
+const newsImageOne = "assets/home/images/news-thumbnail-1.png";
+const newsImageTwo = "assets/home/images/news-thumbnail-2.png";
 
 const dataCard = [
   {
@@ -135,7 +135,7 @@ const FirstCarousel = () => {
           >
             <Image
               src={main.image}
-              alt="News Thumbnail Centra Computer Improvment"
+              alt="News Thumbnail Central Computer Improvment"
               width={300}
               height={200}
               sizes="100vw"

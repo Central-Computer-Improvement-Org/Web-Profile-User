@@ -33,7 +33,7 @@ const Footer = () => {
         <div className="w-full h-full flex flex-col flex-wrap space-y-8 lg:space-y-20 justify-between pt-10 lg:pt-32 pb-10">
           <div className="w-full flex flex-col lg:items-start items-center space-y-5">
             <Image
-              src="/assets/logo/images/logo.svg"
+              src="assets/logo/images/logo.svg"
               alt="Logo Central Computer Improvement"
               width={90}
               height={90}
@@ -82,7 +82,7 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
                 >
                   <Image
-                    src="/assets/logo/images/logo-gmail.png"
+                    src="assets/logo/images/logo-gmail.png"
                     alt="Logo Email CCI"
                     width={35}
                     height={35}
@@ -96,7 +96,7 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white "
                 >
                   <Image
-                    src="/assets/logo/images/logo-instagram.png"
+                    src="assets/logo/images/logo-instagram.png"
                     alt="Logo Instagram CCI"
                     width={35}
                     height={35}
@@ -110,7 +110,7 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
                 >
                   <Image
-                    src="/assets/logo/images/logo-line.png"
+                    src="assets/logo/images/logo-line.png"
                     alt="Logo Line CCI"
                     width={35}
                     height={35}
@@ -124,7 +124,7 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
                 >
                   <Image
-                    src="/assets/logo/images/logo-linkedin.png"
+                    src="assets/logo/images/logo-linkedin.png"
                     alt="Logo Linkedin CCI"
                     width={35}
                     height={35}

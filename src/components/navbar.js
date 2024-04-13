@@ -43,7 +43,7 @@ const Navbar = () => {
           <div className="h-full w-full flex justify-between items-center">
             <Link href="/">
               <Image
-                src="/assets/logo/images/logo.svg"
+                src="assets/logo/images/logo.svg"
                 alt="Logo Central Computer Improvement"
                 width={131}
                 height={72}
@@ -211,7 +211,7 @@ const Navbar = () => {
                         </li>
                         <li className="pt-2 px-4">
                           <Link
-                            href="/divisi"
+                            href="/division"
                             className="block px-4 py-2 text-[24px] rounded text-white"
                             onClick={toggleNavbar}
                           >
