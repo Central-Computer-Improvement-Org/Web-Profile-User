@@ -2,14 +2,14 @@ export async function GET(request) {
     const responseData = {
         code: 200,
         status: "SUCCESS",
-        recordsTotal: 10,
+        recordsTotal: 1,
         data: [
             {
                 id: "STG-458163",
                 address: "Telkom University, Bandung",
                 name: "Central Computer Improvement",
                 description: "Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology).",
-                logo_uri: "/assets/uploads/settings/logo.svg",
+                logo_uri: "assets/uploads/settings/logo.svg",
                 title_website: "Central Computer Improvement",
                 keyword: "cci", // masih dummy karena belum fix
                 createdAt: "2013-02-26 21:28:37.261134+01:00",

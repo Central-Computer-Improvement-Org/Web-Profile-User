@@ -8,8 +8,8 @@ import "swiper/css/pagination";
 
 import styles from "@/components/Home/homeComponent.module.css";
 
-const newsImageOne = "/assets/images/home/news-thumbnail-1.png";
-const newsImageTwo = "/assets/images/home/news-thumbnail-2.png";
+const newsImageOne = "assets/images/home/news-thumbnail-1.png";
+const newsImageTwo = "assets/images/home/news-thumbnail-2.png";
 
 const dataCard = [
   {
@@ -66,7 +66,7 @@ const SecondSlider = () => {
               width={220}
               height={150}
               src={data.image}
-              alt="News Thumbnail Centra Computer Improvment"
+              alt="News Thumbnail Central Computer Improvment"
               responsive="true"
               className="w-full h-auto rounded-t-xl object-cover"
             />

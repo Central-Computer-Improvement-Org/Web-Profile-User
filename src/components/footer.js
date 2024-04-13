@@ -7,19 +7,29 @@ import request from "../app/utils/request";
 
 const Footer = () => {
   const [settingsData, setSettingsData] = useState(null);
+  const [contactData, setContactData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
 
-    request
-      .get("/settings")
-      .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          setSettingsData(response.data);
+    Promise.all([request.get("/settings"), request.get("/contact")])
+      .then(([settingsResponse, contactResponse]) => {
+        if (
+          settingsResponse.status === 200 ||
+          settingsResponse.status === 201
+        ) {
+          setSettingsData(settingsResponse.data);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(JSON.stringify(settingsResponse.errors));
         }
+
+        if (contactResponse.status === 200 || contactResponse.status === 201) {
+          setContactData(contactResponse.data);
+        } else {
+          console.error(JSON.stringify(contactResponse.errors));
+        }
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -27,13 +37,14 @@ const Footer = () => {
         setIsLoading(false);
       });
   }, []);
+
   return (
-    <footer className="w-full h-auto bg-bluePallete-800">
+    <footer id="contact" className="w-full h-auto bg-bluePallete-800">
       <div className="xl:max-w-7xl lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
         <div className="w-full h-full flex flex-col flex-wrap space-y-8 lg:space-y-20 justify-between pt-10 lg:pt-32 pb-10">
           <div className="w-full flex flex-col lg:items-start items-center space-y-5">
             <Image
-              src="/assets/logo/images/logo.svg"
+              src="assets/logo/images/logo.svg"
               alt="Logo Central Computer Improvement"
               width={90}
               height={90}
@@ -82,7 +93,8 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
                 >
                   <Image
-                    src="/assets/logo/images/logo-gmail.png"
+                    src={isLoading ? "Loading..." : contactData?.data[0]?.icon_uri || "assets/logo/images/logo-gmail.png"}
+                   // src="assets/logo/images/logo-gmail.png"
                     alt="Logo Email CCI"
                     width={35}
                     height={35}
@@ -96,7 +108,7 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white "
                 >
                   <Image
-                    src="/assets/logo/images/logo-instagram.png"
+                    src={isLoading ? "Loading..." : contactData?.data[1]?.icon_uri || "assets/logo/images/instagram-gmail.png"}
                     alt="Logo Instagram CCI"
                     width={35}
                     height={35}
@@ -110,7 +122,7 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
                 >
                   <Image
-                    src="/assets/logo/images/logo-line.png"
+                    src={isLoading ? "Loading..." : contactData?.data[2]?.icon_uri || "assets/logo/images/logo-line.png"}
                     alt="Logo Line CCI"
                     width={35}
                     height={35}
@@ -124,7 +136,7 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
                 >
                   <Image
-                    src="/assets/logo/images/logo-linkedin.png"
+                    src={isLoading ? "Loading..." : contactData?.data[3]?.icon_uri || "assets/logo/images/logo-linkedin.png"}
                     alt="Logo Linkedin CCI"
                     width={35}
                     height={35}
