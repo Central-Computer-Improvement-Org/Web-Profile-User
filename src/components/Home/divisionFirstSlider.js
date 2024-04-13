@@ -2,20 +2,19 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation } from "swiper";
+import { Navigation } from "swiper/modules";
+import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import styles from "./homeComponent.module.css";
+import styles from "@/components/Home/homeComponent.module.css";
 
-SwiperCore.use([Navigation]);
-
-const divisionWeb = "/assets/images/logo-divisi-web.png";
-const divisionDesign = "/assets/images/logo-divisi-design.png";
-const divisionGNG = "/assets/images/logo-divisi-gng.png";
-const divisionNetwork = "/assets/images/logo-divisi-network.png";
-const divisionMM = "/assets/images/logo-divisi-mm.png";
-const divisionDR = "/assets/images/logo-divisi-ds.png";
+const divisionWeb = "/assets/logo/images/logo-divisi-web.png";
+const divisionDesign = "/assets/logo/images/logo-divisi-design.png";
+const divisionGNG = "/assets/logo/images/logo-divisi-gng.png";
+const divisionNetwork = "/assets/logo/images/logo-divisi-network.png";
+const divisionMM = "/assets/logo/images/logo-divisi-mm.png";
+const divisionDR = "/assets/logo/images/logo-divisi-ds.png";
 
 const dataCard = [
   {
@@ -61,6 +60,8 @@ const dataCard = [
     divisionUrl: "/projects/data-research",
   },
 ];
+
+SwiperCore.use([Navigation]);
 
 const RoleSlider = () => {
   const router = useRouter();
@@ -137,8 +138,8 @@ const RoleSlider = () => {
         >
           <circle cx="50" cy="50" r="50" fill="#265290" />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M48.9661 33.2082C49.9729 32.2014 51.6053 32.2014 52.6121 33.2082L68.0808 48.677C69.0876 49.6838 69.0876 51.3162 68.0808 52.323L52.6121 67.7918C51.6053 68.7986 49.9729 68.7986 48.9661 67.7918C47.9592 66.7849 47.9592 65.1526 48.9661 64.1457L60.0337 53.0781H32.7422C31.3183 53.0781 30.1641 51.9239 30.1641 50.5C30.1641 49.0761 31.3183 47.9219 32.7422 47.9219H60.0337L48.9661 36.8543C47.9592 35.8474 47.9592 34.2151 48.9661 33.2082Z"
             fill="white"
           />

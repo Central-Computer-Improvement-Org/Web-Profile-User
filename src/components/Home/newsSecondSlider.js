@@ -6,7 +6,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import styles from "@/components/home/homeComponent.module.css";
+import styles from "@/components/Home/homeComponent.module.css";
 
 const newsImageOne = "/assets/images/home/news-thumbnail-1.png";
 const newsImageTwo = "/assets/images/home/news-thumbnail-2.png";

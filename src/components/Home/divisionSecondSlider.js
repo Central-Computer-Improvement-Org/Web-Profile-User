@@ -6,14 +6,14 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import styles from "./homeComponent.module.css";
+import styles from "@/components/Home/homeComponent.module.css";
 
-const divisionWeb = "/assets/images/logo-divisi-web.png";
-const divisionDesign = "/assets/images/logo-divisi-design.png";
-const divisionGNG = "/assets/images/logo-divisi-gng.png";
-const divisionNetwork = "/assets/images/logo-divisi-network.png";
-const divisionMM = "/assets/images/logo-divisi-mm.png";
-const divisionDR = "/assets/images/logo-divisi-ds.png";
+const divisionWeb = "/assets/logo/images/logo-divisi-web.png";
+const divisionDesign = "/assets/logo/images/logo-divisi-design.png";
+const divisionGNG = "/assets/logo/images/logo-divisi-gng.png";
+const divisionNetwork = "/assets/logo/images/logo-divisi-network.png";
+const divisionMM = "/assets/logo/images/logo-divisi-mm.png";
+const divisionDR = "/assets/logo/images/logo-divisi-ds.png";
 
 const dataCard = [
   {
@@ -101,7 +101,7 @@ const RoleSlider = () => {
           <SwiperSlide key={index} className={`w-full my-5 md:my-0`}>
             <div
               onClick={() => router.push(data.divisionUrl)}
-              className={`w-[280px] h-[290px] sm:max-h-[290px] sm:max-w-[280px] flex flex-col space-y-3 py-5 px-3 border-2 border-bluePallete-300 rounded-xl bg-bluePallete-200 ${styles.roleCard}`}
+              className={`w-[280px] h-[290px] sm:max-h-[290px] sm:max-w-[280px] flex flex-col space-y-3 py-5 px-3 border-2 border-bluePallete-300 rounded-xl bg-bluePallete-200 ${styles.divisionCard}`}
             >
               <Image
                 width={80}
@@ -114,7 +114,7 @@ const RoleSlider = () => {
                 {data.title}
               </h2>
               <p
-                className={`font-medium text-[12px] overflow-hidden text-bluePallete-900  ${styles.roleDescription}`}
+                className={`font-medium text-[12px] overflow-hidden text-bluePallete-900  ${styles.divisionDesc}`}
               >
                 {data.description}
               </p>
