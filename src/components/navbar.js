@@ -17,6 +17,14 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const scrollToContact = () => {
+    const contactLink = document.getElementById("contact");
+    if (contactLink) {
+      contactLink.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsClick(false);
+  };
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -83,7 +91,10 @@ const Navbar = () => {
                           <Link
                             href="/about"
                             className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:bg-bluePallete-200"
-                            onClick={toggleNavbar}
+                            onClick = {(event) => {
+                              toggleNavbar(); 
+                              setIsDropdownOpen(false);
+                            }}
                           >
                             About
                           </Link>
@@ -92,19 +103,25 @@ const Navbar = () => {
                           <Link
                             href="/division"
                             className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:bg-bluePallete-200"
-                            onClick={toggleNavbar}
+                            onClick = {(event) => {
+                              toggleNavbar(); 
+                              setIsDropdownOpen(false);
+                            }}
                           >
                             Divisi
                           </Link>
                         </li>
                         <li className="pt-2 pb-2 px-4">
-                          <Link
-                            href="/contact"
-                            className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:bg-bluePallete-200"
-                            onClick={toggleNavbar}
+                          <div
+                            className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
+                            onClick={(event) => {
+                              toggleNavbar(); 
+                              scrollToContact();
+                              setIsDropdownOpen(false); 
+                            }}
                           >
                             Contact
-                          </Link>
+                          </div>
                         </li>
                       </ul>
                     </div>
@@ -219,13 +236,15 @@ const Navbar = () => {
                           </Link>
                         </li>
                         <li className="pt-2 pb-2 px-4">
-                          <Link
-                            href="/contact"
-                            className="block px-4 py-2 text-[24px] rounded text-white"
-                            onClick={toggleNavbar}
+                          <div
+                            className="block px-4 py-2 text-[24px] rounded cursor-pointer text-white"
+                            onClick={(event) => {
+                              toggleNavbar(); 
+                              scrollToContact();
+                            }}
                           >
                             Contact
-                          </Link>
+                          </div>
                         </li>
                       </ul>
                     </div>
