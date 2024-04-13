@@ -90,7 +90,7 @@ const Navbar = () => {
                         </li>
                         <li className="pt-2 px-4">
                           <Link
-                            href="/divisi"
+                            href="/division"
                             className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick={toggleNavbar}
                           >
