@@ -1,47 +1,63 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
-const newsImageOne = "assets/home/images/news-thumbnail-1.png";
-const newsImageTwo = "assets/home/images/news-thumbnail-2.png";
-
-const dataCard = [
-  {
-    image: newsImageOne,
-    title: "AI dalam Kehidupan Sehari-Hari",
-    date: "Mar 12, 2024",
-  },
-  {
-    image: newsImageTwo,
-    title: "Lorem ipsum dolor sit amet dan",
-    date: "Mar 12, 2024",
-  },
-  {
-    image: newsImageOne,
-    title: "Energi blockchain dan masa depan",
-    date: "Mar 12, 2024",
-  },
-  {
-    image: newsImageTwo,
-    title:
-      "Peran AI dalam dunia pendidikan bagi manusia dwdwd wdwdw wdwd ewdwd dw",
-    date: "Mar 12, 2024",
-  },
-  {
-    image: newsImageOne,
-    title: "AI untuk keberlanjutan lingkungan hidup",
-    date: "Mar 12, 2024",
-  },
-];
-
-const FirstCarousel = () => {
+const NewsFristSlider = () => {
+  const [newsData, setNewsData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    request
+      .get("/news")
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          const formattedData = response.data.data.map((item) => {
+            const createdAt = new Date(item.createdAt);
+            const updatedAt = new Date(item.updatedAt);
+            return {
+              ...item,
+              date: `${getMonthName(
+                createdAt.getMonth()
+              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
+            };
+          });
+          setNewsData(formattedData);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, []);
+
+  const getMonthName = (monthIndex) => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return months[monthIndex];
+  };
 
   const NextArrow = ({ onClick }) => {
     return (
@@ -124,44 +140,45 @@ const FirstCarousel = () => {
         {...settings}
         className="w-full h-[320px] md:h-[400px] lg:h-[500px] xl:h-[600px] flex flex-row items-center"
       >
-        {dataCard.map((main, index) => (
-          <div
-            key={index}
-            className={
-              index === currentSlide
-                ? `${styles.newsSlide} ${styles.newsActiveSlide} w-full h-auto`
-                : `${styles.newsSlide} w-auto h-auto`
-            }
-          >
-            <Image
-              src={main.image}
-              alt="News Thumbnail Central Computer Improvment"
-              width={300}
-              height={200}
-              sizes="100vw"
-              responsive="true"
-              className="mt-[20px] rounded-t-lg object-cover"
-            />
-            <div className="w-full flex flex-col space-y-5 mb-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[1px] border-[#234d87] bg-white">
-              <p
-                className={`font-semibold text-[16px] md:text-[20px] lg:text-[32px] leading-0 lg:leading-10 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`}
-              >
-                {main.title}
-              </p>
-              <div className="w-full flex flex-row justify-between items-end">
-                <p className="text-[8px] md:text-[10px] lg:text-[14px] text-[#6B6B6B]">
-                  {main.date}
+        {Array.isArray(newsData) &&
+          newsData.map((data, index) => (
+            <div
+              key={index}
+              className={
+                index === currentSlide
+                  ? `${styles.newsSlide} ${styles.newsActiveSlide} w-full h-auto`
+                  : `${styles.newsSlide} w-auto h-auto`
+              }
+            >
+              <Image
+                src={data.media_uri}
+                alt="News Thumbnail Central Computer Improvment"
+                width={300}
+                height={200}
+                sizes="100vw"
+                responsive="true"
+                className="mt-[20px] rounded-t-lg object-cover"
+              />
+              <div className="w-full flex flex-col space-y-5 mb-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[1px] border-[#234d87] bg-white">
+                <p
+                  className={`font-semibold text-[16px] md:text-[20px] lg:text-[32px] leading-0 lg:leading-10 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`}
+                >
+                  {data.title}
                 </p>
-                <p className="font-bold text-[10px] md:text-[14px] lg:text-[20px] sm:px-[10px] lg:px-[25px] py-[2px] md:py-[5px] lg:py-[8px] sm:rounded lg:rounded-[10px] text-white bg-mainPrimary">
-                  <Link href="/news">Load More</Link>
-                </p>
+                <div className="w-full flex flex-row justify-between items-end">
+                  <p className="text-[8px] md:text-[10px] lg:text-[14px] text-[#6B6B6B]">
+                    {data.date}
+                  </p>
+                  <p className="font-bold text-[10px] md:text-[14px] lg:text-[20px] sm:px-[10px] lg:px-[25px] py-[2px] md:py-[5px] lg:py-[8px] sm:rounded lg:rounded-[10px] text-white bg-mainPrimary">
+                    <Link href="/news">Load More</Link>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </Slider>
     </div>
   );
 };
 
-export default FirstCarousel;
+export default NewsFristSlider;

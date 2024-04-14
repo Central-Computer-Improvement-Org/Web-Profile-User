@@ -1,71 +1,40 @@
-import React, { useRef } from "react";
-import Image from "next/image";
+"use client";
+import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 
+import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
-
-const divisionWeb = "assets/logo/images/logo-divisi-web.png";
-const divisionDesign = "assets/logo/images/logo-divisi-design.png";
-const divisionGNG = "assets/logo/images/logo-divisi-gng.png";
-const divisionNetwork = "assets/logo/images/logo-divisi-network.png";
-const divisionMM = "assets/logo/images/logo-divisi-mm.png";
-const divisionDR = "assets/logo/images/logo-divisi-ds.png";
-
-const dataCard = [
-  {
-    image: divisionWeb,
-    title: "Web Development",
-    description:
-      "Divisi yang berfokus pada pembelajaran pengembangan website terbaru dengan memperhatikan beberapa struktur didalamnya.",
-    divisionUrl: "/division/web-development",
-  },
-  {
-    image: divisionDesign,
-    title: "Design",
-    description:
-      "Divisi yang berfokus mempelajari UI/UX melalui beberapa tahapan didalamnya sehingga divisi design memiliki tujuan atau memberikan output berupa sebuah desain produk sebaik mungkin",
-    divisionUrl: "/division/design",
-  },
-  {
-    image: divisionGNG,
-    title: "Games and Gadget",
-    description:
-      "Divisi Games and Gadget merupakan divisi yang berfokus dalam pengembangan games dan juga kegiatan- kegiatan lainnya yang berhubungan dengan video games.",
-    divisionUrl: "/division/games-and-gadget",
-  },
-  {
-    image: divisionNetwork,
-    title: "Network",
-    description:
-      "Divisi yang berfokus pada pengaturan dan manajemen jaringan komputer sehingga mencapai hasil yang optimal",
-    divisionUrl: "/division/network",
-  },
-  {
-    image: divisionMM,
-    title: "Media Management",
-    description:
-      "Divisi ini yang bergerak di bidang media dari CCI, seperti content creator, content planner, design content, disb. Divisi ini berfokus mempelajari bagaimana mengatur, memanagement dan mendesain sebuah media.",
-    divisionUrl: "/division/media-management",
-  },
-  {
-    image: divisionDR,
-    title: "Data Research",
-    description:
-      "Divisi yang berfokus pada proses dimana mengumpulkan, mengukur, dan menganalisis data dari berbagai sumber untuk mendapatkan wawasan atau pemahaman terhadap suatu hal.",
-    divisionUrl: "/division/data-research",
-  },
-];
 
 SwiperCore.use([Navigation]);
 
-const RoleSlider = () => {
+const DivisionFirstSlider = () => {
   const router = useRouter();
+  const [divisionData, setDivisionData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const swiperRef = useRef(null);
+
+  useEffect(() => {
+    request
+      .get("/division")
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          setDivisionData(response.data.data);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, []);
 
   const goNext = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -102,30 +71,33 @@ const RoleSlider = () => {
         }}
         className={"w-full"}
       >
-        {dataCard.map((data, index) => (
-          <SwiperSlide
-            key={index}
-            data-hash={`slide${index + 1}`}
-            className="cursor-pointer"
-            onClick={() => router.push(data.divisionUrl)}
-          >
-            <div className="h-[350px] w-[280px] max-h-[350px] max-w-[280px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200">
-              <Image
-                width={80}
-                height={80}
-                src={data.image}
-                alt="Division Thumbnail Central Computer Improvment"
-                className="w-auto h-auto md:max-w-[100px] md:max-h-[85px]"
-              />
-              <h2 className="font-bold text-[24px] text-bluePallete-900">
-                {data.title}
-              </h2>
-              <p className="font-medium text-[12px] text-bluePallete-900">
-                {data.description}
-              </p>
-            </div>
-          </SwiperSlide>
-        ))}
+        {Array.isArray(divisionData) &&
+          divisionData.map((data, index) => (
+            <SwiperSlide
+              key={index}
+              data-hash={`slide${index + 1}`}
+              className="cursor-pointer "
+              onClick={() => router.push(data.divisionUrl)}
+            >
+              <div
+                className={`h-[350px] w-[280px] max-h-[350px] max-w-[280px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
+              >
+                <Image
+                  width={80}
+                  height={80}
+                  src={data.logo_uri}
+                  alt={`Division Thumbnail ${data.name}`}
+                  className="w-auto h-auto md:max-w-[100px] md:max-h-[85px]"
+                />
+                <h2 className="font-bold text-[24px] text-bluePallete-900">
+                  {data.name}
+                </h2>
+                <p className="font-medium text-[12px] text-bluePallete-900">
+                  {data.description}
+                </p>
+              </div>
+            </SwiperSlide>
+          ))}
       </Swiper>
       <div className={`${styles.customButtonNext}`} onClick={goNext}>
         <svg
@@ -149,4 +121,4 @@ const RoleSlider = () => {
   );
 };
 
-export default RoleSlider;
+export default DivisionFirstSlider;

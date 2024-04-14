@@ -6,12 +6,12 @@
 }
 
 /* Project Section */
-.projectsIcon:hover {
+.projectsOuterRepo:hover {
   border: 2px solid black;
 }
 
 .projectsIconRepo:hover,
-.projectsIcon:hover .projectsIconRepo {
+.projectsOuterRepo:hover .projectsIconRepo {
   fill: #000000;
 }
 
@@ -21,7 +21,13 @@
   }
 }
 
-@media only screen and (max-width: 421px) {
+@media only screen and (max-width: 424px) {
+  .projectsCardThumbnail {
+    top: 2000px !important;
+  }
+}
+
+@media only screen and (max-width: 416px) {
   .projectsCardThumbnail {
     top: 2030px !important;
   }
@@ -29,7 +35,7 @@
 
 @media only screen and (max-width: 402px) {
   .projectsCardThumbnail {
-    top: 2020px !important;
+    top: 2015px !important;
   }
 }
 
@@ -45,9 +51,9 @@
   }
 }
 
-@media only screen and (max-width: 382px) {
+@media only screen and (max-width: 383px) {
   .projectsCardThumbnail {
-    top: 2020px !important;
+    top: 2030px !important;
   }
 }
 
@@ -60,19 +66,16 @@
 
 @media only screen and (max-width: 374px) {
   .projectsCardThumbnail {
-    top: 2060px !important;
+    top: 2050px !important;
   }
 }
 
 @media only screen and (max-width: 364px) {
   .projectsDesc {
-    margin-top: 165px;
+    margin-top: 170px;
   }
-}
-
-@media only screen and (max-width: 363px) {
   .projectsCardThumbnail {
-    top: 2070px !important;
+    top: 2065px !important;
   }
 }
 
@@ -86,17 +89,14 @@
   .projectsDesc {
     margin-top: 170px;
   }
+  .projectsOuterRepo {
+    margin-top: 10px;
+  }
 }
 
 @media only screen and (max-width: 348px) {
   .projectsThumbnailImage {
     max-width: 240px;
     max-height: 220px;
-  }
-}
-
-@media only screen and (max-width: 339px) {
-  .projectsButtonRepo {
-    font-size: 15px;
   }
 }
