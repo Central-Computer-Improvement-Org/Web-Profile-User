@@ -41,6 +41,7 @@
   }
 }
 
+
 /* Project Section */
 .projectsOuterRepo:hover {
   border: 2px solid black;
@@ -57,21 +58,15 @@
   }
 }
 
-@media only screen and (max-width: 424px) {
-  .projectsCardThumbnail {
-    top: 2000px !important;
-  }
-}
-
 @media only screen and (max-width: 416px) {
   .projectsCardThumbnail {
-    top: 2030px !important;
+    top: 2010px !important;
   }
 }
 
-@media only screen and (max-width: 402px) {
+@media only screen and (max-width: 403px) {
   .projectsCardThumbnail {
-    top: 2015px !important;
+    top: 2035px !important;
   }
 }
 
@@ -82,46 +77,34 @@
 }
 
 @media only screen and (max-width: 384px) {
+  .projectsThumbnailImage {
+    max-width: 260px;
+    max-height: 230px;
+  }
+  .projectsCardThumbnail {
+    top: 2010px !important;
+  }
   .projectsDesc {
     margin-top: 170px;
   }
 }
 
-@media only screen and (max-width: 383px) {
+@media only screen and (max-width: 368px) {
+  .projectsDesc {
+    margin-top: 170px;
+  }
   .projectsCardThumbnail {
     top: 2030px !important;
   }
 }
 
-@media only screen and (max-width: 376px) {
-  .projectsThumbnailImage {
-    max-width: 260px;
-    max-height: 230px;
-  }
-}
-
-@media only screen and (max-width: 374px) {
+@media only screen and (max-width: 358px) {
   .projectsCardThumbnail {
-    top: 2050px !important;
+    top: 2060px !important;
   }
 }
 
-@media only screen and (max-width: 364px) {
-  .projectsDesc {
-    margin-top: 170px;
-  }
-  .projectsCardThumbnail {
-    top: 2065px !important;
-  }
-}
-
-@media only screen and (max-width: 360px) {
-  .projectsCardThumbnail {
-    top: 2090px !important;
-  }
-}
-
-@media only screen and (max-width: 356px) {
+@media only screen and (max-width: 357px) {
   .projectsDesc {
     margin-top: 170px;
   }
@@ -131,8 +114,17 @@
 }
 
 @media only screen and (max-width: 348px) {
+  .projectsCardThumbnail {
+    top: 2075px !important;
+  }
   .projectsThumbnailImage {
     max-width: 240px;
     max-height: 220px;
+  }
+}
+
+@media only screen and (max-width: 343px) {
+  .projectsCardThumbnail {
+    top: 2100px !important;
   }
 }
