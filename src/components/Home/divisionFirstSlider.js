@@ -45,28 +45,24 @@ const DivisionFirstSlider = () => {
     <>
       <Swiper
         ref={swiperRef}
-        slidesPerView={3}
-        spaceBetween={70}
         navigation={{
           nextEl: ".customButtonNext",
         }}
         pagination={false}
-        breakpoints={{
-          "@0.00": {
-            slidesPerView: 1.5,
-            spaceBetween: 10,
+        slidesPerView= {1.2}
+        spaceBetween= {10}
+        breakpoints= {{
+          320: {
+            slidesPerView: 1.3,
+            spaceBetween: 20
           },
-          "@0.75": {
-            slidesPerView: 1.8,
-            spaceBetween: 20,
+          480: {
+            slidesPerView: 2,
+            spaceBetween: 30
           },
-          "@1.00": {
-            slidesPerView: 1.8,
-            spaceBetween: 40,
-          },
-          "@1.50": {
-            slidesPerView: 2.8,
-            spaceBetween: 70,
+          640: {
+            slidesPerView: 2.5,
+            spaceBetween: 10
           },
         }}
         className={"w-full"}
@@ -80,14 +76,14 @@ const DivisionFirstSlider = () => {
               onClick={() => router.push(data.divisionUrl)}
             >
               <div
-                className={`h-[350px] w-[280px] max-h-[350px] max-w-[280px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
+                className={`h-[350px] w-[280px] md:w-auto max-h-[350px] max-w-[280px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
               >
                 <Image
-                  width={80}
-                  height={80}
+                  width={90}
+                  height={85}
                   src={data.logo_uri}
                   alt={`Division Thumbnail ${data.name}`}
-                  className="w-auto h-auto md:max-w-[100px] md:max-h-[85px]"
+                  className="w-auto h-auto md:max-w-[90px] md:max-h-[85px]"
                 />
                 <h2 className="font-bold text-[24px] text-bluePallete-900">
                   {data.name}

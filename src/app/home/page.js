@@ -9,8 +9,8 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import NewsFirstSlider from "@/components/Home/newsFirstSlider";
 import NewsSecondSlider from "@/components/Home/newsSecondSlider";
-import FirstRoleSlider from "@/components/Home/divisionFirstSlider";
-import SecondRoleSlider from "@/components/Home/divisionSecondSlider";
+import DivisionFirstSlider from "@/components/Home/divisionFirstSlider";
+import DivisionSecondSlider from "@/components/Home/divisionSecondSlider";
 import styles from "@/app/home/homePage.module.css";
 
 export default function Home() {
@@ -282,7 +282,7 @@ export default function Home() {
             </section>
             <section id="division" className="w-full h-auto">
               <div className="w-full flex flex-row flex-wrap mt-10 mb-8    sm:mt-32 sm:mb-20">
-                <div className="w-full h-auto basis-full md:basis-2/5 flex items-center justify-center pl-[0px] md:pl-[30px] pr-[0px] md:pr-[10px]">
+                <div className="w-full h-auto basis-full md:basis-1/5 lg:basis-2/5 flex items-center justify-center pl-[0px] md:pl-[30px] pr-[0px] md:pr-[10px]">
                   <h1
                     className={`font-black text-center text-[30px] lg:text-[50px] xl:text-[60px] px-[50px] sm:px-0 text-bluePallete-700 ${styles.divisionTagline}`}
                   >
@@ -290,12 +290,12 @@ export default function Home() {
                     <span className="text-secondPrimary">OUR DIVISIONS</span>{" "}
                   </h1>
                 </div>
-                <div className="basis-full md:basis-3/5 w-auto h-auto max-w-full md:max-w-[60%] max-h-full">
+                <div className={`basis-full md:basis-4/5 lg:basis-3/5 w-auto h-auto max-w-full md:max-w-[78%] lg:max-w-[60%] max-h-full ${styles.divisionContainerCard}`}>
                   <div className="hidden md:block">
-                    <FirstRoleSlider />
+                    <DivisionFirstSlider />
                   </div>
                   <div className="block md:hidden">
-                    <SecondRoleSlider />
+                    <DivisionSecondSlider />
                   </div>
                 </div>
               </div>

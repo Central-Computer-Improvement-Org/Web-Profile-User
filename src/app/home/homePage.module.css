@@ -1,4 +1,40 @@
 /* Division Section */
+@media only screen and (max-width: 914px) {
+  .divisionContainerCard {
+    max-width: 77%;
+  }
+}
+
+@media only screen and (max-width: 876px) {
+  .divisionContainerCard {
+    max-width: 76%;
+  }
+}
+
+@media only screen and (max-width: 841px) {
+  .divisionContainerCard {
+    max-width: 75%;
+  }
+}
+
+@media only screen and (max-width: 807px) {
+  .divisionContainerCard {
+    max-width: 74%;
+  }
+}
+
+@media only screen and (max-width: 777px) {
+  .divisionContainerCard {
+    max-width: 73%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .divisionContainerCard {
+    max-width: 100%;
+  }
+}
+
 @media only screen and (max-width: 344px) {
   .divisionTagline {
     padding-inline: 30px;
