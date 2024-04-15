@@ -73,11 +73,11 @@ const DivisionSecondSlider = () => {
                 className={`w-[280px] h-[290px] sm:max-h-[290px] sm:max-w-[280px] flex flex-col space-y-3 py-5 px-3 border-2 border-bluePallete-300 rounded-xl bg-bluePallete-200 ${styles.divisionSecondCard}`}
               >
                 <Image
-                  width={80}
-                  height={80}
+                  width={90}
+                  height={85}
                   src={data.logo_uri}
                   alt="Division Thumbnail Central Computer Improvment"
-                  className="w-auto h-auto max-w-[95px] max-h-[75px] md:max-w-[100px] md:max-h-[85px]"
+                  className="w-auto h-auto max-w-[90px] max-h-[85px]"
                 />
                 <h2 className="font-bold text-[24px] text-bluePallete-900">
                   {data.name}

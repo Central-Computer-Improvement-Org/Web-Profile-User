@@ -74,8 +74,8 @@ const Navbar = () => {
                           : ""
                       }`}
                       xmlns="http://www.w3.org/2000/svg"
-                      width={16}
-                      height={16}
+                      width={12}
+                      height={12}
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -86,10 +86,10 @@ const Navbar = () => {
                   </button>
                   {isDropdownOpen && (
                     <div className="absolute w-40 top-full left-0 shadow-md rounded-md bg-white">
-                      <ul className="">
+                      <ul >
                         <li className="pt-2 px-4">
                           <Link
-                            href="/about"
+                            href="about"
                             className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick = {(event) => {
                               toggleNavbar(); 
@@ -101,7 +101,7 @@ const Navbar = () => {
                         </li>
                         <li className="pt-2 px-4">
                           <Link
-                            href="/division"
+                            href="division"
                             className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick = {(event) => {
                               toggleNavbar(); 
@@ -219,18 +219,24 @@ const Navbar = () => {
                       <ul>
                         <li className="pt-2 px-4">
                           <Link
-                            href="/about"
+                            href="about"
                             className="block px-4 py-2 text-[24px] rounded text-white"
-                            onClick={toggleNavbar}
+                            onClick={(event) => {
+                              toggleNavbar(); 
+                              setIsDropdownOpen(false);
+                            }}
                           >
                             About
                           </Link>
                         </li>
                         <li className="pt-2 px-4">
                           <Link
-                            href="/division"
+                            href="division"
                             className="block px-4 py-2 text-[24px] rounded text-white"
-                            onClick={toggleNavbar}
+                            onClick={(event) => {
+                              toggleNavbar(); 
+                              setIsDropdownOpen(false);
+                            }}
                           >
                             Divisi
                           </Link>
@@ -241,6 +247,7 @@ const Navbar = () => {
                             onClick={(event) => {
                               toggleNavbar(); 
                               scrollToContact();
+                              setIsDropdownOpen(false); 
                             }}
                           >
                             Contact

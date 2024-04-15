@@ -13,7 +13,7 @@
   z-index: 1;
 }
 
-.divisionFirstCard:active {
+.divisionFirstCard:active, .divisionSecondCard:active {
   background-color: #ffffff !important;
   border: 2px solid #03349A !important;
 }
