@@ -22,7 +22,7 @@ export default function Divisions() {
     {
       imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Rahman Hakim",
+      name: "R. Hakim",
       socialLinks: "https://linkedin.com/",
     },
     {
@@ -52,7 +52,7 @@ export default function Divisions() {
     {
       imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Faiz Elfahad",
+      name: "Faiz E.",
       socialLinks: "https://linkedin.com/",
     },
   ];

@@ -9,7 +9,7 @@ export default function EventCard({ title, description, img, isGreen }) {
   const size = useWindowSize();
 
   const overlayStyle = isGreen
-    ? `bg-secondPrimary-overlay opacity-50`
+    ? `bg-secondPrimary opacity-50`
     : `bg-bluePallete-800 opacity-50`;
   const overlayOnHover = isGreen
     ? "bg-greenPallete-300 opacity-100"

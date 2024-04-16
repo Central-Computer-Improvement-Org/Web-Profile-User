@@ -32,7 +32,7 @@ export const theme = {
         800: "#084c24",
         900: "#063b1c",
       },
-      division: {
+      "division": {
         "design": "#C56539",
         "webdev": "#03349A",
         "gamedev": "#323232",
