@@ -108,7 +108,7 @@ const Footer = () => {
                   className="flex items-center p-1 sm:p-3 rounded border-2 border-white "
                 >
                   <Image
-                    src={isLoading ? "Loading..." : contactData?.data[1]?.icon_uri || "assets/logo/images/instagram-gmail.png"}
+                    src={isLoading ? "Loading..." : contactData?.data[1]?.icon_uri || "assets/logo/images/logo-instagram.png"}
                     alt="Logo Instagram CCI"
                     width={35}
                     height={35}
