@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import TeamCard from "./card/card";
+import TeamCard from "@/components/Team/Card/card";
 import React, { useState } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 

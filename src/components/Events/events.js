@@ -1,5 +1,5 @@
 "use client";
-import EventCard from "@/components/events/card/card";
+import EventCard from "@/components/Events/Card/card";
 import { useWindowSize } from "@uidotdev/usehooks";
 
 export default function Events() {

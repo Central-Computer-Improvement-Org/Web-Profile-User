@@ -7,10 +7,10 @@ export const content = [
 export const theme = {
   extend: {
     colors: {
-      mainPrimary: "#2F67B4",
-      secondPrimary: "#11A950",
-      mainFontColor: "#6B6B6B",
-      bluePallete: {
+      "mainPrimary": "#2F67B4",
+      "secondPrimary": "#11A950",
+      "mainFontColor": "#6B6B6B",
+      "bluePallete": {
         100: "#eaf0f8",
         200: "#e0e8f4",
         300: "#bfd0e8",
@@ -21,7 +21,7 @@ export const theme = {
         800: "#152e51",
         900: "#10243f",
       },
-      greenPallete: {
+      "greenPallete": {
         100: "#e7f6ee",
         200: "#dbf2e5",
         300: "#b5e4c9",
@@ -33,18 +33,18 @@ export const theme = {
         900: "#063b1c",
       },
       division: {
-        design: "#C56539",
-        webdev: "#03349A",
-        gamedev: "#323232",
-        network: "#590995",
-        data: "#29691F",
-        media: "#EE383D",
+        "design": "#C56539",
+        "webdev": "#03349A",
+        "gamedev": "#323232",
+        "network": "#590995",
+        "data": "#29691F",
+        "media": "#EE383D",
       },
     },
     backgroundColor: {
-      mainPrimary: "#2F67B4",
-      secondPrimary: "#11A950",
-      bluePallete: {
+      "mainPrimary": "#2F67B4",
+      "secondPrimary": "#11A950",
+      "bluePallete": {
         100: "#eaf0f8",
         200: "#e0e8f4",
         300: "#bfd0e8",
@@ -55,7 +55,7 @@ export const theme = {
         800: "#152e51",
         900: "#10243f",
       },
-      greenPallete: {
+      "greenPallete": {
         100: "#e7f6ee",
         200: "#dbf2e5",
         300: "#b5e4c9",
@@ -68,12 +68,9 @@ export const theme = {
       },
     },
     backgroundImage: {
-      "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-      "gradient-conic":
-        "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      gradientCard: `linear-gradient(141deg, rgba(181,228,201,1) 0%, rgba(128,186,186,1) 100%, rgba(42,118,162,1) 100%)`,
-      gradientDefault: `linear-gradient(160deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 23%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 100%)`,
-      gradientAccent: `linear-gradient(-110deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(219, 242, 229, 1) 80%, rgba(219, 242, 229, 1) 100%)`,
+      "gradientCard": `linear-gradient(141deg, rgba(181,228,201,1) 0%, rgba(128,186,186,1) 100%, rgba(42,118,162,1) 100%)`,
+      "gradientDefault": `linear-gradient(160deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 23%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 100%)`,
+      "gradientAccent": `linear-gradient(-110deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(219, 242, 229, 1) 80%, rgba(219, 242, 229, 1) 100%)`,
     },
     boxShadow: {
       shadowNav: "10px 0px 5px 1px #bfd0e8",

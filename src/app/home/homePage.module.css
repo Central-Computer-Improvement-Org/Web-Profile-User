@@ -1,0 +1,130 @@
+/* Division Section */
+@media only screen and (max-width: 914px) {
+  .divisionContainerCard {
+    max-width: 77%;
+  }
+}
+
+@media only screen and (max-width: 876px) {
+  .divisionContainerCard {
+    max-width: 76%;
+  }
+}
+
+@media only screen and (max-width: 841px) {
+  .divisionContainerCard {
+    max-width: 75%;
+  }
+}
+
+@media only screen and (max-width: 807px) {
+  .divisionContainerCard {
+    max-width: 74%;
+  }
+}
+
+@media only screen and (max-width: 777px) {
+  .divisionContainerCard {
+    max-width: 73%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .divisionContainerCard {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 344px) {
+  .divisionTagline {
+    padding-inline: 30px;
+  }
+}
+
+
+/* Project Section */
+.projectsOuterRepo:hover {
+  border: 2px solid black;
+}
+
+.projectsIconRepo:hover,
+.projectsOuterRepo:hover .projectsIconRepo {
+  fill: #000000;
+}
+
+@media only screen and (max-width: 568px) {
+  .projectsCardThumbnail {
+    top: 2020px !important;
+  }
+}
+
+@media only screen and (max-width: 416px) {
+  .projectsCardThumbnail {
+    top: 2010px !important;
+  }
+}
+
+@media only screen and (max-width: 403px) {
+  .projectsCardThumbnail {
+    top: 2035px !important;
+  }
+}
+
+@media only screen and (max-width: 395px) {
+  .projectsDesc {
+    margin-top: 185px;
+  }
+}
+
+@media only screen and (max-width: 384px) {
+  .projectsThumbnailImage {
+    max-width: 260px;
+    max-height: 230px;
+  }
+  .projectsCardThumbnail {
+    top: 2010px !important;
+  }
+  .projectsDesc {
+    margin-top: 170px;
+  }
+}
+
+@media only screen and (max-width: 368px) {
+  .projectsDesc {
+    margin-top: 170px;
+  }
+  .projectsCardThumbnail {
+    top: 2030px !important;
+  }
+}
+
+@media only screen and (max-width: 358px) {
+  .projectsCardThumbnail {
+    top: 2060px !important;
+  }
+}
+
+@media only screen and (max-width: 357px) {
+  .projectsDesc {
+    margin-top: 170px;
+  }
+  .projectsOuterRepo {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 348px) {
+  .projectsCardThumbnail {
+    top: 2075px !important;
+  }
+  .projectsThumbnailImage {
+    max-width: 240px;
+    max-height: 220px;
+  }
+}
+
+@media only screen and (max-width: 343px) {
+  .projectsCardThumbnail {
+    top: 2100px !important;
+  }
+}

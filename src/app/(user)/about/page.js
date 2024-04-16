@@ -1,7 +1,7 @@
+import Events from "@/components/Events/events";
+import Divisions from "@/components/Team/team";
 import Header from "@/components/header";
-import Nav from "@/components/nav";
-import Events from "@/components/events/events";
-import Divisions from "@/components/team/team";
+import Nav from "@/components/navbar";
 import Footer from "@/components/footer";
 
 export default function Home() {

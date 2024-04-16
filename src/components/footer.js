@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import request from "@/app/utils/request";
+import request from "../app/utils/request";
 
 const Footer = () => {
   const [settingsData, setSettingsData] = useState(null);
