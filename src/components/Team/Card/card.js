@@ -8,14 +8,14 @@ export default function TeamCard({ imageUrl, title, name, socialLinks }) {
 
   return (
     <div
-      className={`bg-gradientCard relative mt-[30px] lg:mt-[80px] mx-[8px] md:mx-[16px] lg:mx-[24px] xl:mx-[56px] py-[4rem] md:py-[6rem] lg:py-[10rem] rounded-[15px] md:rounded-[30px]`}
+      className={`bg-gradientCard relative mt-[30px] lg:mt-[80px] mx-[4px] md:mx-[16px] lg:mx-[24px] xl:mx-[56px] py-[4rem] md:py-[6rem] lg:py-[7.5rem] xl:py-[10rem] rounded-[15px] md:rounded-[30px]`}
     >
       {size.width >= 1024 ? (
         <div
-          className={` absolute inset-0 space-x-[1rem] flex items-center justify-between md:px-[2rem]`}
+          className={`absolute inset-0 space-x-[1rem] flex items-center justify-between md:px-[2rem]`}
         >
-          <div className="lg:space-y-[32px] xl:space-y-56">
-            <div className="text-blue-darkActive">
+          <div className="lg:space-y-[32px] xl:space-y-[56px]">
+            <div className="text-bluePallete-800">
               <h5
                 className={`antialiased text-[8px] md:text-small lg:text-normal xl:text-large font-medium`}
               >
@@ -30,8 +30,8 @@ export default function TeamCard({ imageUrl, title, name, socialLinks }) {
             <div>
               <Link href={socialLinks}>
                 <Image
-                  src={`assets/about/svgs/linkedin.svg`}
-                  className={`w-[1rem] h-[1rem] lg:w-[2rem] lg:h-[2rem] xl:w-[3rem] xl:h-[3rem]`}
+                  src={`assets/logo/images/logo-linkedin.png`}
+                  className={`w-[1rem] h-[1rem] lg:w-[2.5rem] lg:h-[2.5rem] xl:w-[3rem] xl:h-[3rem]`}
                   width={0}
                   height={0}
                 />
@@ -49,8 +49,8 @@ export default function TeamCard({ imageUrl, title, name, socialLinks }) {
         <div
           className={`absolute inset-0 space-y-[1rem] justify-between py-[1rem] px-[1rem] overflow-hidden`}
         >
-          <div className="flex justify-between space-x-[16px] md:px-16 md:py-[12px]">
-            <div className="text-blue-darkActive">
+          <div className="flex justify-between space-x-[16px] md:px-[16px] md:py-[12px]">
+            <div className="text-bluePallete-800">
               <h5 className={`antialiased text-[8px] md:text-small font-medium`}>
                 {title}
               </h5>
@@ -63,11 +63,11 @@ export default function TeamCard({ imageUrl, title, name, socialLinks }) {
               width={0}
             />
           </div>
-          <div className="relative w-fit md:px-16">
+          <div className="relative w-fit md:px-[16px]">
             <Link href={socialLinks} target="_blank">
               <Image
-                src={`assets/about/svgs/linkedin.svg`}
-                className={`w-[20px] h-[20px] md:w-[1.5rem] md:h-[1.5rem]`}
+                src={`assets/logo/images/logo-linkedin.png`}
+                className={`w-[20px] h-[20px] md:w-[1.5rem] md:h-[1.5rem] lg:`}
                 width={0}
                 height={0}
               />

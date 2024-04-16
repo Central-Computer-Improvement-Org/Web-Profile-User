@@ -1,21 +1,55 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+
+import request from "@/app/utils/request";
 
 const Footer = () => {
+  const [settingsData, setSettingsData] = useState(null);
+  const [contactData, setContactData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    Promise.all([request.get("/settings"), request.get("/contact")])
+      .then(([settingsResponse, contactResponse]) => {
+        if (
+          settingsResponse.status === 200 ||
+          settingsResponse.status === 201
+        ) {
+          setSettingsData(settingsResponse.data);
+        } else {
+          console.error(JSON.stringify(settingsResponse.errors));
+        }
+
+        if (contactResponse.status === 200 || contactResponse.status === 201) {
+          setContactData(contactResponse.data);
+        } else {
+          console.error(JSON.stringify(contactResponse.errors));
+        }
+
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
-    <footer className="w-full h-auto bg-blue-darkActive">
+    <footer id="contact" className="w-full h-auto bg-bluePallete-800">
       <div className="xl:max-w-7xl lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
         <div className="w-full h-full flex flex-col flex-wrap space-y-8 lg:space-y-20 justify-between pt-10 lg:pt-32 pb-10">
           <div className="w-full flex flex-col lg:items-start items-center space-y-5">
-            <button onClick={() => window.scrollTo(0, 0)}>
-              <Image
-                src="/assets/global/svgs/logo.svg"
-                alt="Logo CCI"
-                width={90}
-                height={90}
-                className="w-30 h-30 md:w-[150px] md:h-[80px] md:ml-[8px]"
-              />
-            </button>
+            <Image
+              src="assets/logo/images/logo.svg"
+              alt="Logo Central Computer Improvement"
+              width={90}
+              height={90}
+              className="w-30 h-30 md:w-[150px] md:h-[80px] cursor-pointer"
+            />
             <div className="w-auto flex flex-col">
               <p className="text-center text-[16px] font-bold uppercase text-white">
                 Central Computer
@@ -39,7 +73,10 @@ const Footer = () => {
                   ></path>
                 </svg>
                 <p className="text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] font-bold text-white">
-                  Telkom University, Bandung
+                  {isLoading
+                    ? "Loading..."
+                    : settingsData?.data[0]?.address ||
+                      "Telkom University, Bandung"}
                 </p>
               </div>
               <p className="flex justify-center items-center text-center lg:text-left text-[12px] sm:text-[16px] lg:text-[24px] pr-0 lg:pr-24 text-white">
@@ -49,46 +86,67 @@ const Footer = () => {
             </div>
             <div className="w-full h-full basis-full lg:basis-2/5 flex flex-col justify-between items-center space-y-5 pl-0 lg:pl-20">
               <div className="w-[75%] lg:w-full flex flex-row justify-between">
-                <div className="border-2 p-1 sm:p-3 rounded border-white">
+                <a
+                  href="mailto:cci.unitel@gmail.com?subject=Subject%20of%20the%20email&body="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                >
                   <Image
-                    src="assets/footer/images/footer-gmail.png"
+                    src={isLoading ? "Loading..." : contactData?.data[0]?.icon_uri || "assets/logo/images/logo-gmail.png"}
+                   // src="assets/logo/images/logo-gmail.png"
                     alt="Logo Email CCI"
                     width={35}
                     height={35}
-                    className="w-25 h-25 sm:w-[52px] sm:h-[50px] cursor-pointer"
+                    className="w-[27px] h-[21px] sm:w-[54px] sm:h-[42px] cursor-pointer"
                   />
-                </div>
-                <div className="border-2 p-1 sm:p-3 rounded border-white ">
+                </a>
+                <a
+                  href="https://www.instagram.com/cciunitel/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white "
+                >
                   <Image
-                    src="assets/footer/images/footer-instagram.png"
+                    src={isLoading ? "Loading..." : contactData?.data[1]?.icon_uri || "assets/logo/images/instagram-gmail.png"}
                     alt="Logo Instagram CCI"
                     width={35}
                     height={35}
-                    className="w-25 h-25 sm:w-[52px] sm:h-[50px] cursor-pointer"
+                    className="w-[25px] h-[25px] sm:w-[52px] sm:h-[50px] cursor-pointer"
                   />
-                </div>
-                <div className="border-2 p-1 sm:p-3 rounded border-white">
+                </a>
+                <a
+                  href="https://line.me/R/ti/p/~buz0214o"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                >
                   <Image
-                    src="assets/footer/images/footer-line.png"
+                    src={isLoading ? "Loading..." : contactData?.data[2]?.icon_uri || "assets/logo/images/logo-line.png"}
                     alt="Logo Line CCI"
                     width={35}
                     height={35}
-                    className="w-25 h-25 sm:w-[52px] sm:h-[50px] cursor-pointer"
+                    className="w-[25px] h-[25px] sm:w-[52px] sm:h-[50px] cursor-pointer"
                   />
-                </div>
-                <div className="border-2 p-1 sm:p-3 roundedborder-white">
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/cci-telkomuniversity/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                >
                   <Image
-                    src="assets/footer/images/footer-linkedin.png"
+                    src={isLoading ? "Loading..." : contactData?.data[3]?.icon_uri || "assets/logo/images/logo-linkedin.png"}
                     alt="Logo Linkedin CCI"
                     width={35}
                     height={35}
-                    className="w-25 h-25 sm:w-[52px] sm:h-[50px] cursor-pointer"
+                    className="w-[25px] h-[25px] sm:w-[52px] sm:h-[50px] cursor-pointer"
                   />
-                </div>
+                </a>
               </div>
               <button className="w-[75%] lg:w-full rounded-lg bg-white">
                 <p className="sm:text-[20px] text-[12px] font-bold py-1 sm:px-20 sm:py-3 text-bluePallete-700">
-                  Credit
+                  <Link href="/credit">Credit</Link>
                 </p>
               </button>
             </div>

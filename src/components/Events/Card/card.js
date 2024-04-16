@@ -9,11 +9,11 @@ export default function EventCard({ title, description, img, isGreen }) {
   const size = useWindowSize();
 
   const overlayStyle = isGreen
-    ? `bg-green-overlay opacity-50`
-    : `bg-blue-overlay opacity-50`;
+    ? `bg-secondPrimary-overlay opacity-50`
+    : `bg-bluePallete-800 opacity-50`;
   const overlayOnHover = isGreen
-    ? "bg-green-lightActive opacity-100"
-    : "bg-blue-darkActive opacity-100";
+    ? "bg-greenPallete-300 opacity-100"
+    : "bg-bluePallete-800 opacity-100";
   return (
     <div
       className={`relative px-[150px] py-[2rem] mt-[30px] lg:mt-[80px] lg:mx-[55px] lg:py-[96px] shadow-sm rounded-[15px] lg:rounded-[30px] overflow-hidden`}
@@ -34,12 +34,12 @@ export default function EventCard({ title, description, img, isGreen }) {
         ref={ref}
         className={`absolute inset-0 flex ${
           size.width >= 1024 && hovering
-            ? "lg:px-24 xl:px-40 items-start flex-col justify-center "
+            ? "lg:px-[24px] xl:px-[40px] items-start flex-col justify-center "
             : "items-center justify-center"
         }`}
       >
         {size.width >= 1024 && hovering ? (
-          <span className={`${isGreen ? "text-green-darker" : "text-white"}`}>
+          <span className={`${isGreen ? "text-greenPallete-900" : "text-white"}`}>
             <h5 className="antialiased text-h5 font-bold">{title}</h5>
             <p className="antialiased lg:text-small xl:text-normal font-medium">
               {description}
