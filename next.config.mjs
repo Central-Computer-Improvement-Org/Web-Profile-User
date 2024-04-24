@@ -11,5 +11,4 @@ const nextConfig = {
    basePath: '/web-profile-User'
 };
 
-
 export default nextConfig;
