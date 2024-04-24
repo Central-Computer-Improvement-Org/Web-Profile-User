@@ -45,9 +45,10 @@ const Navbar = () => {
     <>
       <nav
         ref={navOutsideRef}
-        className="top-0 inset-x-0 py-5 fixed z-50 shadow-shadowNav md:shadow-none bg-white transition-all duration-300"
+        className="fixed h-[60px] sm:h-[90px] md:h-[120px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 shadow-shadowNav md:shadow-none transition-all duration-300 bg-white "
       >
         <div className="xl:max-w-7xl lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
+          {/* Desktop menu */}
           <div className="h-full w-full flex justify-between items-center">
             <Link href="/">
               <Image
@@ -60,10 +61,10 @@ const Navbar = () => {
             </Link>
             <div className="md:flex items-center space-x-16 hidden">
               <ul className="md:flex items-center space-x-16 hidden">
-                {/* Dropdown Menu */}
+                {/* Dropdown menu di ukuran deskstop */}
                 <div className="relative">
                   <button
-                    className="md:hover:underline md:hover:underline-offset-2 flex flex-row items-center p-4 text-[#6B6B6B] hover:text-bluePallete-700"
+                    className="flex flex-row items-center p-4 text-[32px] sm:text-[24px] md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700"
                     onClick={toggleDropdown}
                   >
                     About Us
@@ -86,13 +87,13 @@ const Navbar = () => {
                   </button>
                   {isDropdownOpen && (
                     <div className="absolute w-40 top-full left-0 shadow-md rounded-md bg-white">
-                      <ul >
+                      <ul>
                         <li className="pt-2 px-4">
                           <Link
                             href="about"
-                            className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:bg-bluePallete-200"
-                            onClick = {(event) => {
-                              toggleNavbar(); 
+                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded    text-[#6B6B6B] hover:bg-bluePallete-200"
+                            onClick={(event) => {
+                              toggleNavbar();
                               setIsDropdownOpen(false);
                             }}
                           >
@@ -102,9 +103,9 @@ const Navbar = () => {
                         <li className="pt-2 px-4">
                           <Link
                             href="division"
-                            className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:bg-bluePallete-200"
-                            onClick = {(event) => {
-                              toggleNavbar(); 
+                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded text-[#6B6B6B] hover:bg-bluePallete-200"
+                            onClick={(event) => {
+                              toggleNavbar();
                               setIsDropdownOpen(false);
                             }}
                           >
@@ -113,11 +114,11 @@ const Navbar = () => {
                         </li>
                         <li className="pt-2 pb-2 px-4">
                           <div
-                            className="block px-4 py-2 rounded md:hover:underline md:hover:underline-offset-2 cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
+                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick={(event) => {
-                              toggleNavbar(); 
+                              toggleNavbar();
                               scrollToContact();
-                              setIsDropdownOpen(false); 
+                              setIsDropdownOpen(false);
                             }}
                           >
                             Contact
@@ -128,27 +129,28 @@ const Navbar = () => {
                   )}
                 </div>
                 <Link href="/news">
-                  <li className="p-4 md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700">
+                  <li className="font-medium text-[32px] sm:text-[24px] p-4 md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700">
                     News
                   </li>
                 </Link>
                 <Link href="/project">
-                  <li className="p-4 md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700">
+                  <li className="font-medium text-[32px] sm:text-[24px] p-4 md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700">
                     Project
                   </li>
                 </Link>
               </ul>
             </div>
-            {/* Toggle Hamburger */}
+            {/* Icon Hamburger */}
             <div
               onClick={toggleNavbar}
               className="md:hidden cursor-pointer pl-24"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width={30}
-                height={30}
+                width={22}
+                height={18}
                 viewBox="0 0 48 48"
+                className="w-full h-full max-w-[22px] max-h-[18px]"
               >
                 <path
                   fill="none"
@@ -165,7 +167,7 @@ const Navbar = () => {
           <div
             className={
               isClick
-                ? "fixed w-[65%] md:hidden h-screen flex flex-col flex-start left-0 top-0 p-7 sm:p-10 ease-in duration-400 transition-all bg-bluePallete-700"
+                ? "fixed w-[65%] md:hidden h-screen flex flex-col flex-start left-0 top-0 p-5 sm:p-10 ease-in duration-400 transition-all bg-bluePallete-700"
                 : "fixed left-[-100%] top-0 p-10 ease-out duration-400 transition-all"
             }
           >
@@ -173,9 +175,10 @@ const Navbar = () => {
               <div onClick={toggleNavbar} className="cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width={70}
-                  height={70}
+                  width={56}
+                  height={56}
                   viewBox="0 0 24 24"
+                  className="w-full h-full max-w-[56px] max-h-[56px]"
                 >
                   <g fill="none" stroke="white" strokeWidth={1.5}>
                     <circle cx={12} cy={12} r={10}></circle>
@@ -189,11 +192,11 @@ const Navbar = () => {
               </div>
             </div>
             <div className="h-full flex flex-col py-4">
-              <ul className="pt-32">
-                {/* Dropdown Menu in Mobile */}
+              <ul className="pt-[160px]">
+                {/* Dropdown menu di ukuran mobile */}
                 <div className="relative">
                   <button
-                    className="flex flex-row items-center text-[28px] sm:text-[32px] text-white"
+                    className="flex flex-row items-center text-[28px] text-white"
                     onClick={toggleDropdown}
                   >
                     About Us{" "}
@@ -220,9 +223,9 @@ const Navbar = () => {
                         <li className="pt-2 px-4">
                           <Link
                             href="about"
-                            className="block px-4 py-2 text-[24px] rounded text-white"
+                            className="block px-4 text-[25px] rounded text-white"
                             onClick={(event) => {
-                              toggleNavbar(); 
+                              toggleNavbar();
                               setIsDropdownOpen(false);
                             }}
                           >
@@ -232,9 +235,9 @@ const Navbar = () => {
                         <li className="pt-2 px-4">
                           <Link
                             href="division"
-                            className="block px-4 py-2 text-[24px] rounded text-white"
+                            className="block px-4 text-[25px] rounded text-white"
                             onClick={(event) => {
-                              toggleNavbar(); 
+                              toggleNavbar();
                               setIsDropdownOpen(false);
                             }}
                           >
@@ -243,11 +246,11 @@ const Navbar = () => {
                         </li>
                         <li className="pt-2 pb-2 px-4">
                           <div
-                            className="block px-4 py-2 text-[24px] rounded cursor-pointer text-white"
+                            className="block px-4 text-[25px] rounded cursor-pointer text-white"
                             onClick={(event) => {
-                              toggleNavbar(); 
+                              toggleNavbar();
                               scrollToContact();
-                              setIsDropdownOpen(false); 
+                              setIsDropdownOpen(false);
                             }}
                           >
                             Contact
@@ -260,7 +263,7 @@ const Navbar = () => {
                 <Link href="/news">
                   <li
                     onClick={() => setIsClick(false)}
-                    className="py-4 text-[28px] sm:text-[32px] cursor-pointer text-white"
+                    className="py-4 text-[28px] cursor-pointer text-white"
                   >
                     News
                   </li>
@@ -268,7 +271,7 @@ const Navbar = () => {
                 <Link href="/project">
                   <li
                     onClick={() => setIsClick(false)}
-                    className="text-[28px] sm:text-[32px] cursor-pointer text-white"
+                    className="text-[28px] cursor-pointer text-white"
                   >
                     Project
                   </li>

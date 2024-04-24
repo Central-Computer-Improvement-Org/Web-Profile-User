@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -10,7 +9,6 @@ import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const DivisionSecondSlider = () => {
-  const router = useRouter();
   const [divisionData, setDivisionData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,52 +30,59 @@ const DivisionSecondSlider = () => {
   }, []);
   return (
     <>
-      <Swiper
-        style={{
-          "--swiper-pagination-color": "#234d87",
-          "--swiper-pagination-bullet-inactive-color": "#bfd0e8",
-          "--swiper-pagination-bullet-inactive-opacity": "1",
-          "--swiper-pagination-bullet-size": "10px",
-        }}
-        slidesPerView={1}
-        spaceBetween={20}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        breakpoints={{
-          "@0.00": {
-            slidesPerView: 1.2,
-            spaceBetween: 10,
-          },
-          "@0.75": {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          "@1.00": {
-            slidesPerView: 2.5,
-            spaceBetween: 30,
-          },
-          "@1.50": {
-            slidesPerView: 3,
-            spaceBetween: 40,
-          },
-        }}
-        className="w-full h-[360px]"
-      >
-        {Array.isArray(divisionData) &&
-          divisionData.map((data, index) => (
+      {loading ? (
+        <div className="w-full h-[360px] flex items-center justify-center">
+          <h1 className="font-bold text-[20px] text-center text-black">
+            Loading...
+          </h1>
+        </div>
+      ) : (
+        <Swiper
+          style={{
+            "--swiper-pagination-color": "#234d87",
+            "--swiper-pagination-bullet-inactive-color": "#bfd0e8",
+            "--swiper-pagination-bullet-inactive-opacity": "1",
+            "--swiper-pagination-bullet-size": "10px",
+          }}
+          slidesPerView={1.3}
+          spaceBetween={20}
+          loop={false}
+          pagination={{
+            clickable: false,
+          }}
+          centeredSlides={true}
+          modules={[Pagination]}
+          breakpoints={{
+            "@0.00": {
+              slidesPerView: 1.3,
+              spaceBetween: 20,
+            },
+            "@0.75": {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            "@1.00": {
+              slidesPerView: 2.5,
+              spaceBetween: 30,
+            },
+            "@1.50": {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+          }}
+          className="w-full h-[360px]"
+        >
+          {divisionData.map((data, index) => (
             <SwiperSlide key={index} className={`w-full my-5 md:my-0`}>
               <div
-                onClick={() => router.push(data.divisionUrl)}
-                className={`w-[280px] h-[290px] sm:max-h-[290px] sm:max-w-[280px] flex flex-col space-y-3 py-5 px-3 border-2 border-bluePallete-300 rounded-xl bg-bluePallete-200 ${styles.divisionSecondCard}`}
+                className={`w-[280px] h-[290px] sm:max-h-[290px] sm:max-w-[280px] flex flex-col space-y-3 py-5 px-3 border-2 border-bluePallete-600 rounded-[20px] bg-bluePallete-200 ${styles.divisionSecondCard}`}
               >
                 <Image
                   width={90}
                   height={85}
-                  src={data.logo_uri}
+                  src={data.logoUri}
                   alt="Division Thumbnail Central Computer Improvment"
-                  className="w-auto h-auto max-w-[90px] max-h-[85px]"
+                  className="w-auto h-auto max-w-[90px] max-h-[85px] object-cover"
                 />
                 <h2 className="font-bold text-[24px] text-bluePallete-900">
                   {data.name}
@@ -90,7 +95,8 @@ const DivisionSecondSlider = () => {
               </div>
             </SwiperSlide>
           ))}
-      </Swiper>
+        </Swiper>
+      )}
     </>
   );
 };
