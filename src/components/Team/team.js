@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import TeamCard from "./Card/card";
+import TeamCard from "@/components/Team/Card/card";
 import React, { useState } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 
@@ -23,7 +22,7 @@ export default function Divisions() {
     {
       imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Rahman Hakim",
+      name: "R. Hakim",
       socialLinks: "https://linkedin.com/",
     },
     {
@@ -47,13 +46,13 @@ export default function Divisions() {
     {
       imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Arya Firmansyah",
+      name: "Arya F.",
       socialLinks: "https://linkedin.com/",
     },
     {
       imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Faiz Elfahad",
+      name: "Faiz E.",
       socialLinks: "https://linkedin.com/",
     },
   ];
@@ -77,7 +76,7 @@ export default function Divisions() {
           Meet Our Team
         </h3>
       </div>
-      <div className="grid grid-cols-2 mb-32">
+      <div className="grid grid-cols-2 mb-[32px]">
         {displayedCards.map((card, index) => (
           <TeamCard key={index} {...card} />
         ))}
@@ -87,14 +86,21 @@ export default function Divisions() {
           className="text-white w-full flex justify-center hover:opacity-75"
           onClick={handleNext}
         >
-          <Image
-            src={`assets/about/svgs/arrow-next.svg`}
-            className={`${
-              size.width >= 768 ? "w-[65px] h-[65px]" : ""
-            }w-[] md:w-[65px] md:h-[65px]`}
-            width={0}
-            height={0}
-          />
+          <svg
+            width="65"
+            height="65"
+            viewBox="0 0 100 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="50" cy="50" r="50" fill="#265290" />
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M48.9661 33.2082C49.9729 32.2014 51.6053 32.2014 52.6121 33.2082L68.0808 48.677C69.0876 49.6838 69.0876 51.3162 68.0808 52.323L52.6121 67.7918C51.6053 68.7986 49.9729 68.7986 48.9661 67.7918C47.9592 66.7849 47.9592 65.1526 48.9661 64.1457L60.0337 53.0781H32.7422C31.3183 53.0781 30.1641 51.9239 30.1641 50.5C30.1641 49.0761 31.3183 47.9219 32.7422 47.9219H60.0337L48.9661 36.8543C47.9592 35.8474 47.9592 34.2151 48.9661 33.2082Z"
+              fill="white"
+            />
+          </svg>
         </button>
       ) : (
         <div className="flex justify-center mt-4">

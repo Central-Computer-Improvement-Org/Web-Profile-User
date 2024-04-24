@@ -32,6 +32,14 @@ export const theme = {
         800: "#084c24",
         900: "#063b1c",
       },
+      "division": {
+        "design": "#C56539",
+        "webdev": "#03349A",
+        "gamedev": "#323232",
+        "network": "#590995",
+        "data": "#29691F",
+        "media": "#EE383D",
+      },
     },
     backgroundColor: {
       "mainPrimary": "#2F67B4",
@@ -59,12 +67,24 @@ export const theme = {
         900: "#063b1c",
       },
     },
-    boxShadow: {
-      'shadowNav': '10px 0px 5px 1px #bfd0e8'
-    },
     backgroundImage: {
-        gradientDefault: "linear-gradient(150deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 120%)",
-        gradientAccent: "linear-gradient(-110deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 70%, rgba(219, 242,229,1)100%)",
+      "gradientCard": `linear-gradient(141deg, rgba(181,228,201,1) 0%, rgba(128,186,186,1) 100%, rgba(42,118,162,1) 100%)`,
+      "gradientDefault": `linear-gradient(160deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 23%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 100%)`,
+      "gradientAccent": `linear-gradient(-110deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(219, 242, 229, 1) 80%, rgba(219, 242, 229, 1) 100%)`,
+    },
+    boxShadow: {
+      shadowNav: "10px 0px 5px 1px #bfd0e8",
+    },
+    fontSize: {
+      h1: "56px",
+      h2: "48px",
+      h3: "40px",
+      h4: "32px",
+      h5: "24px",
+      large: "20px",
+      medium: "18px",
+      normal: "16px",
+      small: "14px",
     },
   },
 };
