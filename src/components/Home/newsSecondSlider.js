@@ -22,13 +22,12 @@ const NewsSecondSlider = () => {
         if (response.status === 200 || response.status === 201) {
           const formattedData = response.data.data.map((item) => {
             const createdAt = new Date(item.createdAt);
-            // const updatedAt = new Date(item.updatedAt); // mengambil data updatedAt, uncomment jika dibutuhkan
+            // const updatedAt = new Date(item.updatedAt); // uncomment jika dibutuhkan
             return {
               ...item,
               date: `${getMonthName(
                 createdAt.getMonth()
-              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`, // properti key 'date' bisa diubah sesuai keinginan
-              // updatedAt: `${getMonthName(updatedAt.getMonth())} ${updatedAt.getDate()}, ${updatedAt.getFullYear()}` // properti key 'updatedAt' bisa diubah sesuai keinginan
+              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`, // properti key 'date' bisa diubah sesuai kebutuhan
             };
           });
           setNewsData(formattedData);
@@ -93,7 +92,7 @@ const NewsSecondSlider = () => {
         >
           {Array.isArray(newsData) &&
             newsData.map((data, index) => (
-              <SwiperSlide key={index} className="px-3">
+              <SwiperSlide key={index} className="px-3 !flex !justify-start !items-center !flex-col">
                 <div
                   onClick={() => router.push("/news")}
                   className="w-[222px] h-[242px] "
