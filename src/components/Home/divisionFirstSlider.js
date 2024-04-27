@@ -75,7 +75,7 @@ const DivisionFirstSlider = () => {
               className={`cursor-pointer ${styles.divisionCardSwiper}`}
             >
               <div
-                className={`h-[351px] w-[290px] max-h-[351px] max-w-[290px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
+                className={`h-[351px] w-[290px] max-h-[340px] max-w-[290px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
               >
                 <Image
                   width={95}

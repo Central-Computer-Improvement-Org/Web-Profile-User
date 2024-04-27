@@ -42,8 +42,8 @@ export async function GET(request) {
             },
             {
                 id: "PJT-458163-4",
-                name: "Nama Project 4",
-                description: "Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.",
+                name: "Nama Project",
+                description: "Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place wdwdw wdwd wdw.",
                 iconUri: "assets/uploads/project/logo-project.png",
                 imageUri: "assets/uploads/project/projects-thumbnail.png",
                 productionUri: "https://www.cciunitel.com/",
