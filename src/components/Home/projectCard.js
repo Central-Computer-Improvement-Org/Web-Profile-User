@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -9,7 +8,6 @@ import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const ProjectData = () => {
-  const router = useRouter();
   const [projectData, setProjectData] = useState(null);
   const [positionIndex, setPositionIndex] = useState(0);
   const [isMovingData, setIsMovingData] = useState(false);
@@ -87,6 +85,14 @@ const ProjectData = () => {
     [projectData]
   );
 
+  // handle pemotongan nama project maksimal 12 char
+  const cutNameProject = (str, maxLength) => {
+    if (str.length <= maxLength) {
+      return str;
+    }
+    return `${str.substring(0, maxLength)}...`;
+  };
+
   // handle penambahan skeleton loading saat data berpindah
   useEffect(() => {
     if (isMovingData) {
@@ -109,7 +115,7 @@ const ProjectData = () => {
     <>
       <div className={`static w-full h-auto lg:h-[340px] xl:h-auto flex flex-row flex-wrap py-8 px-8 sm:px-10 rounded-[20px] sm:rounded-lg lg:border-[3px] lg:border-bluePallete-600 bg-bluePallete-800 lg:bg-transparent ${styles.projectContainer}`}>
         <div
-          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[1830px] sm:top-[2215px] md:top-[2980px] ${styles.projectsContainerThumbnail}`}
+          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[1730px] sm:top-[2230px] md:top-[3020px] ${styles.projectsContainerThumbnail}`}
         >
           {isMovingData || isLoading || !projectData ? (
             <Skeleton
@@ -123,7 +129,7 @@ const ProjectData = () => {
               width={467}
               height={284}
               responsive="true"
-              className={`w-[290px] h-[260px] sm:w-[450px] sm:h-[257px] md:w-full md:h-[320px] max-w-[650px] max-h-[370px] lg:max-w-[467px] lg:max-h-[284px] rounded-[20px] sm:rounded-lg object-cover ${styles.projectsThumbnailImage}`}
+              className={`w-[290px] h-[270px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] max-w-[650px] max-h-[370px] lg:max-w-[467px] lg:max-h-[284px] rounded-[20px] sm:rounded-lg object-cover ${styles.projectsThumbnailImage}`}
             />
           )}
         </div>
@@ -131,7 +137,7 @@ const ProjectData = () => {
           className={`basis-full lg:basis-3/5 mt-[180px] sm:mt-[230px] md:mt-[300px] lg:mt-0 pl-0 lg:pl-7 flex flex-col justify-between space-y-2 sm:space-y-5 lg:space-y-0 ${styles.projectContainerInfo}`}
         >
           <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center space-y-2 sm:space-y-0">
-            <div className="w-[168px] h-[39px] sm:w-auto sm:h-auto flex flex-row justify-center sm:justify-normal items-center space-x-1 sm:space-x-3 rounded-[10px] bg-white sm:bg-none">
+            <div className="w-auto h-[39px] sm:w-auto sm:h-auto flex flex-row justify-center sm:justify-normal items-center px-2 space-x-1 sm:space-x-2 rounded-[10px] bg-white sm:bg-transparent">
               <div className="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px] max-w-[50px] max-h-[50px]">
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton circle={true} width="100%" height="100%" />
@@ -146,15 +152,15 @@ const ProjectData = () => {
                   />
                 )}
               </div>
-              <div className="block sm:hidden text-[18px] font-bold text-bluePallete-600">
+              <div className={`block sm:hidden font-bold text-[18px] text-bluePallete-600`}>
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={100} height={20} />
                 ) : (
-                  <p>{projectData[positionIndex].name}</p>
+                  <p>{cutNameProject(projectData[positionIndex].name, 12)}</p>
                 )}
               </div>
             </div>
-            <div className="hidden sm:block ml-[10px] text-[8px] sm:text-[15px] lg:text-[18px] font-bold text-white lg:text-black">
+            <div className="hidden sm:block ml-[10px] font-bold text-[8px] sm:text-[15px] lg:text-[18px] overflow-hidden text-white lg:text-black">
               {isMovingData || isLoading || !projectData ? (
                 <Skeleton width={200} height={20} />
               ) : (
@@ -163,7 +169,7 @@ const ProjectData = () => {
             </div>
           </div>
           <div
-            className={`h-auto font-medium text-justify overflow-hidden text-[15px] lg:text-[20px] text-white lg:text-black ${styles.projectsDesc}`}
+            className={`h-auto font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden  text-white lg:text-black ${styles.projectsDesc}`}
           >
             {isMovingData || isLoading || !projectData ? (
               <Skeleton count={3} />
@@ -199,7 +205,7 @@ const ProjectData = () => {
                 />
               </svg>
               <svg
-                className="block lg:hidden w-[22px] h-[22px]"
+                className="block lg:hidden w-[20px] h-[20px]"
                 width="22"
                 height="22"
                 viewBox="0 0 13 12"
@@ -215,7 +221,7 @@ const ProjectData = () => {
               </svg>
               <a
                 rel="noopener noreferrer"
-                className="text-[14px] sm:text-[16px] xl:text-[18px] font-semibold pl-[4px] sm:pl-[20px]"
+                className="text-[14px] sm:text-[16px] lg:text-[20px] font-semibold pl-[5px] sm:pl-[20px]"
               >
                 Go to Website
               </a>
@@ -228,7 +234,7 @@ const ProjectData = () => {
               className={`w-[168px] h-[39px] sm:w-auto sm:h-auto flex flex-row justify-start sm:justify-between items-center space-x-1 sm:space-x-5 py-1 sm:py-2 xl:py-3 px-2 sm:px-5 rounded-[5px] sm:rounded-[15px] bg-bluePallete-900 sm:hover:bg-white transition-colors text-bluePallete-100 sm:hover:text-black border-[2px] border-white lg:border-none duration-300 ease-in-out cursor-pointer ${styles.projectsContainerRepository}`}
             >
               <svg
-                className="w-[22px] h-[22px] lg:w-[25px] lg:h-[25px]"
+                className="w-[20px] h-[20px] lg:w-[25px] lg:h-[25px]"
                 width="25"
                 height="25"
                 viewBox="0 0 25 26"
@@ -244,7 +250,7 @@ const ProjectData = () => {
               </svg>
               <a
                 rel="noopener noreferrer"
-                className="text-[14px] sm:text-[16px] xl:text-[18px] font-semibold"
+                className="text-[14px] sm:text-[16px] lg:text-[20px] font-semibold"
               >
                 Check Repository
               </a>

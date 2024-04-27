@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,7 +15,6 @@ import ProjectCard from "@/components/Home/projectCard";
 import styles from "@/app/home/homePage.module.css";
 
 export default function Home() {
-  const router = useRouter();
   const [settingsData, setSettingsData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -206,7 +204,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="block lg:hidden mt-14">
+                <div className="block lg:hidden mt-1 sm:mt-14">
                   <div className="flex flex-col space-y-3 pr-0 xl:pr-[29px]">
                     <h2 className="text-[25px] lg:text-[40px] font-bold text-mainPrimary">
                       Penghargaan
@@ -226,7 +224,7 @@ export default function Home() {
               >
                 <div className="w-full flex flex-row flex-wrap-reverse">
                   <div className="basis-full lg:basis-2/5 flex items-center">
-                    <div className="flex flex-col space-y-4 mt-14 lg:mt-0">
+                    <div className="flex flex-col space-y-4 mt-1 sm:mt-14 lg:mt-0">
                       <h2 className="text-[25px] md:text-[30px] lg:text-[40px] text-right lg:text-left font-bold text-mainPrimary">
                         Jumlah Project
                       </h2>
@@ -318,16 +316,16 @@ export default function Home() {
               <div className="xl:max-w-7xl lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
                 <div className="w-full flex flex-col space-y-[60px] sm:space-y-[80px] lg:space-y-10 mb-12 sm:mt-0 py-0 sm:py-20">
                   <div className="w-full h-auto flex flex-col items-center justify-between space-y-4 lg:space-y-5">
-                    <h1 className="text-center font-bold text-[20px] sm:text-[26px] md:text-[50px] px-0 lg:px-52 text-bluePallete-800">
+                    <h1 className="font-black sm:font-bold text-center text-[20px] sm:text-[26px] md:text-[50px] px-0 lg:px-52 text-bluePallete-800">
                       Showcasing Our Work: Achievements and Capabilities of
                       Central Computer Improvement
                     </h1>
-                    <p className="text-center text-[12px] sm:text-[18px] md:text-[30px] px-0 lg:px-32 text-bluePallete-800">
+                    <p className="font-semibold sm:font-medium text-center text-[12px] sm:text-[18px] md:text-[30px] px-0 lg:px-32 text-bluePallete-800">
                       Explore our diverse projects and witness the passion,
                       creativity, and impact of Central Computer Improvement
                     </p>
-                    <button className="text-[10px] lg:text-[25px] font-bold rounded-lg p-[15px] lg:p-[30px] text-white bg-bluePallete-800">
-                      <Link href="/project">Explore Our Projects</Link>
+                    <button className="w-[151px] h-[45px] md:w-[311px] md:h-[90px] text-[12px] md:text-[25px] font-bold rounded-lg text-white bg-bluePallete-800">
+                      <Link className="text-center" href="/project">Explore Our Projects</Link>
                     </button>
                     <ProjectCard />
                   </div>
