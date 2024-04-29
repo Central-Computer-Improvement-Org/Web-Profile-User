@@ -28,6 +28,7 @@ const DivisionSecondSlider = () => {
         setLoading(false);
       });
   }, []);
+  
   return (
     <>
       {loading ? (
@@ -84,11 +85,11 @@ const DivisionSecondSlider = () => {
                   alt="Division Thumbnail Central Computer Improvment"
                   className="w-auto h-auto max-w-[90px] max-h-[85px] object-cover"
                 />
-                <h2 className="font-bold text-[24px] text-bluePallete-900">
+                <h2 className="font-bold text-[22px] sm:text-[24px] text-bluePallete-900">
                   {data.name}
                 </h2>
                 <p
-                  className={`font-medium text-[12px] overflow-hidden text-bluePallete-900 ${styles.divisionDesc}`}
+                  className={`font-medium text-[10px] sm:text-[12px] overflow-hidden text-bluePallete-900 ${styles.divisionDesc}`}
                 >
                   {data.description}
                 </p>
