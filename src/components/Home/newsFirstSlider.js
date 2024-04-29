@@ -180,12 +180,13 @@ const SwiperComponent = () => {
                 </div>
               </SwiperSlide>
             ))}
+            {/* Custom Button Next  */}
             <div
               ref={nextButton}
               className={`${styles.newsButtonNext} ${styles.swiperButton} cursor-pointer`}
             >
               <svg
-                className="w-full h-full max-h-[90px] max-w-[90px] sm:w-[50px] md:w-[60px] lg:w-[90px]"
+                className="w-full h-full max-h-[100px] max-w-[100px] sm:w-[50px] md:w-[60px] lg:w-[100px]"
                 width="100"
                 height="100"
                 viewBox="0 0 100 100"
@@ -201,12 +202,13 @@ const SwiperComponent = () => {
                 />
               </svg>
             </div>
+            {/* Custom Button Prev  */}
             <div
               ref={previousButton}
               className={`${styles.newsButtonPrev} ${styles.swiperButton} cursor-pointer`}
             >
               <svg
-                className="w-full h-full max-h-[90px] max-w-[90px] sm:[60px] max-w-[100px] sm:w-[50px] md:w-[60px] lg:w-[90px]"
+                className="w-full h-full max-h-[100px] max-w-[100px] sm:[60px] sm:w-[50px] md:w-[60px] lg:w-[100px]"
                 width="100"
                 height="100"
                 viewBox="0 0 100 100"

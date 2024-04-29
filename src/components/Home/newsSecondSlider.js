@@ -70,9 +70,10 @@ const NewsSecondSlider = () => {
         </div>
       ) : (
         <Swiper
-          slidesPerView={1.4}
-          spaceBetween={1}
+          slidesPerView={1.5}
+          spaceBetween={0}
           pagination={false}
+          centeredSlides={true}
           breakpoints={{
             400: {
               slidesPerView: 1.4,
@@ -92,7 +93,7 @@ const NewsSecondSlider = () => {
         >
           {Array.isArray(newsData) &&
             newsData.map((data, index) => (
-              <SwiperSlide key={index} className="px-3 !flex !justify-start !items-center !flex-col">
+              <SwiperSlide key={index} className="px-1 !flex !justify-start !items-center !flex-col">
                 <div
                   onClick={() => router.push("/news")}
                   className="w-[222px] h-[242px] "

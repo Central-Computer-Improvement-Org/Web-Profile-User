@@ -359,7 +359,7 @@ export default function Home() {
                       <h1 className="text-[22px] sm:text-[50px] lg:text-[80px] text-center font-black text-bluePallete-800">
                         Keep Up With Our Latest News
                       </h1>
-                      <p className="text-[10px] sm:text-[20px] md:text-[30px] text-center font-medium md:px-[10px] lg:px-[120px] xl:px-[200px] text-bluePallete-800">
+                      <p className="text-[12px] sm:text-[20px] md:text-[30px] text-center font-semibold sm:font-medium md:px-[10px] lg:px-[120px] xl:px-[200px] text-bluePallete-800">
                         Contains community activities, competitions, events, and
                         Central Computer Improvement recruitment information
                       </p>
