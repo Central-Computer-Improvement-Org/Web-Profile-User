@@ -1,0 +1,28 @@
+/* @media (max-width: 1280px) {
+  .imageNewsFirstSlider {
+    width: 902px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .imageNewsFirstSlider {
+    width: 100% !important;
+  }
+}
+@media (max-width: 360px) {
+  .imageNewsFirstSlider {
+    width: 390px !important;
+  }
+} */
+
+.swiper-custom-pagination {
+  display: flex;
+  gap: 13px;
+}
+.swiper-pagination-bullet-active {
+  background-color: #265290 !important;
+}
+
+.container-description > p {
+  font-size: 100px;
+}

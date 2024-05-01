@@ -1,0 +1,20 @@
+/* Default width and height */
+.swiper-pagination-bullet {
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+  }
+}
