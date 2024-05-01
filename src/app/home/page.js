@@ -108,7 +108,7 @@ export default function Home() {
                 <div className="w-full flex flex-row flex-wrap-reverse pt-10 sm:pt-20 lg:pt-32">
                   <div className="basis-full lg:basis-3/5 mt-5 sm:mt-10 lg:mt-0">
                     <div className="w-full flex flex-row justify-evenly items-center space-x-5 lg:space-x-10 mt-10 xl:mt-0">
-                      <div class="mb-[40px] md:mb-[80px] w-max-[164px] h-max-[180px] md:w-max-[318px] md:h-max-[412px] rounded-lg rotate-[-5deg] md:rotate-[-8deg] bg-bluePallete-300">
+                      <div className="mb-[40px] md:mb-[80px] w-max-[164px] h-max-[180px] md:w-max-[318px] md:h-max-[412px] rounded-lg rotate-[-5deg] md:rotate-[-8deg] bg-bluePallete-300">
                         <Image
                           className="rounded-t-lg object-cover"
                           src="assets/home/images/connect-card.png"
@@ -122,15 +122,15 @@ export default function Home() {
                             height: "auto",
                           }}
                         />
-                        <div class="flex items-center justify-center">
+                        <div className="flex items-center justify-center">
                           <div className="w-11/12 my-2 md:my-4 rounded-lg bg-[#E1E6EE]">
-                            <p class="text-[12px] md:text-[24px] text-center font-bold px-0x xl:px-5 py-3 md:py-5 text-bluePallete-700">
+                            <p className="text-[12px] md:text-[24px] text-center font-bold px-0x xl:px-5 py-3 md:py-5 text-bluePallete-700">
                               Achievement 100 +
                             </p>
                           </div>
                         </div>
                       </div>
-                      <div class="w-max-[164px] h-max-[180px] md:w-max-[318px] md:h-max-[412px] bg-bluePallete-300 rounded-lg">
+                      <div className="w-max-[164px] h-max-[180px] md:w-max-[318px] md:h-max-[412px] bg-bluePallete-300 rounded-lg">
                         <Image
                           className="rounded-t-lg object-cover"
                           src="assets/home/images/connect-card.png"
@@ -144,9 +144,9 @@ export default function Home() {
                             height: "auto",
                           }}
                         />
-                        <div class="flex items-center justify-center">
+                        <div className="flex items-center justify-center">
                           <div className="w-11/12 my-2 md:my-4 rounded-lg bg-[#E1E6EE]">
-                            <p class="text-[12px] md:text-[24px] text-center font-bold px-0 xl:px-5 py-3 md:py-5 text-bluePallete-700">
+                            <p className="text-[12px] md:text-[24px] text-center font-bold px-0 xl:px-5 py-3 md:py-5 text-bluePallete-700">
                               Member 100 +
                             </p>
                           </div>
@@ -229,7 +229,7 @@ export default function Home() {
                   </div>
                   <div className="basis-full lg:basis-3/5">
                     <div className="w-full flex flex-row justify-evenly items-center space-x-5 lg:space-x-10">
-                      <div class="w-max-[164px] h-max-[180px] md:w-max-[318px] md:h-max-[412px] bg-bluePallete-300 border rounded-lg">
+                      <div className="w-max-[164px] h-max-[180px] md:w-max-[318px] md:h-max-[412px] bg-bluePallete-300 border rounded-lg">
                         <a href="#">
                           <Image
                             className="rounded-t-lg object-cover"
@@ -245,15 +245,15 @@ export default function Home() {
                             }}
                           />
                         </a>
-                        <div class="flex items-center justify-center">
+                        <div className="flex items-center justify-center">
                           <div className="w-11/12 my-2 md:my-4 rounded-lg bg-[#E1E6EE]">
-                            <p class="text-[12px] md:text-[24px] text-center font-bold px-0 xl:px-5 py-3 md:py-5 text-bluePallete-700">
+                            <p className="text-[12px] md:text-[24px] text-center font-bold px-0 xl:px-5 py-3 md:py-5 text-bluePallete-700">
                               Achievement 100 +
                             </p>
                           </div>
                         </div>
                       </div>
-                      <div class="mb-[40px] md:mb-[80px] rotate-[5deg] md:rotate-[8deg] w-max-[164px] h-max-[180px] lg:w-[288px] lg:h-[382px] lg:w-max-[288px] lg:h-max-[382px] xl:w-max-[318px] xl:h-max-[412px] border rounded-lg bg-bluePallete-300">
+                      <div className="mb-[40px] md:mb-[80px] rotate-[5deg] md:rotate-[8deg] w-max-[164px] h-max-[180px] lg:w-[288px] lg:h-[382px] lg:w-max-[288px] lg:h-max-[382px] xl:w-max-[318px] xl:h-max-[412px] border rounded-lg bg-bluePallete-300">
                         <Image
                           className="rounded-t-lg object-cover"
                           src="assets/home/images/connect-card.png"
@@ -267,9 +267,9 @@ export default function Home() {
                             height: "auto",
                           }}
                         />
-                        <div class="flex items-center justify-center">
+                        <div className="flex items-center justify-center">
                           <div className="w-11/12 my-2 md:my-4 rounded-lg bg-[#E1E6EE]">
-                            <p class="text-[12px] md:text-[24px] text-center font-bold px-0 xl:px-5 py-3 md:py-5 text-bluePallete-700">
+                            <p className="text-[12px] md:text-[24px] text-center font-bold px-0 xl:px-5 py-3 md:py-5 text-bluePallete-700">
                               Member 100 +
                             </p>
                           </div>
