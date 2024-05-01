@@ -1,0 +1,23 @@
+@media only screen and (max-width: 370px) {
+    .dvisionCardContainer {
+        width: 270px !important;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .dvisionCardName {
+        font-size: 25px !important;
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    .dvisionCardContainer {
+        width: 250px !important;
+    }
+}
+
+@media only screen and (max-width: 330px) {
+    .dvisionCardContainer {
+        width: 240px !important;
+    }
+}

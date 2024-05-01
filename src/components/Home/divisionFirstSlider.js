@@ -1,20 +1,16 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 
 import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
-SwiperCore.use([Navigation]);
-
 const DivisionFirstSlider = () => {
-  const router = useRouter();
   const [divisionData, setDivisionData] = useState([]);
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef(null);
@@ -41,65 +37,74 @@ const DivisionFirstSlider = () => {
       swiperRef.current.swiper.slideNext();
     }
   };
+
   return (
     <>
-      <Swiper
-        ref={swiperRef}
-        navigation={{
-          nextEl: ".customButtonNext",
-        }}
-        pagination={false}
-        slidesPerView= {1.2}
-        spaceBetween= {10}
-        breakpoints= {{
-          320: {
-            slidesPerView: 1.3,
-            spaceBetween: 20
-          },
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 30
-          },
-          640: {
-            slidesPerView: 2.5,
-            spaceBetween: 10
-          },
-        }}
-        className={"w-full"}
-      >
-        {Array.isArray(divisionData) &&
-          divisionData.map((data, index) => (
+      {/* Pengecekan laoding disini wajib, karena untuk menghindari error fungsi navigation swiper yang membutuhkan data harus wajib ada terlebih dahulu di dalam tag Swiper */}
+      {loading ? (
+        <div className="w-full h-[350px] flex items-center justify-center">
+          <h1 className="font-bold text-[40px] text-center text-black">
+            Loading...
+          </h1>
+        </div>
+      ) : (
+        <Swiper
+          ref={swiperRef}
+          modules={[Navigation]}
+          navigation={{
+            nextEl: ".divisionButtonNext",
+          }}
+          loop={true}
+          pagination={false}
+          slidesPerView={1.2}
+          spaceBetween={10}
+          breakpoints={{
+            640: {
+              slidesPerView: 2.3,
+              spaceBetween: 10,
+            },
+            1280: {
+              slidesPerView: 2.5,
+              spaceBetween: 60,
+            },
+          }}
+          className={"w-full"}
+        >
+          {divisionData.map((data, index) => (
             <SwiperSlide
               key={index}
-              data-hash={`slide${index + 1}`}
-              className="cursor-pointer "
-              onClick={() => router.push(data.divisionUrl)}
+              className={`cursor-pointer ${styles.divisionCardSwiper}`}
             >
-              <div
-                className={`h-[350px] w-[280px] md:w-auto max-h-[350px] max-w-[280px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
-              >
-                <Image
-                  width={90}
-                  height={85}
-                  src={data.logo_uri}
-                  alt={`Division Thumbnail ${data.name}`}
-                  className="w-auto h-auto md:max-w-[90px] md:max-h-[85px]"
-                />
-                <h2 className="font-bold text-[24px] text-bluePallete-900">
-                  {data.name}
-                </h2>
-                <p className="font-medium text-[12px] text-bluePallete-900">
-                  {data.description}
-                </p>
-              </div>
+              <Link href={`/division/${data.id}`}>
+                <div
+                  className={`h-[351px] w-[290px] max-h-[340px] max-w-[290px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
+                >
+                  <Image
+                    width={95}
+                    height={82}
+                    src={data.logoUri}
+                    alt={`Division Thumbnail ${data.name}`}
+                    className="w-auto h-auto md:max-w-[95px] md:max-h-[82px] object-cover"
+                  />
+                  <h2 className="font-bold text-[24px] text-bluePallete-900">
+                    {data.name}
+                  </h2>
+                  <p
+                    className={`font-medium text-[12px] overflow-hidden text-bluePallete-900 ${styles.divisionCardDescription}`}
+                  >
+                    {data.description}
+                  </p>
+                </div>
+              </Link>
             </SwiperSlide>
           ))}
-      </Swiper>
-      <div className={`${styles.customButtonNext}`} onClick={goNext}>
+        </Swiper>
+      )}
+      <div className={`${styles.divisionButtonNext}`} onClick={goNext}>
         <svg
-          className="lg:h-[80px] lg:w-[80px] xl:h-[100px] xl:w-[100px]"
-          width="100"
-          height="100"
+          className="h-[63px] w-[63px]"
+          width="63"
+          height="63"
           viewBox="0 0 100 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
