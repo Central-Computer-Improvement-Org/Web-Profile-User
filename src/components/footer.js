@@ -44,7 +44,11 @@ const Footer = () => {
         <div className="w-full h-full flex flex-col flex-wrap space-y-[25px] sm:space-y-5 lg:space-y-20 justify-between pt-[23px] md:pt-32 pb-10">
           <div className="w-full flex flex-col lg:items-start items-center space-y-0 sm:space-y-5">
             <Image
-              src="assets/logo/images/logo.svg"
+              src={
+                isLoading
+                  ? "Loading..."
+                  : settingsData?.data[0]?.logoUri
+              }
               alt="Logo Central Computer Improvement"
               width={150}
               height={92}
@@ -81,8 +85,10 @@ const Footer = () => {
                 </p>
               </div>
               <p className="flex justify-center items-center text-center lg:text-left text-[8px] sm:text-[16px] lg:text-[24px] pr-0 lg:pr-24 text-white">
-                Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada
-                bidang ICT (Information, Communication and Technology).
+                {isLoading
+                  ? "Loading..."
+                  : settingsData?.data[0]?.description ||
+                    "Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology)."}
               </p>
             </div>
             <div className="w-full h-full basis-full lg:basis-2/5 flex flex-col justify-between items-center space-y-5 pl-0 lg:pl-20">
@@ -97,8 +103,7 @@ const Footer = () => {
                     src={
                       isLoading
                         ? "Loading..."
-                        : contactData?.data[0]?.iconUri ||
-                          "assets/logo/images/logo-gmail.png"
+                        : contactData?.data[0]?.iconUri
                     }
                     alt="Logo Email CCI"
                     width={50}
@@ -117,8 +122,7 @@ const Footer = () => {
                     src={
                       isLoading
                         ? "Loading..."
-                        : contactData?.data[1]?.iconUri ||
-                          "assets/logo/images/instagram-gmail.png"
+                        : contactData?.data[1]?.iconUri
                     }
                     alt="Logo Instagram CCI"
                     width={50}
@@ -137,8 +141,7 @@ const Footer = () => {
                     src={
                       isLoading
                         ? "Loading..."
-                        : contactData?.data[2]?.iconUri ||
-                          "assets/logo/images/logo-line.png"
+                        : contactData?.data[2]?.iconUri
                     }
                     alt="Logo Line CCI"
                     width={50}
@@ -157,8 +160,7 @@ const Footer = () => {
                     src={
                       isLoading
                         ? "Loading..."
-                        : contactData?.data[3]?.iconUri ||
-                          "assets/logo/images/logo-linkedin.png"
+                        : contactData?.data[3]?.iconUri
                     }
                     alt="Logo Linkedin CCI"
                     width={50}

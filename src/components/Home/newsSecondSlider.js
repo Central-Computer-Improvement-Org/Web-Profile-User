@@ -20,17 +20,21 @@ const NewsSecondSlider = () => {
       .get("/news")
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
-          const formattedData = response.data.data.map((item) => {
+          const formatDateData = response.data.data.map((item) => {
             const createdAt = new Date(item.createdAt);
-            // const updatedAt = new Date(item.updatedAt); // uncomment jika dibutuhkan
             return {
               ...item,
               date: `${getMonthName(
                 createdAt.getMonth()
-              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`, // properti key 'date' bisa diubah sesuai kebutuhan
+              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
+              createdAt: createdAt
             };
           });
-          setNewsData(formattedData);
+          // pengurutan data berdasarkan tanggal data terbaru
+          const sortNewsData = formatDateData.sort((a, b) => b.createdAt - a.createdAt);
+          // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
+          const limitNewsData = sortNewsData.slice(0, 5);
+          setNewsData(limitNewsData);
         } else {
           console.error(JSON.stringify(response.errors));
         }
@@ -42,6 +46,7 @@ const NewsSecondSlider = () => {
       });
   }, []);
 
+  // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
   const getMonthName = (monthIndex) => {
     const months = [
       "January",

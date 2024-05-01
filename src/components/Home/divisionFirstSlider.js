@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import Link from 'next/link';
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -75,7 +75,7 @@ const DivisionFirstSlider = () => {
               key={index}
               className={`cursor-pointer ${styles.divisionCardSwiper}`}
             >
-              <Link href={`/division/${data.id}`}>
+              <Link href={`/division?id=${data.id}`}>
                 <div
                   className={`h-[351px] w-[290px] max-h-[340px] max-w-[290px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
                 >

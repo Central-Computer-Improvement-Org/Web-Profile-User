@@ -20,7 +20,7 @@ const ProjectData = () => {
     setProjectData(null);
 
     request
-      .get("/project")
+      .get("/projects")
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const sortedData = response.data.data.sort(
@@ -85,14 +85,6 @@ const ProjectData = () => {
     [projectData]
   );
 
-  // handle pemotongan nama project maksimal 12 char
-  const cutNameProject = (str, maxLength) => {
-    if (str.length <= maxLength) {
-      return str;
-    }
-    return `${str.substring(0, maxLength)}...`;
-  };
-
   // handle penambahan skeleton loading saat data berpindah
   useEffect(() => {
     if (isMovingData) {
@@ -110,6 +102,14 @@ const ProjectData = () => {
       setIsLoading(false);
     }
   }, [isMovingData]);
+
+  // handle pemotongan nama project maksimal 12 char
+  const cutNameProject = (str, maxLength) => {
+    if (str.length <= maxLength) {
+      return str;
+    }
+    return `${str.substring(0, maxLength)}...`;
+  };
 
   return (
     <>

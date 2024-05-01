@@ -10,7 +10,7 @@
   display: inline-block;
   cursor: pointer;
   position: absolute;
-  top: 46%;
+  top: 47%;
   right: 20px;
   transform: translateY(-50%);
   z-index: 1;
@@ -24,13 +24,13 @@
 
 @media only screen and (max-width: 1280px) {
   .divisionButtonNext {
-    top: 43%;
+    top: 42%;
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .divisionButtonNext {
-    top: 46%;
+    top: 45%;
   }
 }
 
@@ -59,7 +59,7 @@
   }
 }
 
-@media only screen and (max-width: 355px) {
+@media only screen and (max-width: 365px) {
   .divisionSecondCard {
     width: auto !important;
   }
