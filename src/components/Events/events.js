@@ -7,9 +7,9 @@ export default function Events() {
 
   return (
     <>
-      <div className="w-full h-[47px] lg:h-[92px] xl:h-[108px] bg-[#092C4C] rounded-[15px] mx-auto">
+      <div className="w-full h-[44px] md:h-[108px] bg-[#092C4C] rounded-[15px] mx-auto md:mb-[50px] lg:mb-0">
         <h3
-          className={`text-[20px] lg:text-h3 font-bold text-white flex justify-center items-center h-full`}
+          className={`text-[20px] md:text-h3 font-bold text-white flex justify-center items-center h-full`}
         >
           Our Event
         </h3>
@@ -24,39 +24,39 @@ export default function Events() {
         <EventCard
           img={`assets/about/images/it-talks.png`}
           title={`IT TALKS`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
+          description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
           isGreen={false}
         />
         <EventCard
           img={`assets/about/images/workshop.png`}
           title={`WORKSHOP`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
+          description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
           isGreen={size.width >= 1024 ? false : true}
         />
         <EventCard
           img={`assets/about/images/bakti-sosial.png`}
           title={`BAKTI SOSIAL`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
+          description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
           isGreen={size.width >= 1024 ? true : false}
         />
         <EventCard
           img={`assets/about/images/open-mind.png`}
           title={`OPEN MIND`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
+          description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
           isGreen={true}
         />
         <EventCard
           img={`assets/about/images/it-competitions.png`}
           title={`IT COMPETITION`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi velit massa, ornare et fermentum cursus, malesuada eget tellus. Etiam eget ipsum eleifend, dictum nulla ac, ornare augue.`}
+          description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
           isGreen={size.width >= 1024 ? false : false}
         />
       </div>
       <div className="hidden lg:flex justify-center lg:mt-[54px]">
         <button>
           <svg
-            width="65"
-            height="65"
+            width="100"
+            height="100"
             viewBox="0 0 100 100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
