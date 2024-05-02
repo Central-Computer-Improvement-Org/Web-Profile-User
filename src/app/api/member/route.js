@@ -69,7 +69,7 @@ export async function GET(request) {
           description: "Divisi yang berfokus mempelajari UI/UX melalui beberapa tahapan didalamnya sehingga divisi design memiliki tujuan atau memberikan output berupa sebuah desain produk sebaik mungkin.",
           logoUri: "assets/uploads/division/logo/logo-divisi-design.png",
         },
-        name: "Aji Prasetyo",
+        name: "Kenzo Tiyu",
         email: "aji123@gmail.com",
         major: "S1 Informatika",
         linkedinUri: "https://www.linkedin.com/company/cci-telkomuniversity/",

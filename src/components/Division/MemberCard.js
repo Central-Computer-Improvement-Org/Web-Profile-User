@@ -54,39 +54,37 @@ const MemberCard = ({ divisionId }) => {
             <p className="font-medium text-[15px] lg:text-[20px] text-bluePallete-800">
               Ketua Divisi
             </p>
-            <h1
-              className="max-w-[250px] font-black text-[25px] lg:text-[40px] leading-[40px] overflow-hidden text-bluePallete-800"
-            >
+            <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
               {ketuaData[0].name}
             </h1>
-            <div>
-              <a
-                href={ketuaData[0].linkedinUri}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
-                  src="assets/uploads/member/logo/logo-linkedin.png"
-                  width={60}
-                  height={60}
-                  alt="Logo Linkedin Member"
-                ></Image>
-              </a>
-            </div>
+            <a
+              href={ketuaData[0].linkedinUri}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
+                src="assets/uploads/member/logo/logo-linkedin.png"
+                width={60}
+                height={60}
+                alt="Logo Linkedin Ketua Divisi"
+              ></Image>
+            </a>
           </div>
           <div className="basis-6/12 flex items-center justify-end">
             <Image
-              className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[15px] object-cover"
+              className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[20px] object-cover"
               src={ketuaData[0].profileUri}
               width={200}
               height={201}
-              alt="Logo Ketua Divisi"
+              alt="Profile Ketua Divisi"
             ></Image>
           </div>
         </div>
       ) : (
-        <p>Data Ketua Not Found</p>
+        <div className="w-[45%] md:w-[30%] flex justify-center items-center">
+          <p className="text-center text-[12px] sm:text-[20px]">Data Ketua Not Found</p>
+        </div>
       )}
 
       {wakilData.length > 0 ? (
@@ -95,22 +93,22 @@ const MemberCard = ({ divisionId }) => {
             <p className="font-medium text-[15px] lg:text-[20px] text-bluePallete-800">
               Wakil Divisi
             </p>
-            <h1 className="max-w-[230px] font-black text-[25px] lg:text-[40px] leading-[40px] overflow-hidden text-bluePallete-800">
+            <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
               {wakilData[0].name}
             </h1>
-              <a
-                href={wakilData[0].linkedinUri}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
-                  src="assets/uploads/member/logo/logo-linkedin.png"
-                  width={60}
-                  height={60}
-                  alt="Logo Linkedin Member"
-                ></Image>
-              </a>
+            <a
+              href={wakilData[0].linkedinUri}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
+                src="assets/uploads/member/logo/logo-linkedin.png"
+                width={60}
+                height={60}
+                alt="Logo Linkedin Wakil Ketua Divisi"
+              ></Image>
+            </a>
           </div>
           <div className="basis-6/12 flex items-center justify-end">
             <Image
@@ -118,12 +116,14 @@ const MemberCard = ({ divisionId }) => {
               src={wakilData[0].profileUri}
               width={200}
               height={201}
-              alt="Logo Ketua Divisi"
+              alt="Profile Wakil Ketua Divisi"
             ></Image>
           </div>
         </div>
       ) : (
-        <p>Data Wakil Ketua Not Found</p>
+        <div className="w-[45%] md:w-[30%] flex justify-center items-center">
+          <p className="text-center text-[12px] sm:text-[20px]">Data Wakil Ketua Not Found</p>
+        </div>
       )}
     </>
   );

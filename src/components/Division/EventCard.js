@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ReactCardFlip from "react-card-flip";
@@ -7,7 +6,6 @@ import { useMediaQuery } from "react-responsive";
 import request from "@/app/utils/request";
 import styles from "@/app/division/divison.module.css";
 
-// definisi background color untuk event responsive desktop
 const desktopColorPattern = [
   "#152E51",
   "#11A950",
@@ -18,13 +16,13 @@ const desktopColorPattern = [
   "#11A950",
 ];
 
-// definisi background color untuk event responsive mobile
 const mobileColorPattern = ["#152E51", "#11A950"];
 
 const EventCard = () => {
   const [eventData, setEventData] = useState(null);
-  const [flipPositon, setFlipPosition] = useState(null);
+  const [flipPosition, setFlipPosition] = useState(null);
   const [colorPattern, setColorPattern] = useState(desktopColorPattern);
+  const [autoFlipCount, setAutoFlipCount] = useState(0);
 
   useEffect(() => {
     request
@@ -41,24 +39,20 @@ const EventCard = () => {
       });
   }, []);
 
-  // handle responsive color background untuk event
   const isDesktop = useMediaQuery({ minWidth: 1051 });
   useEffect(() => {
     setColorPattern(isDesktop ? desktopColorPattern : mobileColorPattern);
   }, [isDesktop]);
 
-  // handle mendapatkan background color untuk event sesuai index
   const getCardBackgroundColor = (index) => {
     const patternIndex = index % colorPattern.length;
     return colorPattern[patternIndex];
   };
 
-  // handle pemutaran / flip card
-  function onclickFlipCard(index) {
-    setFlipPosition(flipPositon === index ? null : index);
+  function onClickFlipCard(index) {
+    setFlipPosition(flipPosition === index ? null : index);
   }
 
-  // handle pemotongan nama project maksimal 12 char
   const cutNameProject = (str, maxLength) => {
     if (str.length <= maxLength) {
       return str;
@@ -66,7 +60,20 @@ const EventCard = () => {
     return `${str.substring(0, maxLength)}..`;
   };
 
-  // handle data event ketika data belum ter get
+  useEffect(() => {
+    if (eventData && eventData.length > 0 && autoFlipCount < 4) { // cek dulu apakah data event sudah ada dan jumlah autoFlipCount kurang dari 4
+      const autoFlipInterval = setInterval(() => {
+        setFlipPosition(0); // setFlipPosition(0) artinya flip card pertama atau index ke 0
+        setTimeout(() => {
+          setFlipPosition(null); // setFlipPosition(null) artinya flip card dijadikan ke posisi awal
+        }, 1000);
+        setAutoFlipCount((prevCount) => prevCount + 1); // setiap 1 detik autoFlipCount akan bertambah 1
+      }, 1000 * 2); // interval auto flip setiap 2 detik
+
+      return () => clearInterval(autoFlipInterval); // ketika component di unmount, maka interval auto flip akan di clear
+    }
+  }, [eventData, autoFlipCount]);
+
   if (!eventData) {
     return (
       <div className="h-screen w-full flex justify-center items-center">
@@ -83,59 +90,55 @@ const EventCard = () => {
         </p>
       </div>
       <div className="w-full h-auto flex flex-wrap justify-around items-center mt-[21px]">
-        {eventData && Array.isArray(eventData) && eventData.length > 0 ? (
-          eventData.map((event, index) => (
-            <div key={event.id} className="mt-[10px] sm:mt-[54px]">
-              <ReactCardFlip
-                key={event.id}
-                isFlipped={flipPositon === index}
-                flipDirection="vertical"
+        {eventData.map((event, index) => (
+          <div key={event.id} className="mt-[10px] sm:mt-[54px]">
+            <ReactCardFlip
+              key={event.id}
+              isFlipped={flipPosition === index}
+              flipDirection="vertical"
+            >
+              {/* Card bagian depan */}
+              <div
+                className={`relative w-[300px] sm:w-full h-[65px] sm:h-full max-w-[517px] max-h-[198px] rounded-[15px] sm:rounded-[30px] overflow-hidden cursor-pointer ${styles.dvisionCardContainer}`}
+                onClick={() => onClickFlipCard(index)}
               >
-                {/* Card Depan*/}
                 <div
-                  className={`relative w-[300px] sm:w-full h-[65px] sm:h-full max-w-[517px] max-h-[198px] rounded-[15px] sm:rounded-[30px] overflow-hidden cursor-pointer ${styles.dvisionCardContainer}`}
-                  onClick={() => onclickFlipCard(index)}
-                >
-                  <div
-                    className="absolute inset-0 rounded-[15px] sm:rounded-[30px] flex justify-center items-center"
-                    style={{
-                      backgroundColor: `${getCardBackgroundColor(index)}80`,
-                    }}
-                  >
-                    <p className="font-black text-[14px] sm:text-[40px] text-[#F5FBF9]">
-                      {cutNameProject(event.name, 15)}
-                    </p>
-                  </div>
-                  <Image
-                    className="h-full w-full object-cover"
-                    src={event.mediaUri}
-                    width={517}
-                    height={198}
-                    alt={[event.title, " Central Computer Improvement"]}
-                    loading="lazy"
-                  />
-                </div>
-                {/* Card Belakang */}
-                <div
-                  className="w-[300px] sm:w-full h-[65px] sm:h-[198px] max-w-[517px] max-h-[198px] flex flex-col justify-start items-left space-y-0 sm:space-y-1 px-[26px] sm:px-[60px] py-[5px] sm:py-[30px] rounded-[15px] sm:rounded-[30px] cursor-pointer"
+                  className="absolute inset-0 rounded-[15px] sm:rounded-[30px] flex justify-center items-center"
                   style={{
-                    backgroundColor: getCardBackgroundColor(index),
+                    backgroundColor: `${getCardBackgroundColor(index)}80`,
                   }}
-                  onClick={() => onclickFlipCard(index)}
                 >
-                  <h1 className="font-black text-[14px] sm:text-[24px] text-white">
-                    {event.name}
-                  </h1>
-                  <p className="text-[8px] sm:text-[16px] font-medium text-white">
-                    {event.description}
+                  <p className="font-black text-[14px] sm:text-[40px] text-[#F5FBF9]">
+                    {cutNameProject(event.name, 15)}
                   </p>
                 </div>
-              </ReactCardFlip>
-            </div>
-          ))
-        ) : (
-          <p className="text-center">No event data available.</p>
-        )}
+                <Image
+                  className="h-full w-full object-cover"
+                  src={event.mediaUri}
+                  width={517}
+                  height={198}
+                  alt={[event.title + " Central Computer Improvement"]}
+                  loading="lazy"
+                />
+              </div>
+              {/* Card bagian belakang */}
+              <div
+                className={`w-[300px] sm:w-full h-[65px] sm:h-[198px] max-w-[517px] max-h-[198px] flex flex-col justify-start items-left space-y-0 sm:space-y-1 px-[26px] sm:px-[60px] py-[5px] sm:py-[30px] rounded-[15px] sm:rounded-[30px] cursor-pointer ${styles.dvisionCardContainer}`}
+                style={{
+                  backgroundColor: getCardBackgroundColor(index),
+                }}
+                onClick={() => onClickFlipCard(index)}
+              >
+                <h1 className="font-black text-[14px] sm:text-[24px] text-white">
+                  {event.name}
+                </h1>
+                <p className="text-[8px] sm:text-[16px] font-medium text-white">
+                  {event.description}
+                </p>
+              </div>
+            </ReactCardFlip>
+          </div>
+        ))}
       </div>
     </>
   );
