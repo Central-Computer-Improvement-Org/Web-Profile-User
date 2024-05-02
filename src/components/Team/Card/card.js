@@ -8,7 +8,7 @@ export default function TeamCard({ imageUrl, title, name, socialLinks, isRight, 
 
   return (
     <div
-      className={`bg-gradientCard relative mt-[30px] ${isRight ? "mr-[20px] ml-[8px]" : "ml-[20px] mr-[8px]"} lg:mt-[80px] md:mx-[16px] lg:mx-[39.5px] xl:mx-[81.5px] py-[54px] md:py-[6rem] lg:py-[155px] rounded-[15px] md:rounded-[30px] overflow-hidden`}
+      className={`bg-gradientCard relative mt-[30px] ${isRight ? "mr-[38px] ml-[8px]" : "ml-[38px] mr-[8px]"} lg:mt-[80px] md:mx-[16px] lg:mx-[39.5px] xl:mx-[81.5px] py-[54px] md:py-[6rem] lg:py-[155px] rounded-[15px] md:rounded-[30px] overflow-hidden`}
     >
       {size.width >= 768 ? (
         <div
