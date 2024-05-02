@@ -104,7 +104,8 @@ export default function Home() {
                 src={
                   isLoading
                     ? "Loading..."
-                    : settingsData?.data[0]?.logoUri
+                    : settingsData?.data[0]?.logffoUri ||
+                      "assets/logo/images/logo.svg" 
                 }
                 alt="Logo Central Computer Improvement"
                 width={291}

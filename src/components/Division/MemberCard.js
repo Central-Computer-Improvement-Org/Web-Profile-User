@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 import request from "@/app/utils/request";
-import styles from "@/components/Division/divisonComponent.module.css";
 
 const MemberCard = ({ divisionId }) => {
   const [memberData, setMemberData] = useState(null);
@@ -37,23 +36,6 @@ const MemberCard = ({ divisionId }) => {
       });
   }, [divisionId]);
 
-  const formatName = (name) => {
-    const nameMember = name.split(" ");
-    const convertNameMember = [];
-  
-    for (let i = 0; i < nameMember.length; i++) {
-      if (i === 3) {
-        convertNameMember.push(nameMember[i][0] + ".");
-      } else if (i > 3) {
-        continue;
-      } else {
-        convertNameMember.push(nameMember[i]);
-      }
-    }
-  
-    return convertNameMember.join(" ");
-  };
-
   if (!memberData) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -73,9 +55,9 @@ const MemberCard = ({ divisionId }) => {
               Ketua Divisi
             </p>
             <h1
-              className={`max-w-[250px] font-black text-[25px] lg:text-[40px] leading-[40px] overflow-hidden text-bluePallete-800 ${styles.memberName}`}
+              className="max-w-[250px] font-black text-[25px] lg:text-[40px] leading-[40px] overflow-hidden text-bluePallete-800"
             >
-              {formatName(ketuaData[0].name)}
+              {ketuaData[0].name}
             </h1>
             <div>
               <a
@@ -113,8 +95,8 @@ const MemberCard = ({ divisionId }) => {
             <p className="font-medium text-[15px] lg:text-[20px] text-bluePallete-800">
               Wakil Divisi
             </p>
-            <h1 className={`max-w-[230px] font-black text-[25px] lg:text-[40px] leading-[40px] overflow-hidden text-bluePallete-800 ${styles.memberName}`}>
-              {formatName(wakilData[0].name)}
+            <h1 className="max-w-[230px] font-black text-[25px] lg:text-[40px] leading-[40px] overflow-hidden text-bluePallete-800">
+              {wakilData[0].name}
             </h1>
               <a
                 href={wakilData[0].linkedinUri}

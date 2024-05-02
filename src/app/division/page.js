@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+// import { Suspense } from "react";
 
 import request from "@/app/utils/request";
 import Header from "@/components/header";
@@ -94,7 +95,7 @@ export default function DetailDvision() {
                       </p>
                     </div>
                     <div className="w-full h-auto flex flex-wrap gap-5 sm:gap-10 justify-start sm:justify-evenly items-center px-5 mt-[45px] sm:mt-[80px]">
-                        {divisionId && <MemberCard divisionId={data.id} />}
+                      {divisionId && <MemberCard divisionId={data.id} />}
                     </div>
                   </section>
                 </>
@@ -102,16 +103,16 @@ export default function DetailDvision() {
             ) : (
               <div className="w-full h-screen flex items-center justify-center">
                 <p className="font-bold text-center text-[30px] text-bluePallete-800">
-                    Data not found
+                  Data not found
                 </p>
               </div>
             )}
-            <sectionx
+            <section
               id="event"
               className="w-full h-auto flex flex-col mt-[50px] sm:mt-[80px] md:mt-[130px] pb-[200px]"
             >
               <EventCard />
-            </sectionx>
+            </section>
           </main>
         </div>
       </span>
