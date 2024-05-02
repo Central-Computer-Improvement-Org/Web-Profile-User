@@ -6,7 +6,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 export default function Divisions() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const size = useWindowSize();
-  const [isRight, setIsRight] = useState(true);
+  const [isLeft, setIsLeft] = useState(false);
   const divisionCards = [
     {
       imageUrl: "assets/about/images/person.png",
@@ -89,9 +89,13 @@ export default function Divisions() {
     });
   };
 
+  const updateIsLeft = (isLeft) => {
+    setIsLeft(!isLeft); // Update isLeft to the opposite of isRight
+  };
+
   const displayedCards = divisionCards.slice(
-    isRight ? currentIndex : currentIndex + 2,
-    currentIndex + 2
+    isLeft ? currentIndex : currentIndex + 2, isLeft ?
+    currentIndex + 2 : currentIndex + 4
   );
   const totalDots = Math.ceil(divisionCards.length / displayedCards.length - 3);
 
@@ -107,14 +111,14 @@ export default function Divisions() {
         </div>
       </div>
       <div className="grid grid-cols-2">
-        <div className="grid md:px-0 grid-rows-2 items-start ">
+        <div className="grid md:px-0 grid-rows-2">
           {displayedCards.map((card, index) => (
-            <TeamCard isRight={false} key={index} {...card} />
+            <TeamCard isLeft={updateIsLeft} isRight={false} key={index} {...card} />
           ))}
         </div>
         <div className="grid md:px-0 grid-rows-2">
           {displayedCards.map((card, index) => (
-            <TeamCard isRight={true} key={index} {...card} />
+            <TeamCard isLeft={updateIsLeft}isRight={true} key={index} {...card} />
           ))}
         </div>
       </div>

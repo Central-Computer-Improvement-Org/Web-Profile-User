@@ -48,7 +48,7 @@ export default function Home() {
                 <Events />
               </div>
             </section>
-            <section id="team" className={`h-full px-[45px] md:px-0`}>
+            <section id="team" className={`h-full md:px-0`}>
               <div className="container mx-auto">
                 <Divisions />
               </div>

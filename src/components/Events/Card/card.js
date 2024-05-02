@@ -96,7 +96,7 @@ export default function EventCard({ title, description, img, isGreen }) {
             </button>
           </div>
           <div
-            className={`relative px-[150px] py-[2rem] mt-[30px] lg:mt-[80px] lg:mx-[55px] lg:py-[96px] shadow-sm rounded-[15px] lg:rounded-[30px] overflow-hidden`}
+            className={`relative px-[150px] py-[20.5px] mt-[30px] lg:mt-[80px] lg:mx-[55px] lg:py-[96px] shadow-sm rounded-[15px] lg:rounded-[30px] overflow-hidden`}
           >
             <button
               onClick={() => {
