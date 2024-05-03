@@ -14,7 +14,7 @@ export async function GET(request) {
             },
             {
                 id: "DVS-458163-2",
-                name: "UI/UX Design",
+                name: "Design",
                 description: "Divisi yang berfokus mempelajari UI/UX melalui beberapa tahapan didalamnya sehingga divisi design memiliki tujuan atau memberikan output berupa sebuah desain produk sebaik mungkin.",
                 logoUri: "assets/uploads/division/logo/logo-divisi-design.png",
                 createdAt: "2013-02-26 21:28:37.261134+01:00",

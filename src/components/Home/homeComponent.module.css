@@ -99,24 +99,18 @@
   }
 }
 
-@media only screen and (max-width: 473px) {
-  .projectsContainerThumbnail {
-    /* top: 1830px !important; */
-  }
-}
-
 @media only screen and (max-width: 456px) {
   .projectsContainerThumbnail {
-    top: 1780px !important;
+    top: 1790px !important;
   }
   .projectsContainerRepository {
     margin-top: 10px;
   }
 }
 
-@media only screen and (max-width: 428px) {
+@media only screen and (max-width: 426px) {
   .projectsContainerThumbnail {
-    top: 1800px !important;
+    top: 1810px !important;
   }
 }
 
@@ -125,11 +119,23 @@
     margin-top: 215px;
   }
   .projectsContainerThumbnail {
-    top: 1800px !important;
+    top: 1815px !important;
   }
   .projectsThumbnailImage {
     max-width: 290px;
     max-height: 270px;
+  }
+}
+
+@media only screen and (max-width: 393px) {
+  .projectTitleMobile {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 335px) {
+  .projectTitleMobile {
+    font-size: 12px;
   }
 }
 
@@ -139,7 +145,7 @@
     max-height: 230px;
   }
   .projectsContainerThumbnail {
-    top: 1790px !important;
+    top: 1805px !important;
   }
   .projectContainerInfo {
     margin-top: 160px;
@@ -148,13 +154,13 @@
 
 @media only screen and (max-width: 376px) {
   .projectsContainerThumbnail {
-    top: 1820px !important;
+    top: 1835px !important;
   }
 }
 
 @media only screen and (max-width: 366px) {
   .projectsContainerThumbnail {
-    top: 1840px !important;
+    top: 1855px !important;
   }
 }
 
@@ -165,26 +171,23 @@
   .projectsContainerRepository {
     margin-top: 10px;
   }
-  .projectsContainerThumbnail {
-    top: 1845px !important;
-  }
 }
 
 @media only screen and (max-width: 357px) {
   .projectsContainerThumbnail {
-    top: 1870px !important;
+    top: 1880px !important;
   }
 }
 
 @media only screen and (max-width: 348px) {
   .projectsContainerThumbnail {
-    top: 1890px !important;
+    top: 1900px !important;
   }
 }
 
 @media only screen and (max-width: 343px) {
   .projectsContainerThumbnail {
-    top: 1920px !important;
+    top: 1930px !important;
   }
   .projectContainerInfo {
     margin-top: 160px;

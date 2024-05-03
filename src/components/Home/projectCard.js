@@ -113,13 +113,16 @@ const ProjectData = () => {
 
   return (
     <>
-      <div className={`static w-full h-auto lg:h-[340px] xl:h-auto flex flex-row flex-wrap py-8 px-8 sm:px-10 rounded-[20px] sm:rounded-lg lg:border-[3px] lg:border-bluePallete-600 bg-bluePallete-800 lg:bg-transparent ${styles.projectContainer}`}>
+      <div
+        className={`static w-full h-auto lg:h-[340px] xl:h-auto flex flex-row flex-wrap py-8 px-8 sm:px-10 rounded-[20px] sm:rounded-lg lg:border-[3px] lg:border-bluePallete-600 bg-bluePallete-800 lg:bg-transparent ${styles.projectContainer}`}
+      >
         <div
-          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[1730px] sm:top-[2230px] md:top-[3020px] ${styles.projectsContainerThumbnail}`}
+          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[1790px] sm:top-[2160px] md:top-[2970px] ${styles.projectsContainerThumbnail}`}
         >
           {isMovingData || isLoading || !projectData ? (
             <Skeleton
-              width="auto" height="auto"
+              width="auto"
+              height="auto"
               style={{ borderRadius: "20px" }}
             />
           ) : (
@@ -136,9 +139,11 @@ const ProjectData = () => {
         <div
           className={`basis-full lg:basis-3/5 mt-[180px] sm:mt-[230px] md:mt-[300px] lg:mt-0 pl-0 lg:pl-7 flex flex-col justify-between space-y-2 sm:space-y-5 lg:space-y-0 ${styles.projectContainerInfo}`}
         >
+          {/* Project Judul Container */}
           <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center space-y-2 sm:space-y-0">
-            <div className="w-auto h-[39px] sm:w-auto sm:h-auto flex flex-row justify-center sm:justify-normal items-center px-2 space-x-1 sm:space-x-2 rounded-[10px] bg-white sm:bg-transparent">
-              <div className="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px] max-w-[50px] max-h-[50px]">
+            <div className="w-auto h-[39px] sm:h-auto flex flex-row justify-center sm:justify-normal items-center px-3 py-1 space-x-1 sm:space-x-2 rounded-[10px] bg-white lg:bg-transparent">
+              {/* Project Icon  */}
+              <div className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px]">
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton circle={true} width="100%" height="100%" />
                 ) : (
@@ -148,26 +153,29 @@ const ProjectData = () => {
                     width={50}
                     height={50}
                     responsive="true"
-                    className="object-cover"
+                    className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-cover"
                   />
                 )}
               </div>
-              <div className={`block sm:hidden font-bold text-[18px] text-bluePallete-600`}>
+              {/* Project Title */}
+              <div className="hidden sm:block ml-[10px] font-bold text-[8px] sm:text-[18px] text-bluePallete-600 lg:text-black">
+                {isMovingData || isLoading || !projectData ? (
+                  <Skeleton width={200} height={20} />
+                ) : (
+                  <p>{cutNameProject(projectData[positionIndex].name, 21)}</p>
+                )}
+              </div>
+              {/* Project Title Mobile */}
+              <div className={`block sm:hidden font-bold text-[18px] text-bluePallete-600 ${styles.projectTitleMobile}`}>
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={100} height={20} />
                 ) : (
-                  <p>{cutNameProject(projectData[positionIndex].name, 12)}</p>
+                  <p>{cutNameProject(projectData[positionIndex].name, 21)}</p>
                 )}
               </div>
             </div>
-            <div className="hidden sm:block ml-[10px] font-bold text-[8px] sm:text-[15px] lg:text-[18px] overflow-hidden text-white lg:text-black">
-              {isMovingData || isLoading || !projectData ? (
-                <Skeleton width={200} height={20} />
-              ) : (
-                <p>{projectData[positionIndex].name}</p>
-              )}
-            </div>
           </div>
+          {/* Project Deskripsi */}
           <div
             className={`h-auto font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden  text-white lg:text-black ${styles.projectsDesc}`}
           >

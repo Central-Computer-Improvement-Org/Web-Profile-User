@@ -61,14 +61,14 @@ const EventCard = () => {
   };
 
   useEffect(() => {
-    if (eventData && eventData.length > 0 && autoFlipCount < 4) { // cek dulu apakah data event sudah ada dan jumlah autoFlipCount kurang dari 4
+    if (eventData && eventData.length > 0 && autoFlipCount < 2) { // cek dulu apakah data event sudah ada dan jumlah autoFlipCount kurang dari 4
       const autoFlipInterval = setInterval(() => {
-        setFlipPosition(0); // setFlipPosition(0) artinya flip card pertama atau index ke 0
+        setFlipPosition(0); // setFlipPosition(0) meng get data flip card pertama atau index ke 0
         setTimeout(() => {
-          setFlipPosition(null); // setFlipPosition(null) artinya flip card dijadikan ke posisi awal
+          setFlipPosition(null); // setFlipPosition(null) mereset flip card menjadi card depan
         }, 1000);
         setAutoFlipCount((prevCount) => prevCount + 1); // setiap 1 detik autoFlipCount akan bertambah 1
-      }, 1000 * 2); // interval auto flip setiap 2 detik
+      }, 1500 * 2); // interval auto flip setiap 1.5 detik
 
       return () => clearInterval(autoFlipInterval); // ketika component di unmount, maka interval auto flip akan di clear
     }
