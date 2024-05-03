@@ -6,6 +6,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 export default function Divisions() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const size = useWindowSize();
+  const [isLeft, setIsLeft] = useState(false);
   const divisionCards = [
     {
       imageUrl: "assets/about/images/person.png",
@@ -15,7 +16,7 @@ export default function Divisions() {
     },
     {
       imageUrl: "assets/about/images/person.png",
-      title: "Ketua",
+      title: "Anggota",
       name: "Abid Zakly",
       socialLinks: "https://github.com/abidzakly",
     },
@@ -34,61 +35,101 @@ export default function Divisions() {
     {
       imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Muh Darrel",
-      socialLinks: "https://linkedin.com/",
-    },
-    {
-      imageUrl: "assets/about/images/person.png",
-      title: "Ketua",
-      name: "Rizky Zaki",
+      name: "Muh Rafi",
       socialLinks: "https://linkedin.com/",
     },
     {
       imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Arya F.",
+      name: "Rizky Abid",
       socialLinks: "https://linkedin.com/",
     },
     {
       imageUrl: "assets/about/images/person.png",
       title: "Anggota",
-      name: "Faiz E.",
+      name: "Arya Muh",
       socialLinks: "https://linkedin.com/",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Elfa Putri",
+      socialLinks: "https://linkedin.com/",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Putra Amar",
+      socialLinks: "https://linkedin.com/",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Amru Jeky",
+      socialLinks: "https://github.com/abidzakly",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Hakim Muh",
+      socialLinks: "https://linkedin.com/",
+    },
+    {
+      imageUrl: "assets/about/images/person.png",
+      title: "Anggota",
+      name: "Rizqi Putri",
+      socialLinks: "https://linkedin.com",
     },
   ];
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => {
-      const nextIndex = prevIndex + 4;
+      const nextIndex = prevIndex + 2;
       return nextIndex >= divisionCards.length ? 0 : nextIndex;
     });
   };
 
-  const displayedCards = divisionCards.slice(currentIndex, currentIndex + 4);
-  const totalDots = Math.ceil(divisionCards.length / displayedCards.length);
+  const updateIsLeft = (isLeft) => {
+    setIsLeft(!isLeft); // Update isLeft to the opposite of isRight
+  };
+
+  const displayedCards = divisionCards.slice(
+    isLeft ? currentIndex : currentIndex + 2, isLeft ?
+    currentIndex + 2 : currentIndex + 4
+  );
+  const totalDots = Math.ceil(divisionCards.length / displayedCards.length - 3);
 
   return (
     <>
-      <div className="w-full h-[47px] lg:h-[92px] xl:h-[108px] bg-[#092C4C] rounded-[15px] mx-auto md-[14px] md:mb-[30px]">
-        <h3
-          className={`text-[20px] lg:text-h3 font-bold text-white flex justify-center items-center h-full`}
-        >
-          Meet Our Team
-        </h3>
+      <div className="px-[45px] md:px-0">
+        <div className="w-full h-[44px] md:h-[108px] bg-[#092C4C] rounded-[15px] mx-auto md-[14px] md:mb-[30px]">
+          <h3
+            className={`text-[20px] md:text-h3 font-bold text-white flex justify-center items-center h-full`}
+          >
+            Meet Our Team
+          </h3>
+        </div>
       </div>
-      <div className="grid grid-cols-2 mb-[32px]">
-        {displayedCards.map((card, index) => (
-          <TeamCard key={index} {...card} />
-        ))}
+      <div className="grid grid-cols-2">
+        <div className="grid md:px-0 grid-rows-2">
+          {displayedCards.map((card, index) => (
+            <TeamCard isLeft={updateIsLeft} isRight={false} key={index} {...card} />
+          ))}
+        </div>
+        <div className="grid md:px-0 grid-rows-2">
+          {displayedCards.map((card, index) => (
+            <TeamCard isLeft={updateIsLeft}isRight={true} key={index} {...card} />
+          ))}
+        </div>
       </div>
       {size.width >= 768 ? (
         <button
-          className="text-white w-full flex justify-center hover:opacity-75"
+          className="text-white w-full flex justify-center hover:opacity-75 md:mt-[54px]"
           onClick={handleNext}
         >
           <svg
-            width="65"
-            height="65"
+            width="100"
+            height="100"
             viewBox="0 0 100 100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +148,7 @@ export default function Divisions() {
           {Array.from({ length: totalDots }, (_, i) => (
             <button
               key={i}
-              className={`w-4 h-4 mx-[2px] rounded-full bg-gray-400 hover:bg-gray-500 ${
+              className={`w-[10px] h-[10px] mx-[2px] rounded-full bg-gray-400 hover:bg-gray-500 ${
                 i === currentIndex / displayedCards.length ? "bg-blue-500" : ""
               }`}
               onClick={() => setCurrentIndex(i * displayedCards.length)}
