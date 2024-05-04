@@ -3,11 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
-import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
 
 import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
@@ -57,6 +57,7 @@ const SwiperComponent = () => {
       });
   }, []);
 
+  // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
   const getMonthName = (monthIndex) => {
     const months = [
       "January",
