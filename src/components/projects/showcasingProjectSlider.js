@@ -1,26 +1,31 @@
 import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
 
+import styles from '@/components/projects/projects.module.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Image from 'next/image';
 
 import { Autoplay } from 'swiper/modules';
 
-export default function ShowcasingProjectSlider({ image }) {
+export default function ShowcasingProjectSlider({ image, speed }) {
   return (
     <>
-      <Swiper
-        slidesPerView={'auto'}
-        spaceBetween={24}
+      {/* <Swiper
+        spaceBetween={30}
         centeredSlides={true}
-        className="w-full lg:!h-[208px] md:!h-[158px] !h-[96px]"
+        slidesPerView={'auto'}
         autoplay={{
-          delay: 1500,
+          delay: 1000,
           disableOnInteraction: false,
+          // startAutoplayOnFirstAction: false,
+          // disableOnInteraction: false,
+          waitForTransition: false,
+          // pauseOnMouseEnter: false,
         }}
         loop={true}
         modules={[Autoplay]}
+        className="mySwiper lg:!h-[208px] md:!h-[158px] !h-[96px]"
       >
         {image &&
           image.map((data, index) => (
@@ -37,7 +42,47 @@ export default function ShowcasingProjectSlider({ image }) {
               />
             </SwiperSlide>
           ))}
-      </Swiper>
+      </Swiper> */}
+
+      <div class="w-full inline-flex flex-nowrap">
+        <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
+          {image &&
+            image.map((data, index) => (
+              <li
+                className="lg:!w-[375px] md:!w-[275px] !w-[165px]"
+                key={index}
+              >
+                <Image
+                  width={0}
+                  height={0}
+                  alt="project-img"
+                  src={data.imageUri}
+                  className="w-full h-full  rounded-[10px]"
+                />
+              </li>
+            ))}
+        </ul>
+        <ul
+          class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll"
+          aria-hidden="true"
+        >
+          {image &&
+            image.map((data, index) => (
+              <li
+                className="lg:!w-[375px] md:!w-[275px] !w-[165px]"
+                key={index}
+              >
+                <Image
+                  width={0}
+                  height={0}
+                  alt="project-img"
+                  src={data.imageUri}
+                  className="w-full h-full  rounded-[10px]"
+                />
+              </li>
+            ))}
+        </ul>
+      </div>
     </>
   );
 }
