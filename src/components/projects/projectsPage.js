@@ -1,18 +1,19 @@
 'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+
+import request from '@/app/utils/request';
+import { FormatString } from '@/app/utils/stringUtils';
+
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Navbar from '@/components/navbar';
-import ShowcasingProjectSlider from '@/components/project/showcasingProjectSlider';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import request from '../utils/request';
-import { FormatString } from '../utils/stringUtils';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
-import Pagination from '@/components/project/pagination';
+import Pagination from '@/components/projects/pagination';
+import ShowcasingProjectSlider from '@/components/projects/showcasingProjectSlider';
 
-const Project = () => {
+const ProjectPage = () => {
   const ProjectMenus = [
     { menu: 'All' },
     { menu: 'Design' },
@@ -24,13 +25,12 @@ const Project = () => {
   ];
   const [menuActive, setMenuActive] = useState('All');
   const [projectData, setProjectData] = useState([]);
-  const [showcasingProject, setShowcasingProject] = useState();
 
   const searchParams = useSearchParams();
 
   useEffect(() => {
     request
-      .get('project')
+      .get('projects')
       .then(function (response) {
         setProjectData(response.data.data);
       })
@@ -41,14 +41,24 @@ const Project = () => {
 
   const page = searchParams.get('page') ?? '1';
   const perPage = searchParams.get('perPage') ?? '5';
-  console.log(page, perPage);
+  // console.log(page, perPage);
   const start = (Number(page) - 1) * Number(perPage);
   const end = start + Number(perPage);
-  console.log(start, end);
+  // console.log(start, end);
 
   let entries = [];
   if (projectData.length > 0) {
     entries = projectData.slice(start, end);
+  }
+
+  if (!projectData && !entries) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <p className="font-bold text-center text-[30px] text-bluePallete-800">
+          Loading...
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -202,4 +212,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default ProjectPage;
