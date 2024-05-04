@@ -9,7 +9,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -22,7 +22,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -35,7 +35,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -48,7 +48,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -61,7 +61,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -74,7 +74,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -87,7 +87,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -100,7 +100,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -113,7 +113,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -126,7 +126,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -139,7 +139,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -152,7 +152,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -165,7 +165,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -178,7 +178,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -191,7 +191,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -204,7 +204,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -217,7 +217,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -230,7 +230,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -243,7 +243,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -256,7 +256,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -269,7 +269,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -282,7 +282,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -295,7 +295,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -308,7 +308,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -321,7 +321,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -334,7 +334,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -347,7 +347,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -360,7 +360,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
@@ -373,7 +373,7 @@ export async function GET(request) {
         name: 'Nama Project 1',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/demo-app-2.jpeg',
         productionUri: 'https://telkomuniversity.ac.id/',
         repositoryUri: 'https://github.com/sandhikagalih',
@@ -386,7 +386,7 @@ export async function GET(request) {
         name: 'Nama Project 2',
         description:
           'Postify is the SMM management platform that lets them create a comprehensive social media strategy they can manage all in one place more that our universi on that face, in interstellar for our coming in the future wolrd in you hand.',
-        iconUri: 'assets/uploads/project/logo-project.png',
+        iconUri: 'assets/uploads/project/icons/logo-project.png',
         imageUri: 'assets/uploads/projects/thumbnails/projects-thumbnail.png',
         productionUri: 'https://www.cciunitel.com/',
         repositoryUri: 'https://github.com/angelabauer',
