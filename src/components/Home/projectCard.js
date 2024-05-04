@@ -103,19 +103,12 @@ const ProjectData = () => {
     }
   }, [isMovingData]);
 
-  // handle pemotongan nama project maksimal 12 char
-  const cutNameProject = (str, maxLength) => {
-    if (str.length <= maxLength) {
-      return str;
-    }
-    return `${str.substring(0, maxLength)}...`;
-  };
-
   return (
     <>
       <div
-        className={`static w-full h-auto lg:h-[340px] xl:h-auto flex flex-row flex-wrap py-8 px-8 sm:px-10 rounded-[20px] sm:rounded-lg lg:border-[3px] lg:border-bluePallete-600 bg-bluePallete-800 lg:bg-transparent ${styles.projectContainer}`}
+        className={`static w-full h-auto lg:h-[340px] xl:h-auto flex flex-row flex-wrap py-8 px-8 sm:px-10 lg:!mt-11 rounded-[20px] sm:rounded-lg lg:border-[3px] lg:border-bluePallete-600 bg-bluePallete-800 lg:bg-transparent ${styles.projectContainer}`}
       >
+        {/* Project Thumbnail */}
         <div
           className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[1790px] sm:top-[2160px] md:top-[2970px] ${styles.projectsContainerThumbnail}`}
         >
@@ -136,12 +129,12 @@ const ProjectData = () => {
             />
           )}
         </div>
+        {/* Project Deskripsi  */}
         <div
           className={`basis-full lg:basis-3/5 mt-[180px] sm:mt-[230px] md:mt-[300px] lg:mt-0 pl-0 lg:pl-7 flex flex-col justify-between space-y-2 sm:space-y-5 lg:space-y-0 ${styles.projectContainerInfo}`}
         >
-          {/* Project Judul Container */}
           <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center space-y-2 sm:space-y-0">
-            <div className="w-auto h-[39px] sm:h-auto flex flex-row justify-center sm:justify-normal items-center px-3 py-1 space-x-1 sm:space-x-2 rounded-[10px] bg-white lg:bg-transparent">
+            <div className="w-auto h-[39px] sm:h-auto flex flex-row justify-center sm:justify-normal items-center px-3 lg:px-0 py-1 lg:py-0 space-x-1 sm:space-x-2 rounded-[10px] bg-white lg:bg-transparent">
               {/* Project Icon  */}
               <div className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px]">
                 {isMovingData || isLoading || !projectData ? (
@@ -157,25 +150,25 @@ const ProjectData = () => {
                   />
                 )}
               </div>
-              {/* Project Title */}
+              {/* Project Judul */}
               <div className="hidden sm:block ml-[10px] font-bold text-[8px] sm:text-[18px] text-bluePallete-600 lg:text-black">
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={200} height={20} />
                 ) : (
-                  <p>{cutNameProject(projectData[positionIndex].name, 21)}</p>
+                  <p>{projectData[positionIndex].name}</p>
                 )}
               </div>
-              {/* Project Title Mobile */}
+              {/* Project Judul Mobile */}
               <div className={`block sm:hidden font-bold text-[18px] text-bluePallete-600 ${styles.projectTitleMobile}`}>
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={100} height={20} />
                 ) : (
-                  <p>{cutNameProject(projectData[positionIndex].name, 21)}</p>
+                  <p>{projectData[positionIndex].name}</p>
                 )}
               </div>
             </div>
           </div>
-          {/* Project Deskripsi */}
+          {/* Project Isi Deskripsi */}
           <div
             className={`h-auto font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden  text-white lg:text-black ${styles.projectsDesc}`}
           >
