@@ -130,7 +130,7 @@ export default function DetailNews() {
                               width={0}
                               height={0}
                               alt="imgNews"
-                              src={data.media_uri}
+                              src={data.mediaUri}
                               className="xl:w-[150px] lg:w-[120px] md:w-[200px] w-[100px] rounded-r-xl "
                             />
                           </div>
