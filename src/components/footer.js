@@ -172,7 +172,7 @@ const Footer = () => {
               </div>
               <button className="w-[75%] lg:w-full rounded-[5px] bg-white">
                 <p className="text-[8px] sm:text-[20px] font-bold py-[5px] sm:py-3 sm:px-20  text-bluePallete-700">
-                  <Link href="/credit">Credit</Link>
+                  <Link href="/credits">Credit</Link>
                 </p>
               </button>
             </div>

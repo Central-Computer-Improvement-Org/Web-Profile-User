@@ -7,7 +7,6 @@ import "swiper/css/pagination";
 
 import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
-import Link from "next/link";
 
 const DivisionSecondSlider = () => {
   const [divisionData, setDivisionData] = useState([]);
@@ -76,7 +75,11 @@ const DivisionSecondSlider = () => {
         >
           {divisionData.map((data, index) => (
             <SwiperSlide key={index} className={`w-full my-5 md:my-0`}>
-              <Link href={`/division?id=${data.id}`}>
+              <a
+                onClick={function () {
+                  router.push(`/division?id=${data.id}`);
+                }}
+              >
                 <div
                   className={`w-[280px] h-[290px] sm:max-h-[290px] sm:max-w-[280px] flex flex-col space-y-3 py-5 px-3 border-2 border-bluePallete-600 rounded-[20px] bg-bluePallete-200 ${styles.divisionSecondCard}`}
                 >
@@ -96,7 +99,7 @@ const DivisionSecondSlider = () => {
                     {data.description}
                   </p>
                 </div>
-              </Link>
+              </a>
             </SwiperSlide>
           ))}
         </Swiper>

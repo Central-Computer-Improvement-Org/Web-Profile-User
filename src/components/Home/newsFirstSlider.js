@@ -38,11 +38,13 @@ const SwiperComponent = () => {
               date: `${getMonthName(
                 createdAt.getMonth()
               )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
-              createdAt: createdAt
+              createdAt: createdAt,
             };
           });
           // pengurutan data berdasarkan tanggal data terbaru
-          const sortNewsData = formatDateData.sort((a, b) => b.createdAt - a.createdAt);
+          const sortNewsData = formatDateData.sort(
+            (a, b) => b.createdAt - a.createdAt
+          );
           // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
           const limitNewsData = sortNewsData.slice(0, 5);
           setNewsData(limitNewsData);
@@ -135,6 +137,7 @@ const SwiperComponent = () => {
                     width={402}
                     height={268}
                     responsive="true"
+                    loading="lazy"
                     className={
                       index === currentSlide
                         ? `rounded-t-[10px] object-cover`

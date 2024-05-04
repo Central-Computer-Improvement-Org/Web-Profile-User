@@ -123,7 +123,7 @@ const Navbar = () => {
                             onClick={(event) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
-                              handleScrollToDivision ();
+                              handleScrollToDivision();
                             }}
                           >
                             Division
@@ -150,7 +150,7 @@ const Navbar = () => {
                     News
                   </li>
                 </Link>
-                <Link href="/project">
+                <Link href="/projects">
                   <li className="font-medium text-[32px] sm:text-[24px] p-4 md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700">
                     Project
                   </li>
@@ -285,7 +285,7 @@ const Navbar = () => {
                     News
                   </li>
                 </Link>
-                <Link href="/project">
+                <Link href="/projects">
                   <li
                     onClick={() => setIsClick(false)}
                     className="text-[28px] cursor-pointer text-white"
