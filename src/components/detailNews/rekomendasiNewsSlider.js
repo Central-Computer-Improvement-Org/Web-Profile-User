@@ -63,7 +63,7 @@ const RekomendasiNewsSlider = ({ newsData }) => {
               <div className="  bg-white  rounded-[10px]">
                 <div className="h-[162px] ">
                   <Image
-                    src={data.media_uri}
+                    src={data.mediaUri}
                     width={0}
                     height={0}
                     alt="banner"

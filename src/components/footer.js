@@ -92,12 +92,12 @@ const Footer = () => {
               </p>
             </div>
             <div className="w-full h-full basis-full lg:basis-2/5 flex flex-col justify-between items-center space-y-5 pl-0 lg:pl-20">
-              <div className="w-[75%] lg:w-full flex flex-row justify-between">
+              <div className="w-[170px] md:w-[385px] flex flex-row justify-between">
                 <a
                   href="mailto:cci.unitel@gmail.com?subject=Subject%20of%20the%20email&body="
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white"
                 >
                   <Image
                     src={
@@ -116,7 +116,7 @@ const Footer = () => {
                   href="https://www.instagram.com/cciunitel/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white "
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white "
                 >
                   <Image
                     src={
@@ -135,7 +135,7 @@ const Footer = () => {
                   href="https://line.me/R/ti/p/~buz0214o"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white"
                 >
                   <Image
                     src={
@@ -154,7 +154,7 @@ const Footer = () => {
                   href="https://www.linkedin.com/company/cci-telkomuniversity/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white"
                 >
                   <Image
                     src={
@@ -170,8 +170,8 @@ const Footer = () => {
                   />
                 </a>
               </div>
-              <button className="w-[75%] lg:w-full rounded-[5px] bg-white">
-                <p className="text-[8px] sm:text-[20px] font-bold py-[5px] sm:py-3 sm:px-20  text-bluePallete-700">
+              <button className="w-[170px] md:w-[385px] h-[15px] md:h-[49px] flex justify-center items-center rounded-[5px] bg-white">
+                <p className="text-[8px] sm:text-[20px] font-bold text-bluePallete-700">
                   <Link href="/credits">Credit</Link>
                 </p>
               </button>

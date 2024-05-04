@@ -62,7 +62,7 @@ const Navbar = () => {
     <>
       <nav
         ref={navOutside}
-        className="fixed h-[60px] sm:h-[90px] md:h-[120px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 shadow-shadowNav md:shadow-none transition-all duration-300 bg-white "
+        className="fixed h-[60px] sm:h-[90px] md:h-[120px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 shadow-shadowNav md:shadow-none transition-all duration-300 bg-white"
       >
         <div className="xl:max-w-7xl lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
           {/* Desktop menu */}

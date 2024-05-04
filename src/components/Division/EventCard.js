@@ -4,8 +4,7 @@ import ReactCardFlip from "react-card-flip";
 import { useMediaQuery } from "react-responsive";
 
 import request from "@/app/utils/request";
-// import styles from "@/app/division/divison.module.css";
-import styles from "@/components/Home/homeComponent.module.css";
+import styles from "@/components/Division/divisionComponent.module.css";
 
 const desktopColorPattern = [
   "#152E51",
@@ -53,13 +52,6 @@ const EventCard = () => {
   function onClickFlipCard(index) {
     setFlipPosition(flipPosition === index ? null : index);
   }
-
-  const cutNameProject = (str, maxLength) => {
-    if (str.length <= maxLength) {
-      return str;
-    }
-    return `${str.substring(0, maxLength)}..`;
-  };
 
   useEffect(() => {
     if (eventData && eventData.length > 0 && autoFlipCount < 2) { // cek dulu apakah data event sudah ada dan jumlah autoFlipCount kurang dari 4
@@ -109,8 +101,8 @@ const EventCard = () => {
                     backgroundColor: `${getCardBackgroundColor(index)}80`,
                   }}
                 >
-                  <p className="font-black text-[14px] sm:text-[40px] text-[#F5FBF9]">
-                    {cutNameProject(event.name, 15)}
+                  <p className="font-black text-[14px] sm:text-[40px] [text-shadow:_0px_6px_7px_rgb(0_0_0_/_40%)] text-[#F5FBF9]">
+                    {event.name}
                   </p>
                 </div>
                 <Image

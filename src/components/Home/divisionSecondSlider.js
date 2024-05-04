@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -9,6 +10,7 @@ import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const DivisionSecondSlider = () => {
+  const router = useRouter();
   const [divisionData, setDivisionData] = useState([]);
   const [loading, setLoading] = useState(true);
 
