@@ -4,7 +4,8 @@ import ReactCardFlip from "react-card-flip";
 import { useMediaQuery } from "react-responsive";
 
 import request from "@/app/utils/request";
-import styles from "@/app/division/divison.module.css";
+// import styles from "@/app/division/divison.module.css";
+import styles from "@/components/Home/homeComponent.module.css";
 
 const desktopColorPattern = [
   "#152E51",
@@ -99,7 +100,7 @@ const EventCard = () => {
             >
               {/* Card bagian depan */}
               <div
-                className={`relative w-[300px] sm:w-full h-[65px] sm:h-full max-w-[517px] max-h-[198px] rounded-[15px] sm:rounded-[30px] overflow-hidden cursor-pointer ${styles.dvisionCardContainer}`}
+                className={`relative w-[300px] sm:w-full h-[65px] sm:h-full max-w-[517px] max-h-[198px] rounded-[15px] sm:rounded-[30px] overflow-hidden cursor-pointer ${styles.dvisionEventCardContainer}`}
                 onClick={() => onClickFlipCard(index)}
               >
                 <div
@@ -123,7 +124,7 @@ const EventCard = () => {
               </div>
               {/* Card bagian belakang */}
               <div
-                className={`w-[300px] sm:w-full h-[65px] sm:h-[198px] max-w-[517px] max-h-[198px] flex flex-col justify-start items-left space-y-0 sm:space-y-1 px-[26px] sm:px-[60px] py-[5px] sm:py-[30px] rounded-[15px] sm:rounded-[30px] cursor-pointer ${styles.dvisionCardContainer}`}
+                className={`w-[300px] sm:w-full h-[65px] sm:h-[198px] max-w-[517px] max-h-[198px] flex flex-col justify-start items-left space-y-0 sm:space-y-1 px-[26px] sm:px-[60px] py-[5px] sm:py-[30px] rounded-[15px] sm:rounded-[30px] cursor-pointer ${styles.dvisionEventCardContainer}`}
                 style={{
                   backgroundColor: getCardBackgroundColor(index),
                 }}

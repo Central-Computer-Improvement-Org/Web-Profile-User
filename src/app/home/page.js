@@ -42,7 +42,7 @@ export default function Home() {
 
   useEffect(() => {
     setIsLoading(true);
-  
+
     const fetchAwardData = async () => {
       try {
         const response = await request.get("/award");
@@ -55,7 +55,7 @@ export default function Home() {
         console.error(error);
       }
     };
-  
+
     const fetchMemberData = async () => {
       try {
         const response = await request.get("/member");
@@ -68,7 +68,7 @@ export default function Home() {
         console.error(error);
       }
     };
-  
+
     const fetchProjectData = async () => {
       try {
         const response = await request.get("/projects");
@@ -81,11 +81,11 @@ export default function Home() {
         console.error(error);
       }
     };
-  
+
     fetchAwardData();
     fetchMemberData();
     fetchProjectData();
-  
+
     setIsLoading(false);
   }, []);
 
@@ -105,7 +105,7 @@ export default function Home() {
                   isLoading
                     ? "Loading..."
                     : settingsData?.data[0]?.logffoUri ||
-                      "assets/logo/images/logo.svg" 
+                      "assets/logo/images/logo.svg"
                 }
                 alt="Logo Central Computer Improvement"
                 width={291}
@@ -283,7 +283,8 @@ export default function Home() {
                       <p className="text-[15px] md:text-[20px] lg:text-[24px] text-right lg:text-left leading-5 lg:leading-10 text-mainPrimary">
                         Unit Kegiatan Mahasiswa Universitas Telkom Central
                         Computer Improvment telah berhasil membuat project
-                        sebanyak {projectData?.recordsTotal || "..."}  yang dilakukan oleh semua divisi yang ada
+                        sebanyak {projectData?.recordsTotal || "..."} yang
+                        dilakukan oleh semua divisi yang ada
                       </p>
                     </div>
                   </div>
@@ -308,7 +309,7 @@ export default function Home() {
                               Achievement
                             </p>
                             <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                            {awardData?.recordsTotal || "..."} +
+                              {awardData?.recordsTotal || "..."} +
                             </p>
                           </div>
                         </div>
@@ -340,7 +341,10 @@ export default function Home() {
                 </div>
               </div>
             </section>
-            <section id="divisionPage" className="w-full h-[540px] md:h-[500px] flex justify-center items-start">
+            <section
+              id="divisionPage"
+              className="w-full h-[540px] md:h-[500px] flex justify-center items-start"
+            >
               <div className="w-full flex flex-row flex-wrap mt-[50px] md:mt-[70px] xl:mt-[130px]">
                 <div
                   className={`w-full h-auto basis-full md:basis-[35%] lg:basis-[40%] flex justify-center items-center md:pl-[70px] lg:pl-[40px] xl:pl-[80px] ${styles.divisionContainerTagline}`}
@@ -356,10 +360,10 @@ export default function Home() {
                   className={`basis-full md:basis-[65%] lg:basis-[59%] w-auto h-auto sm:max-w-[60%] md:max-w-[65%] lg:max-w-[60%] ${styles.divisionCardContainer}`}
                 >
                   <div className="hidden md:block">
-                    <DivisionFirstSlider/>
+                    <DivisionFirstSlider />
                   </div>
                   <div className="block md:hidden">
-                    <DivisionSecondSlider/>
+                    <DivisionSecondSlider />
                   </div>
                 </div>
               </div>
@@ -377,7 +381,9 @@ export default function Home() {
                       creativity, and impact of Central Computer Improvement
                     </p>
                     <button className="w-[151px] h-[45px] md:w-[311px] md:h-[90px] text-[12px] md:text-[25px] font-bold rounded-lg text-white bg-bluePallete-800">
-                      <Link className="text-center" href="/project">Explore Our Projects</Link>
+                      <Link className="text-center" href="/projects">
+                        Explore Our Projects
+                      </Link>
                     </button>
                     <ProjectCard />
                   </div>
@@ -411,7 +417,7 @@ export default function Home() {
                       <h1 className="text-[22px] sm:text-[50px] lg:text-[80px] text-center font-black text-bluePallete-800">
                         Keep Up With Our Latest News
                       </h1>
-                      <p className="text-[12px] sm:text-[20px] md:text-[30px] text-center font-semibold sm:font-medium md:px-[10px] lg:px-[120px] xl:px-[200px] text-bluePallete-800">
+                      <p className="text-[12px] sm:text-[20px] md:text-[30px] text-center font-semibold sm:font-medium md:px-[10px] lg:px-[120px] xl:px-[200px] text-black">
                         Contains community activities, competitions, events, and
                         Central Computer Improvement recruitment information
                       </p>

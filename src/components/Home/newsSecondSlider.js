@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -11,7 +10,6 @@ import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const NewsSecondSlider = () => {
-  const router = useRouter();
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,11 +25,13 @@ const NewsSecondSlider = () => {
               date: `${getMonthName(
                 createdAt.getMonth()
               )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
-              createdAt: createdAt
+              createdAt: createdAt,
             };
           });
           // pengurutan data berdasarkan tanggal data terbaru
-          const sortNewsData = formatDateData.sort((a, b) => b.createdAt - a.createdAt);
+          const sortNewsData = formatDateData.sort(
+            (a, b) => b.createdAt - a.createdAt
+          );
           // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
           const limitNewsData = sortNewsData.slice(0, 5);
           setNewsData(limitNewsData);
@@ -62,7 +62,7 @@ const NewsSecondSlider = () => {
       "November",
       "December",
     ];
-    return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan 
+    return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
   };
 
   return (
@@ -75,14 +75,26 @@ const NewsSecondSlider = () => {
         </div>
       ) : (
         <Swiper
-          slidesPerView={1.5}
+          slidesPerView={1.6}
           spaceBetween={0}
           pagination={false}
           centeredSlides={true}
           breakpoints={{
-            400: {
-              slidesPerView: 1.4,
-              spaceBetween: 5,
+            320: {
+              slidesPerView: 1.3,
+              spaceBetween: 10,
+            },
+            340: {
+              slidesPerView: 1.5,
+              spaceBetween: 10,
+            },
+            380: {
+              slidesPerView: 1.7,
+              spaceBetween: 10,
+            },
+            458: {
+              slidesPerView: 1.7,
+              spaceBetween: 0,
             },
             480: {
               slidesPerView: 2,
@@ -98,17 +110,18 @@ const NewsSecondSlider = () => {
         >
           {Array.isArray(newsData) &&
             newsData.map((data, index) => (
-              <SwiperSlide key={index} className="px-1 !flex !justify-start !items-center !flex-col">
-                <div
-                  onClick={() => router.push("/news")}
-                  className="w-[222px] h-[242px] "
-                >
+              <SwiperSlide
+                key={index}
+                className="px-1 !flex !justify-start !items-center !flex-col"
+              >
+                <div className="w-[222px] h-[242px] ">
                   <Image
                     width={222}
                     height={152}
                     src={data.mediaUri}
                     alt="News Thumbnail Central Computer Improvment"
                     responsive="true"
+                    loading="lazy"
                     className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
                   />
                   <div
