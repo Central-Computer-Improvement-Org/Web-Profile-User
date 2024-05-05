@@ -44,12 +44,20 @@ export default function ShowcasingProjectSlider({ image, speed }) {
           ))}
       </Swiper> */}
 
-      <div class="w-full inline-flex flex-nowrap">
+      <div
+        x-data="{}"
+        x-init="$nextTick(() => {
+        let ul = $refs.logos;
+        ul.insertAdjacentHTML('afterend', ul.outerHTML);
+        ul.nextSibling.setAttribute('aria-hidden', 'true');
+    })"
+        class="w-full inline-flex flex-nowrap overflow-hidden "
+      >
         <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
           {image &&
             image.map((data, index) => (
               <li
-                className="lg:!w-[375px] md:!w-[275px] !w-[165px]"
+                className="lg:!w-[375px] md:!w-[275px] !w-[165px] lg:!h-[208px]"
                 key={index}
               >
                 <Image
@@ -69,7 +77,7 @@ export default function ShowcasingProjectSlider({ image, speed }) {
           {image &&
             image.map((data, index) => (
               <li
-                className="lg:!w-[375px] md:!w-[275px] !w-[165px]"
+                className="lg:!w-[375px] md:!w-[275px] !w-[165px] lg:!h-[208px]"
                 key={index}
               >
                 <Image
