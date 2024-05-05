@@ -57,7 +57,7 @@ export default function ShowcasingProjectSlider({ image, speed }) {
           {image &&
             image.map((data, index) => (
               <li
-                className="lg:!w-[375px] md:!w-[275px] !w-[165px]"
+                className="lg:!w-[375px] md:!w-[275px] !w-[165px] lg:!h-[208px]"
                 key={index}
               >
                 <Image
@@ -77,7 +77,7 @@ export default function ShowcasingProjectSlider({ image, speed }) {
           {image &&
             image.map((data, index) => (
               <li
-                className="lg:!w-[375px] md:!w-[275px] !w-[165px]"
+                className="lg:!w-[375px] md:!w-[275px] !w-[165px] lg:!h-[208px]"
                 key={index}
               >
                 <Image

@@ -185,7 +185,7 @@ const ProjectPage = () => {
                               src={'assets/icon/repository-dark.png'}
                               className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] lg:hidden "
                             />
-                            <h1 className="xl:text-[25px] lg:text-[18px] md:text-[25px] text-[10px] text-bluePallete-900 font-semibold">
+                            <h1 className="xl:text-[25px] lg:text-[18px] md:text-[25px] text-[10px] lg:text-white text-bluePallete-900 font-semibold">
                               Check Repository
                             </h1>
                           </div>
