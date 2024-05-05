@@ -69,20 +69,20 @@ const ProjectPage = () => {
         <div className="pt-[36px]" />
         <section className="md:px-[0px] px-[24px]">
           <div className="">
-            <h1 className="lg:text-[50px] md:text-[35px] text-[20px] font-black text-center xl:px-[357px] md:px-[107px]">
-              Showcasing Our Work: Achievements and Capabilities of Central
-              Computer Improvement
+            <h1 className="xl:text-[50px] lg:text-[40px] md:text-[30px] text-[20px] font-black text-center xl:px-[216px] lg:px-[156px] md:px-[107px]">
+              Showcasing Our Work: <br />
+              Achievements and Capabilities of Central Computer Improvement
             </h1>
             <div className="lg:pt-[24px] md:pt-[20px] pt-[10px]" />
-            <p className="text-center lg:text-[40px] md:text-[20px] text-[12px] font-medium lg:px-[207px] md:px-[77px]">
+            <p className="text-center xl:text-[40px] lg:text-[26px] md:text-[20px] text-[12px] font-medium lg:px-[207px] md:px-[77px]">
               Explore our diverse projects and witness the passion, creativity,
               and impact of Central Computer Improvement
             </p>
-            <div className="lg:pt-[61px] md:pt-[45px] pt-[32px]" />
-            <ShowcasingProjectSlider image={projectData} />
-            <div className="lg:pt-[61px] md:pt-[45px]pt-[36px]" />
           </div>
         </section>
+        <div className="lg:pt-[61px] md:pt-[45px] pt-[32px]" />
+        <ShowcasingProjectSlider image={projectData} />
+        <div className="lg:pt-[61px] md:pt-[45px] pt-[36px]" />
         <section className="xl:px-[179px] lg:px-[50px] md:px-[80px] px-[20px]">
           <div className="flex flex-wrap lg:gap-[36px] gap-[2px] justify-center ">
             {ProjectMenus.map((data, index) => (
@@ -124,7 +124,7 @@ const ProjectPage = () => {
                       width={467}
                       height={284}
                       responsive="true"
-                      className={`w-full h-[189px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] lg:w-[455px]  lg:h-[311px]  lg:max-w-[455px]  lg:max-h-[311px] rounded-[10px]  object-cover `}
+                      className={`w-full h-[189px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] lg:!w-[400px]  lg:h-[261px] xl:w-[455px]  xl:h-[311px]  xl:max-w-[455px]  xl:max-h-[311px] rounded-[10px]  object-cover `}
                     />
                   </div>
                   <div className="w-full ">
@@ -138,12 +138,12 @@ const ProjectPage = () => {
                             src={data.iconUri}
                             className="max-w-[50px] max-h-[50px] lg:w-[50px] lg:h-[50px] w-[25px] h-[25px] lg:block hidden "
                           />
-                          <h1 className="lg:text-[30px] md:text-[30px] text-[18px] lg:font-semibold font-bold text-black">
+                          <h1 className="xl:text-[30px] lg:text-[25px] md:text-[25px] text-[18px] lg:font-semibold font-bold text-black">
                             {data.name}
                           </h1>
                         </div>
                         <div>
-                          <p className="lg:text-[30px] md:text-[25px] text-[15px] font-medium text-black">
+                          <p className="xl:text-[30px] lg:text-[25px] md:text-[25px] text-[15px] font-medium text-black">
                             {FormatString(data.description, 165)}
                           </p>
                         </div>
@@ -159,9 +159,9 @@ const ProjectPage = () => {
                               height={0}
                               alt="project-img"
                               src={'assets/icon/website.png'}
-                              className=" lg:w-[30px] md:w-[30px] w-[13px] lg:h-[30px] md:h-[30px] h-[13px] "
+                              className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] "
                             />
-                            <h1 className="lg:text-[25px] md:text-[25px] text-[10px] text-bluePallete-100 font-semibold">
+                            <h1 className="xl:text-[25px] lg:text-[18px] md:text-[25px] text-[10px] text-bluePallete-100 font-semibold">
                               Go to Website
                             </h1>
                           </div>
@@ -170,22 +170,22 @@ const ProjectPage = () => {
                           href={data.repositoryUri}
                           className="flex cursor-pointer"
                         >
-                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[142px] lg:border-[0px] border border-bluePallete-900  lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] lg:bg-bluePallete-900 bg-white">
+                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[142px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] lg:bg-bluePallete-900 bg-white lg:border-[0px] border border-bluePallete-900">
                             <Image
                               width={0}
                               height={0}
                               alt="project-img"
                               src={'assets/icon/repository.png'}
-                              className=" lg:w-[30px] md:w-[30px] w-[13px] lg:h-[30px] md:h-[30px] h-[13px] lg:block hidden"
+                              className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] hidden lg:block "
                             />
                             <Image
                               width={0}
                               height={0}
                               alt="project-img"
                               src={'assets/icon/repository-dark.png'}
-                              className=" lg:w-[30px] md:w-[30px] w-[13px] lg:h-[30px] md:h-[30px] h-[13px] lg:hidden "
+                              className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] lg:hidden "
                             />
-                            <h1 className="lg:text-[25px] md:text-[25px] text-[10px] lg:text-bluePallete-100 text-bluePallete-900 font-semibold">
+                            <h1 className="xl:text-[25px] lg:text-[18px] md:text-[25px] text-[10px] text-bluePallete-900 font-semibold">
                               Check Repository
                             </h1>
                           </div>
