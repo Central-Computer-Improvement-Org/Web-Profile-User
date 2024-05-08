@@ -17,28 +17,19 @@ import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const SwiperComponent = () => {
-<<<<<<< HEAD
   const previousButton = useRef(null);
   const nextButton = useRef(null);
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
-=======
-   const previousButton = useRef(null);
-   const nextButton = useRef(null);
-   const [newsData, setNewsData] = useState([]);
-   const [loading, setLoading] = useState(true);
-   const [currentSlide, setCurrentSlide] = useState(0);
->>>>>>> 8de4948d954d65eb9764f20b86986194a09bd60b
 
-   const pagination = {
-      clickable: true,
-      renderBullet: function (index, className) {
-         return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
-      },
-   };
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
+    },
+  };
 
-<<<<<<< HEAD
   useEffect(() => {
     request
       .get("/news")
@@ -71,59 +62,25 @@ const SwiperComponent = () => {
         setIsLoading(false);
       });
   }, []);
-=======
-   useEffect(() => {
-      request
-         .get("/news")
-         .then((response) => {
-            if (response.status === 200 || response.status === 201) {
-               const formatDateData = response.data.data.map((item) => {
-                  const createdAt = new Date(item.createdAt);
-                  return {
-                     ...item,
-                     date: `${getMonthName(
-                        createdAt.getMonth()
-                     )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
-                     createdAt: createdAt,
-                  };
-               });
-               // pengurutan data berdasarkan tanggal data terbaru
-               const sortNewsData = formatDateData.sort(
-                  (a, b) => b.createdAt - a.createdAt
-               );
-               // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
-               const limitNewsData = sortNewsData.slice(0, 5);
-               setNewsData(limitNewsData);
-            } else {
-               console.error(JSON.stringify(response.errors));
-            }
-            setLoading(false);
-         })
-         .catch((error) => {
-            console.error(error);
-            setLoading(false);
-         });
-   }, []);
->>>>>>> 8de4948d954d65eb9764f20b86986194a09bd60b
 
-   // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
-   const getMonthName = (monthIndex) => {
-      const months = [
-         "January",
-         "February",
-         "March",
-         "April",
-         "May",
-         "June",
-         "July",
-         "August",
-         "September",
-         "October",
-         "November",
-         "December",
-      ];
-      return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
-   };
+  // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
+  const getMonthName = (monthIndex) => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
+  };
 
   return (
     <>
@@ -205,8 +162,8 @@ const SwiperComponent = () => {
                     />
                   )}
                   <div
-                     ref={nextButton}
-                     className={`${styles.newsButtonNext} ${styles.swiperButton} cursor-pointer`}
+                    ref={nextButton}
+                    className={`${styles.newsButtonNext} ${styles.swiperButton} cursor-pointer`}
                   >
                     <p
                       className={
@@ -263,7 +220,7 @@ const SwiperComponent = () => {
                     </div>
                   </div>
                 </div>
-            </SwiperSlide>
+              </SwiperSlide>
             ))}
             {/* Custom Button Next  */}
             <div
@@ -311,8 +268,8 @@ const SwiperComponent = () => {
             </div>
           </Swiper>
 
-               <style>
-                  {`
+          <style>
+            {`
               .swiper-pagination-bullet-custom {
                   width: 20px;
                   height: 20px;
@@ -332,11 +289,11 @@ const SwiperComponent = () => {
                   }
               }
           `}
-               </style>
-            </div>
-         )}
-      </>
-   );
+          </style>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default SwiperComponent;
