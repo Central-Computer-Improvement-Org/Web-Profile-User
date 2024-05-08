@@ -49,9 +49,9 @@ const DivisionFirstSlider = () => {
           nextEl: ".customButtonNext",
         }}
         pagination={false}
-        slidesPerView= {1.2}
-        spaceBetween= {10}
-        breakpoints= {{
+        slidesPerView={1.2}
+        spaceBetween={10}
+        breakpoints={{
           320: {
             slidesPerView: 1.3,
             spaceBetween: 20

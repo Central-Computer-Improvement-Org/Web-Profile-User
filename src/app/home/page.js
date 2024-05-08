@@ -53,7 +53,7 @@ export default function Home() {
                   isLoading
                     ? "Loading..."
                     : settingsData?.data[0]?.logo_uri ||
-                      "assets/logo/images/logo.svg"
+                    "assets/logo/images/logo.svg"
                 }
                 alt="Logo Central Computer Improvement"
                 width={300}
@@ -65,14 +65,14 @@ export default function Home() {
                   {isLoading
                     ? "Loading..."
                     : settingsData?.data[0]?.title_website ||
-                      "Central Computer Improvement"}
+                    "Central Computer Improvement"}
                 </h1>
               </div>
               <p className="hidden md:block text-[24px] pr-20 text-bluePallete-600">
                 {isLoading
                   ? "Loading..."
                   : settingsData?.data[0]?.description ||
-                    "Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology)."}
+                  "Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology)."}
               </p>
             </div>
             <div className="basis-full md:basis-2/5 flex flex-col flex-wrap items-center justify-center pt-10 md:pt-0">
