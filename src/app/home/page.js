@@ -25,7 +25,7 @@ export default function Home() {
       setIsLoading(true);
 
       request
-         .get("/setting")
+         .get("/settings")
          .then((response) => {
             if (response.status === 200 || response.status === 201) {
                setSettingsData(response.data);
