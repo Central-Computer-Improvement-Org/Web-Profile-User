@@ -126,7 +126,7 @@ export default function Home() {
                 {isLoading
                   ? "Loading..."
                   : settingsData?.data[0]?.description ||
-                    "Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology)."}
+                  "Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology)."}
               </p>
             </div>
             <div className="basis-full md:basis-[45%] flex flex-col flex-wrap items-center justify-center pt-10 md:pt-0">
