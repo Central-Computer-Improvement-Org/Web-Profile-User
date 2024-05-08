@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -11,7 +10,6 @@ import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const NewsSecondSlider = () => {
-  const router = useRouter();
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,16 +18,23 @@ const NewsSecondSlider = () => {
       .get("/news")
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
-          const formattedData = response.data.data.map((item) => {
+          const formatDateData = response.data.data.map((item) => {
             const createdAt = new Date(item.createdAt);
-            const updatedAt = new Date(item.updatedAt);
             return {
               ...item,
-              date: `${getMonthName(createdAt.getMonth())} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,  // get from createdAt
-              // updatedAt: `${getMonthName(updatedAt.getMonth())} ${updatedAt.getDate()}, ${updatedAt.getFullYear()}` // get from updatedAt
+              date: `${getMonthName(
+                createdAt.getMonth()
+              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
+              createdAt: createdAt,
             };
           });
-          setNewsData(formattedData);
+          // pengurutan data berdasarkan tanggal data terbaru
+          const sortNewsData = formatDateData.sort(
+            (a, b) => b.createdAt - a.createdAt
+          );
+          // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
+          const limitNewsData = sortNewsData.slice(0, 5);
+          setNewsData(limitNewsData);
         } else {
           console.error(JSON.stringify(response.errors));
         }
@@ -41,6 +46,7 @@ const NewsSecondSlider = () => {
       });
   }, []);
 
+  // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
   const getMonthName = (monthIndex) => {
     const months = [
       "January",
@@ -54,57 +60,88 @@ const NewsSecondSlider = () => {
       "September",
       "October",
       "November",
-      "December"
+      "December",
     ];
-    return months[monthIndex];
+    return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
   };
 
   return (
-    <Swiper
-      slidesPerView={1.4}
-      spaceBetween={20}
-      pagination={false}
-      breakpoints={{
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 40,
-        },
-        480: {
-          slidesPerView: 1.4,
-          spaceBetween: 30,
-        },
-      }}
-      modules={[Pagination]}
-      className={`w-full`}
-    >
-      {Array.isArray(newsData) &&
-        newsData.map((data, index) => (
-          <SwiperSlide key={index}>
-            <div onClick={() => router.push("/news")} className="w-full">
-              <Image
-                width={220}
-                height={150}
-                src={data.media_uri}
-                alt="News Thumbnail Central Computer Improvment"
-                responsive="true"
-                className="w-full h-auto rounded-t-xl object-cover"
-              />
-              <div
-                className={`h-[100px] max-h-[100px] flex flex-col justify-between p-2 bg-white rounded-b-xl ${styles.newsCardBorder}`}
+    <>
+      {loading ? (
+        <div className="w-full h-[290px] flex justify-center items-center">
+          <p className="font-bold text-center text-[20px] text-bluePallete-700">
+            Loading...
+          </p>
+        </div>
+      ) : (
+        <Swiper
+          slidesPerView={1.6}
+          spaceBetween={0}
+          pagination={false}
+          centeredSlides={true}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.3,
+              spaceBetween: 10,
+            },
+            340: {
+              slidesPerView: 1.5,
+              spaceBetween: 10,
+            },
+            380: {
+              slidesPerView: 1.7,
+              spaceBetween: 10,
+            },
+            458: {
+              slidesPerView: 1.7,
+              spaceBetween: 0,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            560: {
+              slidesPerView: 2.5,
+              spaceBetween: 10,
+            },
+          }}
+          modules={[Pagination]}
+          className={"w-full h-[290px]"}
+        >
+          {Array.isArray(newsData) &&
+            newsData.map((data, index) => (
+              <SwiperSlide
+                key={index}
+                className="px-1 !flex !justify-start !items-center !flex-col"
               >
-                <h2
-                  className={`font-semibold text-[14px] leading-5 sm:leading-0 overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`}
-                >
-                  {data.title}
-                </h2>
-                <p className="text-[10px] font-medium text-gray-500">
-                  {data.date}
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-    </Swiper>
+                <div className="w-[222px] h-[242px] ">
+                  <Image
+                    width={222}
+                    height={152}
+                    src={data.mediaUri}
+                    alt="News Thumbnail Central Computer Improvment"
+                    responsive="true"
+                    loading="lazy"
+                    className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
+                  />
+                  <div
+                    className={`w-full h-[90px] flex flex-col justify-between p-2 bg-white rounded-b-[10px] ${styles.newsCardBorder}`}
+                  >
+                    <h2
+                      className={`font-semibold text-[14px] leading-5 sm:leading-0 overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`}
+                    >
+                      {data.title}
+                    </h2>
+                    <p className="text-[10px] font-medium text-gray-500">
+                      {data.date}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      )}
+    </>
   );
 };
 

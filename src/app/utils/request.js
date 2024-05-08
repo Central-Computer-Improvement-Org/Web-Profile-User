@@ -3,20 +3,20 @@ import Cookies from "js-cookie";
 
 const request = axios.create({
   // comment baseUrl dibawah ketika running di local, dan uncomment baseURL dibawah ketika push ke gihtub
-  // baseURL: `https://central-computer-improvement-org.github.io/Web-Profile-User/api`,
+  baseURL: ` https://103-31-38-146.sslip.io/api/v1/`,
   // uncomment baseURL dibawah ketika running di local, dan comment baseURL dibawah ketika push ke gihtub
-  baseURL: `http://localhost:3000/api/`,
+  // baseURL: `http://localhost:3000/api/`,
   timeout: 10000,
   headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*",
-    "Access-Control-Allow-Credentials": "true",
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Credentials': 'true',
   },
 });
 
 const requestHandler = (request) => {
-  let token = Cookies.get("token");
+  let token = Cookies.get('token');
 
   if (token !== undefined) {
     request.headers.Authorization = `Bearer ${token}`;
@@ -32,7 +32,7 @@ const responseHandler = (response) => {
 const expiredTokenHandler = () => {
   // store.dispatch(getLoginData({}))
   localStorage.clear();
-  Cookies.remove("token");
+  Cookies.remove('token');
   //   window.location.href = './login'; //di uncomment saat sudah integrasi api login
   // return error;
 };
@@ -42,7 +42,7 @@ const errorHandler = (error) => {
   // error.code === 'ERR_NETWORK' should not exist
   if (error.response && error.response.status === 401) {
     //  expiredTokenHandler(); //di uncomment saat sudah integrasi api login
-  } else if (error.code === "ERR_NETWORK") {
+  } else if (error.code === 'ERR_NETWORK') {
     // window.history.pushState({}, 'Redirect Network Error', '/login');
     console.log(error);
     if (error.response?.status === 401) {
@@ -65,11 +65,11 @@ request.interceptors.response.use(
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   get: (url, params = null, headers = {}) =>
-    request({ method: "get", url, params, headers }),
+    request({ method: 'get', url, params, headers }),
   post: (url, data, headers = {}) =>
-    request({ method: "post", url, data, headers }),
-  put: (url, data, headers) => request({ method: "put", url, data, headers }),
-  delete: (url, data) => request({ method: "delete", url, data }),
+    request({ method: 'post', url, data, headers }),
+  put: (url, data, headers) => request({ method: 'put', url, data, headers }),
+  delete: (url, data) => request({ method: 'delete', url, data }),
   setToken: (token) => {
     if (token) {
       request.defaults.headers.common.Authorization = `Bearer ${token}`;

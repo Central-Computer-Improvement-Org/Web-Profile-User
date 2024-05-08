@@ -1,0 +1,6 @@
+.swiper_container {
+  /* Menjadikan centeredSlides penting dengan !important */
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
