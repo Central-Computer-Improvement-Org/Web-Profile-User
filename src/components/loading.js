@@ -1,19 +1,10 @@
-'use client';
-import { Spinner } from 'flowbite-react';
-import { ColorRing } from 'react-loader-spinner';
+"use client";
+import { Spinner } from "flowbite-react";
 
-const Loading = ({ width, height }) => {
+const Loading = ({ size = "w-6 h-6", textAlignment = "text-left" }) => {
   return (
-    <div>
-      <ColorRing
-        visible={true}
-        height={`${width}`}
-        width={`${height}`}
-        ariaLabel="color-ring-loading"
-        wrapperStyle={{}}
-        wrapperClass="color-ring-wrapper"
-        colors={['#1c3e6c', '#1c3e6c', '#1c3e6c', '#1c3e6c', '#1c3e6c']}
-      />
+    <div className={`${textAlignment}`}>
+      <Spinner className={`${size} text-bluePallete-700`} />
     </div>
   );
 };

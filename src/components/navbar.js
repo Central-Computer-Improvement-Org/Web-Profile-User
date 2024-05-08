@@ -62,9 +62,9 @@ const Navbar = () => {
     <>
       <nav
         ref={navOutside}
-        className="fixed h-[60px] sm:h-[90px] md:h-[120px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 shadow-shadowNav md:shadow-none transition-all duration-300 bg-white"
+        className="fixed h-[60px] sm:h-[90px] md:h-[120px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 border-b-[1px] border-bluePallete-300 transition-all duration-300 bg-white"
       >
-        <div className="xl:max-w-7xl lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
+        <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
           {/* Desktop menu */}
           <div className="h-full w-full flex justify-between items-center">
             <Link href="/">
@@ -81,7 +81,7 @@ const Navbar = () => {
                 {/* Dropdown menu di ukuran deskstop */}
                 <div className="relative">
                   <button
-                    className="flex flex-row items-center p-4 text-[32px] sm:text-[24px] md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700"
+                    className="flex flex-row items-center p-4 font-medium text-[32px] sm:text-[24px] md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700"
                     onClick={toggleDropdown}
                   >
                     About Us
@@ -103,12 +103,12 @@ const Navbar = () => {
                     </svg>
                   </button>
                   {isDropdownOpen && (
-                    <div className="absolute w-40 top-full left-0 shadow-md rounded-md bg-white">
+                    <div className="absolute w-[230px] top-full left-0 shadow-[0px_0px_10px_0px_rgba(0,0,0,0.1)] rounded-[10px] bg-white">
                       <ul>
-                        <li className="pt-2 px-4">
+                        <li className="mt-2 mx-2">
                           <Link
-                            href="about"
-                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded text-[#6B6B6B] hover:bg-bluePallete-200"
+                            href="/about"
+                            className="block font-medium px-7 py-[5px] text-[28px] sm:text-[24px] rounded-[10px] cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick={(event) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
@@ -117,9 +117,9 @@ const Navbar = () => {
                             About
                           </Link>
                         </li>
-                        <li className="pt-2 px-4">
+                        <li className="mt-2 mx-2">
                           <div
-                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
+                            className="block font-medium px-7 py-[5px] text-[28px] sm:text-[24px] rounded-[10px] cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick={(event) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
@@ -129,9 +129,9 @@ const Navbar = () => {
                             Division
                           </div>
                         </li>
-                        <li className="pt-2 pb-2 px-4">
+                        <li className="mt-2 mx-2 mb-[8px]">
                           <div
-                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
+                            className="block font-medium px-7 py-[5px] text-[28px] sm:text-[24px] rounded-[10px] cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick={(event) => {
                               toggleNavbar();
                               scrollToContact();
@@ -198,7 +198,7 @@ const Navbar = () => {
                   className="w-full h-full max-w-[56px] max-h-[56px]"
                 >
                   <g fill="none" stroke="white" strokeWidth={1.5}>
-                    <circle cx={12} cy={12} r={10}></circle>
+                    <circle cx={12}   cy={12} r={10}></circle>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -216,9 +216,9 @@ const Navbar = () => {
                     className="flex flex-row items-center text-[28px] text-white"
                     onClick={toggleDropdown}
                   >
-                    About Us{" "}
+                    <p className="font-medium">About Us{" "}</p>
                     <svg
-                      className={`ml-4 w-[28px] h-[14 px] transition duration-300 ease-in-out hover:fill-bluePallete-700 ${
+                      className={`ml-4 w-[28px] h-[14px] transition duration-300 ease-in-out hover:fill-bluePallete-700 ${
                         isDropdownOpen
                           ? "transform rotate-180 ease-in-out duration-400"
                           : ""
@@ -237,9 +237,9 @@ const Navbar = () => {
                   {isDropdownOpen && (
                     <div className="block w-40 top-full left-0 rounded-md">
                       <ul>
-                        <li className="pt-2 px-4">
+                        <li className="pt-1 px-4">
                           <Link
-                            href="about"
+                            href="/about"
                             className="block px-4 text-[25px] rounded text-white"
                             onClick={(event) => {
                               toggleNavbar();
@@ -249,9 +249,9 @@ const Navbar = () => {
                             About
                           </Link>
                         </li>
-                        <li className="pt-2 px-4">
+                        <li className="pt-1 px-4">
                           <div
-                            className="block px-4 text-[25px] rounded text-white"
+                            className="block px-4 text-[25px] cursor-pointer rounded text-white"
                             onClick={(event) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
@@ -261,7 +261,7 @@ const Navbar = () => {
                             Division
                           </div>
                         </li>
-                        <li className="pt-2 pb-2 px-4">
+                        <li className="pt-1 pb-2 px-4">
                           <div
                             className="block px-4 text-[25px] rounded cursor-pointer text-white"
                             onClick={(event) => {

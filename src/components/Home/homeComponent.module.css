@@ -5,6 +5,54 @@
   max-height: 351px !important;
 }
 
+.divisionButtonNext {
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  top: 56%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.divisionFirstCard:active,
+.divisionSecondCard:active {
+  background-color: #ffffff !important;
+  border: 2px solid #03349a !important;
+}
+
+
+@media only screen and (max-width: 1280px) {
+  .divisionButtonNext {
+    top: 51%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .divisionButtonNext {
+    top: 54%;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .divisionCardDescription {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    word-wrap: break-word;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .divisionDesc {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    word-wrap: break-word;
+  }
+}
+
 @media only screen and (max-width: 695px) {
   .divisionDesc {
     -webkit-line-clamp: 4;
@@ -63,7 +111,7 @@
 
 @media only screen and (max-width: 456px) {
   .projectsContainerThumbnail {
-    top: 1790px !important;
+    top: 2525px !important;
   }
   .projectsContainerRepository {
     margin-top: 10px;
@@ -72,7 +120,7 @@
 
 @media only screen and (max-width: 426px) {
   .projectsContainerThumbnail {
-    top: 1810px !important;
+    top: 2590px !important;
   }
 }
 
@@ -81,7 +129,7 @@
     margin-top: 215px;
   }
   .projectsContainerThumbnail {
-    top: 1815px !important;
+    top: 2590px !important;
   }
   .projectsThumbnailImage {
     max-width: 290px;
@@ -95,19 +143,13 @@
   }
 }
 
-@media only screen and (max-width: 335px) {
-  .projectTitleMobile {
-    font-size: 12px;
-  }
-}
-
 @media only screen and (max-width: 384px) {
   .projectsThumbnailImage {
     max-width: 260px;
     max-height: 230px;
   }
   .projectsContainerThumbnail {
-    top: 1805px !important;
+    top: 2580px !important;
   }
   .projectContainerInfo {
     margin-top: 160px;
@@ -116,13 +158,13 @@
 
 @media only screen and (max-width: 376px) {
   .projectsContainerThumbnail {
-    top: 1835px !important;
+    top: 2610px !important;
   }
 }
 
 @media only screen and (max-width: 366px) {
   .projectsContainerThumbnail {
-    top: 1855px !important;
+    top: 2630px !important;
   }
 }
 
@@ -137,22 +179,28 @@
 
 @media only screen and (max-width: 357px) {
   .projectsContainerThumbnail {
-    top: 1880px !important;
+    top: 2690px !important;
   }
 }
 
 @media only screen and (max-width: 348px) {
   .projectsContainerThumbnail {
-    top: 1900px !important;
+    top: 2700px !important;
   }
 }
 
 @media only screen and (max-width: 343px) {
   .projectsContainerThumbnail {
-    top: 1930px !important;
+    top: 2740px !important;
   }
   .projectContainerInfo {
     margin-top: 160px;
+  }
+}
+
+@media only screen and (max-width: 335px) {
+  .projectTitleMobile {
+    font-size: 12px;
   }
 }
 

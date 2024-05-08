@@ -1,7 +1,7 @@
-'use client';
-import Image from 'next/image';
+"use client";
+import Image from "next/image";
 
-const NotFound = ({ className = 'w-[50px] h-[50px]' }) => {
+const NotFound = ({ className = "w-[50px] h-[50px]" }) => {
   return (
     <Image
       src="/assets/icon/notfound.jpg"
