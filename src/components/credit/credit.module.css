@@ -1,0 +1,20 @@
+@media (min-width: 340px) {
+  .containerSliderSecond {
+    padding-left: 60px;
+  }
+}
+@media (min-width: 425px) {
+  .containerSliderSecond {
+    padding-left: 80px;
+  }
+}
+@media (min-width: 479px) {
+  .containerSliderSecond {
+    padding-left: 110px;
+  }
+}
+@media (min-width: 525px) {
+  .containerSliderSecond {
+    padding-left: 130px;
+  }
+}

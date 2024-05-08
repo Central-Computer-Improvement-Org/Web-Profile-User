@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 const request = axios.create({
   // comment baseUrl dibawah ketika running di local, dan uncomment baseURL dibawah ketika push ke gihtub
-  baseURL: `https://central-computer-improvement-org.github.io/Web-Profile-User/api`,
+  baseURL: ` https://103-31-38-146.sslip.io/api/v1/`,
   // uncomment baseURL dibawah ketika running di local, dan comment baseURL dibawah ketika push ke gihtub
   // baseURL: `http://localhost:3000/api/`,
   timeout: 10000,
