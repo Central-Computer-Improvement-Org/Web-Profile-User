@@ -134,36 +134,25 @@ const SwiperComponent = () => {
                       : `${styles.newsDefaultSlide}`
                   }
                 >
-                  {data?.mediaUri ? (
-                    <Image
-                      src={`${host}${data.mediaUri}`}
-                      alt="News Thumbnail Central Computer Improvment"
-                      width={402}
-                      height={268}
-                      responsive="true"
-                      loading="lazy"
-                      className={
-                        index === currentSlide
-                          ? `rounded-t-[10px] object-cover`
-                          : `rounded-t-[10px] object-cover`
-                      }
-                    />
-                  ) : (
-                    <ImageNotFound
-                      width={402}
-                      height={268}
-                      responsive="true"
-                      loading="lazy"
-                      className={
-                        index === currentSlide
-                          ? `rounded-t-[10px] object-cover`
-                          : `rounded-t-[10px] object-cover`
-                      }
-                    />
-                  )}
+                  <Image
+                    src={`${host}${data.mediaUri}`}
+                    alt="News Thumbnail Central Computer Improvment"
+                    width={402}
+                    height={268}
+                    responsive="true"
+                    loading="lazy"
+                    className={
+                      index === currentSlide
+                        ? `rounded-t-[10px] object-cover`
+                        : `rounded-t-[10px] object-cover`
+                    }
+                  />
                   <div
-                    ref={nextButton}
-                    className={`${styles.newsButtonNext} ${styles.swiperButton} cursor-pointer`}
+                    className={
+                      index === currentSlide
+                        ? "w-full sm:h-[90px] md:h-auto flex flex-col space-y-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
+                        : "w-full sm:h-[80px] md:h-[100px] lg:h-[119px] flex flex-col justify-between py-[6px] px-[10px] md:py-[6px] md:px-[10px] lg:py-[10px] lg:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
+                    }
                   >
                     <p
                       className={
@@ -172,19 +161,7 @@ const SwiperComponent = () => {
                           : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
                       }
                     >
-                      {data?.title ? (
-                        data.title
-                      ) : (
-                        <TextNotFound
-                          className={
-                            index === currentSlide
-                              ? `font-semibold text-[15px] md:text-[20px] lg:text-[30px] leading-0 lg:leading-10 max-h-[120px] overflow-hidden text-transparent`
-                              : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-transparent`
-                          }
-                        >
-                          DUMMY
-                        </TextNotFound>
-                      )}
+                      {data.title}
                     </p>
                     <div className="w-full flex flex-row justify-between items-end">
                       <p
@@ -194,19 +171,7 @@ const SwiperComponent = () => {
                             : `font-medium sm:text-[8px] md:text-[12px] text-[#6B6B6B]`
                         }
                       >
-                        {data?.date ? (
-                          data.date
-                        ) : (
-                          <TextNotFound
-                            className={
-                              index === currentSlide
-                                ? `font-medium sm:text-[10px] md:text-[14px] text-transparent`
-                                : `font-medium sm:text-[8px] md:text-[12px] text-transparent`
-                            }
-                          >
-                            DUMMY
-                          </TextNotFound>
-                        )}
+                        {data.date}
                       </p>
                       <p
                         className={

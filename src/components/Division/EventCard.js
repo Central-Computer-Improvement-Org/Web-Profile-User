@@ -72,6 +72,10 @@ const EventCard = () => {
     }
   }, [eventData, autoFlipCount]);
 
+  if (!eventData) {
+    return <Loading />;
+  }
+
   return (
     <>
       <div className="w-full h-[44px] sm:h-[108px] flex justify-center items-center rounded-[15px] bg-[#092C4C]">
@@ -106,9 +110,9 @@ const EventCard = () => {
                     <TeksNotFound className="font-black text-[14px] sm:text-[40px] [text-shadow:_0px_6px_7px_rgb(0_0_0_/_40%)] text-[#F5FBF9]"></TeksNotFound>
                   )}
                 </div>
-                {eventData?.mediaUri ? (
+                {event?.mediaUri ? (
                   <Image
-                    src={`${host}${eventData.mediaUri}`}
+                    src={`${host}${event.mediaUri}`}
                     alt={[event.title + " Central Computer Improvement"]}
                     width={517}
                     height={198}
