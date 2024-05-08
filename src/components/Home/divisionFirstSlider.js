@@ -18,7 +18,7 @@ const DivisionFirstSlider = () => {
 
    useEffect(() => {
       request
-         .get("/division")
+         .get("/users/divisions")
          .then((response) => {
             if (response.status === 200 || response.status === 201) {
                setDivisionData(response.data.data);

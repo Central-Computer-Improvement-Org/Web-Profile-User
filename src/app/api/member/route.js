@@ -5,7 +5,7 @@ export async function GET(request) {
     recordsTotal: 8,
     data: [
       // ketua web dev 
-      {
+      {  
         nim: "12345678910",
         roleId: {
           id: 1,
