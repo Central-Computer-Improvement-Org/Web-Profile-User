@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import request from "@/app/utils/request";
+import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const ProjectData = () => {
@@ -110,7 +111,7 @@ const ProjectData = () => {
       >
         {/* Project Thumbnail */}
         <div
-          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[1790px] sm:top-[2160px] md:top-[2970px] ${styles.projectsContainerThumbnail}`}
+          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[2505px] sm:top-[3040px] md:top-[3920px] ${styles.projectsContainerThumbnail}`}
         >
           {isMovingData || isLoading || !projectData ? (
             <Skeleton
@@ -120,7 +121,7 @@ const ProjectData = () => {
             />
           ) : (
             <Image
-              src={projectData[positionIndex].imageUri || "Loading..."}
+              src={`${host}${projectData[positionIndex].imageUri}`}
               alt="Thumbnail Project Central Computer Improvement"
               width={467}
               height={284}
@@ -140,13 +141,13 @@ const ProjectData = () => {
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton circle={true} width="100%" height="100%" />
                 ) : (
-                  <Image
-                    src={projectData[positionIndex].iconUri}
+                  <Image 
+                    src={`${host}${projectData[positionIndex].iconUri}`}
                     alt="Logo Project Central Computer Improvement"
                     width={50}
                     height={50}
                     responsive="true"
-                    className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-cover"
+                    className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-contain"
                   />
                 )}
               </div>

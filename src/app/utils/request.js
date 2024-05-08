@@ -2,17 +2,17 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const request = axios.create({
-   baseURL: `
-   https://103-31-38-146.sslip.io/api/v1`,
-   timeout: 10000,
-   headers: {
-      // 'Content-Type': 'application/json',
-      'Content-Type': 'application/json, multipart/form-data',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': '*',
-      'Access-Control-Allow-Methods': '*',
-      'Access-Control-Allow-Credentials': 'true',
-   },
+  baseURL: `https://103-31-38-146.sslip.io/api/v1/`,
+  // uncomment baseURL dibawah ketika running di local, dan comment baseURL dibawah ketika push ke gihtub
+  //   baseURL: `http://localhost:3000/api/`,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Methods': '*',
+    'Access-Control-Allow-Credentials': 'true',
+  },
 });
 const requestHandler = (request) => {
    let token = Cookies.get('token');

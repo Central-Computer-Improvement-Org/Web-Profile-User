@@ -1,9 +1,10 @@
-import { Inter } from 'next/font/google';
-import './globals.css';
-import request from './utils/request';
-import { Suspense } from 'react';
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { Suspense } from "react";
+import request from "./utils/request";
+import Loading from "@/components/loading";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata() {
    const response = await request
