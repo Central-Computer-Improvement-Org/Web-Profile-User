@@ -13,6 +13,7 @@ import styles from '@/components/Home/homeComponent.module.css';
 const DivisionSecondSlider = () => {
    const router = useRouter();
    const [loading, setLoading] = useState(true);
+   const [divisionData, setDivisionData] = useState(true);
 
    useEffect(() => {
       request
