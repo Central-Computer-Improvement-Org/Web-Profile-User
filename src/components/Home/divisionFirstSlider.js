@@ -37,11 +37,11 @@ const DivisionFirstSlider = () => {
       });
   }, []);
 
-  const goNext = () => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.slideNext();
-    }
-  };
+   const goNext = () => {
+      if (swiperRef.current && swiperRef.current.swiper) {
+         swiperRef.current.swiper.slideNext();
+      }
+   };
 
   return (
     <>

@@ -16,9 +16,9 @@ import TextNotFound from "@/components/teksNotFound";
 import { host } from "@/components/host";
 
 export default function DetailDvision() {
-  const [divisionData, setDivisionData] = useState(null);
-  const searchParams = useSearchParams();
-  const divisionId = searchParams.get("id");
+   const [divisionData, setDivisionData] = useState(null);
+   const searchParams = useSearchParams();
+   const divisionId = searchParams.get("id");
 
   useEffect(() => {
     if (divisionId) {

@@ -18,7 +18,6 @@ import TextNotFound from "@/components/teksNotFound";
 import styles from "@/app/home/homePage.module.css";
 import { host } from "@/components/host";
 
-
 export default function Home() {
   const [settingsData, setSettingsData] = useState(null);
   const [awardData, setAwardData] = useState(null);
@@ -44,7 +43,6 @@ export default function Home() {
         setIsLoading(false);
       });
   }, []);
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -94,7 +92,7 @@ export default function Home() {
 
     setIsLoading(false);
   }, []);
-  
+
   return (
     <>
       <Header />
@@ -116,9 +114,7 @@ export default function Home() {
                       />
                     ) : settingsData?.logoUri ? (
                       <Image
-                        src={
-                          `${host}${settingsData.logoUri}`
-                        }
+                        src={`${host}${settingsData.logoUri}`}
                         alt="Logo Central Computer Improvement"
                         width={291}
                         height={180}

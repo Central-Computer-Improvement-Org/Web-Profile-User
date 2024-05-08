@@ -9,9 +9,9 @@ import { host } from "@/components/host";
 import request from "@/app/utils/request";
 
 const MemberCard = ({ divisionId }) => {
-  const [memberData, setMemberData] = useState(null);
-  const [ketuaData, setKetuaData] = useState([]);
-  const [wakilData, setWakilData] = useState([]);
+   const [memberData, setMemberData] = useState(null);
+   const [ketuaData, setKetuaData] = useState([]);
+   const [wakilData, setWakilData] = useState([]);
 
   useEffect(() => {
     request

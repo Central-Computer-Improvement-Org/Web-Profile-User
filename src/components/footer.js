@@ -10,12 +10,12 @@ import TextNotFound from "@/components/teksNotFound";
 import { host } from "@/components/host";
 
 const Footer = () => {
-  const [settingsData, setSettingsData] = useState(null);
-  const [contactData, setContactData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+   const [settingsData, setSettingsData] = useState(null);
+   const [contactData, setContactData] = useState(null);
+   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(true);
+   useEffect(() => {
+      setIsLoading(true);
 
     Promise.all([
       request.get("/setting"),
@@ -31,19 +31,19 @@ const Footer = () => {
           console.error(JSON.stringify(settingsResponse.errors));
         }
 
-        if (contactResponse.status === 200 || contactResponse.status === 201) {
-          setContactData(contactResponse.data);
-        } else {
-          console.error(JSON.stringify(contactResponse.errors));
-        }
+            if (contactResponse.status === 200 || contactResponse.status === 201) {
+               setContactData(contactResponse.data);
+            } else {
+               console.error(JSON.stringify(contactResponse.errors));
+            }
 
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
+            setIsLoading(false);
+         })
+         .catch((error) => {
+            console.error(error);
+            setIsLoading(false);
+         });
+   }, []);
 
   return (
     <footer id="contact" className="w-full h-auto bg-bluePallete-800">

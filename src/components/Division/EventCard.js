@@ -72,15 +72,6 @@ const EventCard = () => {
     }
   }, [eventData, autoFlipCount]);
 
-  if (!eventData) {
-    return (
-      <Loading
-        size="w-auto h-auto lg:w-[300px] lg:h-[300px]"
-        textAlignment="text-center"
-      />
-    );
-  }
-
   return (
     <>
       <div className="w-full h-[44px] sm:h-[108px] flex justify-center items-center rounded-[15px] bg-[#092C4C]">
@@ -117,7 +108,6 @@ const EventCard = () => {
                 </div>
                 {eventData?.mediaUri ? (
                   <Image
-                  
                     src={`${host}${eventData.mediaUri}`}
                     alt={[event.title + " Central Computer Improvement"]}
                     width={517}
