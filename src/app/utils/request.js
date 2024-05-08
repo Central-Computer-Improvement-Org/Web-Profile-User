@@ -1,5 +1,5 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const request = axios.create({
   // comment baseUrl dibawah ketika running di local, dan uncomment baseURL dibawah ketika push ke gihtub

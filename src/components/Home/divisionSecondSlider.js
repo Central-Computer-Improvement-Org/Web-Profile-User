@@ -6,13 +6,10 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const DivisionSecondSlider = () => {
   const router = useRouter();
-  const [divisionData, setDivisionData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     request
