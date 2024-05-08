@@ -134,19 +134,33 @@ const SwiperComponent = () => {
                       : `${styles.newsDefaultSlide}`
                   }
                 >
-                  <Image
-                    src={`${host}${data.mediaUri}`}
-                    alt="News Thumbnail Central Computer Improvment"
-                    width={402}
-                    height={268}
-                    responsive="true"
-                    loading="lazy"
-                    className={
-                      index === currentSlide
-                        ? `rounded-t-[10px] object-cover`
-                        : `rounded-t-[10px] object-cover`
-                    }
-                  />
+                  {data?.mediaUri ? (
+                    <Image
+                      src={`${host}${data.mediaUri}`}
+                      alt="News Thumbnail Central Computer Improvment"
+                      width={402}
+                      height={268}
+                      responsive="true"
+                      loading="lazy"
+                      className={
+                        index === currentSlide
+                          ? `rounded-t-[10px] object-cover`
+                          : `rounded-t-[10px] object-cover`
+                      }
+                    />
+                  ) : (
+                    <ImageNotFound
+                      width={402}
+                      height={268}
+                      responsive="true"
+                      loading="lazy"
+                      className={
+                        index === currentSlide
+                          ? `rounded-t-[10px] object-cover`
+                          : `rounded-t-[10px] object-cover`
+                      }
+                    />
+                  )}
                   <div
                     className={
                       index === currentSlide
@@ -161,7 +175,7 @@ const SwiperComponent = () => {
                           : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
                       }
                     >
-                      {data.title}
+                      {data?.title ? data.title : <TextNotFound />}
                     </p>
                     <div className="w-full flex flex-row justify-between items-end">
                       <p
@@ -171,7 +185,7 @@ const SwiperComponent = () => {
                             : `font-medium sm:text-[8px] md:text-[12px] text-[#6B6B6B]`
                         }
                       >
-                        {data.date}
+                        {data?.date ? data.date : <TextNotFound />}
                       </p>
                       <p
                         className={
