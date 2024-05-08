@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+'use client';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-import styles from "@/components/Home/homeComponent.module.css";
+import styles from '@/components/Home/homeComponent.module.css';
 
 const DivisionSecondSlider = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     request
-      .get("/division")
+      .get('/division')
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           setDivisionData(response.data.data);
@@ -39,10 +41,10 @@ const DivisionSecondSlider = () => {
       ) : (
         <Swiper
           style={{
-            "--swiper-pagination-color": "#234d87",
-            "--swiper-pagination-bullet-inactive-color": "#bfd0e8",
-            "--swiper-pagination-bullet-inactive-opacity": "1",
-            "--swiper-pagination-bullet-size": "10px",
+            '--swiper-pagination-color': '#234d87',
+            '--swiper-pagination-bullet-inactive-color': '#bfd0e8',
+            '--swiper-pagination-bullet-inactive-opacity': '1',
+            '--swiper-pagination-bullet-size': '10px',
           }}
           slidesPerView={1.3}
           spaceBetween={20}
@@ -53,19 +55,19 @@ const DivisionSecondSlider = () => {
           centeredSlides={true}
           modules={[Pagination]}
           breakpoints={{
-            "@0.00": {
+            '@0.00': {
               slidesPerView: 1.3,
               spaceBetween: 20,
             },
-            "@0.75": {
+            '@0.75': {
               slidesPerView: 2,
               spaceBetween: 10,
             },
-            "@1.00": {
+            '@1.00': {
               slidesPerView: 2.5,
               spaceBetween: 30,
             },
-            "@1.50": {
+            '@1.50': {
               slidesPerView: 3,
               spaceBetween: 40,
             },
