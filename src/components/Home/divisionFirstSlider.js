@@ -1,35 +1,39 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
 import request from "@/app/utils/request";
+import Loading from "@/components/loading";
+import ImageNotFound from "@/components/imageNotFound";
+import TextNotFound from "@/components/teksNotFound";
+import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const DivisionFirstSlider = () => {
   const router = useRouter();
   const [divisionData, setDivisionData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const swiperRef = useRef(null);
 
   useEffect(() => {
     request
-      .get("/division")
+      .get("/users/divisions")
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           setDivisionData(response.data.data);
         } else {
           console.error(JSON.stringify(response.errors));
         }
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        setLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
@@ -42,12 +46,11 @@ const DivisionFirstSlider = () => {
   return (
     <>
       {/* Pengecekan laoding disini wajib, karena untuk menghindari error fungsi navigation swiper yang membutuhkan data harus wajib ada terlebih dahulu di dalam tag Swiper */}
-      {loading ? (
-        <div className="w-full h-[350px] flex items-center justify-center">
-          <h1 className="font-bold text-[40px] text-center text-black">
-            Loading...
-          </h1>
-        </div>
+      {isLoading ? (
+        <Loading
+          size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
+          textAlignment="text-center"
+        />
       ) : (
         <Swiper
           ref={swiperRef}
@@ -76,29 +79,54 @@ const DivisionFirstSlider = () => {
               key={index}
               className={`cursor-pointer ${styles.divisionCardSwiper}`}
             >
-              <a onClick={
-                function (){
-                  router.push(`/division?id=${data.id}`)
-                }
-              }>
+              <a
+                onClick={function () {
+                  router.push(`/division?id=${data.id}`);
+                }}
+              >
                 <div
                   className={`h-[351px] w-[290px] max-h-[340px] max-w-[290px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
                 >
-                  <Image
-                    width={95}
-                    height={82}
-                    src={data.logoUri}
-                    alt={`Division Thumbnail ${data.name}`}
-                    className="w-auto h-auto md:max-w-[95px] md:max-h-[82px] object-cover"
-                  />
-                  <h2 className="font-bold text-[24px] text-bluePallete-900">
-                    {data.name}
-                  </h2>
-                  <p
-                    className={`font-medium text-[12px] overflow-hidden text-bluePallete-900 ${styles.divisionCardDescription}`}
-                  >
-                    {data.description}
-                  </p>
+                  {data?.logoUri ? (
+                    <Image
+                      width={95}
+                      height={82}
+                      src={`${host}${data.logoUri}`}
+                      alt={`Division Thumbnail ${data.name} Central Computer Improvment`}
+                      className="w-auto h-auto md:max-w-[95px] md:max-h-[82px] object-cover"
+                    />
+                  ) : (
+                    <ImageNotFound
+                      width={95}
+                      height={82}
+                      className="w-auto h-auto md:max-w-[95px] md:max-h-[82px] object-cover"
+                    />
+                  )}
+                  {data?.name ? (
+                    <h2 className="font-bold text-[24px] text-bluePallete-900">
+                      {data.name}
+                    </h2>
+                  ) : (
+                    <TextNotFound className="font-bold text-[24px] text-transparent">
+                      DUMMY
+                    </TextNotFound>
+                  )}
+                  {data?.description ? (
+                    <p
+                      className={`font-medium text-[12px] overflow-hidden text-bluePallete-900 ${styles.divisionCardDescription}`}
+                    >
+                      {data.description}
+                    </p>
+                  ) : (
+                    <TextNotFound
+                      className="font-medium text-transparent text-[12px] overflow-hidden"
+                    >
+                      Divisi yang berfokus mempelajari UI/UX melalui beberapa
+                      tahapan didalamnya sehingga divisi design memiliki tujuan
+                      atau memberikan output berupa sebuah desain produk sebaik
+                      mungkin
+                    </TextNotFound>
+                  )}
                 </div>
               </a>
             </SwiperSlide>

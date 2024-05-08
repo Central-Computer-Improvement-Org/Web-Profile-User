@@ -2,6 +2,10 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
+import Loading from "@/components/loading";
+import ImageNotFound from "@/components/imageNotFound";
+import TextNotFound from "@/components/teksNotFound";
+import { host } from "@/components/host";
 import request from "@/app/utils/request";
 
 const MemberCard = ({ divisionId }) => {
@@ -11,21 +15,36 @@ const MemberCard = ({ divisionId }) => {
 
   useEffect(() => {
     request
-      .get("/member")
+      .get("/users?roleNameExact=Ketua")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
+        if (response.status === 200 || response.status === 201) { 
           const ketuaData = response.data.data.filter(
             (item) =>
-              (item.roleId.name === "ketua" || item.roleId.name === "Ketua") &&
-              item.divisionId.id === divisionId
-          );
-          const wakilData = response.data.data.filter(
-            (item) =>
-              (item.roleId.name === "wakil" || item.roleId.name === "Wakil") &&
-              item.divisionId.id === divisionId
+              (item.role.name === "Ketua") &&
+              item.divisionId === divisionId
           );
           setMemberData(response.data.data);
           setKetuaData(ketuaData);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [divisionId]);
+
+  useEffect(() => {
+    request
+      .get("/users?roleNameExact=Wakil Ketua")
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          const wakilData = response.data.data.filter(
+            (item) =>
+              (item.role.name === "Wakil Ketua") &&
+              item.divisionId === divisionId
+          );
+          setMemberData(response.data.data);
           setWakilData(wakilData);
         } else {
           console.error(JSON.stringify(response.errors));
@@ -38,11 +57,10 @@ const MemberCard = ({ divisionId }) => {
 
   if (!memberData) {
     return (
-      <div className="w-full h-screen flex items-center justify-center">
-        <p className="font-bold text-center text-[30px] text-bluePallete-800">
-          Loading...
-        </p>
-      </div>
+      <Loading
+        size="w-auto h-auto lg:w-[300px] lg:h-[300px]"
+        textAlignment="text-center"
+      />
     );
   }
 
@@ -54,9 +72,16 @@ const MemberCard = ({ divisionId }) => {
             <p className="font-medium text-[15px] lg:text-[20px] text-bluePallete-800">
               Ketua Divisi
             </p>
-            <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
-              {ketuaData[0].name}
-            </h1>
+            {ketuaData[0]?.name ? (
+              <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
+                {ketuaData[0].name}
+              </h1>
+            ) : (
+              <TextNotFound className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-transparent">
+                MUHAMMAD ARYA
+              </TextNotFound>
+            )}
+            {/* belum ter validasi */}
             <a
               href={ketuaData[0].linkedinUri}
               target="_blank"
@@ -72,18 +97,25 @@ const MemberCard = ({ divisionId }) => {
             </a>
           </div>
           <div className="basis-6/12 flex items-center justify-end">
-            <Image
-              className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[20px] object-cover"
-              src={ketuaData[0].profileUri}
-              width={200}
-              height={201}
-              alt="Profile Ketua Divisi"
-            ></Image>
+            {ketuaData[0]?.profileUri ? (
+              <Image
+                src={`${host}${ketuaData[0].profileUri}`}
+                alt="Logo Central Computer Improvement"
+                width={200}
+                height={201}
+                responsive="true"
+                className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[20px] object-cover"
+              />
+            ) : (
+              <ImageNotFound className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[20px] object-cover" />
+            )}
           </div>
         </div>
       ) : (
         <div className="w-[45%] md:w-[30%] flex justify-center items-center">
-          <p className="text-center text-[12px] sm:text-[20px]">Data Ketua Not Found</p>
+          <p className="text-center text-[12px] sm:text-[20px]">
+            <TextNotFound></TextNotFound>
+          </p>
         </div>
       )}
 
@@ -94,8 +126,17 @@ const MemberCard = ({ divisionId }) => {
               Wakil Divisi
             </p>
             <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
-              {wakilData[0].name}
+              {wakilData[0]?.name ? (
+                <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
+                  {wakilData[0].name}
+                </h1>
+              ) : (
+                <TextNotFound className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-transparent">
+                  MUHAMMAD ARYA
+                </TextNotFound>
+              )}
             </h1>
+            {/* belum ter validasi */}
             <a
               href={wakilData[0].linkedinUri}
               target="_blank"
@@ -111,18 +152,25 @@ const MemberCard = ({ divisionId }) => {
             </a>
           </div>
           <div className="basis-6/12 flex items-center justify-end">
-            <Image
-              className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[15px] object-cover"
-              src={wakilData[0].profileUri}
-              width={200}
-              height={201}
-              alt="Profile Wakil Ketua Divisi"
-            ></Image>
+            {wakilData[0]?.profileUri ? (
+              <Image
+                src={`${host}${wakilData[0].profileUri}`}
+                alt="Logo Central Computer Improvement"
+                width={200}
+                height={201}
+                responsive="true"
+                className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[20px] object-cover"
+              />
+            ) : (
+              <ImageNotFound className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[20px] object-cover" />
+            )}
           </div>
         </div>
       ) : (
         <div className="w-[45%] md:w-[30%] flex justify-center items-center">
-          <p className="text-center text-[12px] sm:text-[20px]">Data Wakil Ketua Not Found</p>
+          <p className="text-center text-[12px] sm:text-[20px]">
+            <TextNotFound></TextNotFound>
+          </p>
         </div>
       )}
     </>

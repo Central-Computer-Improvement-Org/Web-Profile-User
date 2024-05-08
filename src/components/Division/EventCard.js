@@ -4,6 +4,10 @@ import ReactCardFlip from "react-card-flip";
 import { useMediaQuery } from "react-responsive";
 
 import request from "@/app/utils/request";
+import Loading from "@/components/loading";
+import ImageNotFound from "@/components/imageNotFound";
+import TeksNotFound from "@/components/teksNotFound";
+import { host } from "@/components/host";
 import styles from "@/components/Division/divisionComponent.module.css";
 
 const desktopColorPattern = [
@@ -26,7 +30,7 @@ const EventCard = () => {
 
   useEffect(() => {
     request
-      .get("/event")
+      .get("/events")
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           setEventData(response.data.data);
@@ -54,7 +58,8 @@ const EventCard = () => {
   }
 
   useEffect(() => {
-    if (eventData && eventData.length > 0 && autoFlipCount < 2) { // cek dulu apakah data event sudah ada dan jumlah autoFlipCount kurang dari 4
+    if (eventData && eventData.length > 0 && autoFlipCount < 2) {
+      // cek dulu apakah data event sudah ada dan jumlah autoFlipCount kurang dari 4
       const autoFlipInterval = setInterval(() => {
         setFlipPosition(0); // setFlipPosition(0) meng get data flip card pertama atau index ke 0
         setTimeout(() => {
@@ -69,9 +74,10 @@ const EventCard = () => {
 
   if (!eventData) {
     return (
-      <div className="h-screen w-full flex justify-center items-center">
-        <p className="font-bold text-20px">Loading...</p>
-      </div>
+      <Loading
+        size="w-auto h-auto lg:w-[300px] lg:h-[300px]"
+        textAlignment="text-center"
+      />
     );
   }
 
@@ -101,18 +107,28 @@ const EventCard = () => {
                     backgroundColor: `${getCardBackgroundColor(index)}80`,
                   }}
                 >
-                  <p className="font-black text-[14px] sm:text-[40px] [text-shadow:_0px_6px_7px_rgb(0_0_0_/_40%)] text-[#F5FBF9]">
-                    {event.name}
-                  </p>
+                  {event?.name ? (
+                    <p className="font-black text-[14px] sm:text-[40px] [text-shadow:_0px_6px_7px_rgb(0_0_0_/_40%)] text-[#F5FBF9]">
+                      {event.name}
+                    </p>
+                  ) : (
+                    <TeksNotFound className="font-black text-[14px] sm:text-[40px] [text-shadow:_0px_6px_7px_rgb(0_0_0_/_40%)] text-[#F5FBF9]"></TeksNotFound>
+                  )}
                 </div>
-                <Image
-                  className="h-full w-full object-cover"
-                  src={event.mediaUri}
-                  width={517}
-                  height={198}
-                  alt={[event.title + " Central Computer Improvement"]}
-                  loading="lazy"
-                />
+                {eventData?.mediaUri ? (
+                  <Image
+                  
+                    src={`${host}${eventData.mediaUri}`}
+                    alt={[event.title + " Central Computer Improvement"]}
+                    width={517}
+                    height={198}
+                    responsive="true"
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <ImageNotFound className="h-full w-full object-cover" />
+                )}
               </div>
               {/* Card bagian belakang */}
               <div
@@ -122,12 +138,20 @@ const EventCard = () => {
                 }}
                 onClick={() => onClickFlipCard(index)}
               >
-                <h1 className="font-black text-[14px] sm:text-[24px] text-white">
-                  {event.name}
-                </h1>
-                <p className="text-[8px] sm:text-[16px] font-medium text-white">
-                  {event.description}
-                </p>
+                {event?.name ? (
+                  <h1 className="font-black text-[14px] sm:text-[24px] text-white">
+                    {event.name}
+                  </h1>
+                ) : (
+                  <TeksNotFound className="font-black text-[14px] sm:text-[24px] text-white"></TeksNotFound>
+                )}
+                {event?.name ? (
+                  <p className="text-[8px] sm:text-[16px] font-medium text-white">
+                    {event.description}
+                  </p>
+                ) : (
+                  <TeksNotFound className="text-[8px] sm:text-[16px] font-medium text-white"></TeksNotFound>
+                )}
               </div>
             </ReactCardFlip>
           </div>

@@ -10,13 +10,17 @@ import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 
 import request from "@/app/utils/request";
+import Loading from "@/components/loading";
+import ImageNotFound from "@/components/imageNotFound";
+import TextNotFound from "@/components/teksNotFound";
+import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const SwiperComponent = () => {
   const previousButton = useRef(null);
   const nextButton = useRef(null);
   const [newsData, setNewsData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const pagination = {
@@ -51,11 +55,11 @@ const SwiperComponent = () => {
         } else {
           console.error(JSON.stringify(response.errors));
         }
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        setLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
@@ -80,12 +84,11 @@ const SwiperComponent = () => {
 
   return (
     <>
-      {loading ? (
-        <div className="w-full h-screen flex items-center justify-center">
-          <h1 className="font-bold text-[40px] text-center text-bluePallete-700">
-            Loading...
-          </h1>
-        </div>
+      {isLoading ? (
+        <Loading
+          size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
+          textAlignment="text-center"
+        />
       ) : (
         <div className="w-full flex items-center justify-center">
           <Swiper
@@ -131,19 +134,33 @@ const SwiperComponent = () => {
                       : `${styles.newsDefaultSlide}`
                   }
                 >
-                  <Image
-                    src={data.mediaUri}
-                    alt="News Thumbnail Central Computer Improvment"
-                    width={402}
-                    height={268}
-                    responsive="true"
-                    loading="lazy"
-                    className={
-                      index === currentSlide
-                        ? `rounded-t-[10px] object-cover`
-                        : `rounded-t-[10px] object-cover`
-                    }
-                  />
+                  {data?.mediaUri ? (
+                    <Image
+                      src={`${host}${data.mediaUri}`}
+                      alt="News Thumbnail Central Computer Improvment"
+                      width={402}
+                      height={268}
+                      responsive="true"
+                      loading="lazy"
+                      className={
+                        index === currentSlide
+                          ? `rounded-t-[10px] object-cover`
+                          : `rounded-t-[10px] object-cover`
+                      }
+                    />
+                  ) : (
+                    <ImageNotFound
+                      width={402}
+                      height={268}
+                      responsive="true"
+                      loading="lazy"
+                      className={
+                        index === currentSlide
+                          ? `rounded-t-[10px] object-cover`
+                          : `rounded-t-[10px] object-cover`
+                      }
+                    />
+                  )}
                   <div
                     className={
                       index === currentSlide
@@ -158,7 +175,19 @@ const SwiperComponent = () => {
                           : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
                       }
                     >
-                      {data.title}
+                      {data?.title ? (
+                        data.title
+                      ) : (
+                        <TextNotFound
+                          className={
+                            index === currentSlide
+                              ? `font-semibold text-[15px] md:text-[20px] lg:text-[30px] leading-0 lg:leading-10 max-h-[120px] overflow-hidden text-transparent`
+                              : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-transparent`
+                          }
+                        >
+                          DUMMY
+                        </TextNotFound>
+                      )}
                     </p>
                     <div className="w-full flex flex-row justify-between items-end">
                       <p
@@ -168,7 +197,19 @@ const SwiperComponent = () => {
                             : `font-medium sm:text-[8px] md:text-[12px] text-[#6B6B6B]`
                         }
                       >
-                        {data.date}
+                        {data?.date ? (
+                          data.date
+                        ) : (
+                          <TextNotFound
+                            className={
+                              index === currentSlide
+                                ? `font-medium sm:text-[10px] md:text-[14px] text-transparent`
+                                : `font-medium sm:text-[8px] md:text-[12px] text-transparent`
+                            }
+                          >
+                            DUMMY
+                          </TextNotFound>
+                        )}
                       </p>
                       <p
                         className={
@@ -182,7 +223,7 @@ const SwiperComponent = () => {
                     </div>
                   </div>
                 </div>
-              </SwiperSlide>
+            </SwiperSlide>
             ))}
             {/* Custom Button Next  */}
             <div
