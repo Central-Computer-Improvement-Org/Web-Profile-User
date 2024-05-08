@@ -17,7 +17,7 @@ const DivisionSecondSlider = () => {
 
    useEffect(() => {
       request
-         .get('/division')
+         .get('/users/divisions')
          .then((response) => {
             if (response.status === 200 || response.status === 201) {
                setDivisionData(response.data.data);
@@ -76,7 +76,7 @@ const DivisionSecondSlider = () => {
                }}
                className="w-full h-[360px]"
             >
-               {divisionData.map((data, index) => (
+               {divisionData?.map((data, index) => (
                   <SwiperSlide key={index} className={`w-full my-5 md:my-0`}>
                      <a
                         onClick={function () {

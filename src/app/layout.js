@@ -10,7 +10,7 @@ export async function generateMetadata() {
       .get('/setting')
       .then((response) => {
          if (response.status === 200 || response.status === 201) {
-            return response.data.data[0].name;
+            return response?.data?.data[0]?.name;
          } else {
             console.error(JSON.stringify(response.errors));
             return 'Central Computer Improvement';
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
          <body className={inter.className}>
             <Suspense
                fallback={
-                  <div className="text-center text-[32px] text-bluePallete-800">
+                  <div>
                      Loading...
                   </div>
                }
