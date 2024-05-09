@@ -54,8 +54,8 @@ const AlsoNewsSlider = () => {
         navigation={{
           nextEl: ".customButtonNext",
         }}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
 
 
       >
