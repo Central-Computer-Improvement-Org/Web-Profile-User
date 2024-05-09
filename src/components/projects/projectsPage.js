@@ -123,19 +123,21 @@ const ProjectPage = () => {
                                  width={467}
                                  height={284}
                                  responsive="true"
-                                 className={`w-full h-[189px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] lg:!w-[400px]  lg:h-[261px] xl:w-[455px]  xl:h-[311px]  xl:max-w-[455px]  xl:max-h-[311px] rounded-[10px]  object-cover `}
+                                 style={{ backgroundSize: 'contain' }}
+                                 className={`w-full h-[189px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] lg:!w-[400px]  lg:h-[261px] xl:w-[455px]  xl:h-[311px]  xl:max-w-[455px]  xl:max-h-[311px] rounded-[10px] object-contain`}
                               />
                            </div>
                            <div className="w-full ">
-                              <div className="h-full flex flex-col lg:justify-between lg:gap-0 md:gap-[20px] gap-[9px]">
+                              <div className="h-full flex flex-col lg:justify-between lg:gap-0 md:gap-[20px] gap-[9px] object-contain">
                                  <div className="flex flex-col lg:gap-[14px] md:gap-[10px] gap-[6px]">
-                                    <div className="flex items-center justify-between">
+                                    <div className="flex items-center justify-between object-contain">
                                        <Image
                                           width={0}
                                           height={0}
                                           alt="project-img"
-                                          src={data.iconUri}
-                                          className="max-w-[50px] max-h-[50px] lg:w-[50px] lg:h-[50px] w-[25px] h-[25px] lg:block hidden "
+                                          style={{ backgroundSize: 'contain' }}
+                                          src={host + data.iconUri}
+                                          className="max-w-[50px] max-h-[50px] lg:w-[50px] lg:h-[50px] w-[25px] h-[25px] lg:block hidden object-contain"
                                        />
                                        <h1 className="xl:text-[30px] lg:text-[25px] md:text-[25px] text-[18px] lg:font-semibold font-bold text-black">
                                           {data.name}
@@ -157,7 +159,8 @@ const ProjectPage = () => {
                                              width={0}
                                              height={0}
                                              alt="project-img"
-                                             src={'assets/icon/website.png'}
+                                             style={{ backgroundSize: 'contain' }}
+                                             src={'/assets/icon/website.png'}
                                              className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] "
                                           />
                                           <h1 className="xl:text-[25px] lg:text-[18px] md:text-[25px] text-[10px] text-bluePallete-100 font-semibold">
@@ -174,14 +177,16 @@ const ProjectPage = () => {
                                              width={0}
                                              height={0}
                                              alt="project-img"
-                                             src={'assets/icon/repository.png'}
+                                             style={{ backgroundSize: 'contain' }}
+                                             src={'/assets/icon/repository.png'}
                                              className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] hidden lg:block "
                                           />
                                           <Image
                                              width={0}
                                              height={0}
                                              alt="project-img"
-                                             src={'assets/icon/repository-dark.png'}
+                                             style={{ backgroundSize: 'contain' }}
+                                             src={'/assets/icon/repository-dark.png'}
                                              className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] lg:hidden "
                                           />
                                           <h1 className="xl:text-[25px] lg:text-[18px] md:text-[25px] text-[10px] lg:text-white text-bluePallete-900 font-semibold">
