@@ -1,20 +1,43 @@
-import Header from "@/components/header";
-import Nav from "@/components/navbar";
-import Footer from "@/components/footer";
-import React from "react";
-import AlsoNewsSlider from "@/components/News/alsoNewsSlider";
-import CarouselSlider from "@/components/News/carouselSlider";
-import TopRead from "@/components/News/topRead";
-import ArticleCard from "@/components/News/ArticleCard";
-import HeroSection from "@/components/News/HeroSection";
-import Image from "next/image";
+'use client';
+import Header from '@/components/header';
+import Nav from '@/components/navbar';
+import Footer from '@/components/footer';
+import React, { useEffect, useState } from 'react';
+import AlsoNewsSlider from '@/components/News/alsoNewsSlider';
+import CarouselSlider from '@/components/News/carouselSlider';
+import TopRead from '@/components/News/topRead';
+import ArticleCard from '@/components/News/ArticleCard';
+import HeroSection from '@/components/News/HeroSection';
+import Image from 'next/image';
+import HeroSectionSliderSecond from '@/components/News/HeroSectionSliderSecond';
+import request from '../utils/request';
+import { host } from '@/components/host';
+import Link from 'next/link';
 
 export default function News() {
+  const [articleDatas, setArticle] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    request
+      .get('/news')
+      .then(function (res) {
+        if (res.data.code === 200 || res.data.code === 201) {
+          setArticle(res.data.data);
+          setIsLoading(false);
+        } else {
+          setIsLoading(false);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }, []);
   return (
     <>
       <Header />
       <Nav />
-      <span className="block h-full bg-white">
+      <span className="block h-full ">
         <span className="block h-full bg-gradientAccent">
           <main
             className={`block bg-gradientDefault h-full bg-fixed bg-no-repeat px-[40px] md:px-[80px] lg:px-[120px] py-[120px] md:py-[10rem] relative `}
@@ -24,27 +47,27 @@ export default function News() {
             </h1>
             <div className="w-full h-[5px] mt-2 bg-bluePallete-700 rounded-lg"></div>
 
-
-
             <section id="hero-section" className="container relative">
-              <div className="md:bg-white lg:bg-transparent mt-4 p-10 s">
-
+              <div className=" bg-transparent mt-4 ">
                 <HeroSection />
               </div>
             </section>
-
-
+            <div className="xl:mt-[95px] md:mt-[80px] mt-[40px]"></div>
             <section id="article">
               <div className="container">
-                <div className="w-full flex flex-row flex-wrap-reverse   pt-10 sm:pt-20 lg:pt-0">
-                  <div className="sm:w-full hidden mt-5 lg:mt-0 lg:basis-7/12 lg:flex flex-col gap-3">
-                    <ArticleCard />
-                    <ArticleCard />
-                    <ArticleCard />
-                    <ArticleCard />
-                    <ArticleCard />
+                <div className="w-full flex flex-row flex-wrap-reverse  ">
+                  <div className="sm:w-full hidden  mt-5 xl:mt-0 xl:basis-7/12 lg:flex flex-col gap-3">
+                    {articleDatas &&
+                      articleDatas.slice(0, 5).map((data, index) => (
+                        <Link
+                          key={index}
+                          href={`/news/detailNews?id=${data.id}`}
+                        >
+                          <ArticleCard title={data.title} />
+                        </Link>
+                      ))}
                   </div>
-                  <div className="sm:w-full lg:basis-5/12 px-0 lg:px-8 flex flex-col gap-4">
+                  <div className="sm:w-full xl:basis-5/12 px-0 xl:px-8 flex flex-col gap-4">
                     <div className="align-baseline mb-3">
                       <svg
                         className="xl:w-[5opx] xl:h-[50px] w-[40px] h-[40px] inline-block "
@@ -61,36 +84,58 @@ export default function News() {
                           fill="#0F9848"
                         />
                       </svg>
-                      <h1 className="text-bluePallete-800 text-2xl md:text-2xl lg:text-3xl font-bold items-baseline py-3 inline ms-3">Top Read of The Day</h1>
+                      <h1 className="text-bluePallete-800 text-2xl md:text-2xl lg:text-3xl font-bold items-baseline py-3 inline ms-3">
+                        Top Read of The Day
+                      </h1>
                     </div>
-
-                    <TopRead />
-
+                    {articleDatas &&
+                      articleDatas.slice(0, 3).map((data, index) => (
+                        <Link
+                          key={index}
+                          href={`/news/detailNews?id=${data.id}`}
+                        >
+                          <TopRead
+                            title={data.title}
+                            date={data.createdAt}
+                            image={host + data.mediaUri}
+                          />
+                        </Link>
+                      ))}
+                    <div />
                   </div>
                 </div>
               </div>
             </section>
 
-            <section id="also-in-news" className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-36">
-              <h1 className="text-4xl lg:text-6xl text-bluePallete-800 font-bold mb-7">Also in News</h1>
+            <section
+              id="also-in-news"
+              className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-36 "
+            >
+              <h1 className="text-4xl lg:text-6xl text-bluePallete-800 font-bold mb-7">
+                Also in News
+              </h1>
               <div className=" lg:hidden flex flex-col gap-4">
-                <ArticleCard />
-                <ArticleCard />
-                <ArticleCard />
-                <ArticleCard />
-                <ArticleCard />
+                {articleDatas &&
+                  articleDatas.slice(0, 5).map((data, index) => (
+                    <Link key={index} href={`/news/detailNews?id=${data.id}`}>
+                      <ArticleCard title={data.title} />
+                    </Link>
+                  ))}
               </div>
               <div className="hidden lg:block">
                 <AlsoNewsSlider />
               </div>
             </section>
 
-            <section id="carousel" className="container hidden lg:block  mx-auto w-full relative">
-              <div className="mx-auto  mt-4 ">
-                <CarouselSlider />
-              </div>
+            <section
+              id="carousel"
+              className="container hidden lg:block  mx-auto w-full relative"
+            >
+              {/* <div className="mx-auto  mt-4 "> */}
+              {/* <CarouselSlider /> */}
+              <HeroSectionSliderSecond />
+              {/* </div> */}
             </section>
-
           </main>
         </span>
       </span>

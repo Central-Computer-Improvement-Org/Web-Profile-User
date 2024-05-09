@@ -1,0 +1,49 @@
+@keyframes backgroundAnimation {
+  0% {
+    background-position: right bottom;
+  }
+  100% {
+    background-position: left bottom;
+  }
+}
+
+.swiper-pagination-bullet {
+  border-radius: 1000px;
+  width: 100px !important;
+  height: 15px !important;
+  display: block;
+  background: #265290;
+}
+
+.swiper-pagination-bullet-active {
+  border-radius: 1000px;
+  width: 100px !important;
+  height: 15px !important;
+  display: block;
+
+  background: linear-gradient(to right, #265290 50%, #bfd0e8 50%);
+  background-size: 200% 100%;
+  animation: backgroundAnimation 5s alternate; /* Animasi berjalan sekali selama 10 detik */
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .swiper-pagination-bullet {
+    border-radius: 1000px;
+    width: 38px !important;
+    height: 8px !important;
+  }
+}
+@media screen and (max-width: 375px) {
+  .swiper-pagination-bullet {
+    border-radius: 1000px;
+    width: 30px !important;
+    height: 8px !important;
+  }
+}
