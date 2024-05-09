@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import moment from 'moment';
-import 'moment/locale/id';
+import Image from "next/image";
+import Link from "next/link";
+import moment from "moment";
+import "moment/locale/id";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
@@ -18,173 +19,174 @@ import TextNotFound from "@/components/teksNotFound";
 import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
-  const SwiperComponent = () => {
-    const router = useRouter();
-    const previousButton = useRef(null);
-    const nextButton = useRef(null);
-    const [newsData, setNewsData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [currentSlide, setCurrentSlide] = useState(0);
+const SwiperComponent = () => {
+  const router = useRouter();
+  const previousButton = useRef(null);
+  const nextButton = useRef(null);
+  const [newsData, setNewsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-    const pagination = {
-      clickable: true,
-      renderBullet: function (index, className) {
-        return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
-      },
-    };
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
+    },
+  };
 
-    useEffect(() => {
-      request
-        .get("/news")
-        .then((response) => {
-          if (response.status === 200 || response.status === 201) {
-            const formatDateData = response.data.data.map((item) => {
-              const createdAt = moment(item.createdAt);
-              return {
-                ...item,
-                createdAt: moment(item.createdAt).format("MMM DD YYYY"),
-                date: `${createdAt.format("MMM DD YYYY")}`,
-              };
-            });
-            // pengurutan data berdasarkan tanggal data terbaru
-            const sortNewsData = formatDateData.sort(
-              (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-            );
-            // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
-            const limitNewsData = sortNewsData.slice(0, 5);
-            setNewsData(limitNewsData);
-          } else {
-            console.error(JSON.stringify(response.errors));
-          }
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error(error);
-          setIsLoading(false);
-        });
-    }, []);
+  useEffect(() => {
+    request
+      .get("/news")
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          const formatDateData = response.data.data.map((item) => {
+            const createdAt = moment(
+              moment(item.createdAt).format("DD-MM-YYYY")
+            ).format("MMM DD[,] YYYY");
+            return {
+              ...item,
+              date: createdAt,
+            };
+          });
+          // pengurutan data berdasarkan tanggal data terbaru
+          const sortNewsData = formatDateData.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+          // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
+          const limitNewsData = sortNewsData.slice(0, 5);
+          setNewsData(limitNewsData);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  }, []);
 
-    return (
-      <>
-        {isLoading ? (
-          <Loading
-            size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
-            textAlignment="text-center"
-          />
-        ) : (
-          <div className="w-full flex items-center justify-center">
-            <Swiper
-              spaceBetween={10}
-              slidesPerView={"auto"}
-              breakpoints={{
-                640: {
-                  slidesPerView: "auto",
-                  spaceBetween: 40,
-                },
-                768: {
-                  slidesPerView: "auto",
-                  spaceBetween: 10,
-                },
-              }}
-              loop={true}
-              pagination={pagination}
-              navigation={{
-                nextEl: `.${styles.newsButtonNext}`,
-                prevEl: `.${styles.newsButtonPrev}`,
-                clickable: true,
-              }}
-              centeredSlides={true}
-              grabCursor={true}
-              effect={"coverflow"}
-              modules={[Pagination, Navigation, EffectCoverflow]}
-              coverflowEffect={{
-                rotate: 0,
-                stretch: 0,
-                depth: 100,
-                modifier: 2.5,
-                slideShadows: false,
-              }}
-              onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
-              className="h-[400px] md:h-[600px]"
-            >
-              {newsData.map((data, index) => (
-                <SwiperSlide key={index} className={`${styles.newsSlider}`}>
+  return (
+    <>
+      {isLoading ? (
+        <Loading
+          size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
+          textAlignment="text-center"
+        />
+      ) : (
+        <div className="w-full flex items-center justify-center">
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={"auto"}
+            breakpoints={{
+              640: {
+                slidesPerView: "auto",
+                spaceBetween: 40,
+              },
+              768: {
+                slidesPerView: "auto",
+                spaceBetween: 10,
+              },
+            }}
+            loop={true}
+            pagination={pagination}
+            navigation={{
+              nextEl: `.${styles.newsButtonNext}`,
+              prevEl: `.${styles.newsButtonPrev}`,
+              clickable: true,
+            }}
+            centeredSlides={true}
+            grabCursor={true}
+            effect={"coverflow"}
+            modules={[Pagination, Navigation, EffectCoverflow]}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2.5,
+              slideShadows: false,
+            }}
+            onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
+            className="h-[400px] md:h-[600px]"
+          >
+            {newsData.map((data, index) => (
+              <SwiperSlide key={index} className={`${styles.newsSlider}`}>
+                <div
+                  className={
+                    index === currentSlide
+                      ? `${styles.newsShowSlide}`
+                      : `${styles.newsDefaultSlide}`
+                  }
+                >
+                  {data?.mediaUri ? (
+                    <Image
+                      src={`${host}${data.mediaUri}`}
+                      alt="News Thumbnail Central Computer Improvment"
+                      width={402}
+                      height={268}
+                      responsive="true"
+                      loading="lazy"
+                      className={
+                        index === currentSlide
+                          ? `rounded-t-[10px] object-cover`
+                          : `rounded-t-[10px] object-cover`
+                      }
+                    />
+                  ) : (
+                    <ImageNotFound
+                      width={402}
+                      height={268}
+                      responsive="true"
+                      loading="lazy"
+                      className={
+                        index === currentSlide
+                          ? `rounded-t-[10px] object-cover`
+                          : `rounded-t-[10px] object-cover`
+                      }
+                    />
+                  )}
                   <div
                     className={
                       index === currentSlide
-                        ? `${styles.newsShowSlide}`
-                        : `${styles.newsDefaultSlide}`
+                        ? "w-full sm:h-[90px] md:h-auto flex flex-col space-y-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
+                        : "w-full sm:h-[80px] md:h-[100px] lg:h-[119px] flex flex-col justify-between py-[6px] px-[10px] md:py-[6px] md:px-[10px] lg:py-[10px] lg:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
                     }
                   >
-                    {data?.mediaUri ? (
-                      <Image
-                        src={`${host}${data.mediaUri}`}
-                        alt="News Thumbnail Central Computer Improvment"
-                        width={402}
-                        height={268}
-                        responsive="true"
-                        loading="lazy"
-                        className={
-                          index === currentSlide
-                            ? `rounded-t-[10px] object-cover`
-                            : `rounded-t-[10px] object-cover`
-                        }
-                      />
-                    ) : (
-                      <ImageNotFound
-                        width={402}
-                        height={268}
-                        responsive="true"
-                        loading="lazy"
-                        className={
-                          index === currentSlide
-                            ? `rounded-t-[10px] object-cover`
-                            : `rounded-t-[10px] object-cover`
-                        }
-                      />
-                    )}
-                    <div
+                    <p
                       className={
                         index === currentSlide
-                          ? "w-full sm:h-[90px] md:h-auto flex flex-col space-y-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
-                          : "w-full sm:h-[80px] md:h-[100px] lg:h-[119px] flex flex-col justify-between py-[6px] px-[10px] md:py-[6px] md:px-[10px] lg:py-[10px] lg:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
+                          ? `font-semibold text-[15px] md:text-[20px] lg:text-[30px] leading-0 lg:leading-10 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
+                          : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
                       }
                     >
+                      {data?.title ? data.title : <TextNotFound />}
+                    </p>
+                    <div className="w-full flex flex-row justify-between items-end">
                       <p
                         className={
                           index === currentSlide
-                            ? `font-semibold text-[15px] md:text-[20px] lg:text-[30px] leading-0 lg:leading-10 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
-                            : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
+                            ? `font-medium sm:text-[10px] md:text-[14px] text-[#6B6B6B]`
+                            : `font-medium sm:text-[8px] md:text-[12px] text-[#6B6B6B]`
                         }
                       >
-                        {data?.title ? data.title : <TextNotFound />}
+                        {data?.date ? data.date : <TextNotFound />}
                       </p>
-                      <div className="w-full flex flex-row justify-between items-end">
-                        <p
-                          className={
-                            index === currentSlide
-                              ? `font-medium sm:text-[10px] md:text-[14px] text-[#6B6B6B]`
-                              : `font-medium sm:text-[8px] md:text-[12px] text-[#6B6B6B]`
-                          }
-                        >
-                          {data?.date ? data.date : <TextNotFound />}
-                        </p>
-                        <p
-                          className={
-                            index === currentSlide
-                              ? `font-bold sm:text-[12px] lg:text-[20px] sm:px-[10px] lg:px-[25px] sm:py-[5px] md:py-[5px] lg:py-[8px] rounded-[10px] text-white bg-mainPrimary`
-                              : `font-bold sm:text-[8px] lg:text-[11px] sm:px-[10px] lg:px-[12px] sm:py-[3px] md:py-[5px] lg:py-[8px] rounded-[8px] text-white bg-mainPrimary`
-                          }
-                        >
-                          <a onClick={function(){
-                            router.push(`/news/detailNews?id=${data.id}`)
-                          }}>Load More</a>
-                        </p>
-                      </div>
+                      <p
+                        className={
+                          index === currentSlide
+                            ? `font-bold sm:text-[12px] lg:text-[20px] sm:px-[10px] lg:px-[25px] sm:py-[5px] md:py-[5px] lg:py-[8px] rounded-[10px] text-white bg-mainPrimary`
+                            : `font-bold sm:text-[8px] lg:text-[11px] sm:px-[10px] lg:px-[12px] sm:py-[3px] md:py-[5px] lg:py-[8px] rounded-[8px] text-white bg-mainPrimary`
+                        }
+                      >
+                        <Link href={`/news/detailNews?id=${data.id}`}>
+                          Load More
+                        </Link>
+                      </p>
                     </div>
                   </div>
-                </SwiperSlide>
-              ))}
+                </div>
+              </SwiperSlide>
+            ))}
             {/* Custom Button Next  */}
             <div
               ref={nextButton}

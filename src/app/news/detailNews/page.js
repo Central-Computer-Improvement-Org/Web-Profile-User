@@ -8,6 +8,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import request from "../../utils/request";
 import moment from "moment";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { styles } from "@/app/news/detailNews/detailNewsPage.module.css";
 import { FormatString } from "../../utils/stringUtils";
@@ -24,8 +25,10 @@ export default function DetailNews() {
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
   const [parsedHTML, setParsedHTML] = useState(null);
-  const [newsOfTheDay, setNewsOfTheDay] = useState();
+  // const [newsOfTheDay, setNewsOfTheDay] = useState();
   const [newsTopData, setNewsTopData] = useState(null);
+  const [newsGetData, setNewsGetData] = useState(null);
+  const [newsAlso, setNewsAlso] = useState();
   // const [isLoading, setIsLoading] = useState(true);
   // const [newsDetailData, setNewsDetailData] = useState();
 
@@ -72,6 +75,45 @@ export default function DetailNews() {
   //     });
   // }, [description]);
 
+  useEffect(() => {
+    request
+      .get("/news")
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          const formatDateData = response.data.data.map((item) => {
+            const createdAt = moment(item.createdAt);
+            return {
+              ...item,
+              createdAt: moment(item.createdAt).format("MMM DD YYYY"),
+              date: `${createdAt.format("MMM DD YYYY")}`,
+            };
+          });
+          // pengurutan data berdasarkan tanggal data terbaru
+          const sortNewsData = formatDateData.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+
+          setNewsGetData(sortNewsData);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    request
+      .get("/news")
+      .then(function (response) {
+        setNewsAlso(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [description]);
+
   // get from news by id
   useEffect(() => {
     if (newsId) {
@@ -83,8 +125,8 @@ export default function DetailNews() {
             setImage(response.data.data.detailNewsMedia);
             setDescription(response.data.data.description);
             setDate(response.data.data.createdAt);
-            } else {
-              console.error(JSON.stringify(response.errors));
+          } else {
+            console.error(JSON.stringify(response.errors));
           }
         })
         .catch((error) => {
@@ -94,7 +136,7 @@ export default function DetailNews() {
       console.error("News ID not found");
     }
   }, [newsId]);
-  console.log(image, "image")
+  // console.log(image, "image")
 
   // get from news, just get viewCount
   useEffect(() => {
@@ -103,9 +145,10 @@ export default function DetailNews() {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const newData = response.data.data;
-          const sortedData = newData.sort((a, b) => b.visitedCount - a.visitedCount);
-          const top3Data = sortedData.slice(0, 3);
-          setNewsTopData(top3Data);
+          const sortedData = newData.sort(
+            (a, b) => b.visitedCount - a.visitedCount
+          );
+          setNewsTopData(sortedData);
         } else {
           console.error(JSON.stringify(response.errors));
         }
@@ -117,25 +160,22 @@ export default function DetailNews() {
 
   // useEffect(() => {
   //   request
-  //     .get("/detail")
+  //     .get("/news")
   //     .then(function (response) {
-  //       setTitle(response.data.data[0].title);
-  //       setImage(response.data.data[0].detailNewsMedia);
-  //       setDescription(response.data.data[0].description);
-  //       setDate(response.data.data[0].createdAt);
+  //       setNewsOfTheDay(response.data.data);
   //     })
   //     .catch(function (error) {
   //       console.log(error);
   //     });
-  // }, [description]); 
-
-  // useEffect(() => {
-  //   const doc = new DOMParser().parseFromString(description, "text/html");
-  //   const htmlElement = doc.documentElement;
-  //   const classNames = Array.from(htmlElement.classList).join(" ");
-  //   htmlElement.setAttribute("class", classNames);
-  //   setParsedHTML(htmlElement);
   // }, [description]);
+
+  useEffect(() => {
+    const doc = new DOMParser().parseFromString(description, "text/html");
+    const htmlElement = doc.documentElement;
+    const classNames = Array.from(htmlElement.classList).join(" ");
+    htmlElement.setAttribute("class", classNames);
+    setParsedHTML(htmlElement);
+  }, [description]);
 
   return (
     <>
@@ -150,22 +190,26 @@ export default function DetailNews() {
                 className="w-full xl:px-20 md:px-12 px-4 sm:pt-44 pt-24  mx-auto"
               >
                 <h1 className="lg:text-6xl md:text-4xl text-xl text-bluePallete-800 font-black lg:mb-6 mb-2 leading-tight">
-                  <span className="lg:text-6xl md:text-4xl text-3xl"></span>{" "} 
+                  <span className="lg:text-6xl md:text-4xl text-3xl"></span>{" "}
                   {title ? (
                     title
                   ) : (
-                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-black">INI ADALAH JUDUL</TextNotFound>
+                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-black">
+                      INI ADALAH JUDUL
+                    </TextNotFound>
                   )}
                 </h1>
                 <div className="inline-block border border-bluePallete-600 rounded-full bg-white lg:text-[25px] md:text-[18px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-3 py-1">
-                  {moment(date).format('MMM DD[,] YYYY')}
+                  {moment(moment(date).format("DD-MM-YYYY")).format(
+                    "MMM DD[,] YYYY"
+                  )}
                 </div>
               </div>
               <div className="w-full xl:pl-[78px] md:pl-0 xl:pr-[29px] md:pr-0 xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row  flex-col gap-[14px] ">
                 <div className="col-span-2  xl:w-[923px] md:w-full">
                   <ImageNewsFirstSlider image={image} />
                   <div className="mt-[40px] xl:px-0 md:px-[50px] px-[30px]">
-                    {parsedHTML && parsedHTML != 'undefined' ? (
+                    {parsedHTML && parsedHTML != "undefined" ? (
                       <div
                         dangerouslySetInnerHTML={{
                           __html: parsedHTML.innerHTML,
@@ -200,30 +244,32 @@ export default function DetailNews() {
                       </h1>
                     </div>
                     <div className="mt-4 lg:px-0 px-[34px] grid grid-cols-1 gap-5">
-                      {newsOfTheDay &&
-                        newsOfTheDay.slice(0, 3).map((data, index) => (
-                          <div
+                      {newsTopData &&
+                        newsTopData.slice(0, 3).map((data, index) => (
+                          <Link
                             key={index}
-                            className="lg:h-[100%] md:h-[150px] h-[90px] flex justify-between border border-bluePallete-600 rounded-xl"
+                            href={`/news/detailNews?id=${data.id}`}
                           >
-                            <div className=" px-[11px] py-[8px] flex flex-col justify-between ">
-                              <h1 className="xl:text-[20px] text-[15px] md:text-[24px] font-semibold text-bluePallete-800">
-                                {FormatString(data.title, 39)}
-                              </h1>
-                              <p className="lg:text-sm md:text-[20px] text-[12px] text-mainFontColor font-medium xl:hidden md:block">
-                                {moment(data.createdAt).format(
-                                  'MMM DD[,] YYYY'
-                                )}
-                              </p>
+                            <div className="lg:h-[100%] md:h-[150px] h-[90px] flex justify-between border border-bluePallete-600 rounded-xl">
+                              <div className=" px-[11px] py-[8px] flex flex-col justify-between ">
+                                <h1 className="xl:text-[20px] text-[15px] md:text-[24px] font-semibold text-bluePallete-800">
+                                  {FormatString(data.title, 39)}
+                                </h1>
+                                <p className="lg:text-sm md:text-[20px] text-[12px] text-mainFontColor font-medium xl:hidden md:block">
+                                  {moment(
+                                    moment(date).format("DD-MM-YYYY")
+                                  ).format("MMM DD[,] YYYY")}
+                                </p>
+                              </div>
+                              <Image
+                                width={0}
+                                height={0}
+                                alt="imgNews"
+                                src={host + data.mediaUri}
+                                className="xl:w-[150px] lg:w-[120px] md:w-[200px] w-[100px] rounded-r-xl "
+                              />
                             </div>
-                            <Image
-                              width={0}
-                              height={0}
-                              alt="imgNews"
-                              src={data.mediaUri}
-                              className="xl:w-[150px] lg:w-[120px] md:w-[200px] w-[100px] rounded-r-xl "
-                            />
-                          </div>
+                          </Link>
                         ))}
                     </div>
                   </div>
@@ -239,7 +285,8 @@ export default function DetailNews() {
                   Also in News
                 </h1>
                 <div>
-                  <RekomendasiNewsSlider newsData={newsOfTheDay} />
+                  <RekomendasiNewsSlider newsData={newsAlso} />
+                  {/* <RekomendasiNewsSlider newsData={newsOfTheDay} /> */}
                 </div>
               </div>
             </section>
