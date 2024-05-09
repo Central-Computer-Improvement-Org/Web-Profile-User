@@ -44,7 +44,11 @@ const Footer = () => {
         <div className="w-full h-full flex flex-col flex-wrap space-y-[25px] sm:space-y-5 lg:space-y-20 justify-between pt-[23px] md:pt-32 pb-10">
           <div className="w-full flex flex-col lg:items-start items-center space-y-0 sm:space-y-5">
             <Image
-              src="assets/logo/images/logo.svg"
+              src={
+                isLoading
+                  ? "Loading..."
+                  : settingsData?.data[0]?.logoUri
+              }
               alt="Logo Central Computer Improvement"
               width={150}
               height={92}
@@ -81,24 +85,25 @@ const Footer = () => {
                 </p>
               </div>
               <p className="flex justify-center items-center text-center lg:text-left text-[8px] sm:text-[16px] lg:text-[24px] pr-0 lg:pr-24 text-white">
-                Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada
-                bidang ICT (Information, Communication and Technology).
+                {isLoading
+                  ? "Loading..."
+                  : settingsData?.data[0]?.description ||
+                    "Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology)."}
               </p>
             </div>
             <div className="w-full h-full basis-full lg:basis-2/5 flex flex-col justify-between items-center space-y-5 pl-0 lg:pl-20">
-              <div className="w-[75%] lg:w-full flex flex-row justify-between">
+              <div className="w-[170px] md:w-[385px] flex flex-row justify-between">
                 <a
                   href="mailto:cci.unitel@gmail.com?subject=Subject%20of%20the%20email&body="
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white"
                 >
                   <Image
                     src={
                       isLoading
                         ? "Loading..."
-                        : contactData?.data[0]?.iconUri ||
-                          "assets/logo/images/logo-gmail.png"
+                        : contactData?.data[0]?.iconUri
                     }
                     alt="Logo Email CCI"
                     width={50}
@@ -111,14 +116,13 @@ const Footer = () => {
                   href="https://www.instagram.com/cciunitel/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white "
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white "
                 >
                   <Image
                     src={
                       isLoading
                         ? "Loading..."
-                        : contactData?.data[1]?.iconUri ||
-                          "assets/logo/images/instagram-gmail.png"
+                        : contactData?.data[1]?.iconUri
                     }
                     alt="Logo Instagram CCI"
                     width={50}
@@ -131,14 +135,13 @@ const Footer = () => {
                   href="https://line.me/R/ti/p/~buz0214o"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white"
                 >
                   <Image
                     src={
                       isLoading
                         ? "Loading..."
-                        : contactData?.data[2]?.iconUri ||
-                          "assets/logo/images/logo-line.png"
+                        : contactData?.data[2]?.iconUri
                     }
                     alt="Logo Line CCI"
                     width={50}
@@ -151,14 +154,13 @@ const Footer = () => {
                   href="https://www.linkedin.com/company/cci-telkomuniversity/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-1 sm:p-3 rounded border-2 border-white"
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white"
                 >
                   <Image
                     src={
                       isLoading
                         ? "Loading..."
-                        : contactData?.data[3]?.iconUri ||
-                          "assets/logo/images/logo-linkedin.png"
+                        : contactData?.data[3]?.iconUri
                     }
                     alt="Logo Linkedin CCI"
                     width={50}
@@ -168,9 +170,9 @@ const Footer = () => {
                   />
                 </a>
               </div>
-              <button className="w-[75%] lg:w-full rounded-[5px] bg-white">
-                <p className="text-[8px] sm:text-[20px] font-bold py-[5px] sm:py-3 sm:px-20  text-bluePallete-700">
-                  <Link href="/credit">Credit</Link>
+              <button className="w-[170px] md:w-[385px] h-[15px] md:h-[49px] flex justify-center items-center rounded-[5px] bg-white">
+                <p className="text-[8px] sm:text-[20px] font-bold text-bluePallete-700">
+                  <Link href="/credits">Credit</Link>
                 </p>
               </button>
             </div>

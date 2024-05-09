@@ -1,22 +1,39 @@
 "use client";
 import * as React from "react";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation"
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
 
 const Navbar = () => {
   const [isClick, setIsClick] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const navOutsideRef = useRef();
+  const navOutside = useRef();
+  const router = useRouter();
 
+  // handle toggle icon navbar untuk mengeluarkan menu navbar saat posisi mobile dari kiri 
   const toggleNavbar = () => {
     setIsClick(!isClick);
   };
 
+  // handle toggle dropdown menu about us untuk di posisi deskstop dan mobile
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  //handle nav menu scroll ke section division
+  const handleScrollToDivision  = () => {
+    const divisionPage = document.getElementById('divisionPage');
+    if (divisionPage) {
+      divisionPage.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push('/#divisionPage', undefined, { scroll: false });
+    }
+    toggleNavbar();
+    setIsDropdownOpen(false);
+  };
+
+  // handle nav nemu scroll ke section contact
   const scrollToContact = () => {
     const contactLink = document.getElementById("contact");
     if (contactLink) {
@@ -28,8 +45,8 @@ const Navbar = () => {
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
-        navOutsideRef.current &&
-        !navOutsideRef.current.contains(event.target)
+        navOutside.current &&
+        !navOutside.current.contains(event.target)
       ) {
         setIsClick(false);
       }
@@ -44,8 +61,8 @@ const Navbar = () => {
   return (
     <>
       <nav
-        ref={navOutsideRef}
-        className="fixed h-[60px] sm:h-[90px] md:h-[120px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 shadow-shadowNav md:shadow-none transition-all duration-300 bg-white "
+        ref={navOutside}
+        className="fixed h-[60px] sm:h-[90px] md:h-[120px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 shadow-shadowNav md:shadow-none transition-all duration-300 bg-white"
       >
         <div className="xl:max-w-7xl lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
           {/* Desktop menu */}
@@ -91,7 +108,7 @@ const Navbar = () => {
                         <li className="pt-2 px-4">
                           <Link
                             href="about"
-                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded    text-[#6B6B6B] hover:bg-bluePallete-200"
+                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick={(event) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
@@ -101,16 +118,16 @@ const Navbar = () => {
                           </Link>
                         </li>
                         <li className="pt-2 px-4">
-                          <Link
-                            href="division"
-                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded text-[#6B6B6B] hover:bg-bluePallete-200"
+                          <div
+                            className="block px-4 py-2 text-[28px] sm:text-[24px] rounded cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick={(event) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
+                              handleScrollToDivision();
                             }}
                           >
-                            Divisi
-                          </Link>
+                            Division
+                          </div>
                         </li>
                         <li className="pt-2 pb-2 px-4">
                           <div
@@ -133,7 +150,7 @@ const Navbar = () => {
                     News
                   </li>
                 </Link>
-                <Link href="/project">
+                <Link href="/projects">
                   <li className="font-medium text-[32px] sm:text-[24px] p-4 md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700">
                     Project
                   </li>
@@ -201,7 +218,7 @@ const Navbar = () => {
                   >
                     About Us{" "}
                     <svg
-                      className={`ml-2 transition duration-300 ease-in-out hover:fill-bluePallete-700 ${
+                      className={`ml-4 w-[28px] h-[14 px] transition duration-300 ease-in-out hover:fill-bluePallete-700 ${
                         isDropdownOpen
                           ? "transform rotate-180 ease-in-out duration-400"
                           : ""
@@ -233,16 +250,16 @@ const Navbar = () => {
                           </Link>
                         </li>
                         <li className="pt-2 px-4">
-                          <Link
-                            href="division"
+                          <div
                             className="block px-4 text-[25px] rounded text-white"
                             onClick={(event) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
+                              handleScrollToDivision ();
                             }}
                           >
-                            Divisi
-                          </Link>
+                            Division
+                          </div>
                         </li>
                         <li className="pt-2 pb-2 px-4">
                           <div
@@ -268,7 +285,7 @@ const Navbar = () => {
                     News
                   </li>
                 </Link>
-                <Link href="/project">
+                <Link href="/projects">
                   <li
                     onClick={() => setIsClick(false)}
                     className="text-[28px] cursor-pointer text-white"

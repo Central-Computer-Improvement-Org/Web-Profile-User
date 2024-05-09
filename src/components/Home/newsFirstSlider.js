@@ -3,11 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
-import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
 
 import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
@@ -38,11 +38,13 @@ const SwiperComponent = () => {
               date: `${getMonthName(
                 createdAt.getMonth()
               )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
-              createdAt: createdAt
+              createdAt: createdAt,
             };
           });
           // pengurutan data berdasarkan tanggal data terbaru
-          const sortNewsData = formatDateData.sort((a, b) => b.createdAt - a.createdAt);
+          const sortNewsData = formatDateData.sort(
+            (a, b) => b.createdAt - a.createdAt
+          );
           // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
           const limitNewsData = sortNewsData.slice(0, 5);
           setNewsData(limitNewsData);
@@ -57,6 +59,7 @@ const SwiperComponent = () => {
       });
   }, []);
 
+  // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
   const getMonthName = (monthIndex) => {
     const months = [
       "January",
@@ -134,6 +137,7 @@ const SwiperComponent = () => {
                     width={402}
                     height={268}
                     responsive="true"
+                    loading="lazy"
                     className={
                       index === currentSlide
                         ? `rounded-t-[10px] object-cover`

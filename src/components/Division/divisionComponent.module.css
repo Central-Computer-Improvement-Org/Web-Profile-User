@@ -1,5 +1,5 @@
 @media only screen and (max-width: 370px) {
-    .dvisionCardContainer {
+    .dvisionEventCardContainer {
         width: 270px !important;
     }
 }
@@ -11,13 +11,13 @@
 }
 
 @media only screen and (max-width: 340px) {
-    .dvisionCardContainer {
+    .dvisionEventCardContainer {
         width: 250px !important;
     }
 }
 
 @media only screen and (max-width: 330px) {
-    .dvisionCardContainer {
+    .dvisionEventCardContainer {
         width: 240px !important;
     }
 }

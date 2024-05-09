@@ -16,40 +16,52 @@ export default function Events() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 ">
         <EventCard
+          img={`assets/about/images/workshop.png`}
+          title={`STUDY GROUP`}
+          description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
+          isGreen={false}
+        />
+        <EventCard
+          img={`assets/about/images/open-mind.png`}
+          title={`MENTORING`}
+          description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
+          isGreen={true}
+        />
+        <EventCard
           img={`assets/about/images/cci-summit.png`}
           title={`CCI SUMMIT`}
           description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
-          isGreen={true}
+          isGreen={size.width >= 1024 ? true : false}
         />
         <EventCard
           img={`assets/about/images/it-talks.png`}
           title={`IT TALKS`}
           description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
-          isGreen={false}
+          isGreen={size.width >= 1024 ? false : true}
         />
         <EventCard
           img={`assets/about/images/workshop.png`}
           title={`WORKSHOP`}
           description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
-          isGreen={size.width >= 1024 ? false : true}
+          isGreen={false}
         />
         <EventCard
           img={`assets/about/images/bakti-sosial.png`}
           title={`BAKTI SOSIAL`}
           description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
-          isGreen={size.width >= 1024 ? true : false}
+          isGreen={true}
         />
         <EventCard
           img={`assets/about/images/open-mind.png`}
           title={`OPEN MIND`}
           description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
-          isGreen={true}
+          isGreen={size.width >= 1024 ? true : false}
         />
         <EventCard
           img={`assets/about/images/it-competitions.png`}
           title={`IT COMPETITION`}
           description={`CCI Summit merupakan event  tahunan UKM CCI berupa  workshop/seminar/webinar/lomba  yang merepresentasikan 6 divisi  dari CCI`}
-          isGreen={size.width >= 1024 ? false : false}
+          isGreen={size.width >= 1024 ? false : true}
         />
       </div>
       <div className="hidden lg:flex justify-center lg:mt-[54px]">

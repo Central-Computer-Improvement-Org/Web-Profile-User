@@ -1,9 +1,16 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import { useWindowSize } from "@uidotdev/usehooks";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useWindowSize } from '@uidotdev/usehooks';
 
-export default function TeamCard({ imageUrl, title, name, socialLinks, isRight, isLeft }) {
+export default function TeamCard({
+  imageUrl,
+  title,
+  name,
+  socialLinks,
+  isRight,
+  isLeft,
+}) {
   const size = useWindowSize();
 
   return (
@@ -21,19 +28,18 @@ export default function TeamCard({ imageUrl, title, name, socialLinks, isRight, 
               >
                 {title}
               </h5>
-              <p
-                className={`antialiased md:text-h5 lg:text-[40px] font-black`}
-              >
+              <p className={`antialiased md:text-h5 lg:text-[40px] font-black`}>
                 {name}
               </p>
             </div>
             <div>
               <Link href={socialLinks}>
                 <Image
-                  src={`assets/logo/images/logo-linkedin.png`}
+                  src={`assets/division/images/logo-linkedin.png`}
                   className={`md:w-[35px] md:h-[35px] lg:w-[60px] lg:h-[60px]`}
                   width={0}
                   height={0}
+                  alt=""
                 />
               </Link>
             </div>
@@ -43,6 +49,7 @@ export default function TeamCard({ imageUrl, title, name, socialLinks, isRight, 
             className={`md:w-[132px] md:h-[132px] lg:w-[200px] lg:h-[201.54px]`}
             height={0}
             width={0}
+            alt=""
           />
         </div>
       ) : (
@@ -51,25 +58,27 @@ export default function TeamCard({ imageUrl, title, name, socialLinks, isRight, 
         >
           <div className="flex justify-between space-x-[16px]">
             <div className="text-bluePallete-800">
-              <h5 className={`antialiased text-[8px] font-medium`}>
-                {title}
-              </h5>
-              <p className={`antialiased break-words text-[15px] font-black`}>{name}</p>
+              <h5 className={`antialiased text-[8px] font-medium`}>{title}</h5>
+              <p className={`antialiased break-words text-[15px] font-black`}>
+                {name}
+              </p>
             </div>
             <Image
               src={imageUrl}
               className={`w-[55px] h-[55px]`}
               height={0}
               width={0}
+              alt=""
             />
           </div>
           <div className="relative w-fit">
             <Link href={socialLinks} target="_blank">
               <Image
-                src={`assets/logo/images/logo-linkedin.png`}
+                src={`assets/division/images/logo-linkedin.png`}
                 className={`w-[20px] h-[20px]`}
                 width={0}
                 height={0}
+                alt=""
               />
             </Link>
           </div>

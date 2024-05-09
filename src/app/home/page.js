@@ -16,6 +16,9 @@ import styles from "@/app/home/homePage.module.css";
 
 export default function Home() {
   const [settingsData, setSettingsData] = useState(null);
+  const [awardData, setAwardData] = useState(null);
+  const [memberData, setMemberData] = useState(null);
+  const [projectData, setProjectData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -37,6 +40,55 @@ export default function Home() {
       });
   }, []);
 
+  useEffect(() => {
+    setIsLoading(true);
+
+    const fetchAwardData = async () => {
+      try {
+        const response = await request.get("/award");
+        if (response.status === 200 || response.status === 201) {
+          setAwardData(response.data);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchMemberData = async () => {
+      try {
+        const response = await request.get("/member");
+        if (response.status === 200 || response.status === 201) {
+          setMemberData(response.data);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchProjectData = async () => {
+      try {
+        const response = await request.get("/projects");
+        if (response.status === 200 || response.status === 201) {
+          setProjectData(response.data);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchAwardData();
+    fetchMemberData();
+    fetchProjectData();
+
+    setIsLoading(false);
+  }, []);
+
   return (
     <>
       <Header />
@@ -52,7 +104,7 @@ export default function Home() {
                 src={
                   isLoading
                     ? "Loading..."
-                    : settingsData?.data[0]?.logoUri ||
+                    : settingsData?.data[0]?.logffoUri ||
                       "assets/logo/images/logo.svg"
                 }
                 alt="Logo Central Computer Improvement"
@@ -132,7 +184,7 @@ export default function Home() {
                               Achievement
                             </p>
                             <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                              100 +
+                              {awardData?.recordsTotal || "..."} +
                             </p>
                           </div>
                         </div>
@@ -143,7 +195,7 @@ export default function Home() {
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
                           src="assets/home/images/connect-card.png"
-                          alt="Achievement Central Computer Improvement"
+                          alt="Member Central Computer Improvement"
                           responsive="true"
                           width={318}
                           height={287}
@@ -154,7 +206,7 @@ export default function Home() {
                               Members
                             </p>
                             <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                              100 +
+                              {memberData?.recordsTotal || "..."} +
                             </p>
                           </div>
                         </div>
@@ -166,7 +218,7 @@ export default function Home() {
                       <div className="flex flex-row flex-start mt-0 md:mt-10">
                         <div className="basis-1/3 flex flex-col items-center sm:items-start space-y-1">
                           <h3 className="text-[30px] lg:text-[40px] font-bold text-mainPrimary">
-                            100+
+                            {memberData?.recordsTotal || "..."} +
                           </h3>
                           <p className="text-[18px] md:text-[24px] text-[#2f66b46b]">
                             Members
@@ -174,7 +226,7 @@ export default function Home() {
                         </div>
                         <div className="basis-1/3 flex flex-col items-center lg:items-start space-y-1 lg:ml-10">
                           <h3 className="text-[30px] lg:text-[40px] pl-[5px] sm:pl-0 font-bold text-mainPrimary">
-                            40+
+                            {awardData?.recordsTotal || "..."}+
                           </h3>
                           <p className="text-[18px] md:text-[24px] text-[#2f66b46b]">
                             Awards
@@ -182,7 +234,7 @@ export default function Home() {
                         </div>
                         <div className="basis-1/3 flex flex-col items-center sm:items-end lg:items-start space-y-1 lg:ml-5">
                           <h3 className="text-[30px] lg:text-[40px] font-bold pl-[5px] sm:pl-0 text-mainPrimary">
-                            100+
+                            {projectData?.recordsTotal || "..."} +
                           </h3>
                           <p className="text-[18px] md:text-[24px] text-[#2f66b46b]">
                             Projects
@@ -231,7 +283,8 @@ export default function Home() {
                       <p className="text-[15px] md:text-[20px] lg:text-[24px] text-right lg:text-left leading-5 lg:leading-10 text-mainPrimary">
                         Unit Kegiatan Mahasiswa Universitas Telkom Central
                         Computer Improvment telah berhasil membuat project
-                        sebanyak ... yang dilakukan oleh semua divisi yang ada
+                        sebanyak {projectData?.recordsTotal || "..."} yang
+                        dilakukan oleh semua divisi yang ada
                       </p>
                     </div>
                   </div>
@@ -256,7 +309,7 @@ export default function Home() {
                               Achievement
                             </p>
                             <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                              100 +
+                              {awardData?.recordsTotal || "..."} +
                             </p>
                           </div>
                         </div>
@@ -267,7 +320,7 @@ export default function Home() {
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
                           src="assets/home/images/connect-card.png"
-                          alt="Achievement Central Computer Improvement"
+                          alt="Member Central Computer Improvement"
                           responsive="true"
                           width={318}
                           height={287}
@@ -278,7 +331,7 @@ export default function Home() {
                               Members
                             </p>
                             <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                              100 +
+                              {memberData?.recordsTotal || "..."} +
                             </p>
                           </div>
                         </div>
@@ -288,10 +341,13 @@ export default function Home() {
                 </div>
               </div>
             </section>
-            <section id="division" className="w-full h-auto">
-              <div className="w-full flex flex-row flex-wrap mt-10 mb-8 sm:mt-32 sm:mb-20">
+            <section
+              id="divisionPage"
+              className="w-full h-[540px] md:h-[500px] flex justify-center items-start"
+            >
+              <div className="w-full flex flex-row flex-wrap mt-[50px] md:mt-[70px] xl:mt-[130px]">
                 <div
-                  className={`w-full h-auto basis-full md:basis-[35%] lg:basis-[40%] flex justify-center items-center md:pl-[70px] lg:pl-[40px] xl:pl-[110px] ${styles.divisionContainerTagline}`}
+                  className={`w-full h-auto basis-full md:basis-[35%] lg:basis-[40%] flex justify-center items-center md:pl-[70px] lg:pl-[40px] xl:pl-[80px] ${styles.divisionContainerTagline}`}
                 >
                   <h1
                     className={`font-black text-center text-[30px] lg:text-[50px] xl:text-[60px] text-bluePallete-800 ${styles.divisionTagline}`}
@@ -304,10 +360,10 @@ export default function Home() {
                   className={`basis-full md:basis-[65%] lg:basis-[59%] w-auto h-auto sm:max-w-[60%] md:max-w-[65%] lg:max-w-[60%] ${styles.divisionCardContainer}`}
                 >
                   <div className="hidden md:block">
-                    <DivisionFirstSlider/>
+                    <DivisionFirstSlider />
                   </div>
                   <div className="block md:hidden">
-                    <DivisionSecondSlider/>
+                    <DivisionSecondSlider />
                   </div>
                 </div>
               </div>
@@ -325,7 +381,9 @@ export default function Home() {
                       creativity, and impact of Central Computer Improvement
                     </p>
                     <button className="w-[151px] h-[45px] md:w-[311px] md:h-[90px] text-[12px] md:text-[25px] font-bold rounded-lg text-white bg-bluePallete-800">
-                      <Link className="text-center" href="/project">Explore Our Projects</Link>
+                      <Link className="text-center" href="/projects">
+                        Explore Our Projects
+                      </Link>
                     </button>
                     <ProjectCard />
                   </div>
@@ -359,7 +417,7 @@ export default function Home() {
                       <h1 className="text-[22px] sm:text-[50px] lg:text-[80px] text-center font-black text-bluePallete-800">
                         Keep Up With Our Latest News
                       </h1>
-                      <p className="text-[12px] sm:text-[20px] md:text-[30px] text-center font-semibold sm:font-medium md:px-[10px] lg:px-[120px] xl:px-[200px] text-bluePallete-800">
+                      <p className="text-[12px] sm:text-[20px] md:text-[30px] text-center font-semibold sm:font-medium md:px-[10px] lg:px-[120px] xl:px-[200px] text-black">
                         Contains community activities, competitions, events, and
                         Central Computer Improvement recruitment information
                       </p>

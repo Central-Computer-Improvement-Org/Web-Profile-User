@@ -55,7 +55,7 @@ export default function EventCard({ title, description, img, isGreen }) {
             ) : (
               <>
                 <h4
-                  className={`antialiased text-white font-black text-[14px] lg:text-h3 drop-shadow-lg tracking-wide`}
+                  className={`antialiased text-white font-black text-[14px] lg:text-h3 text-shadow-xl shadow-gray-500 tracking-wide`}
                 >
                   {title}
                 </h4>
@@ -88,7 +88,7 @@ export default function EventCard({ title, description, img, isGreen }) {
                 className={`absolute inset-0 flex ${"items-center justify-center"}`}
               >
                 <h4
-                  className={`antialiased text-white font-black text-[14px] md:text-h3 drop-shadow-lg tracking-wide`}
+                  className={`antialiased text-white font-black text-[14px] md:text-h3 text-shadow-xl tracking-wide`}
                 >
                   {title}
                 </h4>

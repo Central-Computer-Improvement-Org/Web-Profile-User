@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -11,6 +11,7 @@ import request from "@/app/utils/request";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const DivisionFirstSlider = () => {
+  const router = useRouter();
   const [divisionData, setDivisionData] = useState([]);
   const [loading, setLoading] = useState(true);
   const swiperRef = useRef(null);
@@ -75,7 +76,11 @@ const DivisionFirstSlider = () => {
               key={index}
               className={`cursor-pointer ${styles.divisionCardSwiper}`}
             >
-              <Link href={`/division/${data.id}`}>
+              <a onClick={
+                function (){
+                  router.push(`/division?id=${data.id}`)
+                }
+              }>
                 <div
                   className={`h-[351px] w-[290px] max-h-[340px] max-w-[290px] flex flex-col space-y-3 py-5 px-3 rounded-[20px] border-2 border-bluePallete-300 bg-bluePallete-200 ${styles.divisionFirstCard}`}
                 >
@@ -95,7 +100,7 @@ const DivisionFirstSlider = () => {
                     {data.description}
                   </p>
                 </div>
-              </Link>
+              </a>
             </SwiperSlide>
           ))}
         </Swiper>
