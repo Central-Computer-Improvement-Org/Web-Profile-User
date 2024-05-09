@@ -16,7 +16,7 @@ export default function Events() {
          }
       })
    }, [])
-      const size = useWindowSize();
+   const size = useWindowSize();
 
    return (
       <>
@@ -30,6 +30,7 @@ export default function Events() {
          <div className="grid grid-cols-1 lg:grid-cols-2 ">
             {events.map((v, id) => {
                return (<EventCard
+                  key={id}
                   img={`${host}/${v.mediaUri}`}
                   title={v.name}
                   description={v.description}
