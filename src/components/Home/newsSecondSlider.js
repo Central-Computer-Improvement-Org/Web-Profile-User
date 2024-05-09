@@ -23,18 +23,16 @@ const NewsSecondSlider = () => {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const formatDateData = response.data.data.map((item) => {
-            const createdAt = new Date(item.createdAt);
+            const createdAt = moment(item.createdAt);
             return {
               ...item,
-              date: `${getMonthName(
-                createdAt.getMonth()
-              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
-              createdAt: createdAt,
+              createdAt: moment(item.createdAt).format("MMM DD YYYY"),
+              date: `${createdAt.format("MMM DD YYYY")}`,
             };
           });
           // pengurutan data berdasarkan tanggal data terbaru
           const sortNewsData = formatDateData.sort(
-            (a, b) => b.createdAt - a.createdAt
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
           // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
           const limitNewsData = sortNewsData.slice(0, 5);
@@ -49,25 +47,6 @@ const NewsSecondSlider = () => {
         setIsLoading(false);
       });
   }, []);
-
-  // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
-  const getMonthName = (monthIndex) => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
-  };
 
   return (
     <>
