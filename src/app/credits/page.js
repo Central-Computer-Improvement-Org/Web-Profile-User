@@ -30,10 +30,12 @@ export default function Credits() {
 
   useEffect(() => {
     request
-      .get('/projects?name=Rebuild CCI')
+      .get('/projects?id=PJT-20240508164541859997')
       .then(function (res) {
+        console.log(res.data.data);
         if (res.data.code === 200 || res.data.code === 201) {
-          setContributors(res.data.data[0].contributors);
+          setContributors(res.data.data.contributors);
+          console.log(res.data.data[0], 'asd');
           setIsLoading(false);
         } else {
           // console.log(res);
@@ -41,10 +43,14 @@ export default function Credits() {
         }
       })
       .catch(function (err) {
-        console.error(err);
+        console.log(err);
+        setIsLoading(false);
       });
   }, []);
 
+  useEffect(() => {
+    console.log(contributors);
+  }, [contributors]);
   return (
     <div>
       <Header />
@@ -94,7 +100,9 @@ export default function Credits() {
               </div>
             </div>
           ) : (
-            <NotFound />
+            <div>
+              <NotFound />
+            </div>
           )}
         </section>
         <div className="xl:mt-[180px] md:mt-[120px] mt-[60px]" />

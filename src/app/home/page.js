@@ -28,50 +28,50 @@ export default function Home() {
   useEffect(() => {
     setIsLoading(true);
 
-    request
-      .get("/setting")
-      .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          setSettingsData(response.data.data);
-        } else {
-          console.error(JSON.stringify(response.errors));
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
+      request
+         .get("/setting")
+         .then((response) => {
+            if (response.status === 200 || response.status === 201) {
+               setSettingsData(response.data);
+            } else {
+               console.error(JSON.stringify(response.errors));
+            }
+            setIsLoading(false);
+         })
+         .catch((error) => {
+            console.error(error);
+            setIsLoading(false);
+         });
+   }, []);
 
   useEffect(() => {
     setIsLoading(true);
 
-    const fetchAwardData = async () => {
-      try {
-        const response = await request.get("/awards");
-        if (response.status === 200 || response.status === 201) {
-          setAwardData(response.data);
-        } else {
-          console.error(JSON.stringify(response.errors));
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+      const fetchAwardData = async () => {
+         try {
+            const response = await request.get("/awards");
+            if (response.status === 200 || response.status === 201) {
+               setAwardData(response.data);
+            } else {
+               console.error(JSON.stringify(response.errors));
+            }
+         } catch (error) {
+            console.error(error);
+         }
+      };
 
-    const fetchMemberData = async () => {
-      try {
-        const response = await request.get("/users");
-        if (response.status === 200 || response.status === 201) {
-          setMemberData(response.data);
-        } else {
-          console.error(JSON.stringify(response.errors));
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+      const fetchMemberData = async () => {
+         try {
+            const response = await request.get("/users");
+            if (response.status === 200 || response.status === 201) {
+               setMemberData(response.data);
+            } else {
+               console.error(JSON.stringify(response.errors));
+            }
+         } catch (error) {
+            console.error(error);
+         }
+      };
 
     const fetchProjectData = async () => {
       try {
