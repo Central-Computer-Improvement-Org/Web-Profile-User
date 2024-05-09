@@ -18,6 +18,26 @@ export default function DetailNews() {
   const [date, setDate] = useState();
   const [parsedHTML, setParsedHTML] = useState(null);
   const [newsOfTheDay, setNewsOfTheDay] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [newsNewData, setNewsNewData] = useState(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    request
+      .get('/detail')
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          setNewsNewData(response.data);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     request
@@ -71,7 +91,7 @@ export default function DetailNews() {
                 </div>
               </div>
               <div className="w-full xl:pl-[78px] md:pl-0 xl:pr-[29px] md:pr-0 xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row  flex-col gap-[14px] ">
-                <div class="col-span-2  xl:w-[923px] md:w-full">
+                <div className="col-span-2  xl:w-[923px] md:w-full">
                   <ImageNewsFirstSlider image={image} />
                   <div className="mt-[40px] xl:px-0 md:px-[50px] px-[30px]">
                     {parsedHTML && parsedHTML != 'undefined' ? (

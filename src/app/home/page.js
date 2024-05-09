@@ -107,7 +107,7 @@ export default function Home() {
               <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto flex flex-row flex-wrap">
                 <div className="basis-full md:basis-[55%] flex flex-col space-y-10">
                   <div className="hidden md:block">
-                    {isLoading ? (
+                  {isLoading ? (
                       <Loading
                         size="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
                         textAlignment="text-left"

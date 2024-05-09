@@ -7,11 +7,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { Autoplay } from 'swiper/modules';
+import { host } from '../host';
+import NotFound from '../imageNotFound';
 
 export default function ShowcasingProjectSlider({ image, speed }) {
-  return (
-    <>
-      {/* <Swiper
+   return (
+      <>
+         {/* <Swiper
         spaceBetween={30}
         centeredSlides={true}
         slidesPerView={'auto'}
@@ -44,53 +46,55 @@ export default function ShowcasingProjectSlider({ image, speed }) {
           ))}
       </Swiper> */}
 
-      <div
-        x-data="{}"
-        x-init="$nextTick(() => {
+         <div
+            x-data="{}"
+            x-init="$nextTick(() => {
         let ul = $refs.logos;
         ul.insertAdjacentHTML('afterend', ul.outerHTML);
         ul.nextSibling.setAttribute('aria-hidden', 'true');
     })"
-        class="w-full inline-flex flex-nowrap overflow-hidden "
-      >
-        <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
-          {image &&
-            image.map((data, index) => (
-              <li
-                className="lg:!w-[375px] md:!w-[275px] !w-[165px] lg:!h-[208px]"
-                key={index}
-              >
-                <Image
-                  width={0}
-                  height={0}
-                  alt="project-img"
-                  src={data.imageUri}
-                  className="w-full h-full  rounded-[10px]"
-                />
-              </li>
-            ))}
-        </ul>
-        <ul
-          class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll"
-          aria-hidden="true"
-        >
-          {image &&
-            image.map((data, index) => (
-              <li
-                className="lg:!w-[375px] md:!w-[275px] !w-[165px] lg:!h-[208px]"
-                key={index}
-              >
-                <Image
-                  width={0}
-                  height={0}
-                  alt="project-img"
-                  src={data.imageUri}
-                  className="w-full h-full  rounded-[10px]"
-                />
-              </li>
-            ))}
-        </ul>
-      </div>
-    </>
-  );
+            className="w-full inline-flex flex-nowrap overflow-hidden "
+         >
+            <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
+               {console.info(image)}
+               {image &&
+                  image.map((data, index) => (
+                     <li
+                        className="lg:!w-[375px] md:!w-[275px] !w-[165px] lg:!h-[208px]"
+                        key={index}
+                     >
+                        {data.imageUri ? <Image
+                           width={0}
+                           height={0}
+                           alt="project-img"
+                           src={host + data.imageUri}
+                           className="w-full h-full  rounded-[10px]"
+                        /> : <NotFound />}
+
+                     </li>
+                  ))}
+            </ul>
+            <ul
+               className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll"
+               aria-hidden="true"
+            >
+               {image &&
+                  image.map((data, index) => (
+                     <li
+                        className="lg:!w-[375px] md:!w-[275px] !w-[165px] lg:!h-[208px]"
+                        key={index}
+                     >
+                        {data.imageUri ? <Image
+                           width={0}
+                           height={0}
+                           alt="project-img"
+                           src={host + data.imageUri}
+                           className="w-full h-full  rounded-[10px]"
+                        /> : <NotFound />}
+                     </li>
+                  ))}
+            </ul>
+         </div>
+      </>
+   );
 }
