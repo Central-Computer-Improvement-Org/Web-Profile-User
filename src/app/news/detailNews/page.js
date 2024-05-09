@@ -6,10 +6,9 @@ import Header from '@/components/header';
 import Navbar from '@/components/navbar';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import request from '../utils/request';
+import request from '../../utils/request';
 import moment from 'moment';
-import { styles } from '@/app/detailNews/detailNewsPage.module.css';
-import { FormatString } from '../utils/stringUtils';
+import { FormatString } from '../../utils/stringUtils';
 
 export default function DetailNews() {
   // const [newsDetailData, setNewsDetailData] = useState();
