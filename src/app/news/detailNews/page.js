@@ -158,14 +158,14 @@ export default function DetailNews() {
                   )}
                 </h1>
                 <div className="inline-block border border-bluePallete-600 rounded-full bg-white lg:text-[25px] md:text-[18px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-3 py-1">
-                  {moment(date).format("MMM DD[,] YYYY")}
+                  {moment(date).format('MMM DD[,] YYYY')}
                 </div>
               </div>
               <div className="w-full xl:pl-[78px] md:pl-0 xl:pr-[29px] md:pr-0 xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row  flex-col gap-[14px] ">
                 <div className="col-span-2  xl:w-[923px] md:w-full">
                   <ImageNewsFirstSlider image={image} />
                   <div className="mt-[40px] xl:px-0 md:px-[50px] px-[30px]">
-                    {parsedHTML && parsedHTML != "undefined" ? (
+                    {parsedHTML && parsedHTML != 'undefined' ? (
                       <div
                         dangerouslySetInnerHTML={{
                           __html: parsedHTML.innerHTML,
@@ -212,7 +212,7 @@ export default function DetailNews() {
                               </h1>
                               <p className="lg:text-sm md:text-[20px] text-[12px] text-mainFontColor font-medium xl:hidden md:block">
                                 {moment(data.createdAt).format(
-                                  "MMM DD[,] YYYY"
+                                  'MMM DD[,] YYYY'
                                 )}
                               </p>
                             </div>
