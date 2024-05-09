@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import request from '../../utils/request';
 import moment from 'moment';
 import { FormatString } from '../../utils/stringUtils';
+import { dateFormater } from '@/app/utils/dateFormater';
 
 export default function DetailNews() {
   // const [newsDetailData, setNewsDetailData] = useState();
@@ -87,7 +88,7 @@ export default function DetailNews() {
                   {title}
                 </h1>
                 <div className="inline-block border border-bluePallete-600 rounded-full bg-white lg:text-[25px] md:text-[18px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-3 py-1">
-                  {moment(date).format('MMM DD[,] YYYY')}
+                  {moment(dateFormater(date)).format('MMM DD[,] YYYY')}
                 </div>
               </div>
               <div className="w-full xl:pl-[78px] md:pl-0 xl:pr-[29px] md:pr-0 xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row  flex-col gap-[14px] ">
@@ -140,7 +141,7 @@ export default function DetailNews() {
                                 {FormatString(data.title, 39)}
                               </h1>
                               <p className="lg:text-sm md:text-[20px] text-[12px] text-mainFontColor font-medium xl:hidden md:block">
-                                {moment(data.createdAt).format(
+                                {moment(dateFormater(data.createdAt)).format(
                                   'MMM DD[,] YYYY'
                                 )}
                               </p>

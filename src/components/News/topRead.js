@@ -1,5 +1,6 @@
 'use client';
 
+import { dateFormater } from '@/app/utils/dateFormater';
 import moment from 'moment';
 import Image from 'next/image';
 import React from 'react';
@@ -11,7 +12,9 @@ const TopRead = ({ title, date, image }) => {
         <h2 className="font-bold sm:text-md lg:text-2xl text-bluePallete-700">
           {title}
         </h2>
-        <p className="sm:text-sm">{moment(date).format('MMM DD[,] YYYY')}</p>
+        <p className="sm:text-sm">
+          {moment(dateFormater(date)).format('MMM DD[,] YYYY')}
+        </p>
       </div>
       <div className="ms-auto basis-1/3 ">
         <Image
