@@ -19,10 +19,29 @@ export default function DetailNews() {
   const [date, setDate] = useState();
   const [parsedHTML, setParsedHTML] = useState(null);
   const [newsOfTheDay, setNewsOfTheDay] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     request
-      .get('detailNews')
+      .get("/detail")
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          setSettingsData(response.data.data);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        // setIsLoading(false);
+      });
+  }, []);
+
+
+  useEffect(() => {
+    request
+      .get('/detailNews')
       .then(function (response) {
         setTitle(response.data.data.title);
         setImage(response.data.data.image);
@@ -30,16 +49,16 @@ export default function DetailNews() {
         setDate(response.data.data.createdAt);
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
 
     request
-      .get('news')
+      .get('/news')
       .then(function (response) {
         setNewsOfTheDay(response.data.data);
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   }, [description]);
 
@@ -58,10 +77,10 @@ export default function DetailNews() {
       <main className="w-full h-auto">
         <span className="block h-full bg-gradientAccent">
           <div className="bg-gradientDefault h-full bg-fixed bg-no-repeat relative">
-            <section id="headLine" className="w-full md:pb-0 pb-[111px] ">
+            <section id="headLine" className="w-full md:pb-0 pb-[111px] border-2">
               <div
                 id="title"
-                className="w-full xl:px-20 md:px-12 px-4 sm:pt-44 pt-24  mx-auto"
+                className="w-full xl:px-20 md:px-12 px-4 sm:pt-44 pt-24 mx-auto border-[20px]"
               >
                 <h1 className="lg:text-6xl md:text-4xl text-xl text-bluePallete-800 font-black lg:mb-6 mb-2 leading-tight">
                   <span className="lg:text-6xl md:text-4xl text-3xl "></span>{' '}

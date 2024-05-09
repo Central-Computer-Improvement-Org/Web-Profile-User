@@ -9,198 +9,198 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 
-import request from "@/app/utils/request";
-import Loading from "@/components/loading";
-import ImageNotFound from "@/components/imageNotFound";
-import TextNotFound from "@/components/teksNotFound";
-import { host } from "@/components/host";
-import styles from "@/components/Home/homeComponent.module.css";
+  import request from "@/app/utils/request";
+  import Loading from "@/components/loading";
+  import ImageNotFound from "@/components/imageNotFound";
+  import TextNotFound from "@/components/teksNotFound";
+  import { host } from "@/components/host";
+  import styles from "@/components/Home/homeComponent.module.css";
 
-const SwiperComponent = () => {
-  const previousButton = useRef(null);
-  const nextButton = useRef(null);
-  const [newsData, setNewsData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const SwiperComponent = () => {
+    const previousButton = useRef(null);
+    const nextButton = useRef(null);
+    const [newsData, setNewsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
-    },
-  };
+    const pagination = {
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
+      },
+    };
 
-  useEffect(() => {
-    request
-      .get("/news")
-      .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          const formatDateData = response.data.data.map((item) => {
-            const createdAt = new Date(item.createdAt);
-            return {
-              ...item,
-              date: `${getMonthName(
-                createdAt.getMonth()
-              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
-              createdAt: createdAt,
-            };
-          });
-          // pengurutan data berdasarkan tanggal data terbaru
-          const sortNewsData = formatDateData.sort(
-            (a, b) => b.createdAt - a.createdAt
-          );
-          // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
-          const limitNewsData = sortNewsData.slice(0, 5);
-          setNewsData(limitNewsData);
-        } else {
-          console.error(JSON.stringify(response.errors));
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
+    useEffect(() => {
+      request
+        .get("/news")
+        .then((response) => {
+          if (response.status === 200 || response.status === 201) {
+            const formatDateData = response.data.data.map((item) => {
+              const createdAt = new Date(item.createdAt);
+              return {
+                ...item,
+                date: `${getMonthName(
+                  createdAt.getMonth()
+                )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
+                createdAt: createdAt,
+              };
+            });
+            // pengurutan data berdasarkan tanggal data terbaru
+            const sortNewsData = formatDateData.sort(
+              (a, b) => b.createdAt - a.createdAt
+            );
+            // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
+            const limitNewsData = sortNewsData.slice(0, 5);
+            setNewsData(limitNewsData);
+          } else {
+            console.error(JSON.stringify(response.errors));
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          setIsLoading(false);
+        });
+    }, []);
 
-  // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
-  const getMonthName = (monthIndex) => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
-  };
+    // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
+    const getMonthName = (monthIndex) => {
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
+    };
 
-  return (
-    <>
-      {isLoading ? (
-        <Loading
-          size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
-          textAlignment="text-center"
-        />
-      ) : (
-        <div className="w-full flex items-center justify-center">
-          <Swiper
-            spaceBetween={10}
-            slidesPerView={"auto"}
-            breakpoints={{
-              640: {
-                slidesPerView: "auto",
-                spaceBetween: 40,
-              },
-              768: {
-                slidesPerView: "auto",
-                spaceBetween: 10,
-              },
-            }}
-            loop={true}
-            pagination={pagination}
-            navigation={{
-              nextEl: `.${styles.newsButtonNext}`,
-              prevEl: `.${styles.newsButtonPrev}`,
-              clickable: true,
-            }}
-            centeredSlides={true}
-            grabCursor={true}
-            effect={"coverflow"}
-            modules={[Pagination, Navigation, EffectCoverflow]}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 2.5,
-              slideShadows: false,
-            }}
-            onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
-            className="h-[400px] md:h-[600px]"
-          >
-            {newsData.map((data, index) => (
-              <SwiperSlide key={index} className={`${styles.newsSlider}`}>
-                <div
-                  className={
-                    index === currentSlide
-                      ? `${styles.newsShowSlide}`
-                      : `${styles.newsDefaultSlide}`
-                  }
-                >
-                  {data?.mediaUri ? (
-                    <Image
-                      src={`${host}${data.mediaUri}`}
-                      alt="News Thumbnail Central Computer Improvment"
-                      width={402}
-                      height={268}
-                      responsive="true"
-                      loading="lazy"
-                      className={
-                        index === currentSlide
-                          ? `rounded-t-[10px] object-cover`
-                          : `rounded-t-[10px] object-cover`
-                      }
-                    />
-                  ) : (
-                    <ImageNotFound
-                      width={402}
-                      height={268}
-                      responsive="true"
-                      loading="lazy"
-                      className={
-                        index === currentSlide
-                          ? `rounded-t-[10px] object-cover`
-                          : `rounded-t-[10px] object-cover`
-                      }
-                    />
-                  )}
+    return (
+      <>
+        {isLoading ? (
+          <Loading
+            size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
+            textAlignment="text-center"
+          />
+        ) : (
+          <div className="w-full flex items-center justify-center">
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={"auto"}
+              breakpoints={{
+                640: {
+                  slidesPerView: "auto",
+                  spaceBetween: 40,
+                },
+                768: {
+                  slidesPerView: "auto",
+                  spaceBetween: 10,
+                },
+              }}
+              loop={true}
+              pagination={pagination}
+              navigation={{
+                nextEl: `.${styles.newsButtonNext}`,
+                prevEl: `.${styles.newsButtonPrev}`,
+                clickable: true,
+              }}
+              centeredSlides={true}
+              grabCursor={true}
+              effect={"coverflow"}
+              modules={[Pagination, Navigation, EffectCoverflow]}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2.5,
+                slideShadows: false,
+              }}
+              onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
+              className="h-[400px] md:h-[600px]"
+            >
+              {newsData.map((data, index) => (
+                <SwiperSlide key={index} className={`${styles.newsSlider}`}>
                   <div
                     className={
                       index === currentSlide
-                        ? "w-full sm:h-[90px] md:h-auto flex flex-col space-y-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
-                        : "w-full sm:h-[80px] md:h-[100px] lg:h-[119px] flex flex-col justify-between py-[6px] px-[10px] md:py-[6px] md:px-[10px] lg:py-[10px] lg:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
+                        ? `${styles.newsShowSlide}`
+                        : `${styles.newsDefaultSlide}`
                     }
                   >
-                    <p
+                    {data?.mediaUri ? (
+                      <Image
+                        src={`${host}${data.mediaUri}`}
+                        alt="News Thumbnail Central Computer Improvment"
+                        width={402}
+                        height={268}
+                        responsive="true"
+                        loading="lazy"
+                        className={
+                          index === currentSlide
+                            ? `rounded-t-[10px] object-cover`
+                            : `rounded-t-[10px] object-cover`
+                        }
+                      />
+                    ) : (
+                      <ImageNotFound
+                        width={402}
+                        height={268}
+                        responsive="true"
+                        loading="lazy"
+                        className={
+                          index === currentSlide
+                            ? `rounded-t-[10px] object-cover`
+                            : `rounded-t-[10px] object-cover`
+                        }
+                      />
+                    )}
+                    <div
                       className={
                         index === currentSlide
-                          ? `font-semibold text-[15px] md:text-[20px] lg:text-[30px] leading-0 lg:leading-10 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
-                          : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
+                          ? "w-full sm:h-[90px] md:h-auto flex flex-col space-y-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
+                          : "w-full sm:h-[80px] md:h-[100px] lg:h-[119px] flex flex-col justify-between py-[6px] px-[10px] md:py-[6px] md:px-[10px] lg:py-[10px] lg:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
                       }
                     >
-                      {data?.title ? data.title : <TextNotFound />}
-                    </p>
-                    <div className="w-full flex flex-row justify-between items-end">
                       <p
                         className={
                           index === currentSlide
-                            ? `font-medium sm:text-[10px] md:text-[14px] text-[#6B6B6B]`
-                            : `font-medium sm:text-[8px] md:text-[12px] text-[#6B6B6B]`
+                            ? `font-semibold text-[15px] md:text-[20px] lg:text-[30px] leading-0 lg:leading-10 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
+                            : `font-semibold text-[11px] md:text-[13px] lg:text-[15px] leading-0 max-h-[120px] overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`
                         }
                       >
-                        {data?.date ? data.date : <TextNotFound />}
+                        {data?.title ? data.title : <TextNotFound />}
                       </p>
-                      <p
-                        className={
-                          index === currentSlide
-                            ? `font-bold sm:text-[12px] lg:text-[20px] sm:px-[10px] lg:px-[25px] sm:py-[5px] md:py-[5px] lg:py-[8px] rounded-[10px] text-white bg-mainPrimary`
-                            : `font-bold sm:text-[8px] lg:text-[11px] sm:px-[10px] lg:px-[12px] sm:py-[3px] md:py-[5px] lg:py-[8px] rounded-[8px] text-white bg-mainPrimary`
-                        }
-                      >
-                        <Link href="/news">Load More</Link>
-                      </p>
+                      <div className="w-full flex flex-row justify-between items-end">
+                        <p
+                          className={
+                            index === currentSlide
+                              ? `font-medium sm:text-[10px] md:text-[14px] text-[#6B6B6B]`
+                              : `font-medium sm:text-[8px] md:text-[12px] text-[#6B6B6B]`
+                          }
+                        >
+                          {data?.date ? data.date : <TextNotFound />}
+                        </p>
+                        <p
+                          className={
+                            index === currentSlide
+                              ? `font-bold sm:text-[12px] lg:text-[20px] sm:px-[10px] lg:px-[25px] sm:py-[5px] md:py-[5px] lg:py-[8px] rounded-[10px] text-white bg-mainPrimary`
+                              : `font-bold sm:text-[8px] lg:text-[11px] sm:px-[10px] lg:px-[12px] sm:py-[3px] md:py-[5px] lg:py-[8px] rounded-[8px] text-white bg-mainPrimary`
+                          }
+                        >
+                          <Link href="/news">Load More</Link>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              ))}
             {/* Custom Button Next  */}
             <div
               ref={nextButton}

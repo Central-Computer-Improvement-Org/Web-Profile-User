@@ -7,7 +7,7 @@ export async function GET(request) {
             {
                 id: "NWS-458163-1",
                 title: "AI dalam Kehidupan Sehari-Hari",
-                description: "Artificial Intelligence (AI) adalah sebuah teknologi yang memungkinkan mesin untuk belajar dari pengalaman, menyesuaikan diri terhadap perubahan, dan melakukan tugas seperti manusia. AI telah menjadi bagian dari kehidupan sehari-hari kita, mulai dari asisten virtual hingga mobil otonom.",
+                description: "Virtual Reality (VR) adalah teknologi yang memungkinkan pengguna untuk berinteraksi dengan lingkungan yang disimulasikan oleh komputer. VR telah membawa perubahan besar dalam berbagai bidang, termasuk pekerjaan profesional.",
                 mediaUri: "assets/uploads/news/news-thumbnail-1.png",
                 createdAt: "2023-02-26 21:28:37.261134+01:00",
                 updatedAt: "2013-02-26 21:28:37.261134+01:00",
