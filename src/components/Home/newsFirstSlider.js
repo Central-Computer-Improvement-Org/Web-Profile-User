@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import moment from 'moment';
+import 'moment/locale/id';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
@@ -9,12 +11,12 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 
-  import request from "@/app/utils/request";
-  import Loading from "@/components/loading";
-  import ImageNotFound from "@/components/imageNotFound";
-  import TextNotFound from "@/components/teksNotFound";
-  import { host } from "@/components/host";
-  import styles from "@/components/Home/homeComponent.module.css";
+import request from "@/app/utils/request";
+import Loading from "@/components/loading";
+import ImageNotFound from "@/components/imageNotFound";
+import TextNotFound from "@/components/teksNotFound";
+import { host } from "@/components/host";
+import styles from "@/components/Home/homeComponent.module.css";
 
   const SwiperComponent = () => {
     const previousButton = useRef(null);
@@ -36,18 +38,16 @@ import "swiper/css/effect-coverflow";
         .then((response) => {
           if (response.status === 200 || response.status === 201) {
             const formatDateData = response.data.data.map((item) => {
-              const createdAt = new Date(item.createdAt);
+              const createdAt = moment(item.createdAt);
               return {
                 ...item,
-                date: `${getMonthName(
-                  createdAt.getMonth()
-                )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
-                createdAt: createdAt,
+                createdAt: moment(item.createdAt).format("MMM DD YYYY"),
+                date: `${createdAt.format("MMM DD YYYY")}`,
               };
             });
             // pengurutan data berdasarkan tanggal data terbaru
             const sortNewsData = formatDateData.sort(
-              (a, b) => b.createdAt - a.createdAt
+              (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
             );
             // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
             const limitNewsData = sortNewsData.slice(0, 5);
@@ -62,25 +62,6 @@ import "swiper/css/effect-coverflow";
           setIsLoading(false);
         });
     }, []);
-
-    // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
-    const getMonthName = (monthIndex) => {
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-      return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
-    };
 
     return (
       <>
