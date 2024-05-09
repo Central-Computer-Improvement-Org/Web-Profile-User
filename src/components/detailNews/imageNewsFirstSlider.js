@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import styles from '@/components/detailNews/imageNewsFirstSlider.module.css';
+import { host } from '../host';
 
 const ImageNewsFirstSlider = ({ image }) => {
    const iconArrow = (
@@ -57,12 +58,13 @@ const ImageNewsFirstSlider = ({ image }) => {
             }}
             modules={[Navigation, Pagination]}
          >
+            
             {image &&
                image.map((data, index) => (
                   <SwiperSlide className="cursor-pointer " key={index}>
                      <div className="w-full h-full">
                         <Image
-                           src={data.img}
+                           src={`${host}${image}`}
                            width={0}
                            height={0}
                            alt="banner"

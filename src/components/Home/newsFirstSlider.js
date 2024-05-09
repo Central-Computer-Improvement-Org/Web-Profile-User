@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import moment from 'moment';
 import 'moment/locale/id';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,6 +19,7 @@ import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
   const SwiperComponent = () => {
+    const router = useRouter();
     const previousButton = useRef(null);
     const nextButton = useRef(null);
     const [newsData, setNewsData] = useState([]);
@@ -175,7 +176,9 @@ import styles from "@/components/Home/homeComponent.module.css";
                               : `font-bold sm:text-[8px] lg:text-[11px] sm:px-[10px] lg:px-[12px] sm:py-[3px] md:py-[5px] lg:py-[8px] rounded-[8px] text-white bg-mainPrimary`
                           }
                         >
-                          <Link href="/news">Load More</Link>
+                          <a onClick={function(){
+                            router.push(`/news/detailNews?id=${data.id}`)
+                          }}>Load More</a>
                         </p>
                       </div>
                     </div>

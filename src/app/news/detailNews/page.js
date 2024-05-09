@@ -6,71 +6,136 @@ import Header from "@/components/header";
 import Navbar from "@/components/navbar";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import request from "../utils/request";
+import request from "../../utils/request";
 import moment from "moment";
-import { styles } from "@/app/detailNews/detailNewsPage.module.css";
-import { FormatString } from "../utils/stringUtils";
+import { useSearchParams } from "next/navigation";
+import { styles } from "@/app/news/detailNews/detailNewsPage.module.css";
+import { FormatString } from "../../utils/stringUtils";
+import Loading from "@/components/loading";
+import TextNotFound from "@/components/teksNotFound";
+import ImageNotFound from "@/components/imageNotFound";
 import { host } from "@/components/host";
 
 export default function DetailNews() {
-  // const [newsDetailData, setNewsDetailData] = useState();
+  const newsId = useSearchParams().get("id");
+  const [newsData, setNewsData] = useState(null);
   const [title, setTitle] = useState();
   const [image, setImage] = useState();
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
   const [parsedHTML, setParsedHTML] = useState(null);
   const [newsOfTheDay, setNewsOfTheDay] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [newsNewData, setNewsNewData] = useState(null);
+  const [newsTopData, setNewsTopData] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [newsDetailData, setNewsDetailData] = useState();
 
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   request
+  //     .get("/detail")
+  //     .then((response) => {
+  //       if (response.status === 200 || response.status === 201) {
+  //         setNewsTopData(response.data);
+  //       } else {
+  //         console.error(JSON.stringify(response.errors));
+  //       }
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       setIsLoading(false);
+  //     });
+  // }, []);
+
+  // console.log(newsTopData, "wdwdddd");
+
+  // useEffect(() => {
+  //   request
+  //     .get("/detailNews")
+  //     .then(function (response) {
+  //       setTitle(response.data.data.title);
+  //       setImage(response.data.data.image);
+  //       setDescription(response.data.data.description);
+  //       setDate(response.data.data.createdAt);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+
+  //   request
+  //     .get("news")
+  //     .then(function (response) {
+  //       setNewsOfTheDay(response.data.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, [description]);
+
+  // get from news by id
   useEffect(() => {
-    setIsLoading(true);
+    if (newsId) {
+      request
+        .get(`/news?id=${newsId}`)
+        .then((response) => {
+          if (response.data.code === 200 || response.data.code === 201) {
+            setTitle(response.data.data.title);
+            setImage(response.data.data.detailNewsMedia);
+            setDescription(response.data.data.description);
+            setDate(response.data.data.createdAt);
+            } else {
+              console.error(JSON.stringify(response.errors));
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      console.error("News ID not found");
+    }
+  }, [newsId]);
+  console.log(image, "image")
+
+  // get from news, just get viewCount
+  useEffect(() => {
     request
-      .get("/detail")
+      .get("/news")
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
-          setNewsNewData(response.data);
+          const newData = response.data.data;
+          const sortedData = newData.sort((a, b) => b.visitedCount - a.visitedCount);
+          const top3Data = sortedData.slice(0, 3);
+          setNewsTopData(top3Data);
         } else {
           console.error(JSON.stringify(response.errors));
         }
-        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        setIsLoading(false);
       });
   }, []);
 
-  useEffect(() => {
-    request
-      .get("detailNews")
-      .then(function (response) {
-        setTitle(response.data.data.title);
-        setImage(response.data.data.image);
-        setDescription(response.data.data.description);
-        setDate(response.data.data.createdAt);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  // useEffect(() => {
+  //   request
+  //     .get("/detail")
+  //     .then(function (response) {
+  //       setTitle(response.data.data[0].title);
+  //       setImage(response.data.data[0].detailNewsMedia);
+  //       setDescription(response.data.data[0].description);
+  //       setDate(response.data.data[0].createdAt);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, [description]); 
 
-    request
-      .get("news")
-      .then(function (response) {
-        setNewsOfTheDay(response.data.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [description]);
-
-  useEffect(() => {
-    const doc = new DOMParser().parseFromString(description, "text/html");
-    const htmlElement = doc.documentElement;
-    const classNames = Array.from(htmlElement.classList).join(" ");
-    htmlElement.setAttribute("class", classNames);
-    setParsedHTML(htmlElement);
-  }, [description]);
+  // useEffect(() => {
+  //   const doc = new DOMParser().parseFromString(description, "text/html");
+  //   const htmlElement = doc.documentElement;
+  //   const classNames = Array.from(htmlElement.classList).join(" ");
+  //   htmlElement.setAttribute("class", classNames);
+  //   setParsedHTML(htmlElement);
+  // }, [description]);
 
   return (
     <>
@@ -85,8 +150,12 @@ export default function DetailNews() {
                 className="w-full xl:px-20 md:px-12 px-4 sm:pt-44 pt-24  mx-auto"
               >
                 <h1 className="lg:text-6xl md:text-4xl text-xl text-bluePallete-800 font-black lg:mb-6 mb-2 leading-tight">
-                  <span className="lg:text-6xl md:text-4xl text-3xl "></span>{" "}
-                  {title}
+                  <span className="lg:text-6xl md:text-4xl text-3xl"></span>{" "} 
+                  {title ? (
+                    title
+                  ) : (
+                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-black">INI ADALAH JUDUL</TextNotFound>
+                  )}
                 </h1>
                 <div className="inline-block border border-bluePallete-600 rounded-full bg-white lg:text-[25px] md:text-[18px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-3 py-1">
                   {moment(date).format("MMM DD[,] YYYY")}

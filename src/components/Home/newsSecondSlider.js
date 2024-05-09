@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -14,6 +15,7 @@ import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const NewsSecondSlider = () => {
+  const router = useRouter();
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -93,45 +95,51 @@ const NewsSecondSlider = () => {
                 key={index}
                 className="px-1 !flex !justify-start !items-center !flex-col"
               >
-                <div className="w-[222px] h-[242px] ">
-                  {data?.mediaUri ? (
-                    <Image
-                      width={222}
-                      height={152}
-                      src={`${host}${data.mediaUri}`}
-                      alt="News Thumbnail Central Computer Improvment"
-                      responsive="true"
-                      loading="lazy"
-                      className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
-                    />
-                  ) : (
-                    <ImageNotFound 
-                      width={222}
-                      height={152}
-                      className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
-                    />
-                  )}
-                  <div
-                    className={`w-full h-[90px] flex flex-col justify-between p-2 bg-white rounded-b-[10px] ${styles.newsCardBorder}`}
-                  >
-                    <h2
-                      className={`font-semibold text-[14px] leading-5 sm:leading-0 overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`}
+                <a
+                  onClick={function () {
+                    router.push(`/news/detailNews?id=${data.id}`);
+                  }}
+                >
+                  <div className="w-[222px] h-[242px] ">
+                    {data?.mediaUri ? (
+                      <Image
+                        width={222}
+                        height={152}
+                        src={`${host}${data.mediaUri}`}
+                        alt="News Thumbnail Central Computer Improvment"
+                        responsive="true"
+                        loading="lazy"
+                        className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
+                      />
+                    ) : (
+                      <ImageNotFound 
+                        width={222}
+                        height={152}
+                        className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
+                      />
+                    )}
+                    <div
+                      className={`w-full h-[90px] flex flex-col justify-between p-2 bg-white rounded-b-[10px] ${styles.newsCardBorder}`}
                     >
-                      {data?.title ? (
-                        data.title
-                      ) : (
-                        <TextNotFound />
-                      )}
-                    </h2>
-                    <p className="text-[10px] font-medium text-gray-500">
-                      {data?.date ? (
-                        data.date
-                      ) : (
-                        <TextNotFound />
-                      )}
-                    </p>
+                      <h2
+                        className={`font-semibold text-[14px] leading-5 sm:leading-0 overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`}
+                      >
+                        {data?.title ? (
+                          data.title
+                        ) : (
+                          <TextNotFound />
+                        )}
+                      </h2>
+                      <p className="text-[10px] font-medium text-gray-500">
+                        {data?.date ? (
+                          data.date
+                        ) : (
+                          <TextNotFound />
+                        )}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </a>
               </SwiperSlide>
             ))}
         </Swiper>
