@@ -68,7 +68,7 @@ export default function News() {
                       ))}
                   </div>
                   <div className="sm:w-full xl:basis-5/12 px-0 xl:px-8 flex flex-col gap-4">
-                    <div className="align-baseline mb-3">
+                    <div className="flex  items-center justify-center xl:justify-start mb-3">
                       <svg
                         className="xl:w-[5opx] xl:h-[50px] w-[40px] h-[40px] inline-block "
                         viewBox="0 0 50 50"
@@ -84,7 +84,7 @@ export default function News() {
                           fill="#0F9848"
                         />
                       </svg>
-                      <h1 className="text-bluePallete-800 text-2xl md:text-2xl lg:text-3xl font-bold items-baseline py-3 inline ms-3">
+                      <h1 className="text-bluePallete-800 text-[25px] md:text-2xl lg:text-3xl font-bold items-baseline py-3 inline ms-3">
                         Top Read of The Day
                       </h1>
                     </div>
@@ -111,9 +111,11 @@ export default function News() {
               id="also-in-news"
               className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-36 "
             >
-              <h1 className="text-4xl lg:text-6xl text-bluePallete-800 font-bold mb-7">
-                Also in News
-              </h1>
+              <div className="flex  items-center justify-center xl:justify-start">
+                <h1 className="text-[25px] lg:text-6xl text-bluePallete-800 font-bold mb-7">
+                  Also in News
+                </h1>
+              </div>
               <div className=" lg:hidden flex flex-col gap-4">
                 {articleDatas &&
                   articleDatas.slice(0, 5).map((data, index) => (
