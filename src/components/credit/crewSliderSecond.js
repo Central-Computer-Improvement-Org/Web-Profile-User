@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import styles from '@/components/credit/credit.module.css';
 import CardCreditProfile from './cardCreditProfile';
 
-const CrewSliderSecond = ({ crewDatas }) => {
+const CrewSliderSecond = ({ crewDatas = [] }) => {
   return (
     <div className={`flex justify-center items-center w-full`}>
       {/* Pengecekan laoding disini wajib, karena untuk menghindari error fungsi navigation swiper yang membutuhkan data harus wajib ada terlebih dahulu di dalam tag Swiper */}

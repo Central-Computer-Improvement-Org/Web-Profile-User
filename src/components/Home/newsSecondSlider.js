@@ -7,11 +7,15 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import request from "@/app/utils/request";
+import Loading from "@/components/loading";
+import ImageNotFound from "@/components/imageNotFound";
+import TextNotFound from "@/components/teksNotFound";
+import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const NewsSecondSlider = () => {
   const [newsData, setNewsData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     request
@@ -38,11 +42,11 @@ const NewsSecondSlider = () => {
         } else {
           console.error(JSON.stringify(response.errors));
         }
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        setLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
@@ -67,12 +71,8 @@ const NewsSecondSlider = () => {
 
   return (
     <>
-      {loading ? (
-        <div className="w-full h-[290px] flex justify-center items-center">
-          <p className="font-bold text-center text-[20px] text-bluePallete-700">
-            Loading...
-          </p>
-        </div>
+      {isLoading ? (
+        <Loading size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]" textAlignment="text-center" />
       ) : (
         <Swiper
           slidesPerView={1.6}
@@ -115,25 +115,41 @@ const NewsSecondSlider = () => {
                 className="px-1 !flex !justify-start !items-center !flex-col"
               >
                 <div className="w-[222px] h-[242px] ">
-                  <Image
-                    width={222}
-                    height={152}
-                    src={data.mediaUri}
-                    alt="News Thumbnail Central Computer Improvment"
-                    responsive="true"
-                    loading="lazy"
-                    className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
-                  />
+                  {data?.mediaUri ? (
+                    <Image
+                      width={222}
+                      height={152}
+                      src={`${host}${data.mediaUri}`}
+                      alt="News Thumbnail Central Computer Improvment"
+                      responsive="true"
+                      loading="lazy"
+                      className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
+                    />
+                  ) : (
+                    <ImageNotFound 
+                      width={222}
+                      height={152}
+                      className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
+                    />
+                  )}
                   <div
                     className={`w-full h-[90px] flex flex-col justify-between p-2 bg-white rounded-b-[10px] ${styles.newsCardBorder}`}
                   >
                     <h2
                       className={`font-semibold text-[14px] leading-5 sm:leading-0 overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`}
                     >
-                      {data.title}
+                      {data?.title ? (
+                        data.title
+                      ) : (
+                        <TextNotFound />
+                      )}
                     </h2>
                     <p className="text-[10px] font-medium text-gray-500">
-                      {data.date}
+                      {data?.date ? (
+                        data.date
+                      ) : (
+                        <TextNotFound />
+                      )}
                     </p>
                   </div>
                 </div>

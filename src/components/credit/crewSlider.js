@@ -8,8 +8,9 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/navigation';
 import CardCreditProfile from './cardCreditProfile';
+import { host } from '../host';
 
-export default function CrewSlider({ crewDatas }) {
+export default function CrewSlider({ crewDatas = [] }) {
   const iconArrow = (
     <svg
       className="xl:w-[55px] md:w-[40px] "
@@ -41,18 +42,18 @@ export default function CrewSlider({ crewDatas }) {
         className="mySwiper  xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] "
       >
         {crewDatas &&
-          crewDatas.map((data, index) => (
-            <SwiperSlide key={index} className="">
-              <CardCreditProfile
-                color={'bg-bluePallete-300'}
-                image={
-                  'https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg'
-                }
-                jobdes={'Crew'}
-                name={data.name}
-              />
-            </SwiperSlide>
-          ))}
+          crewDatas.map((data, index) => {
+            return (
+              <SwiperSlide key={index} className="">
+                <CardCreditProfile
+                  color={'bg-bluePallete-300'}
+                  image={`${host}${data.profileUri}`}
+                  jobdes={`${data.role.name}`}
+                  name={data.name}
+                />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
       <div className="absolute z-50 xl:right-12 lg:right-16 top-0 bottom-0 lg:flex items-center justify-center hidden">
         <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">

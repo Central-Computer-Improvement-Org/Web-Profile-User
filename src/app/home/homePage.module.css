@@ -1,3 +1,21 @@
+/* Section Hero */
+.homeGradasiKanan {
+  position: absolute;
+  top: -5%;
+  left: -20%;
+  z-index: -1 !important;
+}
+
+.homeGradasiKiri {
+  position: absolute;
+  top: 15%;
+  right: -15%;
+  z-index: -1 !important;
+}
+
+
+
+
 /* Section Connect */
 @media only screen and (max-width: 390px) {
   .connectCardContainer {
@@ -30,22 +48,13 @@
   .divisionContainerTagline {
     padding-left: 5px !important;
   }
-}
-
-@media only screen and (max-width: 812px) {
-  .divisionCardDescription {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 7;
-    word-wrap: break-word;
-  }
-}
+} 
 
 @media only screen and (max-width: 768px) {
   .divisionCardContainer {
     max-width: 100%;
   }
-}
+} 
 
 @media only screen and (max-width: 400px) {
   .divisionTagline {
