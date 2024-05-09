@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 import styles from '@/components/detailNews/rekomendasiNewsSlider.module.css';
 import { FormatString } from '@/app/utils/stringUtils';
 import moment from 'moment';
+import { dateFormater } from '@/app/utils/dateFormater';
 
 const RekomendasiNewsSlider = ({ newsData }) => {
   const iconArrow = (
@@ -75,7 +76,9 @@ const RekomendasiNewsSlider = ({ newsData }) => {
                     {FormatString(data.title)}
                   </h1>
                   <p className="text-sm text-mainFontColor font-medium">
-                    {moment(data.createdAt).format('MMM DD[,] YYYY')}
+                    {moment(dateFormater(data.createdAt)).format(
+                      'MMM DD[,] YYYY'
+                    )}
                   </p>
                 </div>
               </div>

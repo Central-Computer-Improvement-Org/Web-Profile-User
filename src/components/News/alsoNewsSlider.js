@@ -79,6 +79,7 @@ import moment from 'moment';
 import request from '@/app/utils/request';
 import { host } from '../host';
 import Link from 'next/link';
+import { dateFormater } from '@/app/utils/dateFormater';
 
 const AlsoNewsSlider = () => {
   const iconArrow = (
@@ -164,7 +165,9 @@ const AlsoNewsSlider = () => {
                       {FormatString(data.title)}
                     </h1>
                     <p className="text-sm text-mainFontColor font-medium">
-                      {moment(data.createdAt).format('MMM DD[,] YYYY')}
+                      {moment(dateFormater(data.createdAt)).format(
+                        'MMM DD[,] YYYY'
+                      )}
                     </p>
                   </div>
                 </div>
