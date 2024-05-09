@@ -36,12 +36,12 @@ export default function Credits() {
           setContributors(res.data.data[0].contributors);
           setIsLoading(false);
         } else {
-          console.log(res);
+          // console.log(res);
           setIsLoading(false);
         }
       })
       .catch(function (err) {
-        console.log(err);
+        console.error(err);
       });
   }, []);
 
