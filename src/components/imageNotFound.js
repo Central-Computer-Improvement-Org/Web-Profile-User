@@ -4,7 +4,7 @@ import Image from "next/image";
 const NotFound = ({ className = "w-[50px] h-[50px]" }) => {
    return (
       <Image
-         src="assets/icon/notfound.jpg"
+         src="assets/icon/notfound.svg"
          alt="Not Found Icon"
          width={500}
          height={500}
