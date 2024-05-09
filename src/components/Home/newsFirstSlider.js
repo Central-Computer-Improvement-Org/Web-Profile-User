@@ -23,12 +23,12 @@ const SwiperComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
-    },
-  };
+   const pagination = {
+      clickable: true,
+      renderBullet: function (index, className) {
+         return `<span className="${className} swiper-pagination-bullet-custom"></span>`;
+      },
+   };
 
   useEffect(() => {
     request
