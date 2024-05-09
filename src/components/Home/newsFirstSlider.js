@@ -22,7 +22,7 @@ const SwiperComponent = () => {
    const pagination = {
       clickable: true,
       renderBullet: function (index, className) {
-         return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
+         return `<span className="${className} swiper-pagination-bullet-custom"></span>`;
       },
    };
 

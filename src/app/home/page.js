@@ -25,7 +25,7 @@ export default function Home() {
       setIsLoading(true);
 
       request
-         .get("/settings")
+         .get("/setting")
          .then((response) => {
             if (response.status === 200 || response.status === 201) {
                setSettingsData(response.data);
@@ -45,7 +45,7 @@ export default function Home() {
 
       const fetchAwardData = async () => {
          try {
-            const response = await request.get("/award");
+            const response = await request.get("/awards");
             if (response.status === 200 || response.status === 201) {
                setAwardData(response.data);
             } else {
@@ -58,7 +58,7 @@ export default function Home() {
 
       const fetchMemberData = async () => {
          try {
-            const response = await request.get("/member");
+            const response = await request.get("/users");
             if (response.status === 200 || response.status === 201) {
                setMemberData(response.data);
             } else {
