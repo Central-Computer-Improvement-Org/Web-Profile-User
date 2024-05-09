@@ -32,7 +32,6 @@ const HeroSection = () => {
 
    return (
       <Swiper
-
          slidesPerView={1}
          onSlideChange={() => console.log('slide change')}
          onSwiper={(swiper) => console.log(swiper)}

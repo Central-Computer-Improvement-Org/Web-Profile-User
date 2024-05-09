@@ -38,7 +38,7 @@ export default function Credits() {
           console.log(res.data.data[0], 'asd');
           setIsLoading(false);
         } else {
-          console.log(res);
+          // console.log(res);
           setIsLoading(false);
         }
       })
