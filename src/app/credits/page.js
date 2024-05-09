@@ -79,24 +79,42 @@ export default function Credits() {
           ) : contributors ? (
             <div>
               <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
-                {presidentDatas.map((data, index) => (
-                  <CardCreditProfile
-                    color={'bg-greenPallete-300'}
-                    image={
-                      'https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg'
-                    }
-                    jobdes={'Crew'}
-                    name={data.name}
-                    key={index}
-                  />
-                ))}
+                {contributors
+                  .filter(
+                    (data) =>
+                      data.role.name !== 'Employee Experience' &&
+                      data.division.name === 'Design'
+                  )
+                  .map((data, index) => (
+                    <CardCreditProfile
+                      color={'bg-greenPallete-300'}
+                      image={
+                        'https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg'
+                      }
+                      jobdes={data.role.name}
+                      name={data.name}
+                      key={index}
+                    />
+                  ))}
               </div>
               <div className="mt-[74px]" />
               <div className="md:block hidden">
-                <CrewSlider crewDatas={contributors} />
+                <CrewSlider
+                  crewDatas={contributors.filter(
+                    (data) =>
+                      data.role.name === 'Employee Experience' &&
+                      data.division.name === 'Design'
+                  )}
+                />
               </div>
               <div className="md:hidden block">
-                <CrewSliderSecond crewDatas={contributors} />
+                <CrewSliderSecond
+                  crewDatas={contributors.filter(
+                    (data) =>
+                      data.role.name === 'Employee Experience' &&
+                      data.division.name === 'Design'
+                  )}
+                />
               </div>
             </div>
           ) : (
@@ -118,24 +136,42 @@ export default function Credits() {
           ) : contributors ? (
             <div>
               <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
-                {presidentDatas.map((data, index) => (
-                  <CardCreditProfile
-                    color={'bg-greenPallete-300'}
-                    image={
-                      'https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg'
-                    }
-                    jobdes={'Crew'}
-                    name={data.name}
-                    key={index}
-                  />
-                ))}
+                {contributors
+                  .filter(
+                    (data) =>
+                      data.role.name !== 'Employee Experience' &&
+                      data.division.name === 'Web Development'
+                  )
+                  .map((data, index) => (
+                    <CardCreditProfile
+                      color={'bg-greenPallete-300'}
+                      image={
+                        'https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg'
+                      }
+                      jobdes={data.role.name}
+                      name={data.name}
+                      key={index}
+                    />
+                  ))}
               </div>
               <div className="mt-[74px]" />
               <div className="md:block hidden">
-                <CrewSlider crewDatas={contributors} />
+                <CrewSlider
+                  crewDatas={contributors.filter(
+                    (data) =>
+                      data.role.name === 'Employee Experience' &&
+                      data.division.name === 'Web Development'
+                  )}
+                />
               </div>
               <div className="md:hidden block">
-                <CrewSliderSecond crewDatas={contributors} />
+                <CrewSliderSecond
+                  crewDatas={contributors.filter(
+                    (data) =>
+                      data.role.name === 'Employee Experience' &&
+                      data.division.name === 'Web Development'
+                  )}
+                />
               </div>
             </div>
           ) : (
