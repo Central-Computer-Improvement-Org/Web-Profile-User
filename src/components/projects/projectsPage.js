@@ -39,46 +39,42 @@ const ProjectPage = () => {
     });
   };
 
-  const getProjects = async () => {
-    let payload = {
-      limit: LIMITER,
-      page: page,
-    };
-
-    if (menuActive.name !== 'All') {
-      payload = {
-        limit: LIMITER,
-        page: 1,
-        divisionId: menuActive.id,
-      };
-    }
-    request
-      .get('projects', payload)
-      .then(function (response) {
-        setProjectData(response.data.data);
-        setRecordsTotalProject(response.data.recordsTotal);
-      })
-      .catch(function (error) {
-        // console.log(error);
-      });
-
-    request
-      .get('projects')
-      .then(function (response) {
-        setShowProjectData(response.data.data);
-      })
-      .catch(function (error) {
-        // console.log(error);
-      });
-  };
-
   useEffect(() => {
     getDivisions();
   }, []);
 
   useEffect(() => {
+    const getProjects = async () => {
+      let payload = {
+        limit: LIMITER,
+        page: page,
+      };
+
+      if (menuActive.name !== 'All') {
+        payload = {
+          ...payload,
+          page: 1,
+          divisionId: menuActive.id,
+        };
+      }
+
+      try {
+        const response = await request.get('projects', payload);
+        setProjectData(response.data.data);
+        setRecordsTotalProject(response.data.recordsTotal);
+      } catch (error) {
+        // Handle error
+      }
+
+      try {
+        const response = await request.get('projects');
+        setShowProjectData(response.data.data);
+      } catch (error) {
+        // Handle error
+      }
+    };
     getProjects();
-  }, [page, menuActive]);
+  }, [menuActive.id, menuActive.name, page]);
 
   if (!projectData) {
     return (
