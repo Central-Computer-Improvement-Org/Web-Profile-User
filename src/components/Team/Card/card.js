@@ -2,9 +2,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useWindowSize } from '@uidotdev/usehooks';
+import { host } from '@/components/host';
 
 export default function TeamCard({
-   imageUrl,
+   profileUri,
    title,
    name,
    linkedinUri,
@@ -15,12 +16,11 @@ export default function TeamCard({
 
    return (
       <div
-         className={`bg-gradientCard relative mt-[30px] ${isRight ? 'mr-[20px] ml-[8px]' : 'ml-[20px] mr-[8px]'
-            } lg:mt-[80px] md:mx-[16px] lg:mx-[39.5px] xl:mx-[81.5px] py-[54px] md:py-[6rem] lg:py-[155px] rounded-[15px] md:rounded-[30px] overflow-hidden`}
+         className="h-auto flex justify-around items-center mt-[21px] min-w-[45%] bg-[#B5E4C9] px-[10px] py-[46px] rounded-xl w-[40%]"
       >
          {size.width >= 768 ? (
             <div
-               className={`absolute inset-0 space-x-[1rem] flex items-center justify-between md:px-[1.5rem] lg:px-[2rem]`}
+               className={`inset-0 w-full px-10 space-x-[1rem] flex items-center justify-between`}
             >
                <div className="md:space-y-[16px] lg:space-y-[32px] xl:space-y-[56px]">
                   <div className="text-bluePallete-800">
@@ -30,7 +30,7 @@ export default function TeamCard({
                         {title}
                      </h5>
                      <p className={`antialiased md:text-h5 lg:text-[40px] font-black`}>
-                        {name}
+                        Faiz Elfahad Kurniawan
                      </p>
                   </div>
                   <div>
@@ -40,17 +40,17 @@ export default function TeamCard({
                            className={`md:w-[35px] md:h-[35px] lg:w-[60px] lg:h-[60px]`}
                            width={0}
                            height={0}
-                           alt=""
+                           alt="logo linkedin"
                         />
                      </Link>
                   </div>
                </div>
                <Image
-                  src={imageUrl}
-                  className={`md:w-[132px] md:h-[132px] lg:w-[200px] lg:h-[201.54px]`}
+                  src={host + profileUri}
+                  className={`md:w-[132px] md:h-[132px] lg:w-[200px] lg:h-[201.54px] m`}
                   height={0}
                   width={0}
-                  alt=""
+                  alt="profile picture"
                />
             </div>
          ) : (
@@ -65,11 +65,11 @@ export default function TeamCard({
                      </p>
                   </div>
                   <Image
-                     src={imageUrl}
+                     src={host + profileUri}
                      className={`w-[55px] h-[55px]`}
                      height={0}
                      width={0}
-                     alt=""
+                     alt="profile picture"
                   />
                </div>
                <div className="relative w-fit">

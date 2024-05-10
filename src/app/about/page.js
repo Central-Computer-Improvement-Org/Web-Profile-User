@@ -49,7 +49,7 @@ export default function Home() {
                      </div>
                   </section>
                   <section id="team" className={`h-full md:px-0`}>
-                     <div className="container mx-auto">
+                     <div className="container mx-auto flex flex-col items-center w-full">
                         <Divisions />
                      </div>
                   </section>

@@ -1,20 +1,30 @@
 import React from 'react';
 import Image from 'next/image';
-import { useWindowSize } from "@uidotdev/usehooks";
-
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid, Navigation, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/grid';
+import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import CardCreditProfile from './cardCreditProfile';
+import './about.css'
+
 import { host } from '../host';
+import CardCreditProfile from '../credit/cardCreditProfile';
 
-export default function CrewSlider({ crewDatas = [], color = 'bg-bluePallete-300' }) {
-   const size = useWindowSize();
+const data = [
+   { name: "ASs" },
+   { name: "ASs" },
+   { name: "ASs" },
+   { name: "ASs" },
+   { name: "ASs" },
+   { name: "ASs" },
+   { name: "ASs" },
+   { name: "ASs" },
+]
 
+export default function Slider() {
    const iconArrow = (
       <svg
          className="xl:w-[55px] md:w-[40px] "
@@ -31,7 +41,7 @@ export default function CrewSlider({ crewDatas = [], color = 'bg-bluePallete-300
       </svg>
    );
    return (
-      <div className="relative ">
+      <div className="relative w-full">
          <Swiper
             slidesPerView={2}
             grid={{
@@ -39,38 +49,32 @@ export default function CrewSlider({ crewDatas = [], color = 'bg-bluePallete-300
                fill: 'row',
             }}
             spaceBetween={40}
-            navigation={size.width >= 768 ? {
+            navigation={{
                nextEl: '.next',
-            } : false}
-            pagination={size.width >= 768 ? false : {
-               el: ".bullets-container",
-               type: "bullets",
-               bulletClass: "swiper-custom-bullet",
-               bulletActiveClass: "swiper-custom-bullet-active",
+            }}
+            pagination={{
+               el: '.swiper-pagination',
                clickable: true,
-               renderBullet: function (index, className) {
-                  return '<span className="' + className + '"></span>';
-               },
             }}
             modules={[Grid, Navigation, Pagination]}
-            className="mySwiper  xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] "
+            className="mySwiper xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] w-full"
          >
-            {crewDatas &&
-               crewDatas.map((data, index) => {
+            {data &&
+               data.map((data, index) => {
                   return (
-                     <SwiperSlide key={index} className="">
+                     <SwiperSlide key={index} className="w=[100%]">
                         <CardCreditProfile
-                           color={color}
-                           image={`${host}${data.profileUri}`}
-                           jobdes={`${data.role.name}`}
-                           name={data.name}
+                           color={'bg-bluePallete-300'}
+                           image={`https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg`}
+                           jobdes={`Crew`}
+                           name={"Siti NUrbaya"}
                         />
                      </SwiperSlide>
                   );
                })}
          </Swiper>
-         <div className="bullets-container"></div>
-         <div className="absolute z-50 xl:right-12 lg:right-16 top-0 bottom-0 lg:flex items-center justify-center hidden">
+         <div className="mt-[30px] swiper-pagination lg:hidden md:hidden flex justify-center items-center gap-[10px]" />
+         <div className="absolute z-50 xl:right-12 lg:right-16 top-0 bottom-0 lg:flex items-center justify-center sm:hidden">
             <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
                {iconArrow}
             </button>
