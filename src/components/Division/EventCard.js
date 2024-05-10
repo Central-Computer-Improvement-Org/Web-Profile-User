@@ -25,6 +25,8 @@ const desktopColorPattern = [
 
 const mobileColorPattern = ["#152E51", "#11A950"];
 
+const LIMITER = 6;
+
 const EventCard = () => {
    const size = useWindowSize();
 
@@ -32,22 +34,27 @@ const EventCard = () => {
    const [flipPosition, setFlipPosition] = useState(null);
    const [colorPattern, setColorPattern] = useState(desktopColorPattern);
    const [autoFlipCount, setAutoFlipCount] = useState(0);
-   const [currentIndex, setCurrentIndex] = useState(0);
-   const [isLeft, setIsLeft] = useState(false);
+   const [page, setPage] = useState(1);
+   const [totalPages, setTotalPages] = useState(0);
 
 
    // if (!eventData) {
    //    return <Loading />;
    // }
 
-   // const eventDataFilltered = eventData;
+   // const eventData = eventData;
 
-   useEffect(() => {
-      request
-         .get("/events")
+   const getEvents = async () => {
+      const payload = {
+         limit: LIMITER,
+         page: page
+      };
+
+      await request
+         .get("/events", payload)
          .then((response) => {
-            console.info(response.data.data)
             if (response.status === 200 || response.status === 201) {
+               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
                setEventData(response.data.data);
             } else {
                console.error(JSON.stringify(response.errors));
@@ -56,7 +63,11 @@ const EventCard = () => {
          .catch((error) => {
             console.error(error);
          });
-   }, []);
+   }
+
+   useEffect(() => {
+      getEvents();
+   }, [page]);
 
    const isDesktop = useMediaQuery({ minWidth: 1051 });
    useEffect(() => {
@@ -88,21 +99,8 @@ const EventCard = () => {
    }, [eventData, autoFlipCount]);
 
    const handleNext = () => {
-      setCurrentIndex((prevIndex) => {
-         const nextIndex = prevIndex + 2;
-         return nextIndex >= eventData.length - 2 ? 0 : nextIndex;
-      });
+      page >= totalPages ? setPage(1) : setPage(page + 1);
    };
-
-   const eventDataFilltered = eventData?.slice(
-      isLeft ? currentIndex : currentIndex + 0, isLeft ?
-      currentIndex + 2 : currentIndex + 6
-   );
-   const updateIsLeft = (isLeft) => {
-      setIsLeft(!isLeft); // Update isLeft to the opposite of isRight
-   };
-
-   const totalDots = Math.ceil(eventData?.length / eventData?.length - 3);
 
 
    return (
@@ -113,7 +111,7 @@ const EventCard = () => {
             </p>
          </div>
          <div className="w-full h-auto flex flex-wrap justify-around items-center mt-[21px]">
-            {eventDataFilltered?.map((event, index) => (
+            {eventData?.map((event, index) => (
                <div key={event.id} className="mt-[10px] sm:mt-[54px]">
                   <ReactCardFlip
                      key={event.id}
@@ -180,7 +178,7 @@ const EventCard = () => {
                </div>
             ))}
          </div>
-         {size.width >= 768 ? (
+         {size.width >= 768 && (
             <button
                className="text-white w-full flex justify-center hover:opacity-75 md:mt-[54px]"
                onClick={handleNext}
@@ -201,17 +199,6 @@ const EventCard = () => {
                   />
                </svg>
             </button >
-         ) : (
-            <div className="flex justify-center mt-4">
-               {Array.from({ length: totalDots }, (_, i) => (
-                  <button
-                     key={i}
-                     className={`w-[10px] h-[10px] mx-[2px] rounded-full bg-gray-400 hover:bg-gray-500 ${i === currentIndex / eventData?.length ? "bg-blue-500" : ""
-                        }`}
-                     onClick={() => setCurrentIndex(i * eventData.length)}
-                  />
-               ))}
-            </div>
          )
          }
       </>

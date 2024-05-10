@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
 
-export default function CardCreditProfile({ color, jobdes, name, image }) {
+export default function CardAbout({ color, jobdes, name, image }) {
    return (
       <div
-         className={`xl:w-[534px] xl:h-[286px] lg:w-[380px] lg:h-[186px] md:w-[334px] md:h-[186px] w-[357px] h-[152px] rounded-[15px] ${color} flex justify-center items-center xl:px-[43px] px-[16px]`}
+         className={`xl:w-[534px] xl:h-[286px] lg:w-[380px] lg:h-[186px] md:w-[100%] md:h-[186px] w-[100%] h-[152px] rounded-[15px] ${color} flex justify-center items-center xl:px-[43px] px-[16px]`}
       >
-         <div className="box-border	w-full flex flex-col">
+         <div className="box-border	w-full">
             <p className="xl:text-[20px] md:text-[16px] text-[15px] font-medium text-bluePallete-800">
                {jobdes}
             </p>

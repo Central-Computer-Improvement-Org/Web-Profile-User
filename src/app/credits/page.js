@@ -13,40 +13,40 @@ import NotFound from '@/components/imageNotFound';
 import Loading from '@/components/loading';
 
 export default function Credits() {
-  const presidentDatas = [
-    { posisition: 'Ketua Devisi', name: 'Muhammad Firmansyah Syaputrah' },
-    { posisition: 'Ketua Devisi', name: 'Muhammad Ardiansyah' },
-  ];
-  const crewDatas = [
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-  ];
-  const [contributors, setContributors] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+   const presidentDatas = [
+      { posisition: 'Ketua Devisi', name: 'Muhammad Firmansyah Syaputrah' },
+      { posisition: 'Ketua Devisi', name: 'Muhammad Ardiansyah' },
+   ];
+   const crewDatas = [
+      { posisition: 'Crew', name: 'Kenzo Tiyu' },
+      { posisition: 'Crew', name: 'Kenzo Tiyu' },
+      { posisition: 'Crew', name: 'Kenzo Tiyu' },
+      { posisition: 'Crew', name: 'Kenzo Tiyu' },
+      { posisition: 'Crew', name: 'Kenzo Tiyu' },
+      { posisition: 'Crew', name: 'Kenzo Tiyu' },
+   ];
+   const [contributors, setContributors] = useState();
+   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    request
-      .get('/projects?id=PJT-20240508164541859997')
-      .then(function (res) {
-        console.log(res.data.data);
-        if (res.data.code === 200 || res.data.code === 201) {
-          setContributors(res.data.data.contributors);
-          console.log(res.data.data[0], 'asd');
-          setIsLoading(false);
-        } else {
-          // console.log(res);
-          setIsLoading(false);
-        }
-      })
-      .catch(function (err) {
-        console.log(err);
-        setIsLoading(false);
-      });
-  }, []);
+   useEffect(() => {
+      request
+         .get('/projects?id=PJT-20240508164541859997')
+         .then(function (res) {
+            console.log(res.data.data);
+            if (res.data.code === 200 || res.data.code === 201) {
+               setContributors(res.data.data.contributors);
+               console.log(res.data.data[0], 'asd');
+               setIsLoading(false);
+            } else {
+               // console.log(res);
+               setIsLoading(false);
+            }
+         })
+         .catch(function (err) {
+            console.log(err);
+            setIsLoading(false);
+         });
+   }, []);
 
   useEffect(() => {
     console.log(contributors);
