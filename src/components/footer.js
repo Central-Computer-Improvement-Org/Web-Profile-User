@@ -10,17 +10,14 @@ import TextNotFound from "@/components/teksNotFound";
 import { host } from "@/components/host";
 
 const Footer = () => {
-   const [settingsData, setSettingsData] = useState(null);
-   const [contactData, setContactData] = useState(null);
-   const [isLoading, setIsLoading] = useState(true);
+  const [settingsData, setSettingsData] = useState(null);
+  const [contactData, setContactData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-   useEffect(() => {
-      setIsLoading(true);
+  useEffect(() => {
+    setIsLoading(true);
 
-    Promise.all([
-      request.get("/setting"),
-      request.get("/contact"),
-    ])
+    Promise.all([request.get("/setting"), request.get("/contact")])
       .then(([settingsResponse, contactResponse]) => {
         if (
           settingsResponse.status === 200 ||
@@ -31,19 +28,19 @@ const Footer = () => {
           console.error(JSON.stringify(settingsResponse.errors));
         }
 
-            if (contactResponse.status === 200 || contactResponse.status === 201) {
-               setContactData(contactResponse.data);
-            } else {
-               console.error(JSON.stringify(contactResponse.errors));
-            }
+        if (contactResponse.status === 200 || contactResponse.status === 201) {
+          setContactData(contactResponse.data);
+        } else {
+          console.error(JSON.stringify(contactResponse.errors));
+        }
 
-            setIsLoading(false);
-         })
-         .catch((error) => {
-            console.error(error);
-            setIsLoading(false);
-         });
-   }, []);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <footer id="contact" className="w-full h-auto bg-bluePallete-800">
@@ -99,18 +96,23 @@ const Footer = () => {
                   </div>
                 ) : (
                   <div className="text-center">
-                    <TextNotFound className="font-bold text-[11px] sm:text-[20px] md:text-[25px] lg:text-[30px] text-transparent">Telkom University, Bandung</TextNotFound>
+                    <TextNotFound className="font-bold text-[11px] sm:text-[20px] md:text-[25px] lg:text-[30px] text-transparent">
+                      Telkom University, Bandung
+                    </TextNotFound>
                   </div>
                 )}
               </div>
               {isLoading ? (
                 <Loading />
               ) : settingsData?.description ? (
-                  <p className="flex justify-center items-center text-center lg:text-left text-[8px] sm:text-[16px] lg:text-[24px] pr-0 lg:pr-24 text-white">
-                    {settingsData.description}
-                  </p>
+                <p className="flex justify-center items-center text-center lg:text-left text-[8px] sm:text-[16px] lg:text-[24px] pr-0 lg:pr-24 text-white">
+                  {settingsData.description}
+                </p>
               ) : (
-                  <TextNotFound className="fflex justify-center items-center text-center lg:text-left text-[8px] sm:text-[16px] lg:text-[24px] pr-0 lg:pr-24 text-transparent">Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology).</TextNotFound>
+                <TextNotFound className="fflex justify-center items-center text-center lg:text-left text-[8px] sm:text-[16px] lg:text-[24px] pr-0 lg:pr-24 text-transparent">
+                  Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada
+                  bidang ICT (Information, Communication and Technology).
+                </TextNotFound>
               )}
             </div>
             <div className="w-full h-full basis-full lg:basis-2/5 flex flex-col justify-between items-center space-y-5 pl-0 lg:pl-20">
@@ -123,9 +125,9 @@ const Footer = () => {
                 >
                   {isLoading ? (
                     <Loading
-                    size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
-                    textAlignment="text-left"
-                  />
+                      size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
+                      textAlignment="text-left"
+                    />
                   ) : contactData?.data[0]?.iconUri ? (
                     <Image
                       src={`${host}${contactData.data[0].iconUri}`}
@@ -147,9 +149,9 @@ const Footer = () => {
                 >
                   {isLoading ? (
                     <Loading
-                    size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
-                    textAlignment="text-left"
-                  />
+                      size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
+                      textAlignment="text-left"
+                    />
                   ) : contactData?.data[1]?.iconUri ? (
                     <Image
                       src={`${host}${contactData.data[1].iconUri}`}
@@ -171,9 +173,9 @@ const Footer = () => {
                 >
                   {isLoading ? (
                     <Loading
-                    size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
-                    textAlignment="text-left"
-                  />
+                      size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
+                      textAlignment="text-left"
+                    />
                   ) : contactData?.data[2]?.iconUri ? (
                     <Image
                       src={`${host}${contactData.data[2].iconUri}`}
@@ -195,12 +197,11 @@ const Footer = () => {
                 >
                   {isLoading ? (
                     <Loading
-                    size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
-                    textAlignment="text-left"
-                  />
+                      size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
+                      textAlignment="text-left"
+                    />
                   ) : contactData?.data[3]?.iconUri ? (
                     <Image
-                    
                       src={`${host}${contactData.data[3].iconUri}`}
                       alt="Logo Linkedin CCI"
                       width={50}
@@ -213,11 +214,13 @@ const Footer = () => {
                   )}
                 </a>
               </div>
-              <button className="w-[170px] md:w-[385px] h-[15px] md:h-[49px] flex justify-center items-center rounded-[5px] bg-white">
-                <p className="text-[8px] sm:text-[20px] font-bold text-bluePallete-700">
-                  <Link href="credits">Credit</Link>
-                </p>
-              </button>
+              <Link href="/credits">
+                <button  className="w-[170px] md:w-[385px] h-[15px] md:h-[49px] flex justify-center items-center rounded-[5px] bg-white">
+                  <p className="text-[8px] sm:text-[20px] font-bold text-bluePallete-700">
+                    Credit
+                  </p>
+                </button>
+              </Link>
             </div>
           </div>
           <div className="flex flex-col">
