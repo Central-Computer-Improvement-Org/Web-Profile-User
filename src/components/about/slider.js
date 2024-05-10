@@ -1,20 +1,19 @@
 import React from 'react';
-import Image from 'next/image';
-import { useWindowSize } from "@uidotdev/usehooks";
-
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid, Navigation, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/grid';
+import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import CardCreditProfile from './cardCreditProfile';
+import './about.css'
+
+import CardAbout from './cardAbout';
 import { host } from '../host';
 
-export default function CrewSlider({ crewDatas = [], color = 'bg-bluePallete-300' }) {
-   const size = useWindowSize();
 
+export default function Slider({ data }) {
    const iconArrow = (
       <svg
          className="xl:w-[55px] md:w-[40px] "
@@ -31,7 +30,7 @@ export default function CrewSlider({ crewDatas = [], color = 'bg-bluePallete-300
       </svg>
    );
    return (
-      <div className="relative ">
+      <div className="relative w-full">
          <Swiper
             slidesPerView={2}
             grid={{
@@ -39,38 +38,49 @@ export default function CrewSlider({ crewDatas = [], color = 'bg-bluePallete-300
                fill: 'row',
             }}
             spaceBetween={40}
-            navigation={size.width >= 768 ? {
+            navigation={{
                nextEl: '.next',
-            } : false}
-            pagination={size.width >= 768 ? false : {
-               el: ".bullets-container",
-               type: "bullets",
-               bulletClass: "swiper-custom-bullet",
-               bulletActiveClass: "swiper-custom-bullet-active",
+            }}
+            pagination={{
+               el: '.swiper-pagination',
                clickable: true,
-               renderBullet: function (index, className) {
-                  return '<span className="' + className + '"></span>';
+            }}
+            breakpoints={{
+               425: {
+                  slidesPerView: 1,
+                  rows: 1
                },
+               768: {
+                  slidesPerView: 1,
+                  rows: 1
+               },
+               1024: {
+                  slidesPerView: 2,
+                  rows: 2
+               },
+
             }}
             modules={[Grid, Navigation, Pagination]}
-            className="mySwiper  xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] "
+            className="mySwiper xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] w-full mt-[31px]"
          >
-            {crewDatas &&
-               crewDatas.map((data, index) => {
+            {data &&
+               data.map((data, index) => {
                   return (
-                     <SwiperSlide key={index} className="">
-                        <CardCreditProfile
-                           color={color}
-                           image={`${host}${data.profileUri}`}
-                           jobdes={`${data.role.name}`}
+                     <SwiperSlide key={index} className="w=[100%]">
+                        <CardAbout
+                           color={'bg-greenPallete-300'}
+                           image={host + data.profileUri}
+                           jobdes={data.role.name}
                            name={data.name}
                         />
                      </SwiperSlide>
                   );
                })}
          </Swiper>
-         <div className="bullets-container"></div>
-         <div className="absolute z-50 xl:right-12 lg:right-16 top-0 bottom-0 lg:flex items-center justify-center hidden">
+         <div className="flex justify-center gap-1">
+            <div className="mt-[30px] swiper-pagination lg:hidden flex justify-center items-center gap-[10px]" />
+         </div>
+         <div className="absolute z-[1] xl:-right-28 lg:-right-10 top-0 bottom-0 lg:flex items-center justify-center hidden">
             <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
                {iconArrow}
             </button>
