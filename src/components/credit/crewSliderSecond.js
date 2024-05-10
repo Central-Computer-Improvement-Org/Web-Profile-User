@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 
 import styles from '@/components/credit/credit.module.css';
 import CardCreditProfile from './cardCreditProfile';
+import { host } from '../host';
 
 const CrewSliderSecond = ({ crewDatas = [] }) => {
   return (
@@ -34,9 +35,7 @@ const CrewSliderSecond = ({ crewDatas = [] }) => {
             >
               <CardCreditProfile
                 color={'bg-bluePallete-300'}
-                image={
-                  'https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg'
-                }
+                image={host + data.profileUri}
                 jobdes={'Crew'}
                 name={data.name}
                 key={index}
