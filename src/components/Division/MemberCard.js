@@ -9,19 +9,18 @@ import { host } from "@/components/host";
 import request from "@/app/utils/request";
 
 const MemberCard = ({ divisionId }) => {
-   const [memberData, setMemberData] = useState(null);
-   const [ketuaData, setKetuaData] = useState([]);
-   const [wakilData, setWakilData] = useState([]);
+  const [memberData, setMemberData] = useState(null);
+  const [ketuaData, setKetuaData] = useState([]);
+  const [wakilData, setWakilData] = useState([]);
 
   useEffect(() => {
     request
       .get("/users?roleNameExact=Ketua")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) { 
+        if (response.status === 200 || response.status === 201) {
           const ketuaData = response.data.data.filter(
             (item) =>
-              (item.role.name === "Ketua") &&
-              item.divisionId === divisionId
+              item.role.name === "Ketua" && item.divisionId === divisionId
           );
           setMemberData(response.data.data);
           setKetuaData(ketuaData);
@@ -41,8 +40,7 @@ const MemberCard = ({ divisionId }) => {
         if (response.status === 200 || response.status === 201) {
           const wakilData = response.data.data.filter(
             (item) =>
-              (item.role.name === "Wakil Ketua") &&
-              item.divisionId === divisionId
+              item.role.name === "Wakil Ketua" && item.divisionId === divisionId
           );
           setMemberData(response.data.data);
           setWakilData(wakilData);
@@ -125,17 +123,15 @@ const MemberCard = ({ divisionId }) => {
             <p className="font-medium text-[15px] lg:text-[20px] text-bluePallete-800">
               Wakil Divisi
             </p>
-            <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
-              {wakilData[0]?.name ? (
-                <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
-                  {wakilData[0].name}
-                </h1>
-              ) : (
-                <TextNotFound className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-transparent">
-                  MUHAMMAD ARYA
-                </TextNotFound>
-              )}
-            </h1>
+            {wakilData[0]?.name ? (
+              <h1 className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-bluePallete-800">
+                {wakilData[0].name}
+              </h1>
+            ) : (
+              <TextNotFound className="max-w-[250px] h-[100px] max-h-[100px] font-black text-[25px] lg:text-[40px] mt-1 md:mt-5 leading-[30px] md:leading-[40px] text-transparent">
+                MUHAMMAD ARYA
+              </TextNotFound>
+            )}
             {/* belum ter validasi */}
             <a
               href={wakilData[0].linkedinUri}
