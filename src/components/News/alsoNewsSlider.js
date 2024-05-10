@@ -150,13 +150,13 @@ const AlsoNewsSlider = () => {
               className={`cursor-pointer  xl:!mr-[42px] lg:!mr-[20px] md:!mr-[80px] !mr-[20px] ${styles.rekomendasiNewsCardSwiper} xl:!w-[384px] lg:!w-[300px] md:!w-[280px] !w-[200px]`}
             >
               <Link href={`news/detailNews?id=${data.id}`}>
-                <div className="  bg-white  rounded-[10px]">
+                <div className="bg-white  rounded-[10px]">
                   <div className="h-[162px] ">
                     <Image
                       src={host + data.mediaUri}
                       width={0}
                       height={0}
-                      alt="banner"
+                      alt="Thumbnail Image News Central Computer Improvment"
                       className="w-full h-full object-cover rounded-t-[10px]"
                     />
                   </div>

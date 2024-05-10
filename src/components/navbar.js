@@ -69,7 +69,7 @@ const Navbar = () => {
           <div className="h-full w-full flex justify-between items-center">
             <Link href="/">
               <Image
-                src="assets/logo/images/logo.svg"
+                src="/assets/logo/images/logo.svg"
                 alt="Logo Central Computer Improvement"
                 width={131}
                 height={72}
