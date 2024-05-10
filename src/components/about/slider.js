@@ -46,6 +46,10 @@ export default function Slider({ data }) {
                clickable: true,
             }}
             breakpoints={{
+               375: {
+                  slidesPerView: 1,
+                  rows: 1
+               },
                425: {
                   slidesPerView: 1,
                   rows: 1
