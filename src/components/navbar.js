@@ -4,12 +4,37 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation"
 import Link from "next/link";
 import Image from "next/image";
+import Loading from "./loading";
+import ImageNotFound from "./imageNotFound";
+import request from "../app/utils/request";
+import { host } from "./host";
 
 const Navbar = () => {
+  const [settingsData, setSettingsData] = useState(null);
   const [isClick, setIsClick] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navOutside = useRef();
   const router = useRouter();
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    request
+      .get("/setting")
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          setSettingsData(response.data.data);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  }, []);
 
   // handle toggle icon navbar untuk mengeluarkan menu navbar saat posisi mobile dari kiri 
   const toggleNavbar = () => {
@@ -68,13 +93,23 @@ const Navbar = () => {
           {/* Desktop menu */}
           <div className="h-full w-full flex justify-between items-center">
             <Link href="/">
-              <Image
-                src="/assets/logo/images/logo.svg"
-                alt="Logo Central Computer Improvement"
-                width={131}
-                height={72}
-                className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer"
-              />
+              {isLoading ? (
+                <Loading
+                  size="w-[20px] h-[20px] sm:w-[59px] sm:h-[59px] md:w-[92px] md:h-[92px] cursor-pointer"
+                  textAlignment="text-center"
+                />
+              ) : settingsData?.logoUri ? (
+                <Image
+                  src={`${host}${settingsData.logoUri}`}
+                  alt="Logo Central Computer Improvement"
+                  width={131}
+                  height={72}
+                  responsive="true"
+                  className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer object-contain"
+                />
+              ) : (
+                <ImageNotFound className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer object-contain"/>
+              )}
             </Link>
             <div className="md:flex items-center space-x-16 hidden">
               <ul className="md:flex items-center space-x-16 hidden">
