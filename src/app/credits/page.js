@@ -11,42 +11,43 @@ import request from '../utils/request';
 import CardCreditProfile from '@/components/credit/cardCreditProfile';
 import NotFound from '@/components/imageNotFound';
 import Loading from '@/components/loading';
+import { host } from '@/components/host';
 
 export default function Credits() {
-   const presidentDatas = [
-      { posisition: 'Ketua Devisi', name: 'Muhammad Firmansyah Syaputrah' },
-      { posisition: 'Ketua Devisi', name: 'Muhammad Ardiansyah' },
-   ];
-   const crewDatas = [
-      { posisition: 'Crew', name: 'Kenzo Tiyu' },
-      { posisition: 'Crew', name: 'Kenzo Tiyu' },
-      { posisition: 'Crew', name: 'Kenzo Tiyu' },
-      { posisition: 'Crew', name: 'Kenzo Tiyu' },
-      { posisition: 'Crew', name: 'Kenzo Tiyu' },
-      { posisition: 'Crew', name: 'Kenzo Tiyu' },
-   ];
-   const [contributors, setContributors] = useState();
-   const [isLoading, setIsLoading] = useState(true);
+  const presidentDatas = [
+    { posisition: 'Ketua Devisi', name: 'Muhammad Firmansyah Syaputrah' },
+    { posisition: 'Ketua Devisi', name: 'Muhammad Ardiansyah' },
+  ];
+  const crewDatas = [
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+  ];
+  const [contributors, setContributors] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
-   useEffect(() => {
-      request
-         .get('/projects?id=PJT-20240508164541859997')
-         .then(function (res) {
-            console.log(res.data.data);
-            if (res.data.code === 200 || res.data.code === 201) {
-               setContributors(res.data.data.contributors);
-               console.log(res.data.data[0], 'asd');
-               setIsLoading(false);
-            } else {
-               // console.log(res);
-               setIsLoading(false);
-            }
-         })
-         .catch(function (err) {
-            console.log(err);
-            setIsLoading(false);
-         });
-   }, []);
+  useEffect(() => {
+    request
+      .get('/projects?id=PJT-20240508164541859997')
+      .then(function (res) {
+        console.log(res.data.data);
+        if (res.data.code === 200 || res.data.code === 201) {
+          setContributors(res.data.data.contributors);
+          console.log(res.data.data[0], 'asd');
+          setIsLoading(false);
+        } else {
+          // console.log(res);
+          setIsLoading(false);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     console.log(contributors);
@@ -88,9 +89,7 @@ export default function Credits() {
                   .map((data, index) => (
                     <CardCreditProfile
                       color={'bg-greenPallete-300'}
-                      image={
-                        'https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg'
-                      }
+                      image={host + data.profileUri}
                       jobdes={data.role.name}
                       name={data.name}
                       key={index}
@@ -145,9 +144,7 @@ export default function Credits() {
                   .map((data, index) => (
                     <CardCreditProfile
                       color={'bg-greenPallete-300'}
-                      image={
-                        'https://facts.net/wp-content/uploads/2023/09/19-intriguing-facts-about-model-1695803042.jpg'
-                      }
+                      image={host + data.profileUri}
                       jobdes={data.role.name}
                       name={data.name}
                       key={index}
