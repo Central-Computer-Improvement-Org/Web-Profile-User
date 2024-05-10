@@ -1,16 +1,15 @@
-"use client";
-import ImageNewsFirstSlider from "@/components/detailNews/imageNewsFirstSlider";
-import RekomendasiNewsSlider from "@/components/detailNews/rekomendasiNewsSlider";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
-import Navbar from "@/components/navbar";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import request from "../utils/request";
-import moment from "moment";
-import { styles } from "@/app/detailNews/detailNewsPage.module.css";
-import { FormatString } from "../utils/stringUtils";
-import { host } from "@/components/host";
+'use client';
+import ImageNewsFirstSlider from '@/components/detailNews/imageNewsFirstSlider';
+import RekomendasiNewsSlider from '@/components/detailNews/rekomendasiNewsSlider';
+import Footer from '@/components/footer';
+import Header from '@/components/header';
+import Navbar from '@/components/navbar';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import request from '../../utils/request';
+import moment from 'moment';
+import { FormatString } from '../../utils/stringUtils';
+import { dateFormater } from '@/app/utils/dateFormater';
 
 export default function DetailNews() {
   // const [newsDetailData, setNewsDetailData] = useState();
@@ -26,7 +25,7 @@ export default function DetailNews() {
   useEffect(() => {
     setIsLoading(true);
     request
-      .get("/detail")
+      .get('/detail')
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           setNewsNewData(response.data);
@@ -43,7 +42,7 @@ export default function DetailNews() {
 
   useEffect(() => {
     request
-      .get("detailNews")
+      .get('detailNews')
       .then(function (response) {
         setTitle(response.data.data.title);
         setImage(response.data.data.image);
@@ -55,7 +54,7 @@ export default function DetailNews() {
       });
 
     request
-      .get("news")
+      .get('news')
       .then(function (response) {
         setNewsOfTheDay(response.data.data);
       })
@@ -65,10 +64,10 @@ export default function DetailNews() {
   }, [description]);
 
   useEffect(() => {
-    const doc = new DOMParser().parseFromString(description, "text/html");
+    const doc = new DOMParser().parseFromString(description, 'text/html');
     const htmlElement = doc.documentElement;
-    const classNames = Array.from(htmlElement.classList).join(" ");
-    htmlElement.setAttribute("class", classNames);
+    const classNames = Array.from(htmlElement.classList).join(' ');
+    htmlElement.setAttribute('class', classNames);
     setParsedHTML(htmlElement);
   }, [description]);
 
@@ -85,18 +84,18 @@ export default function DetailNews() {
                 className="w-full xl:px-20 md:px-12 px-4 sm:pt-44 pt-24  mx-auto"
               >
                 <h1 className="lg:text-6xl md:text-4xl text-xl text-bluePallete-800 font-black lg:mb-6 mb-2 leading-tight">
-                  <span className="lg:text-6xl md:text-4xl text-3xl "></span>{" "}
+                  <span className="lg:text-6xl md:text-4xl text-3xl "></span>{' '}
                   {title}
                 </h1>
                 <div className="inline-block border border-bluePallete-600 rounded-full bg-white lg:text-[25px] md:text-[18px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-3 py-1">
-                  {moment(date).format("MMM DD[,] YYYY")}
+                  {moment(dateFormater(date)).format('MMM DD[,] YYYY')}
                 </div>
               </div>
               <div className="w-full xl:pl-[78px] md:pl-0 xl:pr-[29px] md:pr-0 xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row  flex-col gap-[14px] ">
                 <div className="col-span-2  xl:w-[923px] md:w-full">
                   <ImageNewsFirstSlider image={image} />
                   <div className="mt-[40px] xl:px-0 md:px-[50px] px-[30px]">
-                    {parsedHTML && parsedHTML != "undefined" ? (
+                    {parsedHTML && parsedHTML != 'undefined' ? (
                       <div
                         dangerouslySetInnerHTML={{
                           __html: parsedHTML.innerHTML,
@@ -142,8 +141,8 @@ export default function DetailNews() {
                                 {FormatString(data.title, 39)}
                               </h1>
                               <p className="lg:text-sm md:text-[20px] text-[12px] text-mainFontColor font-medium xl:hidden md:block">
-                                {moment(data.createdAt).format(
-                                  "MMM DD[,] YYYY"
+                                {moment(dateFormater(data.createdAt)).format(
+                                  'MMM DD[,] YYYY'
                                 )}
                               </p>
                             </div>
