@@ -70,7 +70,7 @@ export default function CrewSlider({ crewDatas = [], color = 'bg-bluePallete-300
                })}
          </Swiper>
          <div className="bullets-container"></div>
-         <div className="absolute z-50 xl:right-12 lg:right-16 top-0 bottom-0 lg:flex items-center justify-center hidden">
+         <div className="absolute z-1 xl:right-12 lg:right-16 top-0 bottom-0 lg:flex items-center justify-center hidden">
             <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
                {iconArrow}
             </button>
