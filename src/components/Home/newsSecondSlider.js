@@ -1,10 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Link from "next/link";
 
 import request from "@/app/utils/request";
 import Loading from "@/components/loading";
@@ -14,6 +17,7 @@ import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const NewsSecondSlider = () => {
+  const router = useRouter();
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,18 +27,17 @@ const NewsSecondSlider = () => {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const formatDateData = response.data.data.map((item) => {
-            const createdAt = new Date(item.createdAt);
+            const createdAt = moment(
+              moment(item.createdAt).format("DD-MM-YYYY")
+            ).format("MMM DD[,] YYYY");
             return {
               ...item,
-              date: `${getMonthName(
-                createdAt.getMonth()
-              )} ${createdAt.getDate()}, ${createdAt.getFullYear()}`,
-              createdAt: createdAt,
+              date: createdAt,
             };
           });
           // pengurutan data berdasarkan tanggal data terbaru
           const sortNewsData = formatDateData.sort(
-            (a, b) => b.createdAt - a.createdAt
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
           // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
           const limitNewsData = sortNewsData.slice(0, 5);
@@ -50,29 +53,13 @@ const NewsSecondSlider = () => {
       });
   }, []);
 
-  // function untuk mengambil mewakilkan nama bulan, dan convert dari createdAt.getMonth() ke nama bulan
-  const getMonthName = (monthIndex) => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    return months[monthIndex].substring(0, 3); // penggunaan substring untuk mengambil 3 huruf pertama dari nama bulan
-  };
-
   return (
     <>
       {isLoading ? (
-        <Loading size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]" textAlignment="text-center" />
+        <Loading
+          size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
+          textAlignment="text-center"
+        />
       ) : (
         <Swiper
           slidesPerView={1.6}
@@ -108,13 +95,13 @@ const NewsSecondSlider = () => {
           modules={[Pagination]}
           className={"w-full h-[290px]"}
         >
-          {Array.isArray(newsData) &&
-            newsData.map((data, index) => (
-              <SwiperSlide
-                key={index}
-                className="px-1 !flex !justify-start !items-center !flex-col"
-              >
-                <div className="w-[222px] h-[242px] ">
+          {newsData.map((data, index) => (
+            <SwiperSlide
+              key={index}
+              className="px-1 !flex !justify-start !items-center !flex-col"
+            >
+              <Link href={`/news/detailNews?id=${data.id}`}>
+                <div className="w-[222px] h-[242px]">
                   {data?.mediaUri ? (
                     <Image
                       width={222}
@@ -126,7 +113,7 @@ const NewsSecondSlider = () => {
                       className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
                     />
                   ) : (
-                    <ImageNotFound 
+                    <ImageNotFound
                       width={222}
                       height={152}
                       className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
@@ -138,23 +125,16 @@ const NewsSecondSlider = () => {
                     <h2
                       className={`font-semibold text-[14px] leading-5 sm:leading-0 overflow-hidden text-bluePallete-800 ${styles.newsCardTitle}`}
                     >
-                      {data?.title ? (
-                        data.title
-                      ) : (
-                        <TextNotFound />
-                      )}
+                      {data?.title ? data.title : <TextNotFound />}
                     </h2>
                     <p className="text-[10px] font-medium text-gray-500">
-                      {data?.date ? (
-                        data.date
-                      ) : (
-                        <TextNotFound />
-                      )}
+                      {data?.date ? data.date : <TextNotFound />}
                     </p>
                   </div>
                 </div>
-              </SwiperSlide>
-            ))}
+              </Link>
+            </SwiperSlide>
+          ))}
         </Swiper>
       )}
     </>

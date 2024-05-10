@@ -1,17 +1,17 @@
-// ImageNewsFirstSlider
-
 'use client';
 import React, { useRef } from 'react';
-
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import moment from 'moment';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import Link from 'next/link';
+
 import styles from '@/components/detailNews/rekomendasiNewsSlider.module.css';
 import { FormatString } from '@/app/utils/stringUtils';
-import moment from 'moment';
 import { dateFormater } from '@/app/utils/dateFormater';
+import { host } from '../host';
 
 const RekomendasiNewsSlider = ({ newsData }) => {
   const iconArrow = (
@@ -22,8 +22,8 @@ const RekomendasiNewsSlider = ({ newsData }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M26.9661 10.2082C27.9729 9.20142 29.6053 9.20142 30.6121 10.2082L46.0808 25.677C47.0876 26.6838 47.0876 28.3162 46.0808 29.323L30.6121 44.7918C29.6053 45.7986 27.9729 45.7986 26.9661 44.7918C25.9592 43.7849 25.9592 42.1526 26.9661 41.1457L38.0337 30.0781H10.7422C9.31833 30.0781 8.16406 28.9239 8.16406 27.5C8.16406 26.0761 9.31833 24.9219 10.7422 24.9219H38.0337L26.9661 13.8543C25.9592 12.8474 25.9592 11.2151 26.9661 10.2082Z"
         fill="white"
       />
@@ -50,6 +50,14 @@ const RekomendasiNewsSlider = ({ newsData }) => {
           // Ketika lebar layar lebih besar dari 768px
           1024: {
             slidesPerView: 3, // Menampilkan tiga slide per tampilan
+            spaceBetween: 50, // Spasi antara slide adalah 30px
+          },
+          1280: {
+            slidesPerView: 2.6, // Menampilkan tiga slide per tampilan
+            spaceBetween: 100, // Spasi antara slide adalah 30px
+          },
+          1460: {
+            slidesPerView: 3, // Menampilkan tiga slide per tampilan
             spaceBetween: 30, // Spasi antara slide adalah 30px
           },
         }}
@@ -59,12 +67,13 @@ const RekomendasiNewsSlider = ({ newsData }) => {
           newsData.map((data, index) => (
             <SwiperSlide
               key={index}
-              className={`cursor-pointer  xl:!mr-[39.8px] lg:!mr-[20px] md:!mr-[80px] !mr-[20px] ${styles.rekomendasiNewsCardSwiper} xl:!w-[384px] lg:!w-[300px] md:!w-[280px] !w-[200px]`}
+              className={`cursor-pointer xl:!mr-[39.8px] lg:!mr-[70px] md:!mr-[80px] !mr-[20px] xl:!w-[384px] lg:!w-[300px] md:!w-[280px] !w-[200px] ${styles.rekomendasiNewsCardSwiper}`}
             >
-              <div className="  bg-white  rounded-[10px]">
+              <Link href={`/news/detailNews?id=${data.id}`}>
+              <div className="bg-white  rounded-[10px]">
                 <div className="h-[162px] ">
                   <Image
-                    src={data.mediaUri}
+                    src={host+data.mediaUri}
                     width={0}
                     height={0}
                     alt="banner"
@@ -76,12 +85,12 @@ const RekomendasiNewsSlider = ({ newsData }) => {
                     {FormatString(data.title)}
                   </h1>
                   <p className="text-sm text-mainFontColor font-medium">
-                    {moment(dateFormater(data.createdAt)).format(
-                      'MMM DD[,] YYYY'
-                    )}
+                    {moment(dateFormater(data.createdAt)).format("MMM DD[,] YYYY")}
                   </p>
                 </div>
               </div>
+              </Link>
+
             </SwiperSlide>
           ))}
       </Swiper>

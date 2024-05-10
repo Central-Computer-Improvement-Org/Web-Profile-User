@@ -1,73 +1,92 @@
-'use client';
-import ImageNewsFirstSlider from '@/components/detailNews/imageNewsFirstSlider';
-import RekomendasiNewsSlider from '@/components/detailNews/rekomendasiNewsSlider';
-import Footer from '@/components/footer';
-import Header from '@/components/header';
-import Navbar from '@/components/navbar';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import request from '../../utils/request';
-import moment from 'moment';
-import { FormatString } from '../../utils/stringUtils';
-import { dateFormater } from '@/app/utils/dateFormater';
+"use client";
+import ImageNewsFirstSlider from "@/components/detailNews/imageNewsFirstSlider";
+import RekomendasiNewsSlider from "@/components/detailNews/rekomendasiNewsSlider";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import Navbar from "@/components/navbar";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import request from "../../utils/request";
+import moment from "moment";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import styles from "@/app/news/detailNews/detailNewsPage.module.css";
+import { FormatString } from "../../utils/stringUtils";
+import Loading from "@/components/loading";
+import TextNotFound from "@/components/teksNotFound";
+import ImageNotFound from "@/components/imageNotFound";
+import { host } from "@/components/host";
+import { dateFormater } from "@/app/utils/dateFormater";
 
 export default function DetailNews() {
-  // const [newsDetailData, setNewsDetailData] = useState();
+  const newsId = useSearchParams().get("id");
   const [title, setTitle] = useState();
   const [image, setImage] = useState();
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
   const [parsedHTML, setParsedHTML] = useState(null);
-  const [newsOfTheDay, setNewsOfTheDay] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [newsNewData, setNewsNewData] = useState(null);
-
-  useEffect(() => {
-    setIsLoading(true);
-    request
-      .get('/detail')
-      .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          setNewsNewData(response.data);
-        } else {
-          console.error(JSON.stringify(response.errors));
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
+  const [newsTopData, setNewsTopData] = useState(null);
+  const [newsAlso, setNewsAlso] = useState();
 
   useEffect(() => {
     request
-      .get('detailNews')
+      .get("/news")
       .then(function (response) {
-        setTitle(response.data.data.title);
-        setImage(response.data.data.image);
-        setDescription(response.data.data.description);
-        setDate(response.data.data.createdAt);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    request
-      .get('news')
-      .then(function (response) {
-        setNewsOfTheDay(response.data.data);
+        setNewsAlso(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   }, [description]);
 
+  // get from news by id
   useEffect(() => {
-    const doc = new DOMParser().parseFromString(description, 'text/html');
+    if (newsId) {
+      request
+        .get(`/news?id=${newsId}`)
+        .then((response) => {
+          if (response.data.code === 200 || response.data.code === 201) {
+            setTitle(response.data.data.title);
+            setImage(response.data.data.detailNewsMedia);
+            setDescription(response.data.data.description);
+            setDate(response.data.data.createdAt);
+          } else {
+            console.error(JSON.stringify(response.errors));
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      console.error("News ID not found");
+    }
+  }, [newsId]);
+
+  // get from news, just get viewCount
+  useEffect(() => {
+    request
+      .get("/news")
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          const newData = response.data.data;
+          const sortedData = newData.sort(
+            (a, b) => b.visitedCount - a.visitedCount
+          );
+          setNewsTopData(sortedData);
+        } else {
+          console.error(JSON.stringify(response.errors));
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const doc = new DOMParser().parseFromString(description, "text/html");
     const htmlElement = doc.documentElement;
-    const classNames = Array.from(htmlElement.classList).join(' ');
-    htmlElement.setAttribute('class', classNames);
+    const classNames = Array.from(htmlElement.classList).join(" ");
+    htmlElement.setAttribute("class", classNames);
     setParsedHTML(htmlElement);
   }, [description]);
 
@@ -78,24 +97,31 @@ export default function DetailNews() {
       <main className="w-full h-auto">
         <span className="block h-full bg-gradientAccent">
           <div className="bg-gradientDefault h-full bg-fixed bg-no-repeat relative">
+            {/* <section className="w-full xl:max-w-[1350px] lg:max-w-6xl md:max-w-4xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto"> */}
             <section id="headLine" className="w-full md:pb-0 pb-[111px] ">
               <div
                 id="title"
-                className="w-full xl:px-20 md:px-12 px-4 sm:pt-44 pt-24  mx-auto"
+                className="w-full xl:max-w-[1390px] lg:max-w-[66rem] md:max-w-[48rem] sm:max-w-[38rem] max-w-[28rem] px-3 sm:px-0 mx-auto lg:pt-44 md:pt-36 sm:pt-[7rem] pt-[70px]"
               >
                 <h1 className="lg:text-6xl md:text-4xl text-xl text-bluePallete-800 font-black lg:mb-6 mb-2 leading-tight">
-                  <span className="lg:text-6xl md:text-4xl text-3xl "></span>{' '}
-                  {title}
+                  <span className="lg:text-6xl md:text-4xl text-3xl"></span>{" "}
+                  {title ? (
+                    title
+                  ) : (
+                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-transparent">
+                      INI ADALAH JUDUL
+                    </TextNotFound>
+                  )}
                 </h1>
-                <div className="inline-block border border-bluePallete-600 rounded-full bg-white lg:text-[25px] md:text-[18px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-3 py-1">
-                  {moment(dateFormater(date)).format('MMM DD[,] YYYY')}
+                <div className="inline-block border border-bluePallete-600 rounded-full lg:text-[25px] md:text-[18px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-2 py-1 bg-[#ffff]">
+                  {moment(dateFormater(date)).format("MMM DD[,] YYYY")}
                 </div>
               </div>
-              <div className="w-full xl:pl-[78px] md:pl-0 xl:pr-[29px] md:pr-0 xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row  flex-col gap-[14px] ">
-                <div className="col-span-2  xl:w-[923px] md:w-full">
+              <div className="w-full xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row flex-col gap-[40px]">
+                <div className="col-span-2 w-full xl:ml-[70px] xl:max-w-[923px]">
                   <ImageNewsFirstSlider image={image} />
-                  <div className="mt-[40px] xl:px-0 md:px-[50px] px-[30px]">
-                    {parsedHTML && parsedHTML != 'undefined' ? (
+                  <div className="mt-[40px] px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
+                    {parsedHTML && parsedHTML != "undefined" ? (
                       <div
                         dangerouslySetInnerHTML={{
                           __html: parsedHTML.innerHTML,
@@ -107,9 +133,9 @@ export default function DetailNews() {
                     )}
                   </div>
                 </div>
-                <div className="xl:w-[396px] md:w-full">
+                <div className="w-full !px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:pl-0 pr-0 xl:pr-[40px]">
                   <div className="lg:mt-14 mt-[53px]">
-                    <div className="flex items-center  lg:justify-start justify-center">
+                    <div className="flex items-center xl:justify-start justify-center">
                       <svg
                         className="xl:w-[5opx] xl:h-[50px] w-[40px] h-[40px] "
                         viewBox="0 0 50 50"
@@ -125,35 +151,40 @@ export default function DetailNews() {
                           fill="#0F9848"
                         />
                       </svg>
-                      <h1 className="xl:text-[32px] lg:text-[22px] text-[25px] text-bluePallete-800 font-bold">
+                      <h1 className={`${styles.topHeadlineNews} text-center xl:text-[32px] md:text-[22px] text-[25px] pl-0 xl:pl-[5px] text-bluePallete-800 font-bold`}>
                         Top Reads of The Day
                       </h1>
                     </div>
-                    <div className="mt-4 lg:px-0 px-[34px] grid grid-cols-1 gap-5">
-                      {newsOfTheDay &&
-                        newsOfTheDay.slice(0, 3).map((data, index) => (
-                          <div
+                    <div className="mt-4 lg:px-0 grid grid-cols-1 gap-5">
+                      {newsTopData &&
+                        newsTopData.slice(0, 3).map((data, index) => (
+                          <Link
                             key={index}
-                            className="lg:h-[100%] md:h-[150px] h-[90px] flex justify-between border border-bluePallete-600 rounded-xl"
+                            href={`/news/detailNews?id=${data.id}`}
                           >
-                            <div className=" px-[11px] py-[8px] flex flex-col justify-between ">
-                              <h1 className="xl:text-[20px] text-[15px] md:text-[24px] font-semibold text-bluePallete-800">
-                                {FormatString(data.title, 39)}
-                              </h1>
-                              <p className="lg:text-sm md:text-[20px] text-[12px] text-mainFontColor font-medium xl:hidden md:block">
-                                {moment(dateFormater(data.createdAt)).format(
-                                  'MMM DD[,] YYYY'
-                                )}
-                              </p>
+                            <div className="h-full xl:max-h-[100px] w-full md:h-[150px] flex justify-between border border-bluePallete-600 bg-white rounded-xl">
+                              <div className=" px-[11px] py-[8px] flex flex-col justify-between ">
+                                <h1
+                                  className={`${styles.detailTopNewsTitle} xl:text-[20px] md:text-[24px] text-[15px] font-semibold text-bluePallete-800`}
+                                >
+                                  {FormatString(data.title, 39)}
+                                </h1>
+                                <p className="lg:text-sm md:text-[20px] text-[12px] text-mainFontColor font-medium md:block">
+                                  {moment(dateFormater(date)).format(
+                                    "MMM DD[,] YYYY"
+                                  )}
+                                </p>
+                              </div>
+                              <Image
+                                width={150}
+                                height={100}
+                                alt="Image News Central Computer Improvement"
+                                responsive="true"
+                                src={host + data.mediaUri}
+                                className={`${styles.detailTopNewsImage} w-[100px] sm:w-[250px] sm:w-max-[250px] xl:w-[150px] xl:max-w-[150px] xl:h-auto rounded-r-xl object-cover`}
+                              />
                             </div>
-                            <Image
-                              width={0}
-                              height={0}
-                              alt="imgNews"
-                              src={data.mediaUri}
-                              className="xl:w-[150px] lg:w-[120px] md:w-[200px] w-[100px] rounded-r-xl "
-                            />
-                          </div>
+                          </Link>
                         ))}
                     </div>
                   </div>
@@ -169,10 +200,11 @@ export default function DetailNews() {
                   Also in News
                 </h1>
                 <div>
-                  <RekomendasiNewsSlider newsData={newsOfTheDay} />
+                  <RekomendasiNewsSlider newsData={newsAlso} />
                 </div>
               </div>
             </section>
+            {/* </section> */}
           </div>
         </span>
       </main>
