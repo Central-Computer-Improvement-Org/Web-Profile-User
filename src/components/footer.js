@@ -33,7 +33,6 @@ const Footer = () => {
         } else {
           console.error(JSON.stringify(contactResponse.errors));
         }
-
         setIsLoading(false);
       })
       .catch((error) => {
