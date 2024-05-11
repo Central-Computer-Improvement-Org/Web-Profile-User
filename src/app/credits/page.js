@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 
 import Footer from '@/components/footer';
 import Header from '@/components/header';
@@ -14,18 +13,6 @@ import Loading from '@/components/loading';
 import { host } from '@/components/host';
 
 export default function Credits() {
-  const presidentDatas = [
-    { posisition: 'Ketua Devisi', name: 'Muhammad Firmansyah Syaputrah' },
-    { posisition: 'Ketua Devisi', name: 'Muhammad Ardiansyah' },
-  ];
-  const crewDatas = [
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-  ];
   const [contributors, setContributors] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,10 +20,8 @@ export default function Credits() {
     request
       .get('/projects?id=PJT-20240508164541859997')
       .then(function (res) {
-        console.log(res.data.data);
         if (res.data.code === 200 || res.data.code === 201) {
           setContributors(res.data.data.contributors);
-          console.log(res.data.data[0], 'asd');
           setIsLoading(false);
         } else {
           // console.log(res);
@@ -49,9 +34,6 @@ export default function Credits() {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(contributors);
-  }, [contributors]);
   return (
     <div>
       <Header />
@@ -83,8 +65,8 @@ export default function Credits() {
                 {contributors
                   .filter(
                     (data) =>
-                      data.role.name !== 'Employee Experience' &&
-                      data.division.name === 'Design'
+                      data.role?.name !== 'Employee Experience' &&
+                      data.division?.name === 'Design'
                   )
                   .map((data, index) => (
                     <CardCreditProfile
@@ -101,8 +83,8 @@ export default function Credits() {
                 <CrewSlider
                   crewDatas={contributors.filter(
                     (data) =>
-                      data.role.name === 'Employee Experience' &&
-                      data.division.name === 'Design'
+                      data.role?.name === 'Employee Experience' &&
+                      data.division?.name === 'Design'
                   )}
                 />
               </div>
@@ -110,8 +92,8 @@ export default function Credits() {
                 <CrewSliderSecond
                   crewDatas={contributors.filter(
                     (data) =>
-                      data.role.name === 'Employee Experience' &&
-                      data.division.name === 'Design'
+                      data.role?.name === 'Employee Experience' &&
+                      data.division?.name === 'Design'
                   )}
                 />
               </div>
@@ -138,8 +120,8 @@ export default function Credits() {
                 {contributors
                   .filter(
                     (data) =>
-                      data.role.name !== 'Employee Experience' &&
-                      data.division.name === 'Web Development'
+                      data.role?.name !== 'Employee Experience' &&
+                      data.division?.name === 'Web Development'
                   )
                   .map((data, index) => (
                     <CardCreditProfile
@@ -156,8 +138,8 @@ export default function Credits() {
                 <CrewSlider
                   crewDatas={contributors.filter(
                     (data) =>
-                      data.role.name === 'Employee Experience' &&
-                      data.division.name === 'Web Development'
+                      data.role?.name === 'Employee Experience' &&
+                      data.division?.name === 'Web Development'
                   )}
                 />
               </div>
@@ -165,8 +147,8 @@ export default function Credits() {
                 <CrewSliderSecond
                   crewDatas={contributors.filter(
                     (data) =>
-                      data.role.name === 'Employee Experience' &&
-                      data.division.name === 'Web Development'
+                      data.role?.name === 'Employee Experience' &&
+                      data.division?.name === 'Web Development'
                   )}
                 />
               </div>
