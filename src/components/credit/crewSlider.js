@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { useWindowSize } from '@uidotdev/usehooks';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
