@@ -60,7 +60,7 @@ const Footer = () => {
                   width={150}
                   height={92}
                   responsive="true"
-                  className="w-[95px] h-[59px] md:w-[150px] md:h-[92px] cursor-pointer"
+                  className="w-[95px] h-[59px] md:w-[150px] md:h-[92px] cursor-pointer object-contain"
                 />
               ) : (
                 <ImageNotFound className="hidden md:block w-auto h-auto md:w-[400px] md:h-[300px] object-contain" />
@@ -224,7 +224,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-col pt-[80px] pb-[50px]">
+        <div className="flex flex-col pt-[20px] pb-[20px] md:pt-[80px] md:pb-[50px]">
           <p className="w-auto text-center text-[5px] sm:text-[14px] font-bold text-white">
             Copyright © 2024 • Telkom University
           </p>
