@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,7 +16,6 @@ import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const NewsSecondSlider = () => {
-  const router = useRouter();
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

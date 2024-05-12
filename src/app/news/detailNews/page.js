@@ -97,7 +97,6 @@ export default function DetailNews() {
       <main className="w-full h-auto">
         <span className="block h-full bg-gradientAccent">
           <div className="bg-gradientDefault h-full bg-fixed bg-no-repeat relative">
-            {/* <section className="w-full xl:max-w-[1350px] lg:max-w-6xl md:max-w-4xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto"> */}
             <section id="headLine" className="w-full md:pb-0 pb-[111px] ">
               <div
                 id="title"
@@ -113,14 +112,14 @@ export default function DetailNews() {
                     </TextNotFound>
                   )}
                 </h1>
-                <div className="inline-block border border-bluePallete-600 rounded-full lg:text-[25px] md:text-[18px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-2 py-1 bg-[#ffff]">
+                <div className="inline-block border border-bluePallete-600 rounded-full lg:text-[25px] md:text-[14px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-2 py-1 bg-[#ffff]">
                   {moment(dateFormater(date)).format("MMM DD[,] YYYY")}
                 </div>
               </div>
               <div className="w-full xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row flex-col gap-[40px]">
                 <div className="col-span-2 w-full xl:ml-[70px] xl:max-w-[923px]">
                   <ImageNewsFirstSlider image={image} />
-                  <div className="mt-[40px] px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
+                  <div className="mt-[20px] sm:mt-[30px] md:mt-[40px] px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
                     {parsedHTML && parsedHTML != "undefined" ? (
                       <div
                         dangerouslySetInnerHTML={{

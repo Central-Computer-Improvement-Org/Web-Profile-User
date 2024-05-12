@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
@@ -20,7 +19,6 @@ import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const SwiperComponent = () => {
-  const router = useRouter();
   const previousButton = useRef(null);
   const nextButton = useRef(null);
   const [newsData, setNewsData] = useState([]);
