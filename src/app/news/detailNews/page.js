@@ -113,7 +113,8 @@ export default function DetailNews() {
                   )}
                 </h1>
                 <div className="inline-block border border-bluePallete-600 rounded-full lg:text-[25px] md:text-[14px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-2 py-1 bg-[#ffff]">
-                  {moment(dateFormater(date)).format("MMM DD[,] YYYY")}
+                    {moment(dateFormater(date)).format("MMM DD[,] YYYY")}
+                    {/* {dateFormater(date)} */}
                 </div>
               </div>
               <div className="w-full xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row flex-col gap-[40px]">
@@ -169,9 +170,8 @@ export default function DetailNews() {
                                   {FormatString(data.title, 39)}
                                 </h1>
                                 <p className="lg:text-sm md:text-[20px] text-[12px] text-mainFontColor font-medium md:block">
-                                  {moment(dateFormater(date)).format(
-                                    "MMM DD[,] YYYY"
-                                  )}
+                                  {moment(dateFormater(date)).format("MMM DD[,] YYYY")}
+                                  {/* {dateFormater(data.createdAt)} */}
                                 </p>
                               </div>
                               <Image

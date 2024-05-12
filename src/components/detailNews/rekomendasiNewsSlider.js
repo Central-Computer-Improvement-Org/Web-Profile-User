@@ -86,6 +86,7 @@ const RekomendasiNewsSlider = ({ newsData }) => {
                               </h1>
                               <p className="text-sm text-mainFontColor font-medium">
                                  {moment(dateFormater(data.createdAt)).format("MMM DD[,] YYYY")}
+                                 {/* {dateFormater(data.createdAt)} */}
                               </p>
                            </div>
                         </div>

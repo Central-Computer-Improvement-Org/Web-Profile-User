@@ -13,6 +13,7 @@ import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
 import { host } from "@/components/host";
+import { dateFormater } from "@/app/utils/dateFormater";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const NewsSecondSlider = () => {
@@ -25,9 +26,8 @@ const NewsSecondSlider = () => {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const formatDateData = response.data.data.map((item) => {
-            const createdAt = moment(
-              moment(item.createdAt).format("DD-MM-YYYY")
-            ).format("MMM DD[,] YYYY");
+            // {moment(dateFormater(date)).format("MMM DD[,] YYYY")}
+            const createdAt = dateFormater(item.createdAt)
             return {
               ...item,
               date: createdAt,

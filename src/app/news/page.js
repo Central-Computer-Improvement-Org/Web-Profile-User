@@ -8,7 +8,6 @@ import CarouselSlider from '@/components/News/carouselSlider';
 import TopRead from '@/components/News/topRead';
 import ArticleCard from '@/components/News/ArticleCard';
 import HeroSection from '@/components/News/HeroSection';
-import Image from 'next/image';
 import HeroSectionSliderSecond from '@/components/News/HeroSectionSliderSecond';
 import request from '../utils/request';
 import { host } from '@/components/host';

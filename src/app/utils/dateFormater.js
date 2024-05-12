@@ -1,5 +1,5 @@
 import moment from 'moment';
 
 export const dateFormater = (date) => {
-  return moment(date).format('DD-MM-YYYY');
-};
+  return moment(String(date)).format("ll")
+}
