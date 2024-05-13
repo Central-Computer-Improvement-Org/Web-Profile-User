@@ -53,14 +53,16 @@ const Footer = () => {
                   textAlignment="text-left"
                 />
               ) : settingsData?.logoUri ? (
-                <Image
-                  src={`${host}${settingsData.logoUri}`}
-                  alt="Logo Central Computer Improvement"
-                  width={150}
-                  height={92}
-                  responsive="true"
-                  className="w-[95px] h-[59px] md:w-[150px] md:h-[92px] cursor-pointer object-contain"
-                />
+                <Link href="/">
+                  <Image
+                    src={`${host}${settingsData.logoUri}`}
+                    alt="Logo Central Computer Improvement"
+                    width={150}
+                    height={92}
+                    responsive="true"
+                    className="w-[95px] h-[59px] md:w-[150px] md:h-[92px] cursor-pointer object-contain"
+                  />
+                </Link>
               ) : (
                 <ImageNotFound className="hidden md:block w-auto h-auto md:w-[400px] md:h-[300px] object-contain" />
               )}

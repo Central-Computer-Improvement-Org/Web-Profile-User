@@ -13,7 +13,7 @@ const TopRead = ({ title, date, image }) => {
           {title}
         </h2>
         <p className="sm:text-sm">
-          {moment(dateFormater(date)).format('MMM DD[,] YYYY')}
+          {moment(String(date)).format("MMM DD[,] YYYY")}
         </p>
       </div>
       <div className="ms-auto basis-1/3 ">
@@ -22,7 +22,7 @@ const TopRead = ({ title, date, image }) => {
           width={100}
           height={100}
           src={image}
-          alt=""
+          alt="Thumbnail News Central Computer Improvement"
         />
       </div>
     </div>
