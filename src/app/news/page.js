@@ -1,25 +1,24 @@
-'use client';
-import Header from '@/components/header';
-import Nav from '@/components/navbar';
-import Footer from '@/components/footer';
-import React, { useEffect, useState } from 'react';
-import AlsoNewsSlider from '@/components/News/alsoNewsSlider';
-import CarouselSlider from '@/components/News/carouselSlider';
-import TopRead from '@/components/News/topRead';
-import ArticleCard from '@/components/News/ArticleCard';
-import HeroSection from '@/components/News/HeroSection';
-import Image from 'next/image';
-import HeroSectionSliderSecond from '@/components/News/HeroSectionSliderSecond';
-import request from '../utils/request';
-import { host } from '@/components/host';
-import Link from 'next/link';
+"use client";
+import Header from "@/components/header";
+import Nav from "@/components/navbar";
+import Footer from "@/components/footer";
+import React, { useEffect, useState } from "react";
+import AlsoNewsSlider from "@/components/News/alsoNewsSlider";
+import CarouselSlider from "@/components/News/carouselSlider";
+import TopRead from "@/components/News/topRead";
+import ArticleCard from "@/components/News/ArticleCard";
+import HeroSection from "@/components/News/HeroSection";
+import HeroSectionSliderSecond from "@/components/News/HeroSectionSliderSecond";
+import request from "../utils/request";
+import { host } from "@/components/host";
+import Link from "next/link";
 
 export default function News() {
   const [articleDatas, setArticle] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     request
-      .get('/news')
+      .get("/news")
       .then(function (res) {
         if (res.data.code === 200 || res.data.code === 201) {
           setArticle(res.data.data);
@@ -111,7 +110,7 @@ export default function News() {
               id="also-in-news"
               className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-36 "
             >
-              <div className="flex  items-center justify-center xl:justify-start">
+              <div className="flex items-center justify-center xl:justify-start">
                 <h1 className="text-[25px] lg:text-6xl text-bluePallete-800 font-bold mb-7">
                   Also in News
                 </h1>
@@ -133,10 +132,7 @@ export default function News() {
               id="carousel"
               className="container hidden lg:block  mx-auto w-full relative"
             >
-              {/* <div className="mx-auto  mt-4 "> */}
-              {/* <CarouselSlider /> */}
               <HeroSectionSliderSecond />
-              {/* </div> */}
             </section>
           </main>
         </span>

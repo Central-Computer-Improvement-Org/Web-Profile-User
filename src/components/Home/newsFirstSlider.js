@@ -38,9 +38,7 @@ const SwiperComponent = () => {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const formatDateData = response.data.data.map((item) => {
-            const createdAt = moment(
-              moment(item.createdAt).format("DD-MM-YYYY")
-            ).format("MMM DD[,] YYYY");
+            const createdAt = moment(String(item.createdAt)).format("MMM DD[,] YYYY")
             return {
               ...item,
               date: createdAt,
