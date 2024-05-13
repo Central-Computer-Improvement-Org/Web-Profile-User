@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './news.css';
+// import './newsSecond.css';
 import Image from 'next/image';
 import request from '@/app/utils/request';
 import { host } from '../host';
@@ -41,7 +42,7 @@ const HeroSection = () => {
           Loading...
         </div>
       ) : (
-        <div className="bg-transparent">
+        <div className="bg-transparent ">
           <Swiper
             modules={[Pagination, Autoplay]}
             slidesPerView={1}
@@ -74,10 +75,17 @@ const HeroSection = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className=" w-full xl:mt-[25px] md:mt-[20px] mt-[10px] bg-transparent">
+          {/* <div className=" w-full xl:mt-[25px] md:mt-[20px] mt-[10px] bg-transparent">
             <div className="flex justify-end items-center bg-transparent">
-              <div className="inline-block  mx-auto bg-transparent">
+              <div className="inline-block  mx-auto bg-transparent swiper-1">
                 <div className="swiper-custom-pagination flex gap-[10px]" />
+              </div>
+            </div>
+          </div> */}
+          <div className=" w-full xl:mt-[40px] md:mt-[35px] mt-[10px] ">
+            <div className="flex justify-center items-center bg-transparent">
+              <div className="flex justify-center items-center  mx-auto bg-transparent">
+                <div className="swiper-custom-pagination flex justify-center items-center gap-[10px]" />
               </div>
             </div>
           </div>
