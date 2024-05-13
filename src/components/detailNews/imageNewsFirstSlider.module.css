@@ -9,6 +9,66 @@
   top: 24.7%;
 }
 
+@media only screen and (min-width: 1785px) and (max-width: 1805px) {
+  .newsButtonNext {
+    right: 47.5%;
+  }
+}
+
+@media only screen and (min-width: 1764px) and (max-width: 1784px) {
+  .newsButtonNext {
+    right: 46.5%;
+  }
+}
+
+@media only screen and (min-width: 1743px) and (max-width: 1763px) {
+  .newsButtonNext {
+    right: 45.5%;
+  }
+}
+
+@media only screen and (min-width: 1722px) and (max-width: 1742px) {
+  .newsButtonNext {
+    right: 44.5%;
+  }
+}
+
+@media only screen and (min-width: 1711px) and (max-width: 1721px) {
+  .newsButtonNext {
+    right: 44.5%;
+  }
+}
+
+@media only screen and (min-width: 1681px) and (max-width: 1700px) {
+  .newsButtonNext {
+    right: 43.5%;
+  }
+}
+
+@media only screen and (min-width: 1661px) and (max-width: 1680px) {
+  .newsButtonNext {
+    right: 42.5%;
+  }
+}
+
+@media only screen and (min-width: 1640px) and (max-width: 1660px) {
+  .newsButtonNext {
+    right: 41.5%;
+  }
+}
+
+@media only screen and (min-width: 1621px) and (max-width: 1639px) {
+  .newsButtonNext {
+    right: 40.5%;
+  }
+}
+
+@media only screen and (min-width: 1608px) and (max-width: 1620px) {
+  .newsButtonNext {
+    right: 39.5%;
+  }
+}
+
 @media only screen and (min-width: 1580px) and (max-width: 1607px) {
   .newsButtonNext {
     right: 38.5%;

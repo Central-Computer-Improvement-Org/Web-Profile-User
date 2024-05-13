@@ -16,7 +16,6 @@ import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
 import { host } from "@/components/host";
-import { dateFormater } from "@/app/utils/dateFormater";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const SwiperComponent = () => {
@@ -39,8 +38,7 @@ const SwiperComponent = () => {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const formatDateData = response.data.data.map((item) => {
-            // {moment(dateFormater(date)).format("MMM DD[,] YYYY")}
-            const createdAt = dateFormater(item.createdAt)
+            const createdAt = moment(String(item.createdAt)).format("MMM DD[,] YYYY")
             return {
               ...item,
               date: createdAt,
