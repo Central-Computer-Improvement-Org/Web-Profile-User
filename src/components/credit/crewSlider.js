@@ -9,6 +9,7 @@ import 'swiper/css/grid';
 import 'swiper/css/navigation';
 import CardCreditProfile from './cardCreditProfile';
 import { host } from '../host';
+import NotFound from '../imageNotFound';
 
 export default function CrewSlider({
   crewDatas = [],
@@ -31,14 +32,22 @@ export default function CrewSlider({
       />
     </svg>
   );
-  return (
+  return crewDatas.length ? (
     <div className="relative ">
       <Swiper
-        slidesPerView={2}
-        grid={{
-          rows: 2,
-          fill: 'row',
-        }}
+        slidesPerView={size.width > 425 ? 2 : 1}
+        // centeredSlides={true}
+        grid={
+          size.width > 425
+            ? {
+                rows: 2,
+                fill: 'row',
+              }
+            : {
+                rows: 1,
+                fill: 'row',
+              }
+        }
         spaceBetween={40}
         navigation={{
           nextEl: '.next',
@@ -61,16 +70,18 @@ export default function CrewSlider({
         modules={[Grid, Navigation, Pagination]}
         className="mySwiper  xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] "
       >
-        {crewDatas &&
-          crewDatas.map((data, index) => {
+        {crewDatas.length &&
+          crewDatas?.map((data, index) => {
             return (
               <SwiperSlide key={index} className="">
-                <CardCreditProfile
-                  color={color}
-                  image={`${host}${data.profileUri}`}
-                  jobdes={`${data.role.name}`}
-                  name={data.name}
-                />
+                <div className="flex justify-center items-center">
+                  <CardCreditProfile
+                    color={color}
+                    image={`${host}${data?.profileUri}`}
+                    jobdes={`${data.role?.name}`}
+                    name={data?.name}
+                  />
+                </div>
               </SwiperSlide>
             );
           })}
@@ -81,6 +92,10 @@ export default function CrewSlider({
           {iconArrow}
         </button>
       </div>
+    </div>
+  ) : (
+    <div className="flex justify-center w-[100%]">
+      <NotFound className="flex justify-center w-[200px]" />
     </div>
   );
 }
