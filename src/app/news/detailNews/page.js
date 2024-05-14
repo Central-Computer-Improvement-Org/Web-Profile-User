@@ -117,7 +117,9 @@ export default function DetailNews() {
                       textAlignment="text-center"
                     />
                   ) : title ? (
-                    <h1 className="lg:text-6xl md:text-4xl text-3xl">title</h1>
+                    <h1 className="lg:text-6xl md:text-4xl text-3xl">
+                      {title}
+                    </h1>
                   ) : (
                     <TextNotFound className="lg:text-6xl md:text-4xl text-3xl"></TextNotFound>
                   )}
