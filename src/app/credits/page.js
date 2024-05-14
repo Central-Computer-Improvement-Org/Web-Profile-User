@@ -1,11 +1,11 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Navbar from '@/components/navbar';
 import CrewSlider from '@/components/credit/crewSlider';
-import CrewSliderSecond from '@/components/credit/crewSliderSecond';
 import request from '../utils/request';
 import CardCreditProfile from '@/components/credit/cardCreditProfile';
 import NotFound from '@/components/imageNotFound';
@@ -13,6 +13,18 @@ import Loading from '@/components/loading';
 import { host } from '@/components/host';
 
 export default function Credits() {
+  const presidentDatas = [
+    { posisition: 'Ketua Devisi', name: 'Muhammad Firmansyah Syaputrah' },
+    { posisition: 'Ketua Devisi', name: 'Muhammad Ardiansyah' },
+  ];
+  const crewDatas = [
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+    { posisition: 'Crew', name: 'Kenzo Tiyu' },
+  ];
   const [contributors, setContributors] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -20,8 +32,10 @@ export default function Credits() {
     request
       .get('/projects?id=PJT-20240508164541859997')
       .then(function (res) {
+        console.log(res.data.data);
         if (res.data.code === 200 || res.data.code === 201) {
           setContributors(res.data.data.contributors);
+          console.log(res.data.data[0], 'asd');
           setIsLoading(false);
         } else {
           // console.log(res);
@@ -33,6 +47,37 @@ export default function Credits() {
         setIsLoading(false);
       });
   }, []);
+
+  const ketuaDesignDatas = contributors
+    ?.map((data, index) => {
+      if (index <= 2) {
+        if (data.division != null) {
+          return data;
+        }
+      }
+    })
+
+    .filter(
+      (v) =>
+        v !== undefined &&
+        v.role?.name !== 'Employee Experience' &&
+        v.division?.name === 'Design'
+    );
+  const ketuaWebDatas = contributors
+    ?.map((data, index) => {
+      if (index <= 2) {
+        if (data.division != null) {
+          return data;
+        }
+      }
+    })
+
+    .filter(
+      (v) =>
+        v !== undefined &&
+        v.role?.name !== 'Employee Experience' &&
+        v.division?.name === 'Web Development'
+    );
 
   return (
     <div>
@@ -62,7 +107,7 @@ export default function Credits() {
           ) : contributors ? (
             <div>
               <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
-                {contributors
+                {/* {contributors
                   .filter(
                     (data) =>
                       data.role?.name !== 'Employee Experience' &&
@@ -72,29 +117,43 @@ export default function Credits() {
                     <CardCreditProfile
                       color={'bg-greenPallete-300'}
                       image={host + data.profileUri}
-                      jobdes={data.role.name}
+                      jobdes={data.role?.name}
                       name={data.name}
                       key={index}
                     />
-                  ))}
+                  ))} */}
+                {ketuaDesignDatas.length ? (
+                  ketuaDesignDatas.length &&
+                  ketuaDesignDatas.map((data, index) => (
+                    <CardCreditProfile
+                      color={'bg-greenPallete-300'}
+                      image={host + data.profileUri}
+                      jobdes={data.role?.name}
+                      name={data.name}
+                      key={index}
+                    />
+                  ))
+                ) : (
+                  <div className="flex justify-center w-[100%]">
+                    <NotFound className="flex justify-center w-[200px]" />
+                  </div>
+                )}
               </div>
               <div className="mt-[74px]" />
-              <div className="md:block hidden">
+              <div className="">
                 <CrewSlider
-                  crewDatas={contributors.filter(
-                    (data) =>
-                      data.role?.name === 'Employee Experience' &&
-                      data.division?.name === 'Design'
-                  )}
-                />
-              </div>
-              <div className="md:hidden block">
-                <CrewSliderSecond
-                  crewDatas={contributors.filter(
-                    (data) =>
-                      data.role?.name === 'Employee Experience' &&
-                      data.division?.name === 'Design'
-                  )}
+                  crewDatas={contributors
+                    ?.map((data) => {
+                      if (data.division != null) {
+                        return data;
+                      }
+                    })
+                    .filter(
+                      (v) =>
+                        v !== undefined &&
+                        v.role?.name === 'Employee Experience' &&
+                        v.division?.name === 'Design'
+                    )}
                 />
               </div>
             </div>
@@ -117,39 +176,38 @@ export default function Credits() {
           ) : contributors ? (
             <div>
               <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
-                {contributors
-                  .filter(
-                    (data) =>
-                      data.role?.name !== 'Employee Experience' &&
-                      data.division?.name === 'Web Development'
-                  )
-                  .map((data, index) => (
+                {ketuaWebDatas.length ? (
+                  ketuaWebDatas.length &&
+                  ketuaWebDatas.map((data, index) => (
                     <CardCreditProfile
                       color={'bg-greenPallete-300'}
                       image={host + data.profileUri}
-                      jobdes={data.role.name}
+                      jobdes={data.role?.name}
                       name={data.name}
                       key={index}
                     />
-                  ))}
+                  ))
+                ) : (
+                  <div className="flex justify-center w-[100%]">
+                    <NotFound className="flex justify-center w-[200px]" />
+                  </div>
+                )}
               </div>
               <div className="mt-[74px]" />
-              <div className="md:block hidden">
+              <div className="">
                 <CrewSlider
-                  crewDatas={contributors.filter(
-                    (data) =>
-                      data.role?.name === 'Employee Experience' &&
-                      data.division?.name === 'Web Development'
-                  )}
-                />
-              </div>
-              <div className="md:hidden block">
-                <CrewSliderSecond
-                  crewDatas={contributors.filter(
-                    (data) =>
-                      data.role?.name === 'Employee Experience' &&
-                      data.division?.name === 'Web Development'
-                  )}
+                  crewDatas={contributors
+                    ?.map((data) => {
+                      if (data.division != null) {
+                        return data;
+                      }
+                    })
+                    .filter(
+                      (v) =>
+                        v !== undefined &&
+                        v.role?.name === 'Employee Experience' &&
+                        v.division?.name === 'Web Development'
+                    )}
                 />
               </div>
             </div>
