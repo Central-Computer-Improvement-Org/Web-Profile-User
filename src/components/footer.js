@@ -64,7 +64,7 @@ const Footer = () => {
                   />
                 </Link>
               ) : (
-                <ImageNotFound className="hidden md:block w-auto h-auto md:w-[400px] md:h-[300px] object-contain" />
+                <ImageNotFound className="hidden md:block w-[95px] h-[59px] md:w-[150px] md:h-[92px] object-contain" />
               )}
               <div className="w-auto flex flex-col">
                 <p className="font-bold text-center text-[8px] sm:text-[16px] uppercase text-white">
