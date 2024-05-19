@@ -24,7 +24,6 @@ const ProjectPage = () => {
   console.log(page, perPage);
   const start = (Number(page) - 1) * Number(perPage);
   const end = start + Number(perPage);
-  // console.log(start, end);
 
   //   let ProjectMenus = [{ menu: 'All', id: nulls }];
   const [menuActive, setMenuActive] = useState({ name: 'All', id: null });

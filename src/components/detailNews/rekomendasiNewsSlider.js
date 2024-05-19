@@ -18,14 +18,12 @@ const RekomendasiNewsSlider = ({ newsData }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (newsData) {
-      setIsLoading(false);
-    }
+    setIsLoading(false);
   }, [newsData]);
 
   const iconArrow = (
     <svg
-      className="xl:w-[55px] md:w-[40px] "
+      className="xl:w-[55px] md:w-[40px]"
       viewBox="0 0 55 55"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +38,7 @@ const RekomendasiNewsSlider = ({ newsData }) => {
   );
 
   return (
-    <div className="relative ">
+    <div className="relative">
       {isLoading ? (
         <Loading size="w-[70px] h-[70px]" textAlignment="text-center" />
       ) : (
@@ -50,41 +48,38 @@ const RekomendasiNewsSlider = ({ newsData }) => {
             nextEl: ".next",
           }}
           breakpoints={{
-            // Ketika lebar layar lebih kecil dari atau sama dengan 640px
             640: {
-              slidesPerView: 1, // Menampilkan satu slide per tampilan
-              spaceBetween: 10, // Spasi antara slide adalah 10px
+              slidesPerView: 1,
+              spaceBetween: 10,
             },
-            // Ketika lebar layar lebih besar dari 640px tetapi kurang dari atau sama dengan 768px
             768: {
-              slidesPerView: 2, // Menampilkan dua slide per tampilan
-              spaceBetween: 20, // Spasi antara slide adalah 20px
+              slidesPerView: 2,
+              spaceBetween: 20,
             },
-            // Ketika lebar layar lebih besar dari 768px
             1024: {
-              slidesPerView: 3, // Menampilkan tiga slide per tampilan
-              spaceBetween: 50, // Spasi antara slide adalah 30px
+              slidesPerView: 3,
+              spaceBetween: 50,
             },
             1280: {
-              slidesPerView: 2.6, // Menampilkan tiga slide per tampilan
-              spaceBetween: 100, // Spasi antara slide adalah 30px
+              slidesPerView: 2.6,
+              spaceBetween: 100,
             },
             1460: {
-              slidesPerView: 3, // Menampilkan tiga slide per tampilan
-              spaceBetween: 30, // Spasi antara slide adalah 30px
+              slidesPerView: 3,
+              spaceBetween: 30,
             },
           }}
           modules={[Navigation]}
         >
-          {newsData &&
+          {newsData && newsData.length > 0 ? (
             newsData.map((data, index) => (
               <SwiperSlide
                 key={index}
                 className={`cursor-pointer xl:!mr-[39.8px] lg:!mr-[70px] md:!mr-[80px] !mr-[20px] xl:!w-[384px] lg:!w-[300px] md:!w-[280px] !w-[200px] ${styles.rekomendasiNewsCardSwiper}`}
               >
                 <Link href={`/news/detailNews?id=${data.id}`}>
-                  <div className="bg-white  rounded-[10px]">
-                    <div className="h-[162px] ">
+                  <div className="bg-white rounded-[10px]">
+                    <div className="h-[162px]">
                       {data.mediaUri ? (
                         <Image
                           src={host + data.mediaUri}
@@ -122,7 +117,12 @@ const RekomendasiNewsSlider = ({ newsData }) => {
                   </div>
                 </Link>
               </SwiperSlide>
-            ))}
+            ))
+          ) : (
+            <div className="w-full h-[200px] flex items-center justify-center">
+              <ImageNotFound className="w-full h-full object-cover rounded-t-[10px]" />
+            </div>
+          )}
         </Swiper>
       )}
       <div className="absolute z-20 right-[0.8%] top-0 bottom-0 flex items-center justify-center">

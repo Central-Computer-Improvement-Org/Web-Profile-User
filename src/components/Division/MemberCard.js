@@ -5,8 +5,8 @@ import Image from "next/image";
 import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
-import { host } from "@/components/host";
 import request from "@/app/utils/request";
+import { host } from "@/components/host";
 
 const MemberCard = ({ divisionId }) => {
   const [memberData, setMemberData] = useState(null);
