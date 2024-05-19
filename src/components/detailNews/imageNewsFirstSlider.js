@@ -6,8 +6,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { host } from "../host";
 import "./image.css";
+import { host } from "../host";
 import ImageNotFound from "@/components/imageNotFound";
 import Loading from "@/components/loading";
 import styles from "@/components/detailNews/imageNewsFirstSlider.module.css";
@@ -15,6 +15,9 @@ import styles from "@/components/detailNews/imageNewsFirstSlider.module.css";
 const ImageNewsFirstSlider = ({ image }) => {
   const swiperRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState(0);
+  const [failedImages, setFailedImages] = useState(0);
+
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
@@ -23,20 +26,27 @@ const ImageNewsFirstSlider = ({ image }) => {
   };
 
   useEffect(() => {
-    if (image) {
-      const imagesLoaded = [];
+    if (image && image.length > 0) {
       image.forEach((data) => {
-        const img = document.createElement("img");
+        const img = new Image();
         img.src = host + data;
         img.onload = () => {
-          imagesLoaded.push(data);
-          if (imagesLoaded.length === image.length) {
-            setIsLoading(false);
-          }
+          setLoadedImages((prev) => prev + 1);
+        };
+        img.onerror = () => {
+          setFailedImages((prev) => prev + 1);
         };
       });
+    } else {
+      setIsLoading(false);
     }
   }, [image]);
+
+  useEffect(() => {
+    if (image && (loadedImages + failedImages === image.length)) {
+      setIsLoading(false);
+    }
+  }, [loadedImages, failedImages, image]);
 
   const goNext = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -47,38 +57,44 @@ const ImageNewsFirstSlider = ({ image }) => {
   return (
     <>
       {isLoading ? (
-        <Loading size="w-[70px] h-[70px]" textAlignment="text-center" />
+        <div className="w-[600px] h-[500px] flex justify-center items-center">
+          <Loading size="w-[150px] h-[150px]" textAlignment="text-center"/>
+        </div>
       ) : (
         <div className="xl:w-[902px] w-full swiper-2">
-          <Swiper
-            ref={swiperRef}
-            className={`${styles.containerNews} w-full xl:h-[600px] lg:h-[780px] md:h-[600px] sm:h-[390px] h-[320px] xl:rounded-lg `}
-            slidesPerView={1}
-            pagination={pagination}
-            navigation={{
-              nextEl: ".newsButtonNext",
-            }}
-            modules={[Navigation, Pagination]}
-          >
-            {image &&
-              image.map((data, index) => (
-                <SwiperSlide className="cursor-pointer" key={index}>
-                  <div className="w-full h-full">
-                    {data ? (
-                      <Image
-                        src={host + data}
-                        width={0}
-                        height={0}
-                        alt="banner"
-                        className={`${styles.imagesNews} w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat`}
-                      />
-                    ) : (
-                      <ImageNotFound className="w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat" />
-                    )}
-                  </div>
-                </SwiperSlide>
-              ))}
-          </Swiper>
+          {(!image || failedImages === image.length) ? (
+            <ImageNotFound className="w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat" />
+          ) : (
+            <Swiper
+              ref={swiperRef}
+              className={`${styles.containerNews} w-full xl:h-[600px] lg:h-[780px] md:h-[600px] sm:h-[390px] h-[320px] xl:rounded-lg `}
+              slidesPerView={1}
+              pagination={pagination}
+              navigation={{
+                nextEl: ".newsButtonNext",
+              }}
+              modules={[Navigation, Pagination]}
+            >
+              {image &&
+                image.map((data, index) => (
+                  <SwiperSlide className="cursor-pointer" key={index}>
+                    <div className="w-full h-full">
+                      {data ? (
+                        <Image
+                          src={host + data}
+                          width={0}
+                          height={0}
+                          alt="Thumbnail News Central Computer Improvement"
+                          className={`${styles.imagesNews} w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat`}
+                        />
+                      ) : (
+                        <ImageNotFound className="w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat" />
+                      )}
+                    </div>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          )}
           <style>
             {`
               .swiper-pagination-bullet-custom {

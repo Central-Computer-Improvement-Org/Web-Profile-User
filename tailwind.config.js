@@ -73,8 +73,10 @@ export const theme = {
       },
       backgroundImage: {
          gradientCard: `linear-gradient(141deg, rgba(181,228,201,1) 0%, rgba(128,186,186,1) 100%, rgba(42,118,162,1) 100%)`,
-         gradientDefault: `linear-gradient(160deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 23%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 100%)`,
-         gradientAccent: `linear-gradient(-110deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(219, 242, 229, 1) 80%, rgba(219, 242, 229, 1) 100%)`,
+         gradientDefault: `linear-gradient(110deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 23%, rgba(255, 255, 255, 0) 70%, rgba(191, 208, 232, 1) 100%)`,
+         gradientAccent: `linear-gradient(-100deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(219, 242, 229, 0.2) 80%, rgba(219, 242, 229, 0.1) 100%)`,
+         gradientDefaultTwo: `linear-gradient(110deg, rgba(191, 208, 232, 1) 0%, rgba(255, 255, 255, 0) 23%, rgba(255, 255, 255, 0.5) 70%, rgba(191, 208, 232, 0.7) 100%)`,
+         gradientAccentTwo: `linear-gradient(-120deg, rgba(219, 242, 229, 1) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 70%, rgba(219, 242, 229, 0.8) 80%, rgba(219, 242, 229, 0.9) 100%)`,
       },
       boxShadow: {
          shadowNav: '10px 0px 5px 1px #bfd0e8',

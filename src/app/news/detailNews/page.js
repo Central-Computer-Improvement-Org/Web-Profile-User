@@ -26,7 +26,7 @@ export default function DetailNews() {
   const [date, setDate] = useState();
   const [parsedHTML, setParsedHTML] = useState(null);
   const [newsTopData, setNewsTopData] = useState(null);
-  const [newsAlso, setNewsAlso] = useState();
+  const [newsAlso, setNewsAlso] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -35,10 +35,12 @@ export default function DetailNews() {
     request
       .get("/news")
       .then(function (response) {
-        if (response.data.code === 200 || response.data.code === 201) {
-          setNewsAlso(response.data.data);
+        if (response.data.status === 200 || response.data.status === 201) {
+          setNewsAlso(response.data.data || []);
+          setIsLoading(false);
         } else {
           console.error(JSON.stringify(response.errors));
+          setIsLoading(false);
         }
         setIsLoading(false);
       })
@@ -53,7 +55,7 @@ export default function DetailNews() {
       request
         .get(`/news?id=${newsId}`)
         .then((response) => {
-          if (response.data.code === 200 || response.data.code === 201) {
+          if (response.data.status === 200 || response.data.status === 201) {
             setTitle(response.data.data.title);
             setImage(response.data.data.detailNewsMedia);
             setDescription(response.data.data.description);
@@ -90,11 +92,15 @@ export default function DetailNews() {
   }, []);
 
   useEffect(() => {
-    const doc = new DOMParser().parseFromString(description, "text/html");
-    const htmlElement = doc.documentElement;
-    const classNames = Array.from(htmlElement.classList).join(" ");
-    htmlElement.setAttribute("class", classNames);
-    setParsedHTML(htmlElement);
+    if (description) {
+      const doc = new DOMParser().parseFromString(description, "text/html");
+      const htmlElement = doc.documentElement;
+      const classNames = Array.from(htmlElement.classList).join(" ");
+      htmlElement.setAttribute("class", classNames);
+      setParsedHTML(htmlElement);
+    } else {
+      setParsedHTML(null);
+    }
   }, [description]);
 
   return (
@@ -102,8 +108,8 @@ export default function DetailNews() {
       <Header />
       <Navbar />
       <main className="w-full h-auto">
-        <span className="block h-full bg-gradientAccent">
-          <div className="bg-gradientDefault h-full bg-fixed bg-no-repeat relative">
+        <span className="block h-full bg-gradientAccentTwo">
+          <span className="block h-full bg-gradientDefaultTwo">
             <section id="headLine" className="w-full md:pb-0 pb-[111px] ">
               <div
                 id="title"
@@ -117,11 +123,11 @@ export default function DetailNews() {
                       textAlignment="text-center"
                     />
                   ) : title ? (
-                    <h1 className="lg:text-6xl md:text-4xl text-3xl">
+                    <h1 className="lg:text-6xl md:text-4xl text-3xl text-bluePallete-800">
                       {title}
                     </h1>
                   ) : (
-                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl"></TextNotFound>
+                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-transparent">Ini Judul Jika News Tidak Ada</TextNotFound>
                   )}
                 </h1>
                 <div className="inline-block border border-bluePallete-600 rounded-full lg:text-[25px] md:text-[14px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-2 py-1 bg-[#ffff]">
@@ -131,11 +137,11 @@ export default function DetailNews() {
                       textAlignment="text-center"
                     />
                   ) : date ? (
-                    <h1 className="lg:text-[25px] md:text-[14px] text-[10px] text-mainFontColor font-medium lg:px-3 px-[9px] lg:py-[4px] py-1 bg-[#ffff]">
+                    <h1 className="font-medium lg:text-[25px] md:text-[14px] text-[10px]  lg:px-3 px-[9px] lg:py-[4px] py-1 text-mainFontColor">
                       {moment(String(date)).format("MMM DD[,] YYYY")}
                     </h1>
                   ) : (
-                    <TextNotFound className="lg:text-[25px] md:text-[14px] text-[10px] text-mainFontColor font-medium lg:px-3 px-[9px] lg:py-[4px] py-1 bg-transparent">
+                    <TextNotFound className="font-medium lg:text-[25px] md:text-[14px] text-[10px] lg:px-3 px-[9px] lg:py-[4px] py-1 text-transparent">
                       01 MARET 2024
                     </TextNotFound>
                   )}
@@ -145,7 +151,7 @@ export default function DetailNews() {
                 <div className="col-span-2 w-full xl:ml-[70px] xl:max-w-[923px]">
                   <ImageNewsFirstSlider image={image} />
                   <div className="mt-[20px] sm:mt-[30px] md:mt-[40px] px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
-                    {parsedHTML && parsedHTML != "undefined" ? (
+                    {parsedHTML && parsedHTML.innerHTML.trim() !== "" ? (
                       <div
                         dangerouslySetInnerHTML={{
                           __html: parsedHTML.innerHTML,
@@ -153,9 +159,12 @@ export default function DetailNews() {
                         className="xl:text-[30px] md:text-[20px] text-[10px] text-start md:text-justify "
                       />
                     ) : (
-                      <TextNotFound className="xl:text-[30px] md:text-[20px] text-[10px] text-start md:text-justify"></TextNotFound>
+                      <TextNotFound className="xl:text-[30px] md:text-[20px] text-[10px] text-start md:text-justify text-transparent">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                      </TextNotFound>
                     )}
                   </div>
+
                 </div>
                 <div className="w-full !px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:pl-0 pr-0 xl:pr-[40px]">
                   <div className="lg:mt-14 mt-[53px]">
@@ -221,8 +230,8 @@ export default function DetailNews() {
               </div>
             </section>
             <section
-              id="rekomendasiNews "
-              className="w-full py-[111px] md:block hidden "
+              id="rekomendasiNews"
+              className="w-full py-[111px] md:block hidden"
             >
               <div className="xl:pl-[107px] md:px-[36px] pr-10 flex flex-col gap-7">
                 <h1 className="xl:text-[80px] md:text-[40px] text-bluePallete-500 font-black">
@@ -233,7 +242,7 @@ export default function DetailNews() {
                 </div>
               </div>
             </section>
-          </div>
+          </span>
         </span>
       </main>
       <Footer />

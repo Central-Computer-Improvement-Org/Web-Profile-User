@@ -1,17 +1,19 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+
 import Header from "@/components/header";
 import Nav from "@/components/navbar";
 import Footer from "@/components/footer";
-import React, { useEffect, useState } from "react";
 import AlsoNewsSlider from "@/components/News/alsoNewsSlider";
-import CarouselSlider from "@/components/News/carouselSlider";
 import TopRead from "@/components/News/topRead";
 import ArticleCard from "@/components/News/ArticleCard";
 import HeroSection from "@/components/News/HeroSection";
 import HeroSectionSliderSecond from "@/components/News/HeroSectionSliderSecond";
+import Loading from "@/components/loading";
 import request from "../utils/request";
 import { host } from "@/components/host";
-import Link from "next/link";
+// import CarouselSlider from "@/components/News/carouselSlider";
 
 export default function News() {
   const [articleDatas, setArticle] = useState();
@@ -36,10 +38,10 @@ export default function News() {
     <>
       <Header />
       <Nav />
-      <span className="block h-full ">
-        <span className="block h-full bg-gradientAccent">
+      <span className="block h-full bg-gradientAccentTwo">
+        <span className="block h-full bg-gradientDefaultTwo">
           <main
-            className={`block bg-gradientDefault h-full bg-fixed bg-no-repeat px-[40px] md:px-[80px] lg:px-[120px] py-[120px] md:py-[10rem] relative `}
+            className="h-full px-[40px] md:px-[80px] lg:px-[120px] py-[120px] md:py-[10rem]"
           >
             <h1 className="text-7xl font-bold text-secondPrimary px-[15px]">
               NEWS
@@ -87,19 +89,28 @@ export default function News() {
                         Top Read of The Day
                       </h1>
                     </div>
-                    {articleDatas &&
-                      articleDatas.slice(0, 3).map((data, index) => (
-                        <Link
-                          key={index}
-                          href={`/news/detailNews?id=${data.id}`}
-                        >
-                          <TopRead
-                            title={data.title}
-                            date={data.createdAt}
-                            image={host + data.mediaUri}
-                          />
-                        </Link>
-                      ))}
+                    {
+                      isLoading ? (
+                        <Loading
+                          size="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
+                          textAlignment="text-left"
+                        />
+                      ) : (
+                        articleDatas &&
+                        articleDatas.slice(0, 3).map((data, index) => (
+                          <Link
+                            key={index}
+                            href={`/news/detailNews?id=${data.id}`}
+                          >
+                            <TopRead
+                              titple={data.title}
+                              date={data.createdAt}
+                              image={host + data.mediaUri}
+                            />
+                          </Link>
+                        ))
+                      )
+                    }
                     <div />
                   </div>
                 </div>

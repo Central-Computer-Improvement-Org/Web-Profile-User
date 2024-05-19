@@ -1,44 +1,29 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+"use client";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
-import Footer from '@/components/footer';
-import Header from '@/components/header';
-import Navbar from '@/components/navbar';
-import CrewSlider from '@/components/credit/crewSlider';
-import request from '../utils/request';
-import CardCreditProfile from '@/components/credit/cardCreditProfile';
-import NotFound from '@/components/imageNotFound';
-import Loading from '@/components/loading';
-import { host } from '@/components/host';
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import Navbar from "@/components/navbar";
+import CrewSlider from "@/components/credit/crewSlider";
+import request from "../utils/request";
+import CardCreditProfile from "@/components/credit/cardCreditProfile";
+import ImageNotFound from "@/components/imageNotFound";
+import Loading from "@/components/loading";
+import { host } from "@/components/host";
 
 export default function Credits() {
-  const presidentDatas = [
-    { posisition: 'Ketua Devisi', name: 'Muhammad Firmansyah Syaputrah' },
-    { posisition: 'Ketua Devisi', name: 'Muhammad Ardiansyah' },
-  ];
-  const crewDatas = [
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-    { posisition: 'Crew', name: 'Kenzo Tiyu' },
-  ];
   const [contributors, setContributors] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     request
-      .get('/projects?id=PJT-20240508164541859997')
+      .get("/projects?id=PJT-20240508164541859997")
       .then(function (res) {
-        console.log(res.data.data);
         if (res.data.code === 200 || res.data.code === 201) {
           setContributors(res.data.data.contributors);
-          console.log(res.data.data[0], 'asd');
           setIsLoading(false);
         } else {
-          // console.log(res);
           setIsLoading(false);
         }
       })
@@ -60,8 +45,8 @@ export default function Credits() {
     .filter(
       (v) =>
         v !== undefined &&
-        v.role?.name !== 'Employee Experience' &&
-        v.division?.name === 'Design'
+        v.role?.name !== "Employee Experience" &&
+        v.division?.name === "Design"
     );
   const ketuaWebDatas = contributors
     ?.map((data, index) => {
@@ -75,8 +60,8 @@ export default function Credits() {
     .filter(
       (v) =>
         v !== undefined &&
-        v.role?.name !== 'Employee Experience' &&
-        v.division?.name === 'Web Development'
+        v.role?.name !== "Employee Experience" &&
+        v.division?.name === "Web Development"
     );
 
   return (
@@ -107,26 +92,11 @@ export default function Credits() {
           ) : contributors ? (
             <div>
               <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
-                {/* {contributors
-                  .filter(
-                    (data) =>
-                      data.role?.name !== 'Employee Experience' &&
-                      data.division?.name === 'Design'
-                  )
-                  .map((data, index) => (
-                    <CardCreditProfile
-                      color={'bg-greenPallete-300'}
-                      image={host + data.profileUri}
-                      jobdes={data.role?.name}
-                      name={data.name}
-                      key={index}
-                    />
-                  ))} */}
                 {ketuaDesignDatas.length ? (
                   ketuaDesignDatas.length &&
                   ketuaDesignDatas.map((data, index) => (
                     <CardCreditProfile
-                      color={'bg-greenPallete-300'}
+                      color={"bg-greenPallete-300"}
                       image={host + data.profileUri}
                       jobdes={data.role?.name}
                       name={data.name}
@@ -134,13 +104,13 @@ export default function Credits() {
                     />
                   ))
                 ) : (
-                  <div className="flex justify-center w-[100%]">
-                    <NotFound className="flex justify-center w-[200px]" />
+                  <div className="w-full flex justify-center">
+                    <ImageNotFound className="flex justify-center w-[200px]" />
                   </div>
                 )}
               </div>
               <div className="mt-[74px]" />
-              <div className="">
+              <div>
                 <CrewSlider
                   crewDatas={contributors
                     ?.map((data) => {
@@ -151,16 +121,16 @@ export default function Credits() {
                     .filter(
                       (v) =>
                         v !== undefined &&
-                        v.role?.name === 'Employee Experience' &&
-                        v.division?.name === 'Design'
+                        v.role?.name === "Employee Experience" &&
+                        v.division?.name === "Design"
                     )}
                 />
               </div>
             </div>
           ) : (
-            <div>
-              <NotFound />
-            </div>
+          <div className="w-full flex justify-center">
+              <ImageNotFound className="flex justify-center w-[200px]" />
+          </div>
           )}
         </section>
         <div className="xl:mt-[180px] md:mt-[120px] mt-[60px]" />
@@ -180,7 +150,7 @@ export default function Credits() {
                   ketuaWebDatas.length &&
                   ketuaWebDatas.map((data, index) => (
                     <CardCreditProfile
-                      color={'bg-greenPallete-300'}
+                      color={"bg-greenPallete-300"}
                       image={host + data.profileUri}
                       jobdes={data.role?.name}
                       name={data.name}
@@ -189,7 +159,7 @@ export default function Credits() {
                   ))
                 ) : (
                   <div className="flex justify-center w-[100%]">
-                    <NotFound className="flex justify-center w-[200px]" />
+                    <ImageNotFound className="flex justify-center w-[200px]" />
                   </div>
                 )}
               </div>
@@ -205,14 +175,17 @@ export default function Credits() {
                     .filter(
                       (v) =>
                         v !== undefined &&
-                        v.role?.name === 'Employee Experience' &&
-                        v.division?.name === 'Web Development'
+                        v.role?.name === "Employee Experience" &&
+                        v.division?.name === "Web Development"
                     )}
                 />
               </div>
             </div>
           ) : (
-            <NotFound />
+            <div className="w-full flex justify-center">
+              <ImageNotFound
+                className="flex justify-center w-[200px]" />
+          </div>
           )}
         </section>
         <div className="mt-[90px]" />

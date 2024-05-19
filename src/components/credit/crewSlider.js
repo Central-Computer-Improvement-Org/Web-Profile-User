@@ -1,12 +1,11 @@
 import React from 'react';
 import { useWindowSize } from '@uidotdev/usehooks';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid, Navigation, Pagination } from 'swiper/modules';
-
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/navigation';
+
 import CardCreditProfile from './cardCreditProfile';
 import { host } from '../host';
 import NotFound from '../imageNotFound';
@@ -36,17 +35,16 @@ export default function CrewSlider({
     <div className="relative ">
       <Swiper
         slidesPerView={size.width > 425 ? 2 : 1}
-        // centeredSlides={true}
         grid={
           size.width > 425
             ? {
-                rows: 2,
-                fill: 'row',
-              }
+              rows: 2,
+              fill: 'row',
+            }
             : {
-                rows: 1,
-                fill: 'row',
-              }
+              rows: 1,
+              fill: 'row',
+            }
         }
         spaceBetween={40}
         navigation={{
@@ -57,15 +55,15 @@ export default function CrewSlider({
           size.width >= 768
             ? false
             : {
-                el: '.bullets-container',
-                type: 'bullets',
-                bulletClass: 'swiper-custom-bullet',
-                bulletActiveClass: 'swiper-custom-bullet-active',
-                clickable: true,
-                renderBullet: function (index, className) {
-                  return '<span className="' + className + '"></span>';
-                },
-              }
+              el: '.bullets-container',
+              type: 'bullets',
+              bulletClass: 'swiper-custom-bullet',
+              bulletActiveClass: 'swiper-custom-bullet-active',
+              clickable: true,
+              renderBullet: function (index, className) {
+                return '<span className="' + className + '"></span>';
+              },
+            }
         }
         modules={[Grid, Navigation, Pagination]}
         className="mySwiper  xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] "
