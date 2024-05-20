@@ -35,7 +35,7 @@ export default function DetailNews() {
     request
       .get("/news")
       .then(function (response) {
-        if (response.data.status === 200 || response.data.status === 201) {
+        if (response.data.code === 200 || response.data.code === 201) {
           setNewsAlso(response.data.data || []);
           setIsLoading(false);
         } else {
@@ -55,7 +55,7 @@ export default function DetailNews() {
       request
         .get(`/news?id=${newsId}`)
         .then((response) => {
-          if (response.data.status === 200 || response.data.status === 201) {
+          if (response.data.code === 200 || response.data.code === 201) {
             setTitle(response.data.data.title);
             setImage(response.data.data.detailNewsMedia);
             setDescription(response.data.data.description);
@@ -102,6 +102,8 @@ export default function DetailNews() {
       setParsedHTML(null);
     }
   }, [description]);
+
+  console.log("newsAlso", newsAlso);
 
   return (
     <>
@@ -197,15 +199,15 @@ export default function DetailNews() {
                             key={index}
                             href={`/news/detailNews?id=${data.id}`}
                           >
-                            <div className="h-full xl:max-h-[100px] w-full md:h-[150px] flex justify-between border border-bluePallete-600 bg-white rounded-xl">
+                            <div className="h-full max-h-[90px] xl:max-h-[100px] w-full md:h-[150px] flex justify-between border border-bluePallete-600 bg-white rounded-xl">
                               <div className=" px-[11px] py-[8px] flex flex-col justify-between ">
                                 {
                                   data?.title ? (
-                                    <h1 className={`${styles.detailTopNewsTitle} xl:text-[20px] md:text-[24px] text-[15px] font-semibold text-bluePallete-800`}>
-                                      {FormatString(data.title, 39)}
+                                    <h1 className={`${styles.detailTopNewsTitle} !xl:text-[20px] !md:text-[24px] text-[15px] font-semibold overflow-hidden text-bluePallete-800`}>
+                                      {data.title}
                                     </h1>
                                   ) : (
-                                    <TextNotFound className="xl:text-[20px] md:text-[14px] text-[12px] text-transparent font-bold">Ini Deskripsi News</TextNotFound>
+                                    <TextNotFound className="xl:text-[20px] md:text-[14px] text-[12px] text-transparent font-bold">Ini Judul News</TextNotFound>
                                   )
                                 }
                               </div>

@@ -6,7 +6,8 @@
   position: absolute;
   transform: translateY(-50%);
   z-index: 1;
-  top: 24.7%;
+  top: 138%;
+  right: 42.5%;
 }
 
 @media only screen and (min-width: 1785px) and (max-width: 1805px) {

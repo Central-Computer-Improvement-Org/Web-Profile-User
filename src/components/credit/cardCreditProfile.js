@@ -27,11 +27,11 @@ export default function CardCreditProfile({
 
    return (
       <div
-         className={`basis-[534px] w-full h-[152px] sm:h-full max-h-[286px] flex gap-5 px-[16px] py-[15px] sm:px-8 sm:py-10 rounded-[15px] ${color}`}
+         className={`w-full h-[152px] sm:h-full max-h-[286px] flex gap-5 px-[16px] py-[15px] sm:px-8 sm:py-10 rounded-[15px] ${color}`}
       >
-         <div className="basis-6/12 flex flex-col">
+         <div className="basis-[40%] sm:basis-6/12 flex flex-col">
             {jobDescription(jobdes)}
-            <h1 className="lg:max-h-[130px] max-h-[80px] overflow-hidden  xl:text-[40px] md:text-[24px] text-[25px] font-black text-bluePallete-800">
+            <h1 className="lg:max-h-[130px] max-h-[80px] overflow-hidden xl:text-[40px] md:text-[24px] text-[25px] font-black leading-[40px] text-bluePallete-800">
                {name}
             </h1>
 
@@ -46,7 +46,7 @@ export default function CardCreditProfile({
             </a>
          </div>
 
-         <div className="basis-6/12 flex items-center justify-end">
+         <div className="basis-[60%] sm:basis-6/12 flex items-center justify-end">
             <Image
                src={image}
                alt="Profile Image Member Central Computer Improvement"

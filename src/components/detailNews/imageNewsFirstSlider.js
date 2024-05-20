@@ -28,7 +28,7 @@ const ImageNewsFirstSlider = ({ image }) => {
   useEffect(() => {
     if (image && image.length > 0) {
       image.forEach((data) => {
-        const img = new Image();
+        const img = document.createElement("img");
         img.src = host + data;
         img.onload = () => {
           setLoadedImages((prev) => prev + 1);
@@ -98,16 +98,16 @@ const ImageNewsFirstSlider = ({ image }) => {
           <style>
             {`
               .swiper-pagination-bullet-custom {
-                  width: 16px;
-                  height: 16px;
-                  background-color: #265290;
-                  border-radius: 50%;
+                  width: 16px !important;
+                  height: 16px !important;
+                  background-color: #265290 !important;
+                  border-radius: 50% !important;
                   margin: 0 5px !important;
               }
               @media only screen and (max-width: 768px) {
                 .swiper-pagination-bullet-custom {
-                  width: 10px;
-                  height: 10px;
+                  width: 10px !important;
+                  height: 10px !important;
                 }
               }
             `}

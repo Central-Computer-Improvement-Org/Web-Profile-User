@@ -103,7 +103,7 @@ export default function News() {
                             href={`/news/detailNews?id=${data.id}`}
                           >
                             <TopRead
-                              titple={data.title}
+                              title={data.title}
                               date={data.createdAt}
                               image={host + data.mediaUri}
                             />
