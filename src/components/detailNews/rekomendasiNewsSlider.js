@@ -92,7 +92,7 @@ const RekomendasiNewsSlider = ({ newsData }) => {
                         <ImageNotFound className="w-full h-full object-cover rounded-t-[10px]" />
                       )}
                     </div>
-                    <div className="h-full border border-mainFontColor rounded-b-[10px] p-3 flex flex-col gap-[28px] justify-between">
+                    <div className="h-full border border-bluePallete-600 rounded-b-[10px] p-3 flex flex-col gap-[28px] justify-between">
                       {data.title ? (
                         <h3 className="xl:h-[56px] md:h-[48px] xl:text-xl md:text-[16px] font-semibold text-bluePallete-800">
                           {FormatString(data.title)}

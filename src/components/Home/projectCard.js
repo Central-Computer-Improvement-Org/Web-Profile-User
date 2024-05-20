@@ -25,7 +25,7 @@ const ProjectData = () => {
     request
       .get("/projects")
       .then((response) => {
-        if (response.code === 200 || response.code === 201) {
+        if (response.status === 200 || response.status === 201) {
           const sortedData = response.data.data.sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );

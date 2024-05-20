@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import CardCreditProfile from './cardCreditProfile';
 import { host } from '../host';
 import NotFound from '../imageNotFound';
+import styles from './credit.module.css';
 
 export default function CrewSlider({
   crewDatas = [],
@@ -31,10 +32,11 @@ export default function CrewSlider({
       />
     </svg>
   );
+
   return crewDatas.length ? (
-    <div className="relative ">
+    <div className="relative">
       <Swiper
-        slidesPerView={size.width > 425 ? 2 : 1}
+        slidesPerView={size.width > 640 ? 2 : (size.width < 425 ? 1.2 : 1)}
         grid={
           size.width > 425
             ? {
@@ -66,7 +68,8 @@ export default function CrewSlider({
             }
         }
         modules={[Grid, Navigation, Pagination]}
-        className="mySwiper  xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] "
+        // className="mySwiper xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px]"
+        className="mySwiper"
       >
         {crewDatas.length &&
           crewDatas?.map((data, index) => {
@@ -85,7 +88,7 @@ export default function CrewSlider({
           })}
       </Swiper>
       <div className="bullets-container"></div>
-      <div className="absolute z-1 xl:right-12 lg:right-16 top-0 bottom-0 lg:flex items-center justify-center hidden">
+      <div className={`${styles.test} absolute z-10 top-0 bottom-0 lg:flex items-center justify-center hidden`}>
         <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
           {iconArrow}
         </button>
