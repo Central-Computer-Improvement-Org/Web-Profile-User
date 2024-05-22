@@ -1,22 +1,24 @@
 import Image from 'next/image';
 import React from 'react';
 
+import styles from '../../components/about/aboutComponent.module.css';
+
 export default function CardAbout({ color, jobdes, name, image }) {
    return (
       <div
-         className={`xl:w-[534px] xl:h-[286px] lg:w-[380px] lg:h-[186px] md:w-[100%] md:h-[186px] w-[100%] h-[152px] rounded-[15px] ${color} flex justify-center items-center xl:px-[43px] px-[16px]`}
+         className={`${styles.aboutCardContainer} xl:w-[534px] xl:h-[286px] lg:w-[380px] lg:h-[186px] md:w-[100%] md:h-[186px] w-[100%] h-[152px] rounded-[10px] sm:rounded-[15px] ${color} flex justify-between sm:justify-center items-center xl:px-[43px] sm:px-[16px] px-[10px]`}
       >
-         <div className="box-border	w-full">
-            <p className="xl:text-[20px] md:text-[16px] text-[15px] font-medium text-bluePallete-800">
+         <div className="box-border w-auto sm:w-full h-auto">
+            <p className={`${styles.aboutCardJob} xl:text-[20px] md:text-[16px] text-[15px] font-medium text-bluePallete-800`}>
                {jobdes}
             </p>
-            <h1 className="lg:max-h-[130px] max-h-[80px] overflow-hidden  xl:text-[40px] md:text-[24px] text-[25px] font-black text-bluePallete-800">
+            <h1 className={`${styles.aboutCardName} lg:max-h-[130px] max-h-[80px] overflow-hidden  xl:text-[40px] md:text-[24px] text-[25px] font-black text-bluePallete-800`}>
                {name}
             </h1>
 
-            <div className="">
+            <div>
                <svg
-                  className="xl:w-[60px] xl:h-[60px] md:w-[30px] md:h-[30px] w-[30px] h-[30px] "
+                  className={`${styles.aboutCardLink} xl:w-[60px] xl:h-[60px] md:w-[30px] md:h-[30px] w-[30px] h-[30px]`}
                   width="60"
                   height="60"
                   viewBox="0 0 60 60"
@@ -40,11 +42,11 @@ export default function CardAbout({ color, jobdes, name, image }) {
          </div>
 
          <Image
-            width={0}
-            height={0}
-            alt="project-img"
+            width={200}
+            height={200}
+            alt="Profile Ketua Divisi Central Computer Improvement"
             src={image}
-            className="max-w-[200px] max-h-[200px] xl:w-[200px] xl:h-[200px] md:w-[140px] md:h-[140px] w-[120px] h-[120px] rounded-[20px] "
+            className={`${styles.aboutCardProfile} max-w-[200px] max-h-[200px] xl:w-[200px] xl:h-[200px] md:w-[140px] md:h-[140px] w-[120px] h-[120px] rounded-[5px] sm:rounded-[20px]`}
          />
       </div>
    );

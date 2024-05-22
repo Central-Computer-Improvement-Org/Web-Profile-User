@@ -13,15 +13,15 @@ export default function Home() {
             <span className="block h-full bg-gradientAccentTwo">
                <spacn className="block h-full bg-gradientDefaultTwo">
                   <div
-                     className="h-full pb-[25px] pt-[117px] md:py-[220px] md:px-[96px] lg:px-[47px] xl:px-[147px]"
+                     className="w-full h-auto pb-[25px] pt-[117px] md:pb-[100px] lg:pb-[220px] md:pt-[220px] xl:max-w-[75rem] lg:max-w-[67rem] md:max-w-[51rem] sm:max-w-xl max-w-md px-5 sm:px-0 mx-auto"
                   >
                      <section
                         id="sejarah"
-                        className={`text-pretty w-full h-auto mb-[39px] md:mb-[100px] px-[45px] md:px-0`}
+                        className="text-pretty w-full h-auto mb-[39px] md:mb-[100px]"
                      >
                         <div className="container mx-auto text-pretty">
                            <h3
-                              className={`text-[16px] md:text-h3 font-bold text-bluePallete-800`}
+                              className="text-[16px] md:text-h3 font-bold text-bluePallete-800"
                            >
                               Sejarah CCI
                            </h3>
@@ -43,14 +43,14 @@ export default function Home() {
                      </section>
                      <section
                         id="event"
-                        className={`h-full mb-[50px] md:mb-[80px] px-[45px] md:px-0`}
+                        className="h-full mb-[50px] md:mb-[80px]"
                      >
                         <div className="w-full h-auto flex flex-col mt-[50px] sm:mt-[80px] md:mt-[130px] pb-[70px] md:pb-[200px]">
                            <EventCard />
                         </div>
                      </section>
-                     <section id="team" className={`h-full md:px-0`}>
-                        <div className="container mx-auto flex flex-col items-center w-full px-[16px]">
+                     <section id="team" className="-full md:px-0">
+                        <div className="container mx-auto flex flex-col items-center w-full">
                            <Divisions />
                         </div>
                      </section>

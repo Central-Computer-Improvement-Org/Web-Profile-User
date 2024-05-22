@@ -10,7 +10,7 @@
 	display: inline-block;
 	cursor: pointer;
 	position: absolute;
-	top: 56%;
+	top: 365%;
 	right: 20px;
 	transform: translateY(-50%);
 	z-index: 1;
@@ -24,13 +24,19 @@
 
 @media only screen and (max-width: 1280px) {
 	.divisionButtonNext {
-		top: 51%;
+		top: 350%;
+	}
+}
+
+@media only screen and (max-width: 1058px) {
+	.divisionButtonNext {
+		top: 359%;
 	}
 }
 
 @media only screen and (max-width: 1024px) {
 	.divisionButtonNext {
-		top: 54%;
+		top: 412%;
 	}
 }
 
@@ -150,6 +156,9 @@
 	}
 	.projectContainerInfo {
 		margin-top: 160px;
+	}
+	.projectTitleMobile {
+		font-size: 14px !important;
 	}
 }
 
