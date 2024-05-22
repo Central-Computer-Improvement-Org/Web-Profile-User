@@ -25,7 +25,10 @@ const DivisionFirstSlider = () => {
          .get("/users/divisions")
          .then((response) => {
             if (response.status === 200 || response.status === 201) {
-               setDivisionData(response.data.data);
+               const divisioData = response.data.data.filter(
+                  (item) => item.name !== "All"
+               );
+               setDivisionData(divisioData);
             } else {
                console.error(JSON.stringify(response.errors));
             }
@@ -150,7 +153,7 @@ const DivisionFirstSlider = () => {
                   fill="white"
                />
             </svg>
-         </div>
+         </div>   
       </>
    );
 };
