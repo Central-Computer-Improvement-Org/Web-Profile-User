@@ -182,6 +182,7 @@ export default function Home() {
         </section>
         <span className="block h-full bg-gradientAccent">
           <div className="block h-full bg-gradientDefault">
+            
             <section id="connect" className="w-full h-auto">
               {/* Layout Section Connect Pertama  */}
               <div

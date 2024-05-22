@@ -113,7 +113,7 @@ const ProjectData = () => {
       >
         {/* Project Thumbnail*/}
         <div
-          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[2505px] sm:top-[3040px] md:top-[3920px] ${styles.projectsContainerThumbnail}`}
+          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[2505px] sm:top-[3100px] md:top-[3980px] ${styles.projectsContainerThumbnail}`}
         >
           {isMovingData || isLoading || !projectData ? (
             <Skeleton
@@ -177,15 +177,15 @@ const ProjectData = () => {
               </div>
               {/* Project Judul Mobile */}
               <div
-                className={`block sm:hidden ${styles.projectTitleMobile}`}
+                className={`block sm:hidden`}
               >
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={100} height={20} />
                 ) : (
                   projectData[positionIndex].name ? (
-                    <p className="font-bold text-[18px] text-bluePallete-600 ">{projectData[positionIndex].name}</p>
+                    <p className={`font-bold text-[18px] text-bluePallete-600 ${styles.projectTitleMobile}`}>{projectData[positionIndex].name}</p>
                   ) : (
-                    <TextNotFound className="font-bold text-[18px] text-transparent">Project Title</TextNotFound>
+                    <TextNotFound className="font-bold text-[14px] text-transparent">Project Title</TextNotFound>
                   )
                 )}
               </div>
