@@ -121,7 +121,7 @@ const ProjectData = () => {
               height="auto"
               style={{ borderRadius: "20px" }}
             />
-          ) : projectData[positionIndex].imageUri ? (
+          ) : projectData[positionIndex]?.imageUri ? (
             <Image
               src={`${host}${projectData[positionIndex].imageUri}`}
               alt="Thumbnail Project Central Computer Improvement"
@@ -147,7 +147,7 @@ const ProjectData = () => {
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton circle={true} width="100%" height="100%" />
                 ) : (
-                  projectData[positionIndex].iconUri ? (
+                  projectData[positionIndex]?.iconUri ? (
                     <Image
                     src={`${host}${projectData[positionIndex].iconUri}`}
                     alt="Logo Project Central Computer Improvement"
@@ -166,7 +166,7 @@ const ProjectData = () => {
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={200} height={20} />
                 ) : (
-                  projectData[positionIndex].name ? (
+                  projectData[positionIndex]?.name ? (
                     <p className="font-bold text-[8px] sm:text-[18px] text-bluePallete-600 lg:text-black">{projectData[positionIndex].name}</p>
                   ) : (
                     <TextNotFound
@@ -182,7 +182,7 @@ const ProjectData = () => {
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={100} height={20} />
                 ) : (
-                  projectData[positionIndex].name ? (
+                  projectData[positionIndex]?.name ? (
                     <p className={`font-bold text-[18px] text-bluePallete-600 ${styles.projectTitleMobile}`}>{projectData[positionIndex].name}</p>
                   ) : (
                     <TextNotFound className="font-bold text-[14px] text-transparent">Project Title</TextNotFound>
@@ -198,7 +198,7 @@ const ProjectData = () => {
             {isMovingData || isLoading || !projectData ? (
               <Skeleton count={3} />
             ) : (
-              projectData[positionIndex].description ? (
+              projectData[positionIndex]?.description ? (
                 <p className={`font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-white lg:text-black ${styles.projectsDesc}`}>{projectData[positionIndex].description}</p>
               ) : (
                 <TextNotFound className="font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-transparent">Ini Deskripsi yang panjang sekali, hingga membuat content bisa terlihat cukup bagus</TextNotFound>
