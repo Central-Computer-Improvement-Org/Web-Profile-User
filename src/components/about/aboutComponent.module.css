@@ -10,7 +10,7 @@
 	background-color: orange;
 }
 
-.test {
+.aboutButtonRight {
 	right: -5%;
 	top: 5%;
 }
@@ -18,7 +18,7 @@
 
 
 @media only screen and (max-width: 1350px) {
-	.test {
+	.aboutButtonRight {
 		right: 0%;
 	}
 }
