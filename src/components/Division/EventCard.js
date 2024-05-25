@@ -172,9 +172,9 @@ const EventCard = () => {
                </div>
             ))}
          </div>
-         {size.width >= 768 && (
-            <button
-               className="text-white w-full flex justify-center hover:opacity-75 md:mt-[54px]"
+         <div className="w-full flex justify-center items-center">
+         <button
+               className={`${styles.eventButton} w-full flex justify-center hover:opacity-75 mt-[20px] sm:mt-[54px] text-white`}
                onClick={handleNext}
             >
                <svg
@@ -183,6 +183,7 @@ const EventCard = () => {
                   viewBox="0 0 100 100"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="w-[50px] h-[50px] sm:w-[100px] sm:h-[100px]"
                >
                   <circle cx="50" cy="50" r="50" fill="#265290" />
                   <path
@@ -193,8 +194,7 @@ const EventCard = () => {
                   />
                </svg>
             </button >
-         )
-         }
+         </div>
       </>
    );
 };

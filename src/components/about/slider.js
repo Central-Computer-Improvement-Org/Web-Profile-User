@@ -41,7 +41,7 @@ export default function Slider({ data }) {
             className="mySwiper xl:!max-w-[1108px] lg:!max-w-[798px] md:!max-w-[708px] w-full mt-[31px]"
          >
             {data && data.map((user, index) => (
-               <SwiperSlide key={index} className="w=[100%]">
+               <SwiperSlide key={index} className="w-[100%]">
                   <CardAbout
                      color={'bg-greenPallete-300'}
                      image={host + user.profileUri}
@@ -54,7 +54,7 @@ export default function Slider({ data }) {
          <div className="flex justify-center gap-1">
             <div className="mt-[30px] swiper-pagination lg:hidden flex justify-center items-center gap-[10px]"/>
          </div>
-         <div className={`${styles.test} absolute z-[10] bottom-0 lg:flex items-center justify-center hidden`}>
+         <div className={`${styles.aboutButtonRight} absolute z-[10] bottom-0 lg:flex items-center justify-center hidden`}>
             <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
                {iconArrow}
             </button>
