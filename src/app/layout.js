@@ -19,7 +19,7 @@ export async function generateMetadata() {
       })
       .catch((error) => {
          console.error(error);
-         return 'Central Computer Improvementdd';
+         return 'Central Computer Improvement';
       });
 
    return {
