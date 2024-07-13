@@ -16,9 +16,10 @@ import TextNotFound from "@/components/teksNotFound";
 import { host } from "@/components/host";
 
 export default function DetailDvision() {
-  const [divisionData, setDivisionData] = useState(null);
-  const searchParams = useSearchParams();
-  const divisionId = searchParams.get("id");
+   const [divisionData, setDivisionData] = useState(null);
+   const [isLoading, setIsLoading] = useState(true);
+   const searchParams = useSearchParams();
+   const divisionId = searchParams.get("id");
 
    useEffect(() => {
       if (divisionId) {
@@ -30,25 +31,30 @@ export default function DetailDvision() {
                      (data) => data.id === divisionId
                   );
                   setDivisionData(filterById);
+                  setIsLoading(false);
                } else {
                   console.error(JSON.stringify(response.errors));
+                  setIsLoading(false);
                }
             })
             .catch((error) => {
                console.error(error);
+               setIsLoading(false);
             });
       } else {
          console.error("Division ID not found");
+         setIsLoading(false);
       }
    }, [divisionId]);
 
-   // handle data divison ketika data belum ter get
    if (!divisionData) {
       return (
-         <Loading
-            size="w-auto h-auto lg:w-[300px] lg:h-[300px]"
-            textAlignment="text-center"
-         />
+         <div className="w-full h-screen flex justify-center items-center">
+            <Loading
+               size="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
+               textAlignment="text-left"
+            />
+         </div>
       );
    }
 
@@ -56,10 +62,10 @@ export default function DetailDvision() {
       <>
          <Header />
          <Navbar />
-         <span className="block h-full bg-gradientAccent">
-            <div className="bg-gradientDefault h-full bg-fixed bg-no-repeat relative">
+         <span className="block h-full bg-gradientAccentTwo">
+            <div className="block h-full bg-gradientDefaultTwo">
                <main className="w-full h-auto xl:max-w-[75rem] lg:max-w-[67rem] md:max-w-[51rem] sm:max-w-xl max-w-md px-5 sm:px-0 mx-auto">
-                  {divisionData && divisionData.length > 0 ? (
+                  {divisionData &&
                      divisionData.map((data) => (
                         <div key={data.id}>
                            <section
@@ -68,7 +74,12 @@ export default function DetailDvision() {
                            >
                               <div className="w-full h-auto flex justify-between items-center">
                                  <div className="basis-3/5">
-                                    {data?.name ? (
+                                    {isLoading ? (
+                                       <Loading
+                                          size="w-[80px] h-[80px] lg:w-[140px] lg:h-[140px]"
+                                          textAlignment="text-left"
+                                       />
+                                    ) : data?.name ? (
                                        <h1
                                           className={`font-black text-[32px] sm:text-[40px] md:text-[70px] lg:text-[90px] text-secondPrimary ${styles.dvisionCardName}`}
                                        >
@@ -76,34 +87,44 @@ export default function DetailDvision() {
                                        </h1>
                                     ) : (
                                        <TextNotFound className="font-black text-[32px] sm:text-[40px] md:text-[70px] lg:text-[90px] text-transparent">
-                                          DIVISI DATA
+                                          Nama Divisi
                                        </TextNotFound>
                                     )}
                                  </div>
                                  <div className="basis-2/5 flex items-center justify-end">
-                                    {data?.logoUri ? (
+                                    {isLoading ? (
+                                       <Loading
+                                          size="w-[80px] h-[80px] lg:w-[140px] lg:h-[140px]"
+                                          textAlignment="text-center"
+                                       />
+                                    ) : data?.logoUri ? (
                                        <Image
-                                          className="w-[90px] h-[78px] sm:w-[130px] sm:h-[108px] lg:w-[170px] lg:h-[148px] object-cover"
                                           src={`${host}${data.logoUri}`}
-                                          width={170}
-                                          height={148}
                                           alt={[
                                              "Logo " +
                                              data.name +
                                              " Central Computer Improvement",
                                           ]}
+                                          width={170}
+                                          height={148}
+                                          className="w-[90px] h-[78px] sm:w-[130px] sm:h-[108px] lg:w-[170px] lg:h-[148px] object-cover"
                                        />
                                     ) : (
                                        <ImageNotFound className="w-[90px] h-[78px] sm:w-[130px] sm:h-[108px] lg:w-[170px] lg:h-[148px] object-cover" />
                                     )}
                                  </div>
                               </div>
-                              {data?.description ? (
+                              {isLoading ? (
+                                 <Loading
+                                    size="w-[80px] h-[80px] lg:w-[140px] lg:h-[140px]"
+                                    textAlignment="text-center"
+                                 />
+                              ) : data?.description ? (
                                  <p className="font-medium text-[14px] sm:text-[28px] lg:text-[40px] leading-0 md:leading-10 text-bluePallete-800">
                                     {data.description}
                                  </p>
                               ) : (
-                                 <TextNotFound className="font-black text-[32px] sm:text-[40px] md:text-[70px] lg:text-[90px] text-transparent">
+                                 <TextNotFound className="font-medium text-[14px] sm:text-[28px] lg:text-[40px] leading-0 md:leading-10 text-transparent">
                                     Divisi yang berfokus pada pembelajaran pengembangan
                                     website terbaru dengan memperhatikan beberapa struktur
                                     didalamnya.
@@ -124,18 +145,16 @@ export default function DetailDvision() {
                               </div>
                            </section>
                         </div>
-                     ))
-                  ) : (
-                     <div className="w-full h-screen flex items-center justify-center">
-                        <p className="font-bold text-center text-[30px] text-bluePallete-800">
-                           Data not found
-                        </p>
-                     </div>
-                  )}
+                     ))}
                   <section
                      id="event"
                      className="w-full h-auto flex flex-col mt-[50px] sm:mt-[80px] md:mt-[130px] pb-[70px] md:pb-[200px]"
                   >
+                     <div className="w-full h-[44px] sm:h-[108px] flex justify-center items-center rounded-[15px] bg-[#092C4C]">
+                        <p className="font-bold text-[20px] sm:text-[40px] text-center text-white">
+                           Our Event
+                        </p>
+                     </div>
                      <EventCard />
                   </section>
                </main>

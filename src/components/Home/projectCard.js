@@ -6,6 +6,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import request from "@/app/utils/request";
 import { host } from "@/components/host";
+import TextNotFound from "@/components/teksNotFound";
+import ImageNotFound from "@/components/imageNotFound";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const ProjectData = () => {
@@ -109,9 +111,9 @@ const ProjectData = () => {
       <div
         className={`static w-full h-auto lg:h-[340px] xl:h-auto flex flex-row flex-wrap py-8 px-8 sm:px-10 lg:!mt-11 rounded-[20px] sm:rounded-lg lg:border-[3px] lg:border-bluePallete-600 bg-bluePallete-800 lg:bg-transparent ${styles.projectContainer}`}
       >
-        {/* Project Thumbnail */}
+        {/* Project Thumbnail*/}
         <div
-          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[2505px] sm:top-[3040px] md:top-[3920px] ${styles.projectsContainerThumbnail}`}
+          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[2505px] sm:top-[3100px] md:top-[3980px] ${styles.projectsContainerThumbnail}`}
         >
           {isMovingData || isLoading || !projectData ? (
             <Skeleton
@@ -119,13 +121,17 @@ const ProjectData = () => {
               height="auto"
               style={{ borderRadius: "20px" }}
             />
-          ) : (
+          ) : projectData[positionIndex]?.imageUri ? (
             <Image
               src={`${host}${projectData[positionIndex].imageUri}`}
               alt="Thumbnail Project Central Computer Improvement"
               width={467}
               height={284}
               responsive="true"
+              className={`w-[290px] h-[270px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] max-w-[650px] max-h-[370px] lg:max-w-[467px] lg:max-h-[284px] rounded-[20px] sm:rounded-lg object-cover ${styles.projectsThumbnailImage}`}
+            />
+          ) : (
+            <ImageNotFound
               className={`w-[290px] h-[270px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] max-w-[650px] max-h-[370px] lg:max-w-[467px] lg:max-h-[284px] rounded-[20px] sm:rounded-lg object-cover ${styles.projectsThumbnailImage}`}
             />
           )}
@@ -141,7 +147,8 @@ const ProjectData = () => {
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton circle={true} width="100%" height="100%" />
                 ) : (
-                  <Image 
+                  projectData[positionIndex]?.iconUri ? (
+                    <Image
                     src={`${host}${projectData[positionIndex].iconUri}`}
                     alt="Logo Project Central Computer Improvement"
                     width={50}
@@ -149,36 +156,56 @@ const ProjectData = () => {
                     responsive="true"
                     className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-contain"
                   />
+                  ) : (
+                    <ImageNotFound className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-contain" />
+                  )
                 )}
               </div>
               {/* Project Judul */}
-              <div className="hidden sm:block ml-[10px] font-bold text-[8px] sm:text-[18px] text-bluePallete-600 lg:text-black">
+              <div className="hidden sm:block ml-[10px]">
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={200} height={20} />
                 ) : (
-                  <p>{projectData[positionIndex].name}</p>
+                  projectData[positionIndex]?.name ? (
+                    <p className="font-bold text-[8px] sm:text-[18px] text-bluePallete-600 lg:text-black">{projectData[positionIndex].name}</p>
+                  ) : (
+                    <TextNotFound
+                      className="font-bold text-[8px] sm:text-[18px] text-transparent"
+                    >Project Title</TextNotFound>
+                  )
                 )}
               </div>
               {/* Project Judul Mobile */}
-              <div className={`block sm:hidden font-bold text-[18px] text-bluePallete-600 ${styles.projectTitleMobile}`}>
+              <div
+                className={`block sm:hidden`}
+              >
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={100} height={20} />
                 ) : (
-                  <p>{projectData[positionIndex].name}</p>
+                  projectData[positionIndex]?.name ? (
+                    <p className={`font-bold text-[18px] text-bluePallete-600 ${styles.projectTitleMobile}`}>{projectData[positionIndex].name}</p>
+                  ) : (
+                    <TextNotFound className="font-bold text-[14px] text-transparent">Project Title</TextNotFound>
+                  )
                 )}
               </div>
             </div>
           </div>
           {/* Project Isi Deskripsi */}
           <div
-            className={`h-auto font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden  text-white lg:text-black ${styles.projectsDesc}`}
+            className={`h-auto`}
           >
             {isMovingData || isLoading || !projectData ? (
               <Skeleton count={3} />
             ) : (
-              <p>{projectData[positionIndex].description}</p>
+              projectData[positionIndex]?.description ? (
+                <p className={`font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-white lg:text-black ${styles.projectsDesc}`}>{projectData[positionIndex].description}</p>
+              ) : (
+                <TextNotFound className="font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-transparent">Ini Deskripsi yang panjang sekali, hingga membuat content bisa terlihat cukup bagus</TextNotFound>
+              )
             )}
           </div>
+          {/* Button */}
           <div
             className={`flex flex-row flex-wrap justify-between lg:justify-start items-center space-x-0 md:space-x-5`}
           >

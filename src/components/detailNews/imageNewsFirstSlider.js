@@ -1,90 +1,138 @@
-// ImageNewsFirstSlider
+import React, { useRef, useState, useEffect } from "react";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-'use client';
-import React from 'react';
-
-import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { host } from '../host';
-import styles from '@/components/detailNews/imageNewsFirstSlider.module.css';
+import "./image.css";
+import { host } from "../host";
+import ImageNotFound from "@/components/imageNotFound";
+import Loading from "@/components/loading";
+import styles from "@/components/detailNews/imageNewsFirstSlider.module.css";
 
 const ImageNewsFirstSlider = ({ image }) => {
-  const iconArrow = (
-    <svg
-      width="35"
-      height="35"
-      viewBox="0 0 35 35"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M17.1602 6.49615C17.8009 5.85545 18.8397 5.85545 19.4804 6.49615L29.3242 16.3399C29.9649 16.9806 29.9649 18.0194 29.3242 18.6601L19.4804 28.5038C18.8397 29.1446 17.8009 29.1446 17.1602 28.5038C16.5195 27.8631 16.5195 26.8244 17.1602 26.1837L24.2032 19.1406H6.83594C5.92985 19.1406 5.19531 18.4061 5.19531 17.5C5.19531 16.5939 5.92985 15.8594 6.83594 15.8594H24.2032L17.1602 8.81635C16.5195 8.17564 16.5195 7.13686 17.1602 6.49615Z"
-        fill="white"
-      />
-    </svg>
-  );
+  const swiperRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState(0);
+  const [failedImages, setFailedImages] = useState(0);
+
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
+    },
+  };
+
+  useEffect(() => {
+    if (image && image.length > 0) {
+      image.forEach((data) => {
+        const img = document.createElement("img");
+        img.src = host + data;
+        img.onload = () => {
+          setLoadedImages((prev) => prev + 1);
+        };
+        img.onerror = () => {
+          setFailedImages((prev) => prev + 1);
+        };
+      });
+    } else {
+      setIsLoading(false);
+    }
+  }, [image]);
+
+  useEffect(() => {
+    if (image && (loadedImages + failedImages === image.length)) {
+      setIsLoading(false);
+    }
+  }, [loadedImages, failedImages, image]);
+
+  const goNext = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
+
   return (
-    <div className={`${styles.imageNewsFirstSlider} xl:w-[902px] w-full `}>
-      <Swiper
-        className={`w-full xl:h-[520px] md:h-[550px] sm:h-[390px] h-[200px] xl:rounded-lg `}
-        slidesPerView={1}
-        pagination={{
-          el: '.swiper-custom-pagination',
-          clickable: true,
-          renderBullet: function (index, className) {
-            if (window.innerWidth <= 600) {
-              return (
-                '<span class="' +
-                className +
-                '" style="width: 10px; height: 10px; background-color: #265290;"></span>'
-              );
-            } else {
-              return (
-                '<span class="' +
-                className +
-                '" style="width: 16px; height: 16px; background-color: #265290;"></span>'
-              );
-            }
-          },
-        }}
-        navigation={{
-          nextEl: '.next',
-        }}
-        modules={[Navigation, Pagination]}
-      >
-        {image &&
-          image.map((data, index) => (
-            <SwiperSlide className="cursor-pointer" key={index}>
-              <div className="w-full h-full">
-                <Image
-                  src={host + data}
-                  width={0}
-                  height={0}
-                  responsive="true"
-                  alt="banner"
-                  className="w-full h-full xl:rounded-lg xl:h-[520px] xl:w-[902px] object-cover"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-      </Swiper>
-      <div className=" w-full xl:mt-[15px] mt-[10px]">
-        <div className="flex justify-end items-center">
-          <div className="inline-block  mx-auto">
-            <div className="swiper-custom-pagination " />
-          </div>
-          <button className="bg-bluePallete-500 text-transparent rounded-full w-16 h-16  items-center justify-center next lg:flex hidden">
-            {iconArrow}
-          </button>
+    <>
+      {isLoading ? (
+        <div className="w-[600px] h-[500px] flex justify-center items-center">
+          <Loading size="w-[150px] h-[150px]" textAlignment="text-center"/>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className="xl:w-[902px] w-full swiper-2">
+          {(!image || failedImages === image.length) ? (
+            <ImageNotFound className="w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat" />
+          ) : (
+            <Swiper
+              ref={swiperRef}
+              className={`${styles.containerNews} w-full xl:h-[600px] lg:h-[780px] md:h-[600px] sm:h-[390px] h-[320px] xl:rounded-lg `}
+              slidesPerView={1}
+              pagination={pagination}
+              navigation={{
+                nextEl: ".newsButtonNext",
+              }}
+              modules={[Navigation, Pagination]}
+            >
+              {image &&
+                image.map((data, index) => (
+                  <SwiperSlide className="cursor-pointer" key={index}>
+                    <div className="w-full h-full">
+                      {data ? (
+                        <Image
+                          src={host + data}
+                          width={0}
+                          height={0}
+                          alt="Thumbnail News Central Computer Improvement"
+                          className={`${styles.imagesNews} w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat`}
+                        />
+                      ) : (
+                        <ImageNotFound className="w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat" />
+                      )}
+                    </div>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          )}
+          <style>
+            {`
+              .swiper-pagination-bullet-custom {
+                  width: 16px !important;
+                  height: 16px !important;
+                  background-color: #265290 !important;
+                  border-radius: 50% !important;
+                  margin: 0 5px !important;
+              }
+              @media only screen and (max-width: 768px) {
+                .swiper-pagination-bullet-custom {
+                  width: 10px !important;
+                  height: 10px !important;
+                }
+              }
+            `}
+          </style>
+          <div className={`${styles.newsButtonNext}`} onClick={goNext}>
+            <svg
+              className="h-[63px] w-[63px]"
+              width="63"
+              height="63"
+              viewBox="0 0 100 100"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="50" cy="50" r="50" fill="#265290" />
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M48.9661 33.2082C49.9729 32.2014 51.6053 32.2014 52.6121 33.2082L68.0808 48.677C69.0876 49.6838 69.0876 51.3162 68.0808 52.323L52.6121 67.7918C51.6053 68.7986 49.9729 68.7986 48.9661 67.7918C47.9592 66.7849 47.9592 65.1526 48.9661 64.1457L60.0337 53.0781H32.7422C31.3183 53.0781 30.1641 51.9239 30.1641 50.5C30.1641 49.0761 31.3183 47.9219 32.7422 47.9219H60.0337L48.9661 36.8543C47.9592 35.8474 47.9592 34.2151 48.9661 33.2082Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

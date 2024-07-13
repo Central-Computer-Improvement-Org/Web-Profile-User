@@ -1,0 +1,93 @@
+.swiper-custom-bullet {
+	height: 2px;
+	width: 2px;
+	background-color: white;
+}
+
+.swiper-custom-bullet.swiper-custom-bullet-active {
+	height: 2px;
+	width: 2px;
+	background-color: orange;
+}
+
+.aboutButtonRight {
+	right: -5%;
+	top: 5%;
+}
+
+
+
+@media only screen and (max-width: 1350px) {
+	.aboutButtonRight {
+		right: 0%;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	.aboutContainerSwiper{
+		height: 350px !important;
+	}
+	.aboutCardContainer {
+		height: 110px !important;
+	}
+	.aboutCardJob {
+		font-size: 12px !important;
+	}
+	.aboutCardName{
+		font-size: 16px !important;
+		height: 40px !important;
+		line-height: 20px !important;
+	}
+	.aboutCardLink {
+		width: 30px !important;
+		height: 30px !important;
+	}
+	.aboutCardProfile {
+		width: 70px !important;
+		height: 70px !important;
+	}
+}
+
+@media only screen and (max-width: 396px) {
+	.aboutCardContainer {
+		height: 100px !important;
+	}
+	.aboutCardJob {
+		font-size: 8px !important;
+	}
+	.aboutCardName{
+		font-size: 15px !important;
+		height: 35px !important;
+		line-height: 15px !important;
+	}
+	.aboutCardLink {
+		width: 20px !important;
+		height: 20px !important;
+	}
+	.aboutCardProfile {
+		width: 55px !important;
+		height: 55px !important;
+	}
+}
+
+@media only screen and (max-width: 385px) {
+	.aboutContainerSwiper{
+		height: 270px !important;
+	}
+	.aboutCardContainer {
+		height: 80px !important;
+	}
+	.aboutCardName{
+		font-size: 12px !important;
+		height: 35px !important;
+		line-height: 15px !important;
+	}
+	.aboutCardLink {
+		width: 15px !important;
+		height: 15px !important;
+	}
+	.aboutCardProfile {
+		width: 45px !important;
+		height: 45px !important;
+	}
+}

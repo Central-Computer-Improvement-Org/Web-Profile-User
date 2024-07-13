@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ReactCardFlip from "react-card-flip";
 import { useMediaQuery } from "react-responsive";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 import request from "@/app/utils/request";
-import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
 import TeksNotFound from "@/components/teksNotFound";
 import { host } from "@/components/host";
 import styles from "@/components/Division/divisionComponent.module.css";
-import { useWindowSize } from "@uidotdev/usehooks";
 
 
 const desktopColorPattern = [
@@ -36,13 +35,6 @@ const EventCard = () => {
    const [autoFlipCount, setAutoFlipCount] = useState(0);
    const [page, setPage] = useState(1);
    const [totalPages, setTotalPages] = useState(0);
-
-
-   // if (!eventData) {
-   //    return <Loading />;
-   // }
-
-   // const eventData = eventData;
 
    const getEvents = async () => {
       const payload = {
@@ -102,14 +94,16 @@ const EventCard = () => {
       page >= totalPages ? setPage(1) : setPage(page + 1);
    };
 
+   if (!eventData || eventData.length === 0) {
+      return (
+         <div className="w-full h-auto flex justify-center items-center mt-[50px]">
+            <ImageNotFound className="w-[90px] h-[78px] sm:w-[130px] sm:h-[108px] lg:w-[170px] lg:h-[148px] object-cover" />
+         </div>
+      );
+   }
 
    return (
       <>
-         <div className="w-full h-[44px] sm:h-[108px] flex justify-center items-center rounded-[15px] bg-[#092C4C]">
-            <p className="font-bold text-[20px] sm:text-[40px] text-center text-white">
-               Our Event
-            </p>
-         </div>
          <div className="w-full h-auto flex flex-wrap justify-around items-center mt-[21px]">
             {eventData?.map((event, index) => (
                <div key={event.id} className="mt-[10px] sm:mt-[54px]">
@@ -178,9 +172,9 @@ const EventCard = () => {
                </div>
             ))}
          </div>
-         {size.width >= 768 && (
-            <button
-               className="text-white w-full flex justify-center hover:opacity-75 md:mt-[54px]"
+         <div className="w-full flex justify-center items-center">
+         <button
+               className={`${styles.eventButton} w-full flex justify-center hover:opacity-75 mt-[20px] sm:mt-[54px] text-white`}
                onClick={handleNext}
             >
                <svg
@@ -189,6 +183,7 @@ const EventCard = () => {
                   viewBox="0 0 100 100"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="w-[50px] h-[50px] sm:w-[100px] sm:h-[100px]"
                >
                   <circle cx="50" cy="50" r="50" fill="#265290" />
                   <path
@@ -199,8 +194,7 @@ const EventCard = () => {
                   />
                </svg>
             </button >
-         )
-         }
+         </div>
       </>
    );
 };

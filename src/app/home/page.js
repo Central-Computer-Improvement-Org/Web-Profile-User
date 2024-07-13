@@ -98,91 +98,91 @@ export default function Home() {
       <Header />
       <Navbar />
       <main className="w-full h-auto">
-        <span className="block h-full bg-gradientAccent">
-          <div className="bg-gradientDefault h-full bg-fixed bg-no-repeat relative">
-            <section
-              id="hero"
-              className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-36"
-            >
-              <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto flex flex-row flex-wrap">
-                <div className="basis-full md:basis-[55%] flex flex-col space-y-10">
-                  <div className="hidden md:block">
-                  {isLoading ? (
-                      <Loading
-                        size="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
-                        textAlignment="text-left"
-                      />
-                    ) : settingsData?.logoUri ? (
-                      <Image
-                        src={`${host}${settingsData.logoUri}`}
-                        alt="Logo Central Computer Improvement"
-                        width={291}
-                        height={180}
-                        responsive="true"
-                        className="w-auto h-auto md:w-full md:h-[180px] max-w-[291px] max-h-[180px] object-contain"
-                      />
-                    ) : (
-                      <ImageNotFound className="hidden md:block w-auto h-auto md:w-[400px] md:h-[300px] object-contain" />
-                    )}
-                  </div>
-                  <div className="flex flex-col space-y-1">
-                    {isLoading ? (
-                      <Loading
-                        size="w-[70px] h-[70px]"
-                        textAlignment="text-center md:text-left"
-                      />
-                    ) : settingsData?.name ? (
-                      <h1 className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 text-bluePallete-600">
-                        {settingsData.name}
-                      </h1>
-                    ) : (
-                      <TextNotFound className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 text-bluePallete-600"></TextNotFound>
-                    )}
-                  </div>
-                  {/* Deskripsi ketika desktop */}
-                  <div className="hidden md:block">
-                    {isLoading ? (
-                      <Loading
-                        size="w-[60px] h-[60px]"
-                        textAlignment="text-left"
-                      />
-                    ) : settingsData?.description ? (
-                      <p className="text-[24px] pr-5 text-bluePallete-600">
-                        {settingsData.description}
-                      </p>
-                    ) : (
-                      <TextNotFound className="text-[24px] pr-5 text-bluePallete-600"></TextNotFound>
-                    )}
-                  </div>
-                </div>
-                <div className="basis-full md:basis-[45%] flex flex-col flex-wrap items-center justify-center pt-10 md:pt-0">
-                  <Image
-                    src="assets/home/images/hero-banner.png"
-                    alt="Hero Central Computer Improvement"
-                    width={525}
-                    height={381}
-                    responsive="true"
-                    className="w-full h-full max-w-[293px] max-h-[196px] md:max-w-[525px] md:max-h-[381px] object-contain"
+        <section
+          id="hero"
+          className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-[200px]"
+        >
+          <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto flex flex-row flex-wrap">
+            <div className="basis-full md:basis-[55%] flex flex-col space-y-10">
+              <div className="hidden md:block">
+                {isLoading ? (
+                  <Loading
+                    size="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
+                    textAlignment="text-left"
                   />
-                  {/* Deskripsi ketika mobile */}
-                  <div className="block md:hidden">
-                    {isLoading ? (
-                      <Loading
-                        size="w-[40px] h-[40px]"
-                        textAlignment="text-left"
-                      />
-                    ) : settingsData?.description ? (
-                      <p className="text-center text-[20px] sm:text-[24px] pt-10 lg:pt-0 text-bluePallete-600">
-                        {settingsData.description}
-                      </p>
-                    ) : (
-                      <TextNotFound className="text-center text-[20px] sm:text-[24px] pt-10 lg:pt-0 text-bluePallete-600"></TextNotFound>
-                    )}
-                  </div>
-                </div>
+                ) : settingsData?.logoUri ? (
+                  <Image
+                    src={`${host}${settingsData.logoUri}`}
+                    alt="Logo Central Computer Improvement"
+                    width={291}
+                    height={180}
+                    responsive="true"
+                    className="w-auto h-auto md:w-full md:h-[180px] max-w-[291px] max-h-[180px] object-contain"
+                  />
+                ) : (
+                  <ImageNotFound className="hidden md:block w-auto h-auto md:w-[400px] md:h-[300px] object-contain" />
+                )}
               </div>
-            </section>
-
+              <div className="flex flex-col space-y-1">
+                {isLoading ? (
+                  <Loading
+                    size="w-[70px] h-[70px]"
+                    textAlignment="text-center md:text-left"
+                  />
+                ) : settingsData?.name ? (
+                  <h1 className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 text-bluePallete-600">
+                    {settingsData.name}
+                  </h1>
+                ) : (
+                  <TextNotFound className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 text-bluePallete-600"></TextNotFound>
+                )}
+              </div>
+              {/* Deskripsi ketika desktop */}
+              <div className="hidden md:block">
+                {isLoading ? (
+                  <Loading
+                    size="w-[60px] h-[60px]"
+                    textAlignment="text-left"
+                  />
+                ) : settingsData?.description ? (
+                  <p className="text-[24px] pr-5 text-bluePallete-600">
+                    {settingsData.description}
+                  </p>
+                ) : (
+                  <TextNotFound className="text-[24px] pr-5 text-bluePallete-600"></TextNotFound>
+                )}
+              </div>
+            </div>
+            <div className="basis-full md:basis-[45%] flex flex-col flex-wrap items-center justify-center pt-10 md:pt-0">
+              <Image
+                src="assets/home/images/hero-banner.png"
+                alt="Hero Central Computer Improvement"
+                width={525}
+                height={381}
+                responsive="true"
+                className="w-full h-full max-w-[293px] max-h-[196px] md:max-w-[525px] md:max-h-[381px] object-contain"
+              />
+              {/* Deskripsi ketika mobile */}
+              <div className="block md:hidden">
+                {isLoading ? (
+                  <Loading
+                    size="w-[40px] h-[40px]"
+                    textAlignment="text-left"
+                  />
+                ) : settingsData?.description ? (
+                  <p className="text-center text-[20px] sm:text-[24px] pt-10 lg:pt-0 text-bluePallete-600">
+                    {settingsData.description}
+                  </p>
+                ) : (
+                  <TextNotFound className="text-center text-[20px] sm:text-[24px] pt-10 lg:pt-0 text-bluePallete-600"></TextNotFound>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+        <span className="block h-full bg-gradientAccent">
+          <div className="block h-full bg-gradientDefault">
+            
             <section id="connect" className="w-full h-auto">
               {/* Layout Section Connect Pertama  */}
               <div
