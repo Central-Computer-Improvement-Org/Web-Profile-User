@@ -1,1 +1,1 @@
-export const host = 'https://103-31-38-146.sslip.io'
+export const host = 'https://kevinid.pythonanywhere.com'
