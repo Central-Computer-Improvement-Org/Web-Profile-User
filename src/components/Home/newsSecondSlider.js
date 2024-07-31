@@ -1,18 +1,18 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import Link from "next/link";
 
+import { host } from "@/components/host";
 import request from "@/app/utils/request";
 import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
-import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
 
 const NewsSecondSlider = () => {
