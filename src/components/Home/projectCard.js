@@ -1,21 +1,21 @@
-"use client";
-import React, { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+'use client';
+import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-import request from "@/app/utils/request";
-import { host } from "@/components/host";
-import TextNotFound from "@/components/teksNotFound";
-import ImageNotFound from "@/components/imageNotFound";
-import styles from "@/components/Home/homeComponent.module.css";
+import request from '@/app/utils/request';
+import { host } from '@/components/host';
+import TextNotFound from '@/components/teksNotFound';
+import ImageNotFound from '@/components/imageNotFound';
+import styles from '@/components/Home/homeComponent.module.css';
 
 const ProjectData = () => {
   const [projectData, setProjectData] = useState(null);
   const [positionIndex, setPositionIndex] = useState(0);
   const [isMovingData, setIsMovingData] = useState(false);
-  const [circleColor, setCircleColor] = useState("#152e51");
-  const [pathColor, setPathColor] = useState("white");
+  const [circleColor, setCircleColor] = useState('#152e51');
+  const [pathColor, setPathColor] = useState('white');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const ProjectData = () => {
     setProjectData(null);
 
     request
-      .get("/projects")
+      .get('/projects')
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const sortedData = response.data.data.sort(
@@ -45,27 +45,27 @@ const ProjectData = () => {
   useEffect(() => {
     const handleCircleColor = () => {
       if (window.innerWidth > 1024) {
-        setCircleColor("#152e51");
+        setCircleColor('#152e51');
       } else {
-        setCircleColor("white");
+        setCircleColor('white');
       }
     };
 
     const handlePathColor = () => {
       if (window.innerWidth > 1024) {
-        setPathColor("white");
+        setPathColor('white');
       } else {
-        setPathColor("#152e51");
+        setPathColor('#152e51');
       }
     };
 
-    window.addEventListener("resize", handleCircleColor);
-    window.addEventListener("resize", handlePathColor);
+    window.addEventListener('resize', handleCircleColor);
+    window.addEventListener('resize', handlePathColor);
     handleCircleColor();
     handlePathColor();
 
     return () => {
-      window.removeEventListener("resize", handleCircleColor);
+      window.removeEventListener('resize', handleCircleColor);
     };
   }, []);
 
@@ -75,11 +75,11 @@ const ProjectData = () => {
       setIsMovingData(true);
       setIsLoading(true);
 
-      if (type === "left") {
+      if (type === 'left') {
         setPositionIndex((prevData) =>
           prevData === 0 ? projectData.length - 1 : prevData - 1
         );
-      } else if (type === "right") {
+      } else if (type === 'right') {
         setPositionIndex((prevData) =>
           prevData === projectData.length - 1 ? 0 : prevData + 1
         );
@@ -119,7 +119,7 @@ const ProjectData = () => {
             <Skeleton
               width="auto"
               height="auto"
-              style={{ borderRadius: "20px" }}
+              style={{ borderRadius: '20px' }}
             />
           ) : projectData[positionIndex]?.imageUri ? (
             <Image
@@ -146,9 +146,8 @@ const ProjectData = () => {
               <div className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px]">
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton circle={true} width="100%" height="100%" />
-                ) : (
-                  projectData[positionIndex]?.iconUri ? (
-                    <Image
+                ) : projectData[positionIndex]?.iconUri ? (
+                  <Image
                     src={`${host}${projectData[positionIndex].iconUri}`}
                     alt="Logo Project Central Computer Improvement"
                     width={50}
@@ -156,53 +155,50 @@ const ProjectData = () => {
                     responsive="true"
                     className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-contain"
                   />
-                  ) : (
-                    <ImageNotFound className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-contain" />
-                  )
+                ) : (
+                  <ImageNotFound className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-contain" />
                 )}
               </div>
               {/* Project Judul */}
               <div className="hidden sm:block ml-[10px]">
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={200} height={20} />
+                ) : projectData[positionIndex]?.name ? (
+                  <p className="font-bold text-[8px] sm:text-[18px] text-bluePallete-600 lg:text-black">
+                    {projectData[positionIndex].name}
+                  </p>
                 ) : (
-                  projectData[positionIndex]?.name ? (
-                    <p className="font-bold text-[8px] sm:text-[18px] text-bluePallete-600 lg:text-black">{projectData[positionIndex].name}</p>
-                  ) : (
-                    <TextNotFound
-                      className="font-bold text-[8px] sm:text-[18px] text-transparent"
-                    >Project Title</TextNotFound>
-                  )
+                  <TextNotFound className="font-bold text-[8px] sm:text-[18px] text-transparent"></TextNotFound>
                 )}
               </div>
               {/* Project Judul Mobile */}
-              <div
-                className={`block sm:hidden`}
-              >
+              <div className={`block sm:hidden`}>
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={100} height={20} />
+                ) : projectData[positionIndex]?.name ? (
+                  <p
+                    className={`font-bold text-[18px] text-bluePallete-600 ${styles.projectTitleMobile}`}
+                  >
+                    {projectData[positionIndex].name}
+                  </p>
                 ) : (
-                  projectData[positionIndex]?.name ? (
-                    <p className={`font-bold text-[18px] text-bluePallete-600 ${styles.projectTitleMobile}`}>{projectData[positionIndex].name}</p>
-                  ) : (
-                    <TextNotFound className="font-bold text-[14px] text-transparent">Project Title</TextNotFound>
-                  )
+                  <TextNotFound className="font-bold text-[14px] text-transparent"></TextNotFound>
                 )}
               </div>
             </div>
           </div>
           {/* Project Isi Deskripsi */}
-          <div
-            className={`h-auto`}
-          >
+          <div className={`h-auto`}>
             {isMovingData || isLoading || !projectData ? (
               <Skeleton count={3} />
+            ) : projectData[positionIndex]?.description ? (
+              <p
+                className={`font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-white lg:text-black ${styles.projectsDesc}`}
+              >
+                {projectData[positionIndex].description}
+              </p>
             ) : (
-              projectData[positionIndex]?.description ? (
-                <p className={`font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-white lg:text-black ${styles.projectsDesc}`}>{projectData[positionIndex].description}</p>
-              ) : (
-                <TextNotFound className="font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-transparent">Ini Deskripsi yang panjang sekali, hingga membuat content bisa terlihat cukup bagus</TextNotFound>
-              )
+              <TextNotFound className="font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-transparent"></TextNotFound>
             )}
           </div>
           {/* Button */}
@@ -212,7 +208,7 @@ const ProjectData = () => {
             {/* Button go to website */}
             <div
               onClick={() =>
-                window.open(projectData[positionIndex].productionUri, "_blank")
+                window.open(projectData[positionIndex].productionUri, '_blank')
               }
               className={`w-[168px] h-[39px] sm:w-auto sm:h-auto flex flex-row justify-start sm:justify-between items-center py-1 sm:py-2 xl:py-3 px-2 sm:px-5 rounded-[5px] sm:rounded-[15px] bg-white lg:bg-bluePallete-900 sm:hover:bg-white transition-colors text-black lg:text-bluePallete-100 sm:hover:text-black duration-300 ease-in-out cursor-pointer ${styles.projectsContainerRepository}`}
             >
@@ -258,7 +254,7 @@ const ProjectData = () => {
             {/* Button go to repository */}
             <div
               onClick={() =>
-                window.open(projectData[positionIndex].repositoryUri, "_blank")
+                window.open(projectData[positionIndex].repositoryUri, '_blank')
               }
               className={`w-[168px] h-[39px] sm:w-auto sm:h-auto flex flex-row justify-start sm:justify-between items-center space-x-1 sm:space-x-5 py-1 sm:py-2 xl:py-3 px-2 sm:px-5 rounded-[5px] sm:rounded-[15px] bg-bluePallete-900 sm:hover:bg-white transition-colors text-bluePallete-100 sm:hover:text-black border-[2px] border-white lg:border-none duration-300 ease-in-out cursor-pointer ${styles.projectsContainerRepository}`}
             >
@@ -289,7 +285,7 @@ const ProjectData = () => {
           <div className="w-full flex justify-end items-center space-x-3 sm:space-x-4">
             {/* Arrow Kiri */}
             <svg
-              onClick={() => handleProjectArrow("left")}
+              onClick={() => handleProjectArrow('left')}
               className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] cursor-pointer"
               width="50"
               height="50"
@@ -308,7 +304,7 @@ const ProjectData = () => {
             </svg>
             {/* Arrow Kanan */}
             <svg
-              onClick={() => handleProjectArrow("right")}
+              onClick={() => handleProjectArrow('right')}
               className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] cursor-pointer"
               width="50"
               height="50"

@@ -130,7 +130,7 @@ export default function DetailNews() {
                     </h1>
                   ) : (
                     <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-transparent">
-                      Ini Judul Jika News Tidak Ada
+                      {''}
                     </TextNotFound>
                   )}
                 </h1>
@@ -216,7 +216,7 @@ export default function DetailNews() {
                                   </h1>
                                 ) : (
                                   <TextNotFound className="xl:text-[20px] md:text-[14px] text-[12px] text-transparent font-bold">
-                                    Ini Judul News
+                                    {''}
                                   </TextNotFound>
                                 )}
                               </div>
