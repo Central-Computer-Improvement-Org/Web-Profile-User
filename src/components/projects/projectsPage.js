@@ -180,7 +180,7 @@ const ProjectPage = () => {
                           href={data.productionUri}
                           className="flex cursor-pointer"
                         >
-                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[142px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] bg-bluePallete-900">
+                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[148px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] bg-bluePallete-900">
                             <Image
                               width={0}
                               height={0}
@@ -198,7 +198,7 @@ const ProjectPage = () => {
                           href={data.repositoryUri}
                           className="flex cursor-pointer"
                         >
-                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[142px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] lg:bg-bluePallete-900 bg-white lg:border-[0px] border border-bluePallete-900">
+                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[148px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] lg:bg-bluePallete-900 bg-white lg:border-[0px] border border-bluePallete-900">
                             <Image
                               width={0}
                               height={0}

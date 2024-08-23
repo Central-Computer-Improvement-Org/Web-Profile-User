@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import moment from "moment";
-import "swiper/css";
-import "swiper/css/navigation";
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import moment from 'moment';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
-import styles from "@/components/detailNews/rekomendasiNewsSlider.module.css";
-import { FormatString } from "@/app/utils/stringUtils";
-import { host } from "../host";
-import Loading from "@/components/loading";
-import ImageNotFound from "@/components/imageNotFound";
-import TeksNotFound from "@/components/teksNotFound";
+import styles from '@/components/detailNews/rekomendasiNewsSlider.module.css';
+import { FormatString } from '@/app/utils/stringUtils';
+import { host } from '../host';
+import Loading from '@/components/loading';
+import ImageNotFound from '@/components/imageNotFound';
+import TeksNotFound from '@/components/teksNotFound';
 
 const RekomendasiNewsSlider = ({ newsData }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +45,7 @@ const RekomendasiNewsSlider = ({ newsData }) => {
         <Swiper
           className={` ${styles.rekomendasiNewsSwiper} rounded-[10px] xl:w-[95%] w-full !ml-0`}
           navigation={{
-            nextEl: ".next",
+            nextEl: '.next',
           }}
           breakpoints={{
             640: {
@@ -99,13 +99,13 @@ const RekomendasiNewsSlider = ({ newsData }) => {
                         </h3>
                       ) : (
                         <TeksNotFound className="xl:h-[56px] md:h-[48px] xl:text-xl md:text-[16px] font-semibold text-transparent">
-                          Ini Judul News
+                          {''}
                         </TeksNotFound>
                       )}
                       {data.createdAt ? (
                         <p className="text-sm text-mainFontColor font-medium">
                           {moment(String(data.createdAt)).format(
-                            "MMM DD[,] YYYY"
+                            'MMM DD[,] YYYY'
                           )}
                         </p>
                       ) : (
