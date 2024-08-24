@@ -1,14 +1,13 @@
-import React, { useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React from 'react';
 import Image from 'next/image';
 
-import styles from '@/components/projects/projects.module.css';
-import 'swiper/css';
-import 'swiper/css/pagination';
-
-import { Autoplay } from 'swiper/modules';
 import { host } from '../host';
 import NotFound from '../imageNotFound';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import { Autoplay } from 'swiper/modules';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
+// import styles from '@/components/projects/projects.module.css';
 
 export default function ShowcasingProjectSlider({ image, speed }) {
    return (
@@ -49,14 +48,13 @@ export default function ShowcasingProjectSlider({ image, speed }) {
          <div
             x-data="{}"
             x-init="$nextTick(() => {
-        let ul = $refs.logos;
-        ul.insertAdjacentHTML('afterend', ul.outerHTML);
-        ul.nextSibling.setAttribute('aria-hidden', 'true');
-    })"
-            className="w-full inline-flex flex-nowrap overflow-hidden "
+               let ul = $refs.logos;
+               ul.insertAdjacentHTML('afterend', ul.outerHTML);
+               ul.nextSibling.setAttribute('aria-hidden', 'true');
+            })"
+            className="inline-flex w-full overflow-hidden flex-nowrap"
          >
             <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
-               {console.info(image)}
                {image &&
                   image.map((data, index) => (
                      <li
@@ -66,11 +64,11 @@ export default function ShowcasingProjectSlider({ image, speed }) {
                         {data.imageUri ? <Image
                            width={0}
                            height={0}
-                           alt="project-img"
+                           alt="Project Logo CCI"
                            src={host + data.imageUri}
                            className="w-full h-full  rounded-[10px]"
+                           priority={true}
                         /> : <NotFound />}
-
                      </li>
                   ))}
             </ul>
