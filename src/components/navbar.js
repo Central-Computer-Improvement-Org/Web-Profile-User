@@ -1,21 +1,23 @@
 "use client";
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import Loading from "./loading";
-import ImageNotFound from "./imageNotFound";
-import request from "../app/utils/request";
+
 import { host } from "./host";
+import request from "../app/utils/request";
+import Loading from "@/components/loading";
+import ImageNotFound from "./imageNotFound";
+import LogoCCI from "../../public/assets/logo/logo-cci.png";
 
 const Navbar = () => {
+  const navOutside = useRef();
+  const router = useRouter();
   const [settingsData, setSettingsData] = useState(null);
   const [isClick, setIsClick] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const navOutside = useRef();
-  const router = useRouter();
 
   useEffect(() => {
     setIsLoading(true);
@@ -91,7 +93,7 @@ const Navbar = () => {
       >
         <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
           {/* Desktop menu */}
-          <div className="h-full w-full flex justify-between items-center">
+          <div className="flex items-center justify-between w-full h-full">
             <Link href="/">
               {isLoading ? (
                 <Loading
@@ -108,11 +110,18 @@ const Navbar = () => {
                   className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer object-contain"
                 />
               ) : (
-                <ImageNotFound className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer object-contain"/>
+                <Image
+                  src={LogoCCI}
+                  alt="Logo CCI"
+                  width={131}
+                  height={72}
+                  priority={true}
+                  className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer object-contain"
+                />
               )}
             </Link>
-            <div className="md:flex items-center space-x-16 hidden">
-              <ul className="md:flex items-center space-x-16 hidden">
+            <div className="items-center hidden space-x-16 md:flex">
+              <ul className="items-center hidden space-x-16 md:flex">
                 {/* Dropdown menu di ukuran deskstop */}
                 <div className="relative">
                   <button
@@ -140,7 +149,7 @@ const Navbar = () => {
                   {isDropdownOpen && (
                     <div className="absolute w-[230px] top-full left-0 shadow-[0px_0px_10px_0px_rgba(0,0,0,0.1)] rounded-[10px] bg-white">
                       <ul>
-                        <li className="mt-2 mx-2">
+                        <li className="mx-2 mt-2">
                           <Link
                             href="/about"
                             className="block font-medium px-7 py-[5px] text-[28px] sm:text-[24px] rounded-[10px] cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
@@ -152,7 +161,7 @@ const Navbar = () => {
                             About
                           </Link>
                         </li>
-                        <li className="mt-2 mx-2">
+                        <li className="mx-2 mt-2">
                           <div
                             className="block font-medium px-7 py-[5px] text-[28px] sm:text-[24px] rounded-[10px] cursor-pointer text-[#6B6B6B] hover:bg-bluePallete-200"
                             onClick={(event) => {
@@ -195,7 +204,7 @@ const Navbar = () => {
             {/* Icon Hamburger */}
             <div
               onClick={toggleNavbar}
-              className="md:hidden cursor-pointer pl-24"
+              className="pl-24 cursor-pointer md:hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -223,7 +232,7 @@ const Navbar = () => {
                 : "fixed left-[-100%] top-0 p-10 ease-out duration-400 transition-all"
             }
           >
-            <div className="w-full flex items-center justify-start">
+            <div className="flex items-center justify-start w-full">
               <div onClick={toggleNavbar} className="cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -243,7 +252,7 @@ const Navbar = () => {
                 </svg>
               </div>
             </div>
-            <div className="h-full flex flex-col py-4">
+            <div className="flex flex-col h-full py-4">
               <ul className="pt-[160px]">
                 {/* Dropdown menu di ukuran mobile */}
                 <div className="relative">
@@ -270,9 +279,9 @@ const Navbar = () => {
                     </svg>
                   </button>
                   {isDropdownOpen && (
-                    <div className="block w-40 top-full left-0 rounded-md">
+                    <div className="left-0 block w-40 rounded-md top-full">
                       <ul>
-                        <li className="pt-1 px-4">
+                        <li className="px-4 pt-1">
                           <Link
                             href="/about"
                             className="block px-4 text-[25px] rounded text-white"
@@ -284,7 +293,7 @@ const Navbar = () => {
                             About
                           </Link>
                         </li>
-                        <li className="pt-1 px-4">
+                        <li className="px-4 pt-1">
                           <div
                             className="block px-4 text-[25px] cursor-pointer rounded text-white"
                             onClick={(event) => {
@@ -296,7 +305,7 @@ const Navbar = () => {
                             Division
                           </div>
                         </li>
-                        <li className="pt-1 pb-2 px-4">
+                        <li className="px-4 pt-1 pb-2">
                           <div
                             className="block px-4 text-[25px] rounded cursor-pointer text-white"
                             onClick={(event) => {
