@@ -5,10 +5,10 @@ import ReactCardFlip from "react-card-flip";
 import { useMediaQuery } from "react-responsive";
 import { useWindowSize } from "@uidotdev/usehooks";
 
+import { host } from "@/components/host";
 import request from "@/app/utils/request";
 import ImageNotFound from "@/components/imageNotFound";
 import TeksNotFound from "@/components/teksNotFound";
-import { host } from "@/components/host";
 import styles from "@/components/Division/divisionComponent.module.css";
 
 
@@ -21,9 +21,7 @@ const desktopColorPattern = [
    "#11A950",
    "#11A950",
 ];
-
 const mobileColorPattern = ["#152E51", "#11A950"];
-
 const LIMITER = 6;
 
 const EventCard = () => {
@@ -77,14 +75,13 @@ const EventCard = () => {
 
    useEffect(() => {
       if (eventData && eventData.length > 0 && autoFlipCount < 2) {
-         // cek dulu apakah data event sudah ada dan jumlah autoFlipCount kurang dari 4
          const autoFlipInterval = setInterval(() => {
             setFlipPosition(0); // setFlipPosition(0) meng get data flip card pertama atau index ke 0
             setTimeout(() => {
                setFlipPosition(null); // setFlipPosition(null) mereset flip card menjadi card depan
             }, 1000);
-            setAutoFlipCount((prevCount) => prevCount + 1); // setiap 1 detik autoFlipCount akan bertambah 1
-         }, 1500 * 2); // interval auto flip setiap 1.5 detik
+            setAutoFlipCount((prevCount) => prevCount + 1); // setiap 1 detik autoFlipCount akan bertambah 1 yang diambil dari timeOut yang diset 1000
+         }, 1500 * 2); // interval auto flip setiap 1.5 detik dan terjadi 2 kali
 
          return () => clearInterval(autoFlipInterval); // ketika component di unmount, maka interval auto flip akan di clear
       }
@@ -139,10 +136,10 @@ const EventCard = () => {
                               height={198}
                               responsive="true"
                               loading="lazy"
-                              className="h-full w-full object-cover"
+                              className="object-cover w-full h-full"
                            />
-                        ) : (
-                           <ImageNotFound className="h-full w-full object-cover" />
+                        ) : ( 
+                           <ImageNotFound className="object-cover w-full h-full" />
                         )}
                      </div>
                      {/* Card bagian belakang */}
@@ -172,7 +169,7 @@ const EventCard = () => {
                </div>
             ))}
          </div>
-         <div className="w-full flex justify-center items-center">
+         <div className="flex items-center justify-center w-full">
          <button
                className={`${styles.eventButton} w-full flex justify-center hover:opacity-75 mt-[20px] sm:mt-[54px] text-white`}
                onClick={handleNext}

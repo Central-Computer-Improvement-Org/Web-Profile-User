@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import request from "../utils/request";
+import { host } from "@/components/host";
+import request from "@/app/utils/request";
 import Header from "@/components/header";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -13,10 +14,9 @@ import DivisionFirstSlider from "@/components/Home/divisionFirstSlider";
 import DivisionSecondSlider from "@/components/Home/divisionSecondSlider";
 import ProjectCard from "@/components/Home/projectCard";
 import Loading from "@/components/loading";
-import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
 import styles from "@/app/home/homePage.module.css";
-import { host } from "@/components/host";
+import LogoCCI from "../../../public/assets/logo/logo-cci.png";
 
 export default function Home() {
   const [settingsData, setSettingsData] = useState(null);
@@ -98,10 +98,7 @@ export default function Home() {
       <Header />
       <Navbar />
       <main className="w-full h-auto">
-        <section
-          id="hero"
-          className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-[200px]"
-        >
+        <section id="hero" className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-[200px]">
           <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto flex flex-row flex-wrap">
             <div className="basis-full md:basis-[55%] flex flex-col space-y-10">
               <div className="hidden md:block">
@@ -116,11 +113,18 @@ export default function Home() {
                     alt="Logo Central Computer Improvement"
                     width={291}
                     height={180}
-                    responsive="true"
+                    priority={true}
                     className="w-auto h-auto md:w-full md:h-[180px] max-w-[291px] max-h-[180px] object-contain"
                   />
                 ) : (
-                  <ImageNotFound className="hidden md:block w-auto h-auto md:w-[400px] md:h-[300px] object-contain" />
+                  <Image
+                    src={LogoCCI}
+                    alt="Logo Central Computer Improvement"
+                    width={291}
+                    height={180}
+                    priority={true}
+                    className="w-auto h-auto md:w-full md:h-[180px] max-w-[291px] max-h-[180px] object-contain"
+                  />
                 )}
               </div>
               <div className="flex flex-col space-y-1">
@@ -134,7 +138,9 @@ export default function Home() {
                     {settingsData.name}
                   </h1>
                 ) : (
-                  <TextNotFound className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 text-bluePallete-600"></TextNotFound>
+                  <h1 className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 text-bluePallete-600">
+                    Central Computer Improvment
+                  </h1>
                 )}
               </div>
               {/* Deskripsi ketika desktop */}
@@ -149,7 +155,9 @@ export default function Home() {
                     {settingsData.description}
                   </p>
                 ) : (
-                  <TextNotFound className="text-[24px] pr-5 text-bluePallete-600"></TextNotFound>
+                  <p className="text-[24px] pr-5 text-bluePallete-600">
+                    Unit Kegiatan Mahasiswa di Telkom University yang berfokus pada bidang ICT (Information, Communication and Technology).
+                  </p>
                 )}
               </div>
             </div>
@@ -182,7 +190,6 @@ export default function Home() {
         </section>
         <span className="block h-full bg-gradientAccent">
           <div className="block h-full bg-gradientDefault">
-            
             <section id="connect" className="w-full h-auto">
               {/* Layout Section Connect Pertama  */}
               <div
@@ -204,8 +211,8 @@ export default function Home() {
                 <h1 className="text-center text-[25px] md:text-[32px] font-bold text-bluePallete-500">
                   Connect Share Speak Up
                 </h1>
-                <div className="w-full flex flex-row flex-wrap-reverse pt-10 sm:pt-20 lg:pt-32">
-                  <div className="basis-full lg:basis-3/5 mt-5 sm:mt-10 lg:mt-0">
+                <div className="flex flex-row flex-wrap-reverse w-full pt-10 sm:pt-20 lg:pt-32">
+                  <div className="mt-5 basis-full lg:basis-3/5 sm:mt-10 lg:mt-0">
                     <div
                       className={`w-full flex flex-row justify-evenly items-center space-x-3 lg:space-x-10 mt-10 xl:mt-0 ${styles.connectCardTeks}`}
                     >
@@ -282,10 +289,10 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="basis-full lg:basis-2/5">
-                    <div className="w-auto flex flex-col space-y-10 m-0 lg:m-4 xl:m-5">
-                      <div className="flex flex-row flex-start mt-0 md:mt-10">
+                    <div className="flex flex-col w-auto m-0 space-y-10 lg:m-4 xl:m-5">
+                      <div className="flex flex-row mt-0 flex-start md:mt-10">
                         {/* Member Data */}
-                        <div className="basis-1/3 flex flex-col items-center sm:items-start space-y-1">
+                        <div className="flex flex-col items-center space-y-1 basis-1/3 sm:items-start">
                           {isLoading ? (
                             <Loading size="w-[20px] h-[20px] sm:w-[40px] sm:h-[40px]" />
                           ) : memberData?.recordsTotal !== undefined &&
@@ -306,7 +313,7 @@ export default function Home() {
                           </p>
                         </div>
                         {/* Award Data */}
-                        <div className="basis-1/3 flex flex-col items-center lg:items-start space-y-1 lg:ml-10">
+                        <div className="flex flex-col items-center space-y-1 basis-1/3 lg:items-start lg:ml-10">
                           {isLoading ? (
                             <Loading size="w-[20px] h-[20px] sm:w-[40px] sm:h-[40px]" />
                           ) : awardData?.recordsTotal !== undefined &&
@@ -327,7 +334,7 @@ export default function Home() {
                           </p>
                         </div>
                         {/* Project Data */}
-                        <div className="basis-1/3 flex flex-col items-center sm:items-end lg:items-start space-y-1 lg:ml-5">
+                        <div className="flex flex-col items-center space-y-1 basis-1/3 sm:items-end lg:items-start lg:ml-5">
                           {isLoading ? (
                             <Loading size="w-[20px] h-[20px] sm:w-[40px] sm:h-[40px]" />
                           ) : projectData?.recordsTotal !== undefined &&
@@ -363,7 +370,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="block lg:hidden mt-1 sm:mt-14">
+                <div className="block mt-1 lg:hidden sm:mt-14">
                   <div className="flex flex-col space-y-3 pr-0 xl:pr-[29px]">
                     <h2 className="text-[25px] lg:text-[40px] font-bold text-mainPrimary">
                       Penghargaan
@@ -381,9 +388,9 @@ export default function Home() {
                 id="connect-second"
                 className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md mx-auto px-5 sm:px-0 pb-10 sm:pb-20 mt-10 lg:mt-40"
               >
-                <div className="w-full flex flex-row flex-wrap-reverse">
-                  <div className="basis-full lg:basis-2/5 flex items-center">
-                    <div className="flex flex-col space-y-4 mt-1 sm:mt-14 lg:mt-0">
+                <div className="flex flex-row flex-wrap-reverse w-full">
+                  <div className="flex items-center basis-full lg:basis-2/5">
+                    <div className="flex flex-col mt-1 space-y-4 sm:mt-14 lg:mt-0">
                       <h2 className="text-[25px] md:text-[30px] lg:text-[40px] text-right lg:text-left font-bold text-mainPrimary">
                         Jumlah Project
                       </h2>
@@ -521,7 +528,7 @@ export default function Home() {
             <section id="projects" className="w-full h-auto">
               <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md mx-auto px-5 sm:px-0">
                 <div className="w-full flex flex-col space-y-[60px] sm:space-y-[80px] lg:space-y-10 mb-12 sm:mt-0 py-0 sm:py-20">
-                  <div className="w-full h-auto flex flex-col items-center justify-between space-y-4 lg:space-y-5">
+                  <div className="flex flex-col items-center justify-between w-full h-auto space-y-4 lg:space-y-5">
                     <h1 className="font-black sm:font-bold text-center text-[20px] sm:text-[26px] md:text-[50px] px-0 lg:px-52 text-bluePallete-800">
                       Showcasing Our Work: Achievements and Capabilities of
                       Central Computer Improvement
@@ -554,7 +561,7 @@ export default function Home() {
                       Central Computer Improvement recruitment information
                     </p>
                     {/* carousel ini hanya akan muncul jika ukuran layar diatas ukuran layar handphone */}
-                    <div className="static w-full h-full flex flex-col">
+                    <div className="static flex flex-col w-full h-full">
                       <NewsFirstSlider />
                     </div>
                   </div>
@@ -562,7 +569,7 @@ export default function Home() {
               </div>
               {/* content ini hanya akan muncul jika ukuran layar masuk ke ukuran layar handphone */}
               <div className="block sm:hidden">
-                <div className="w-full h-auto flex flex-col">
+                <div className="flex flex-col w-full h-auto">
                   <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md mx-auto px-5 sm:px-0">
                     <div className="w-full flex flex-col spaced-y-5 pb-[30px] sm:pb-[50px] items-center">
                       <h1 className="text-[22px] sm:text-[50px] lg:text-[80px] text-center font-black text-bluePallete-800">

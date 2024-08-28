@@ -1,18 +1,17 @@
 'use client';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
 
-import request from '@/app/utils/request';
+import { host } from '@/components/host';
 import { FormatString } from '@/app/utils/stringUtils';
-
+import request from '@/app/utils/request';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Navbar from '@/components/navbar';
 import Pagination from '@/components/projects/pagination';
 import ShowcasingProjectSlider from '@/components/projects/showcasingProjectSlider';
-import { host } from '../host';
 
 const LIMITER = 5;
 
@@ -21,7 +20,6 @@ const ProjectPage = () => {
 
   const page = searchParams.get('page') ?? '1';
   const perPage = searchParams.get('perPage') ?? LIMITER;
-  console.log(page, perPage);
   const start = (Number(page) - 1) * Number(perPage);
   const end = start + Number(perPage);
 
@@ -62,14 +60,15 @@ const ProjectPage = () => {
         setProjectData(response.data.data);
         setRecordsTotalProject(response.data.recordsTotal);
       } catch (error) {
-        // Handle error
+        setProjectData([]);
+        setRecordsTotalProject(0);
       }
 
       try {
         const response = await request.get('projects');
         setShowProjectData(response.data.data);
       } catch (error) {
-        // Handle error
+        setShowProjectData([]);
       }
     };
     getProjects();
@@ -77,7 +76,7 @@ const ProjectPage = () => {
 
   if (!projectData) {
     return (
-      <div className="w-full h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center w-full h-screen">
         <p className="font-bold text-center text-[30px] text-bluePallete-800">
           Loading...
         </p>
@@ -104,8 +103,10 @@ const ProjectPage = () => {
             </p>
           </div>
         </section>
+        
         <div className="lg:pt-[61px] md:pt-[45px] pt-[32px]" />
         <ShowcasingProjectSlider image={showProjectData} />
+        
         <div className="lg:pt-[61px] md:pt-[45px] pt-[36px]" />
         <section className="xl:px-[179px] lg:px-[50px] md:px-[80px] px-[20px]">
           <div className="flex flex-wrap lg:gap-[36px] gap-[2px] justify-center ">
@@ -115,7 +116,7 @@ const ProjectPage = () => {
                 className={`lg:px-[30px] md:px-[20px] px-[10px] lg:py-[10px] md:py-[8px] py-[5px] ${
                   menuActive.name == data.name
                     ? 'md:bg-blue-100 bg-transparent'
-                    : 'bg-transparent'
+                    : 'bg-transparent hover:bg-blue-100'
                 } rounded-[10px] `}
                 style={{ cursor: 'pointer' }}
                 onClick={() => setMenuActive(data)}
@@ -133,6 +134,7 @@ const ProjectPage = () => {
             ))}
           </div>
         </section>
+        
         <div className="pt-[39px]" />
         <section className="lg:px-[95px] md:px-[50px] px-[20px] ">
           <div className="flex flex-col lg:gap-[36px] md:gap-[28px] gap-[24px]">
@@ -180,7 +182,7 @@ const ProjectPage = () => {
                           href={data.productionUri}
                           className="flex cursor-pointer"
                         >
-                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[142px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] bg-bluePallete-900">
+                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[148px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] bg-bluePallete-900">
                             <Image
                               width={0}
                               height={0}
@@ -198,7 +200,7 @@ const ProjectPage = () => {
                           href={data.repositoryUri}
                           className="flex cursor-pointer"
                         >
-                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[142px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] lg:bg-bluePallete-900 bg-white lg:border-[0px] border border-bluePallete-900">
+                          <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[148px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] lg:bg-bluePallete-900 bg-white lg:border-[0px] border border-bluePallete-900">
                             <Image
                               width={0}
                               height={0}
@@ -227,6 +229,7 @@ const ProjectPage = () => {
               ))}
           </div>
         </section>
+        
         <div className="pt-[88px]" />
         <div className="flex justify-center">
           <Pagination

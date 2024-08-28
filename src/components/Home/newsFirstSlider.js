@@ -11,12 +11,13 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 
+import { host } from "@/components/host";
 import request from "@/app/utils/request";
 import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
-import { host } from "@/components/host";
 import styles from "@/components/Home/homeComponent.module.css";
+
 
 const SwiperComponent = () => {
   const previousButton = useRef(null);
@@ -70,7 +71,7 @@ const SwiperComponent = () => {
           textAlignment="text-center"
         />
       ) : (
-        <div className="w-full flex items-center justify-center">
+        <div className="flex items-center justify-center w-full">
           <Swiper
             spaceBetween={10}
             slidesPerView={"auto"}
@@ -157,7 +158,7 @@ const SwiperComponent = () => {
                     >
                       {data?.title ? data.title : <TextNotFound />}
                     </p>
-                    <div className="w-full flex flex-row justify-between items-end">
+                    <div className="flex flex-row items-end justify-between w-full">
                       <p
                         className={
                           index === currentSlide

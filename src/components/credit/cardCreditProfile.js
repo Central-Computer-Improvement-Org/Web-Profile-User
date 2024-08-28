@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
+
 export default function CardCreditProfile({
    color,
    jobdes,
@@ -14,8 +15,6 @@ export default function CardCreditProfile({
          aliasJob = "Precident";
       } else if (jobdes === "Wakil Ketua") {
          aliasJob = "Vice Precident";
-      } else if (jobdes === "Employee Experience") {
-         aliasJob = "Member";
       }
 
       return (
@@ -34,7 +33,6 @@ export default function CardCreditProfile({
             <h1 className="lg:max-h-[130px] max-h-[80px] overflow-hidden xl:text-[40px] md:text-[24px] text-[25px] font-black leading-[40px] text-bluePallete-800">
                {name}
             </h1>
-
             <a href={linkedinUri} target="_blank" rel="noopener noreferrer">
                <Image
                   className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
@@ -45,7 +43,6 @@ export default function CardCreditProfile({
                ></Image>
             </a>
          </div>
-
          <div className="basis-[60%] sm:basis-6/12 flex items-center justify-end">
             <Image
                src={image}

@@ -1,25 +1,25 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import request from "../../utils/request";
-import moment from "moment";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+'use client';
+import React, { useEffect, useState } from 'react';
+import request from '../../utils/request';
+import moment from 'moment';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-import ImageNewsFirstSlider from "@/components/detailNews/imageNewsFirstSlider";
-import RekomendasiNewsSlider from "@/components/detailNews/rekomendasiNewsSlider";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
-import Navbar from "@/components/navbar";
-import Image from "next/image";
-import styles from "@/app/news/detailNews/detailNewsPage.module.css";
-import { FormatString } from "../../utils/stringUtils";
-import Loading from "@/components/loading";
-import TextNotFound from "@/components/teksNotFound";
-import ImageNotFound from "@/components/imageNotFound";
-import { host } from "@/components/host";
+import ImageNewsFirstSlider from '@/components/detailNews/imageNewsFirstSlider';
+import RekomendasiNewsSlider from '@/components/detailNews/rekomendasiNewsSlider';
+import Footer from '@/components/footer';
+import Header from '@/components/header';
+import Navbar from '@/components/navbar';
+import Image from 'next/image';
+import styles from '@/app/news/detailNews/detailNewsPage.module.css';
+import { FormatString } from '../../utils/stringUtils';
+import Loading from '@/components/loading';
+import TextNotFound from '@/components/teksNotFound';
+import ImageNotFound from '@/components/imageNotFound';
+import { host } from '@/components/host';
 
 export default function DetailNews() {
-  const newsId = useSearchParams().get("id");
+  const newsId = useSearchParams().get('id');
   const [title, setTitle] = useState();
   const [image, setImage] = useState();
   const [description, setDescription] = useState();
@@ -33,7 +33,7 @@ export default function DetailNews() {
     setIsLoading(true);
 
     request
-      .get("/news")
+      .get('/news')
       .then(function (response) {
         if (response.data.code === 200 || response.data.code === 201) {
           setNewsAlso(response.data.data || []);
@@ -68,13 +68,13 @@ export default function DetailNews() {
           console.error(error);
         });
     } else {
-      console.error("News ID not found");
+      console.error('News ID not found');
     }
   }, [newsId]);
 
   useEffect(() => {
     request
-      .get("/news")
+      .get('/news')
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const newData = response.data.data;
@@ -93,17 +93,17 @@ export default function DetailNews() {
 
   useEffect(() => {
     if (description) {
-      const doc = new DOMParser().parseFromString(description, "text/html");
+      const doc = new DOMParser().parseFromString(description, 'text/html');
       const htmlElement = doc.documentElement;
-      const classNames = Array.from(htmlElement.classList).join(" ");
-      htmlElement.setAttribute("class", classNames);
+      const classNames = Array.from(htmlElement.classList).join(' ');
+      htmlElement.setAttribute('class', classNames);
       setParsedHTML(htmlElement);
     } else {
       setParsedHTML(null);
     }
   }, [description]);
 
-  console.log("newsAlso", newsAlso);
+  console.log('newsAlso', newsAlso);
 
   return (
     <>
@@ -118,7 +118,7 @@ export default function DetailNews() {
                 className="w-full xl:max-w-[1390px] lg:max-w-[66rem] md:max-w-[48rem] sm:max-w-[38rem] max-w-[28rem] px-3 sm:px-0 mx-auto lg:pt-44 md:pt-36 sm:pt-[7rem] pt-[70px]"
               >
                 <h1 className="lg:text-6xl md:text-4xl text-xl text-bluePallete-800 font-black lg:mb-6 mb-2 leading-tight">
-                  <span className="lg:text-6xl md:text-4xl text-3xl"></span>{" "}
+                  <span className="lg:text-6xl md:text-4xl text-3xl"></span>{' '}
                   {isLoading ? (
                     <Loading
                       size="w-[70px] h-[70px]"
@@ -129,7 +129,9 @@ export default function DetailNews() {
                       {title}
                     </h1>
                   ) : (
-                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-transparent">Ini Judul Jika News Tidak Ada</TextNotFound>
+                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-transparent">
+                      {''}
+                    </TextNotFound>
                   )}
                 </h1>
                 <div className="inline-block border border-bluePallete-600 rounded-full lg:text-[25px] md:text-[14px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-2 py-1 bg-[#ffff]">
@@ -140,7 +142,7 @@ export default function DetailNews() {
                     />
                   ) : date ? (
                     <h1 className="font-medium lg:text-[25px] md:text-[14px] text-[10px]  lg:px-3 px-[9px] lg:py-[4px] py-1 text-mainFontColor">
-                      {moment(String(date)).format("MMM DD[,] YYYY")}
+                      {moment(String(date)).format('MMM DD[,] YYYY')}
                     </h1>
                   ) : (
                     <TextNotFound className="font-medium lg:text-[25px] md:text-[14px] text-[10px] lg:px-3 px-[9px] lg:py-[4px] py-1 text-transparent">
@@ -150,10 +152,10 @@ export default function DetailNews() {
                 </div>
               </div>
               <div className="w-full xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row flex-col gap-[40px]">
-                <div className="col-span-2 w-full xl:ml-[70px] xl:max-w-[923px]">
+                <div className="col-span-2 w-full xl:ml-[70px] xl:max-w-[923px] ">
                   <ImageNewsFirstSlider image={image} />
                   <div className="mt-[20px] sm:mt-[30px] md:mt-[40px] px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
-                    {parsedHTML && parsedHTML.innerHTML.trim() !== "" ? (
+                    {parsedHTML && parsedHTML.innerHTML.trim() !== '' ? (
                       <div
                         dangerouslySetInnerHTML={{
                           __html: parsedHTML.innerHTML,
@@ -162,11 +164,16 @@ export default function DetailNews() {
                       />
                     ) : (
                       <TextNotFound className="xl:text-[30px] md:text-[20px] text-[10px] text-start md:text-justify text-transparent">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the industrys
+                        standard dummy text ever since the 1500s, when an
+                        unknown printer took a galley of type and scrambled it
+                        to make a type specimen book. It has survived not only
+                        five centuries, but also the leap into electronic
+                        typesetting, remaining essentially unchanged.
                       </TextNotFound>
                     )}
                   </div>
-
                 </div>
                 <div className="w-full !px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:pl-0 pr-0 xl:pr-[40px]">
                   <div className="lg:mt-14 mt-[53px]">
@@ -201,15 +208,17 @@ export default function DetailNews() {
                           >
                             <div className="h-full max-h-[90px] xl:max-h-[100px] w-full md:h-[150px] flex justify-between border border-bluePallete-600 bg-white rounded-xl">
                               <div className=" px-[11px] py-[8px] flex flex-col justify-between ">
-                                {
-                                  data?.title ? (
-                                    <h1 className={`${styles.detailTopNewsTitle} !xl:text-[20px] !md:text-[24px] text-[15px] font-semibold overflow-hidden text-bluePallete-800`}>
-                                      {data.title}
-                                    </h1>
-                                  ) : (
-                                    <TextNotFound className="xl:text-[20px] md:text-[14px] text-[12px] text-transparent font-bold">Ini Judul News</TextNotFound>
-                                  )
-                                }
+                                {data?.title ? (
+                                  <h1
+                                    className={`${styles.detailTopNewsTitle} !xl:text-[20px] !md:text-[24px] text-[15px] font-semibold overflow-hidden text-bluePallete-800`}
+                                  >
+                                    {data.title}
+                                  </h1>
+                                ) : (
+                                  <TextNotFound className="xl:text-[20px] md:text-[14px] text-[12px] text-transparent font-bold">
+                                    {''}
+                                  </TextNotFound>
+                                )}
                               </div>
                               {data?.mediaUri ? (
                                 <Image
