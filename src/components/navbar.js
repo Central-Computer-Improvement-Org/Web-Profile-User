@@ -128,7 +128,7 @@ const Navbar = () => {
                     className="flex flex-row items-center p-4 font-medium text-[32px] sm:text-[24px] md:hover:underline md:hover:underline-offset-2 text-[#6B6B6B] hover:text-bluePallete-700"
                     onClick={toggleDropdown}
                   >
-                    About Us TEST
+                    About Us
                     <svg
                       className={`ml-2 transition duration-300 ease-in-out hover:fill-bluePallete-700 ${
                         isDropdownOpen
