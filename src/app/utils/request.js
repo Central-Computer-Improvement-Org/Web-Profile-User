@@ -1,8 +1,10 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import 'dotenv/config'
+
 
 const request = axios.create({
-   baseURL: `https://kevinid.pythonanywhere.com/api/v1/`,
+   baseURL: `${process.env.NEXT_PUBLIC_HOST}/api/v1`,
    // uncomment baseURL dibawah ketika running di local, dan comment baseURL dibawah ketika push ke gihtub
    //   baseURL: `http://localhost:3000/api/`,
    timeout: 10000,
