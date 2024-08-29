@@ -1,15 +1,15 @@
-"use client";
-import React, { useEffect, useState } from "react";
+'use client';
+import React, { useEffect, useState } from 'react';
 
-import { host } from "@/components/host";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
-import Navbar from "@/components/navbar";
-import CrewSlider from "@/components/credit/crewSlider";
-import CardCreditProfile from "@/components/credit/cardCreditProfile";
-import ImageNotFound from "@/components/imageNotFound";
-import Loading from "@/components/loading";
-import request from "../utils/request";
+import { host } from '@/components/host';
+import Footer from '@/components/footer';
+import Header from '@/components/header';
+import Navbar from '@/components/navbar';
+import CrewSlider from '@/components/credit/crewSlider';
+import CardCreditProfile from '@/components/credit/cardCreditProfile';
+import ImageNotFound from '@/components/imageNotFound';
+import Loading from '@/components/loading';
+import request from '../utils/request';
 
 export default function Credits() {
   const [contributors, setContributors] = useState();
@@ -17,7 +17,7 @@ export default function Credits() {
 
   useEffect(() => {
     request
-      .get("/projects?id=PJT-20240729053353002924")
+      .get('/projects?id=PJT-20240729053353002924')
       .then(function (res) {
         if (res.data.code === 200 || res.data.code === 201) {
           setContributors(res.data.data.contributors);
@@ -47,8 +47,8 @@ export default function Credits() {
     .filter(
       (v) =>
         v !== undefined &&
-        v.role?.name !== "Member" &&
-        v.division?.name === "Design"
+        v.role?.name !== 'Member' &&
+        v.division?.name === 'Design'
     );
 
   const ketuaWebDatas = contributors
@@ -62,8 +62,8 @@ export default function Credits() {
     .filter(
       (v) =>
         v !== undefined &&
-        v.role?.name !== "Member" &&
-        v.division?.name === "Web Development"
+        v.role?.name !== 'Member' &&
+        v.division?.name === 'Web Development'
     );
 
   return (
@@ -79,7 +79,7 @@ export default function Credits() {
                   CREDIT
                 </h1>
                 <div className="xl:mt-[47px] md:mt-[38px] mt-[20px]" />
-                <div className="xl:w-[1147px] xl:h-[108px] md:w-[700px] md:h-[88px] w-[311px] h-[44px] rounded-[15px] bg-bluePallete-900 text-white font-bold xl:text-[40px] md:text-[30px] text-[20px] m-auto flex justify-center items-center">
+                <div className="xl:w-[1147px] xl:h-[88px] md:w-[700px] md:h-[68px] w-[311px] h-[34px] md:rounded-[15px] rounded-[6px] bg-bluePallete-900 text-white font-bold xl:text-[40px] md:text-[30px] text-[20px] m-auto flex justify-center items-center">
                   <h1>Meet Our Creators</h1>
                 </div>
               </section>
@@ -101,7 +101,7 @@ export default function Credits() {
                         ketuaDesignDatas.length &&
                         ketuaDesignDatas.map((data, index) => (
                           <CardCreditProfile
-                            color={"bg-greenPallete-300"}
+                            color={'bg-greenPallete-300'}
                             image={host + data.profileUri}
                             jobdes={data.role?.name}
                             name={data.name}
@@ -127,8 +127,8 @@ export default function Credits() {
                           .filter(
                             (v) =>
                               v !== undefined &&
-                              v.role?.name === "Member" &&
-                              v.division?.name === "Design"
+                              v.role?.name === 'Member' &&
+                              v.division?.name === 'Design'
                           )}
                       />
                     </div>
@@ -157,7 +157,7 @@ export default function Credits() {
                         ketuaWebDatas.length &&
                         ketuaWebDatas.map((data, index) => (
                           <CardCreditProfile
-                            color={"bg-greenPallete-300"}
+                            color={'bg-greenPallete-300'}
                             image={host + data.profileUri}
                             jobdes={data.role?.name}
                             name={data.name}
@@ -183,8 +183,8 @@ export default function Credits() {
                           .filter(
                             (v) =>
                               v !== undefined &&
-                              v.role?.name === "Member" &&
-                              v.division?.name === "Web Development"
+                              v.role?.name === 'Member' &&
+                              v.division?.name === 'Web Development'
                           )}
                       />
                     </div>
