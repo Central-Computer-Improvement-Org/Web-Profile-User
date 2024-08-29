@@ -1,15 +1,13 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    unoptimized: true,
-  },
-  // TODO : komen output, assetPrefix & basePath jika running lokal, aktifkan kembali ketika push
-  output: 'export',
-  assetPrefix:
-    'https://central-computer-improvement-org.github.io/Web-Profile-User',
-  basePath: '/Web-Profile-User',
+   reactStrictMode: true,
+   images: {
+      unoptimized: true,
+   },
+   output: "standalone",
+assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,
+   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
 };
 
 export default nextConfig;
