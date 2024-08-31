@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ReactCardFlip from "react-card-flip";
 import { useMediaQuery } from "react-responsive";
-import { useWindowSize } from "@uidotdev/usehooks";
+// import { useWindowSize } from "@uidotdev/usehooks";
 
 import { host } from "@/components/host";
 import request from "@/app/utils/request";
 import ImageNotFound from "@/components/imageNotFound";
 import TeksNotFound from "@/components/teksNotFound";
 import styles from "@/components/Division/divisionComponent.module.css";
-
 
 const desktopColorPattern = [
    "#152E51",
@@ -24,9 +23,8 @@ const desktopColorPattern = [
 const mobileColorPattern = ["#152E51", "#11A950"];
 const LIMITER = 6;
 
-const EventCard = () => {
-   const size = useWindowSize();
-
+const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
+   // const size = useWindowSize();
    const [eventData, setEventData] = useState(null);
    const [flipPosition, setFlipPosition] = useState(null);
    const [colorPattern, setColorPattern] = useState(desktopColorPattern);
@@ -37,18 +35,40 @@ const EventCard = () => {
    const getEvents = async () => {
       const payload = {
          limit: LIMITER,
-         page: page
+         page: page,
+         ...(filterByDivisionName && { divisionName: filterByDivisionName }),
+         ...(filterByDivisionId && { divisionId: filterByDivisionId }),
       };
 
       await request
          .get("/events", payload)
          .then((response) => {
             if (response.status === 200 || response.status === 201) {
-               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-               setEventData(response.data.data);
+               const filteredData = response.data.data.filter(event => {
+                  if (filterByDivisionName) {
+                     return event.division.name === filterByDivisionName;
+                  }
+                  if (filterByDivisionId) {
+                     return event.division.id === filterByDivisionId;
+                  }
+                  return true;
+               });
+
+               setEventData(filteredData);
+
+               if (!filterByDivisionName && !filterByDivisionId) {
+                  setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+               }
             } else {
                console.error(JSON.stringify(response.errors));
             }
+            // if (response.status === 200 || response.status === 201) {
+            //    setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+            //    const filteredData = response.data.data.filter(event => !filterByDivision || event.division.name === filterByDivision);
+            //    setEventData(filteredData);
+            // } else {
+            //    console.error(JSON.stringify(response.errors));
+            // }
          })
          .catch((error) => {
             console.error(error);
@@ -60,6 +80,7 @@ const EventCard = () => {
    }, [page]);
 
    const isDesktop = useMediaQuery({ minWidth: 1051 });
+
    useEffect(() => {
       setColorPattern(isDesktop ? desktopColorPattern : mobileColorPattern);
    }, [isDesktop]);
@@ -138,7 +159,7 @@ const EventCard = () => {
                               loading="lazy"
                               className="object-cover w-full h-full"
                            />
-                        ) : ( 
+                        ) : (
                            <ImageNotFound className="object-cover w-full h-full" />
                         )}
                      </div>
@@ -170,7 +191,7 @@ const EventCard = () => {
             ))}
          </div>
          <div className="flex items-center justify-center w-full">
-         <button
+            <button
                className={`${styles.eventButton} w-full flex justify-center hover:opacity-75 mt-[20px] sm:mt-[54px] text-white`}
                onClick={handleNext}
             >

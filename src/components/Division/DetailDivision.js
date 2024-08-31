@@ -49,7 +49,7 @@ export default function DetailDvision() {
 
    if (!divisionData) {
       return (
-         <div className="w-full h-screen flex justify-center items-center">
+         <div className="flex items-center justify-center w-full h-screen">
             <Loading
                size="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
                textAlignment="text-left"
@@ -72,7 +72,7 @@ export default function DetailDvision() {
                               id="hero"
                               className="w-full h-auto flex flex-col space-y-[40px] pt-[100px] md:pt-[200px] mb-[50px] md:mb-[100px]"
                            >
-                              <div className="w-full h-auto flex justify-between items-center">
+                              <div className="flex items-center justify-between w-full h-auto">
                                  <div className="basis-3/5">
                                     {isLoading ? (
                                        <Loading
@@ -91,7 +91,7 @@ export default function DetailDvision() {
                                        </TextNotFound>
                                     )}
                                  </div>
-                                 <div className="basis-2/5 flex items-center justify-end">
+                                 <div className="flex items-center justify-end basis-2/5">
                                     {isLoading ? (
                                        <Loading
                                           size="w-[80px] h-[80px] lg:w-[140px] lg:h-[140px]"
@@ -155,7 +155,7 @@ export default function DetailDvision() {
                            Our Event
                         </p>
                      </div>
-                     <EventCard />
+                     <EventCard filterByDivisionId={divisionId} />
                   </section>
                </main>
             </div>

@@ -1,0 +1,14 @@
+/* Section Main Hero */
+.homeGradasiKanan {
+  position: absolute;
+  top: -5%;
+  left: -20%;
+  z-index: -1 !important;
+}
+
+.homeGradasiKiri {
+  position: absolute;
+  top: 15%;
+  right: -15%;
+  z-index: -1 !important;
+}

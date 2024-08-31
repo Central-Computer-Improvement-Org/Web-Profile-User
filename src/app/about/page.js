@@ -46,11 +46,11 @@ export default function Home() {
                         className="h-full mb-[50px] md:mb-[80px]"
                      >
                         <div className="w-full h-auto flex flex-col mt-[50px] sm:mt-[80px] md:mt-[130px] pb-[70px] md:pb-[200px]">
-                           <EventCard />
+                           <EventCard filterByDivisionName="All" />
                         </div>
                      </section>
                      <section id="team" className="-full md:px-0">
-                        <div className="container mx-auto flex flex-col items-center w-full">
+                        <div className="container flex flex-col items-center w-full mx-auto">
                            <Divisions />
                         </div>
                      </section>
