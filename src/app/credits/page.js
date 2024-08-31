@@ -74,19 +74,18 @@ export default function Credits() {
         <span className="block h-full bg-gradientAccentTwo">
           <span className="block h-full bg-gradientDefaultTwo">
             <div className="pt-[90px] sm:pt-[130px] md:pt-[160px] w-full h-auto xl:max-w-[75rem] lg:max-w-[67rem] md:max-w-[51rem] sm:max-w-xl max-w-md px-5 sm:px-0 mx-auto">
-              <section>
-                <h1 className="xl:text-[100px] md:text-[70px] text-[32px] font-black text-greenPallete-400 text-center">
+              <section className="flex flex-col gap-6">
+                <h1 className="xl:text-[70px] lg:text-[60px] md:text-[70px] text-[32px] font-black text-greenPallete-400 text-center">
                   CREDIT
                 </h1>
-                <div className="xl:mt-[47px] md:mt-[38px] mt-[20px]" />
-                <div className="xl:w-[1147px] xl:h-[108px] md:w-[700px] md:h-[88px] w-[311px] h-[44px] rounded-[15px] bg-bluePallete-900 text-white font-bold xl:text-[40px] md:text-[30px] text-[20px] m-auto flex justify-center items-center">
+                <div className="w-full max-w-[70%] py-3  md:rounded-[15px] rounded-[6px] bg-bluePallete-900 text-white font-bold xl:text-[30px] lg:text-[25px] md:text-[20px] text-[16px] m-auto flex justify-center items-center">
                   <h1>Meet Our Creators</h1>
                 </div>
               </section>
-              <div className="xl:mt-[102px] md:mt-[102px] mt-[40px]" />
+              <div className="xl:mt-[70px] md:mt-[40px] mt-[20px]" />
               {/* UI UX Section */}
               <section>
-                <div className="xl:w-[594px] xl:h-[108px] md:w-[300px] md:h-[88px] w-[250px] h-[54px] rounded-[15px] bg-bluePallete-300 text-bluePallete-800 font-bold xl:text-[40px] md:text-[30px] text-[20px] m-auto flex justify-center items-center">
+                <div className="w-full max-w-[50%] py-3 md:rounded-[15px] rounded-[6px] bg-bluePallete-300 text-bluePallete-800 font-bold xl:text-[30px] md:text-[20px] text-[16px] m-auto flex justify-center items-center">
                   <h1>UI/UX</h1>
                 </div>
                 <div className="xl:mt-[45px] md:mt-[35px] mt-[25px]" />
@@ -95,7 +94,7 @@ export default function Credits() {
                     <Loading width={80} height={80} />
                   </div>
                 ) : contributors ? (
-                  <div className="flex flex-col w-full">
+                  <div className="flex flex-col w-full md:px-5">
                     <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
                       {ketuaDesignDatas.length ? (
                         ketuaDesignDatas.length &&
@@ -116,7 +115,7 @@ export default function Credits() {
                       )}
                     </div>
                     <div>
-                      <div className="mt-10 sm:mt-[74px]" />
+                      <div className="mt-10 sm:mt-[40px]" />
                       <CrewSlider
                         crewDatas={contributors
                           ?.map((data) => {
@@ -139,19 +138,19 @@ export default function Credits() {
                   </div>
                 )}
               </section>
-              <div className="xl:mt-[180px] md:mt-[120px] mt-[60px]" />
+              <div className="xl:mt-[130px] md:mt-[120px] mt-[60px]" />
               {/* Web Development Section */}
               <section className="pb-[100px]">
-                <div className="xl:w-[594px] xl:h-[108px] md:w-[300px] md:h-[88px] w-[250px] h-[54px] rounded-[15px] bg-bluePallete-300 text-bluePallete-800 font-bold xl:text-[40px] md:text-[30px] text-[20px] m-auto flex justify-center items-center">
+                <div className="w-full max-w-[50%] py-3 md:rounded-[15px] rounded-[6px] bg-bluePallete-300 text-bluePallete-800 font-bold xl:text-[30px] md:text-[20px] text-[16px] m-auto flex justify-center items-center">
                   <h1>Web Development</h1>
                 </div>
-                <div className="xl:mt-[45px] md:mt-[35px] mt-[25px]" />
+                <div className="xl:mt-[60px] md:mt-[35px] mt-[25px]" />
                 {isLoading ? (
                   <div className="w-full h-[200px] flex justify-center items-center">
                     <Loading width={80} height={80} />
                   </div>
                 ) : contributors ? (
-                  <div>
+                  <div className="flex flex-col w-full md:px-5">
                     <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
                       {ketuaWebDatas.length ? (
                         ketuaWebDatas.length &&
@@ -171,7 +170,7 @@ export default function Credits() {
                         </div>
                       )}
                     </div>
-                    <div className="mt-[30px] sm:mt-[74px]" />
+                    <div className="mt-[30px] sm:mt-[40px]" />
                     <div>
                       <CrewSlider
                         crewDatas={contributors
