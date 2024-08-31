@@ -23,7 +23,7 @@ const desktopColorPattern = [
 const mobileColorPattern = ["#152E51", "#11A950"];
 const LIMITER = 6;
 
-const EventCard = ({ filterByDivision }) => {
+const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
    // const size = useWindowSize();
    const [eventData, setEventData] = useState(null);
    const [flipPosition, setFlipPosition] = useState(null);
@@ -35,33 +35,52 @@ const EventCard = ({ filterByDivision }) => {
    const getEvents = async () => {
       const payload = {
          limit: LIMITER,
-         page: page, ...(filterByDivision && { divisionName: filterByDivision })
+         page: page,
+         ...(filterByDivisionName && { divisionName: filterByDivisionName }),
+         ...(filterByDivisionId && { divisionId: filterByDivisionId }),
       };
 
       await request
          .get("/events", payload)
          .then((response) => {
             if (response.status === 200 || response.status === 201) {
-               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-               const filteredData = response.data.data.filter(event => !filterByDivision || event.division.name === filterByDivision);
+               const filteredData = response.data.data.filter(event => {
+                  if (filterByDivisionName) {
+                     return event.division.name === filterByDivisionName;
+                  }
+                  if (filterByDivisionId) {
+                     return event.division.id === filterByDivisionId;
+                  }
+                  return true;
+               });
+
                setEventData(filteredData);
+
+               if (!filterByDivisionName && !filterByDivisionId) {
+                  setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+               }
             } else {
                console.error(JSON.stringify(response.errors));
             }
+            // if (response.status === 200 || response.status === 201) {
+            //    setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+            //    const filteredData = response.data.data.filter(event => !filterByDivision || event.division.name === filterByDivision);
+            //    setEventData(filteredData);
+            // } else {
+            //    console.error(JSON.stringify(response.errors));
+            // }
          })
          .catch((error) => {
             console.error(error);
          });
    }
 
-   console.log(eventData);
-
    useEffect(() => {
       getEvents();
    }, [page]);
 
    const isDesktop = useMediaQuery({ minWidth: 1051 });
-   
+
    useEffect(() => {
       setColorPattern(isDesktop ? desktopColorPattern : mobileColorPattern);
    }, [isDesktop]);
@@ -140,7 +159,7 @@ const EventCard = ({ filterByDivision }) => {
                               loading="lazy"
                               className="object-cover w-full h-full"
                            />
-                        ) : ( 
+                        ) : (
                            <ImageNotFound className="object-cover w-full h-full" />
                         )}
                      </div>
