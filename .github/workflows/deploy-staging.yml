@@ -34,6 +34,11 @@ jobs:
           docker buildx build --push --platform linux/amd64,linux/arm64 \
             --tag kevinirawand/fe-cci-web-profile:production \
             -f Dockerfile .
+        env:
+            NEXT_PUBLIC_OUTPUT: ${{ secrets.STAGING_OUTPUT }}
+            NEXT_PUBLIC_HOST: ${{ secrets.NEXT_PUBLIC_HOST }}
+            NEXT_PUBLIC_ASSET_PREFIX: ${{ secrets.STAGING_ASSET_PREFIX }}
+            NEXT_PUBLIC_BASE_PATH: ${{ secrets.STAGING_BASE_PATH }}
 
       - name: Deploy with Docker Compose
         run: |
