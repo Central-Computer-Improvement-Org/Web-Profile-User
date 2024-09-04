@@ -66,8 +66,9 @@ export default function ShowcasingProjectSlider({ image, speed }) {
                            height={0}
                            alt="Project Logo CCI"
                            src={host + data.imageUri}
-                           className="w-full h-full aspect-video object-cover rounded-[10px]" // Jika gambar yg dinput horizontal
+                           // className="w-full h-full aspect-video object-cover rounded-[10px]" // Jika gambar yg dinput horizontal
                            // className="w-full h-full aspect-video object-contain rounded-[10px]" // Jika gambar yg dinput kotak
+                           className="w-full h-full aspect-video rounded-[10px]" // Jika gambar yg dinput streach / horizontal paling aman (untuk skrng)
                            priority={true}
                         /> : <NotFound />}
                      </li>
@@ -88,8 +89,9 @@ export default function ShowcasingProjectSlider({ image, speed }) {
                            height={0}
                            alt="project-img"
                            src={host + data.imageUri}
-                           className="w-full h-full aspect-video object-cover rounded-[10px]" // Jika gambar yg dinput horizontal 
-                           // className="w-full h-full aspect-video object-contain rounded-[10px]" // Jika gambar yg dinput kotak
+                           // className="w-full h-full aspect-video object-cover rounded-[10px]" // Jika gambar yg dinput horizontal 
+                           // className="w-full h-full aspect-video object contain rounded-[10px]" // Jika gambar yg dinput kotak
+                           className="w-full h-full aspect-video rounded-[10px]" // Jika gambar yg dinput streach / horizontal paling aman (untuk skrng)
                         /> : <NotFound />}
                      </li>
                   ))}
