@@ -15,7 +15,7 @@ RUN \
 
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /Web-Profile-User/node_modules ./node_modules
 COPY . .
 
 
@@ -34,13 +34,13 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
+COPY --from=builder /var/www/fe-cci-web-profile/Web-Profile-User/public ./public
 
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
 
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /var/www/fe-cci-web-profile/Web-Profile-User/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /var/www/fe-cci-web-profile/Web-Profile-User/.next/static ./.next/static
 
 USER nextjs
 
