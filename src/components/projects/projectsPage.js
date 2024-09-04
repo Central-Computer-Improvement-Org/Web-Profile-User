@@ -90,24 +90,24 @@ const ProjectPage = () => {
       <Navbar />
       <main className="w-full h-auto mt-[60px] sm:mt-[90px] md:mt-[120px]">
         <div className="pt-[36px]" />
-        <section className="md:px-[0px] px-[24px]">
+        <section className="md:px-[0px] px-[14px]">
           <div className="">
-            <h1 className="xl:text-[50px] lg:text-[40px] md:text-[30px] text-[20px] font-black text-center xl:px-[216px] lg:px-[156px] md:px-[107px]">
+            <h1 className="text-bluePallete-900 xl:text-[50px] lg:text-[40px] md:text-[30px] text-[20px] font-black text-center 2xl:px-[216px] xl:px-[100px] lg:px-[156px] md:px-[107px] sm:px-20 leading-[25px] sm:leading-[30px] md:leading-[42px] xl:leading-[62px]">
               Showcasing Our Work: <br />
               Achievements and Capabilities of Central Computer Improvement
             </h1>
-            <div className="lg:pt-[24px] md:pt-[20px] pt-[10px]" />
-            <p className="text-center xl:text-[40px] lg:text-[26px] md:text-[20px] text-[12px] font-medium lg:px-[207px] md:px-[77px]">
+            <div className="lg:pt-[10px] md:pt-[20px] pt-[10px]" />
+            <p className="text-center 2xl:text-[32px] xl:text-[28px] lg:text-[24px] md:text-[20px] text-[12px] font-medium lg:px-[207px] md:px-[77px] sm:px-16 sm:leading-10 leading-[14px]">
               Explore our diverse projects and witness the passion, creativity,
               and impact of Central Computer Improvement
             </p>
           </div>
         </section>
         
-        <div className="lg:pt-[61px] md:pt-[45px] pt-[32px]" />
+        <div className="lg:pt-[32px] md:pt-[45px] pt-[32px]" />
         <ShowcasingProjectSlider image={showProjectData} />
         
-        <div className="lg:pt-[61px] md:pt-[45px] pt-[36px]" />
+        <div className="lg:pt-[51px] md:pt-[45px] sm:pt-[36px] pt-[20px]" />
         <section className="xl:px-[179px] lg:px-[50px] md:px-[80px] px-[20px]">
           <div className="flex flex-wrap lg:gap-[36px] gap-[2px] justify-center ">
             {divisions.map((data, index) => (
@@ -117,14 +117,14 @@ const ProjectPage = () => {
                   menuActive.name == data.name
                     ? 'md:bg-blue-100 bg-transparent'
                     : 'bg-transparent hover:bg-blue-100'
-                } rounded-[10px] `}
+                } rounded-[5px] sm:rounded-[10px]`}
                 style={{ cursor: 'pointer' }}
                 onClick={() => setMenuActive(data)}
               >
                 <h1
                   className={`lg:text-[24px] md:text-[18px] text-[15px] ${
                     menuActive.name == data.name
-                      ? 'md:font-medium font-bold'
+                      ? 'md:font-medium !font-bold'
                       : 'font-medium'
                   } lg:text-black text-[#4F4F4F] `}
                 >
