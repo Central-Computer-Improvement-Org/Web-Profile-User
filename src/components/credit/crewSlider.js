@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid, Navigation, Pagination } from 'swiper/modules';
@@ -11,7 +11,7 @@ import CardCreditProfile from './cardCreditProfile';
 import NotFound from '../imageNotFound';
 import styles from './credit.module.css';
 
-
+const LIMITER = 4;
 export default function CrewSlider({
   crewDatas = [],
   color = 'bg-bluePallete-300',
@@ -32,8 +32,34 @@ export default function CrewSlider({
       />
     </svg>
   );
+  
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [crewDatas2, setCrewDatas2] = useState([]);
 
-  return crewDatas.length ? (
+  useEffect(() => {
+    if (crewDatas.length > LIMITER) {
+      // const totalPages = Math.ceil(crewDatas.length / LIMITER);
+      // console.log("total", totalPages);
+      
+      setTotalPages(Math.ceil(crewDatas.length / LIMITER));
+      
+      const start = (page - 1) * LIMITER;
+      const end = start + LIMITER;
+      setCrewDatas2(crewDatas.slice(start, end));
+      // setCrewDatas2(crewDatas.slice(0, 2));
+    }
+  }, [crewDatas, page]);
+  
+  console.log("totalpages", totalPages);  
+  console.log("crewDatas2", crewDatas2);
+  console.log("crewD", page);
+
+  const handleNext = () => {
+    page >= totalPages ? setPage(1) : setPage(page + 1);
+  };
+
+  return crewDatas2.length ? (
     <div className="relative">
       <Swiper
         grid={
@@ -80,8 +106,8 @@ export default function CrewSlider({
         modules={[Grid, Navigation, Pagination]}
         className="mySwiper"
       >
-        {crewDatas.length &&
-          crewDatas?.map((data, index) => {
+        {crewDatas2.length &&
+          crewDatas2?.map((data, index) => {
             return (
               <SwiperSlide key={index}>
                 <div className="flex items-center justify-center">
@@ -98,7 +124,7 @@ export default function CrewSlider({
       </Swiper>
       <div className="bullets-container"></div>
       <div className={`${styles.test} absolute z-10 top-0 bottom-0 lg:flex items-center justify-center hidden`}>
-        <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
+        <button onClick={handleNext} className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
           {iconArrow}
         </button>
       </div>
