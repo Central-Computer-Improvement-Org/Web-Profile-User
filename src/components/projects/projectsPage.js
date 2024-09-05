@@ -104,7 +104,7 @@ const ProjectPage = () => {
           </div>
         </section>
         
-        <div className="lg:pt-[32px] md:pt-[45px] pt-[32px]" />
+        <div className="lg:pt-[42px] md:pt-[38px] pt-[32px]" />
         <ShowcasingProjectSlider image={showProjectData} />
         
         <div className="lg:pt-[51px] md:pt-[45px] sm:pt-[36px] pt-[20px]" />
