@@ -7,11 +7,12 @@ import 'swiper/css/grid';
 import 'swiper/css/navigation';
 
 import { host } from '../host';
+import { ImageNotFound } from '../imageNotFound';
 import CardCreditProfile from './cardCreditProfile';
 import NotFound from '../imageNotFound';
 import styles from './credit.module.css';
 
-const LIMITER = 4;
+// const LIMITER = 4;
 export default function CrewSlider({
   crewDatas = [],
   color = 'bg-bluePallete-300',
@@ -33,35 +34,67 @@ export default function CrewSlider({
     </svg>
   );
   
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [crewDatas2, setCrewDatas2] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState(0);
+  // const [crewDatas2, setCrewDatas2] = useState([]);
 
-  useEffect(() => {
-    if (crewDatas.length > LIMITER) {
-      // const totalPages = Math.ceil(crewDatas.length / LIMITER);
-      // console.log("total", totalPages);
+
+  // useEffect(() => {
+  //   if (crewDatas.length > LIMITER) {
+  //     // const totalPages = Math.ceil(crewDatas.length / LIMITER);
+  //     // console.log("total", totalPages);
       
-      setTotalPages(Math.ceil(crewDatas.length / LIMITER));
+  //     setTotalPages(Math.ceil(crewDatas.length / LIMITER));
       
-      const start = (page - 1) * LIMITER;
-      const end = start + LIMITER;
-      setCrewDatas2(crewDatas.slice(start, end));
-      // setCrewDatas2(crewDatas.slice(0, 2));
-    }
-  }, [crewDatas, page]);
+  //     const start = (page - 1) * LIMITER;
+  //     const end = start + LIMITER;
+  //     setCrewDatas2(crewDatas.slice(start, end));
+  //     console.log("start", start);
+  //     console.log("end", end);
+  //     // setCrewDatas2(crewDatas.slice(0, 2));
+  //   }
+  // }, [crewDatas, page]);
   
-  console.log("totalpages", totalPages);  
-  console.log("crewDatas2", crewDatas2);
-  console.log("crewD", page);
+  // console.log("totalpages:", totalPages);  
+  // console.log("crewDatas2:", crewDatas2);
+  // console.log("pages:", page);
+
+  
+
+//   if (!crewDatas || crewDatas.length === 0) {
+//     return (
+//        <div className="w-full h-auto flex justify-center items-center mt-[50px]">
+//           <ImageNotFound className="w-[90px] h-[78px] sm:w-[130px] sm:h-[108px] lg:w-[170px] lg:h-[148px] object-cover" />
+//        </div>
+//     );
+//  }
+
+  // const sisaSlide
+  let currentItemIndex = 0;
+  let endSliceIndex = 4;
+  const potongData = crewDatas.slice(currentItemIndex, endSliceIndex);
+  console.log("potongData:", potongData);
 
   const handleNext = () => {
-    page >= totalPages ? setPage(1) : setPage(page + 1);
+    if (endSliceIndex >= crewDatas.length) {
+        currentItemIndex = 0;
+        endSliceIndex = 4;
+    }
   };
 
-  return crewDatas2.length ? (
+  return crewDatas.length ? (
     <div className="relative">
       <Swiper
+        onReachEnd={(e) => {
+          const sisaSlide = crewDatas.length - e.activeIndex; // Menghitung sisa data berdasarkan index aktif
+          console.log("Sisa Slide:", sisaSlide);
+          
+          if (sisaSlide > 0 && sisaSlide < e.params.slidesPerView) {
+            // Jika sisa slide lebih kecil dari slidesPerView
+            e.params.slidesPerView = sisaSlide; // Ubah slidesPerView sesuai dengan sisa slide
+            e.update(); // Update swiper setelah merubah konfigurasi
+          }
+        }}
         grid={
           size.width > 425
             ? {
@@ -73,22 +106,40 @@ export default function CrewSlider({
               fill: 'row',
             }
         }
-        slidesPerView={1.2}
+        // slidesPerGroup={3}
+        // slidesPerView="auto"
+        slidesPerView={
+          size.width > 425
+            ? 2
+            : 1
+        }
+        setWrapperSize={true}
+        loopPreventsSliding={true}
         spaceBetween={20}
         breakpoints={{
           425: {
-            slidesPerView: 1.1,
+            slidePerView: 1,
             spaceBetween: 20,
+            slidesPerColumnFill: 'row',
+            direction: 'horizontal',
+            centerInsufficientSlides:true,
           },
           640: {
-            slidesPerView: 2,
+            slidePerView: 2,
             spaceBetween: 40,
+            slidesPerColumnFill: 'row',
+            direction: 'horizontal',
+            centerInsufficientSlides:true,
           }
         }}
+        // slidesPerColumn: 2,
+        // slidesPerColumnFill='row'
+        centerInsufficientSlides={true}
+        direction='horizontal'
         navigation={{
           nextEl: '.next',
         }}
-        loop={true}
+        loop={false}
         pagination={
           size.width >= 768
             ? false
@@ -106,8 +157,8 @@ export default function CrewSlider({
         modules={[Grid, Navigation, Pagination]}
         className="mySwiper"
       >
-        {crewDatas2.length &&
-          crewDatas2?.map((data, index) => {
+        {crewDatas.length &&
+          crewDatas?.map((data, index) => {
             return (
               <SwiperSlide key={index}>
                 <div className="flex items-center justify-center">
@@ -124,7 +175,7 @@ export default function CrewSlider({
       </Swiper>
       <div className="bullets-container"></div>
       <div className={`${styles.test} absolute z-10 top-0 bottom-0 lg:flex items-center justify-center hidden`}>
-        <button onClick={handleNext} className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
+        <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
           {iconArrow}
         </button>
       </div>
