@@ -11,62 +11,71 @@ import Slider from "../about/slider";
 const LIMITER = 6;
 
 const Divisions = () => {
-   const [currentIndex, setCurrentIndex] = useState(0);
-   const size = useWindowSize();
-   const [isLeft, setIsLeft] = useState(false);
-   const [teams, setTeams] = useState([]);
-   const [page, setPage] = useState(1);
-   const [totalPages, setTotalPages] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const size = useWindowSize();
+  const [isLeft, setIsLeft] = useState(false);
+  const [teams, setTeams] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-   const getTeams = async () => {
-      const payload = {
-         page: page
-      };
-      try {
-         const response = await request.get('/users?roleNameExact=Ketua', { params: payload });
-         console.log('API Response:', response);
+  const getTeams = async () => {
+    const payload = {
+      page: page,
+    };
+    try {
+      const response = await request.get("/users?roleNameExact=Ketua", {
+        params: payload,
+      });
+      console.log("API Response:", response);
 
-         if (response.data.code === 200 || response.data.code === 201) {
-            console.log('Data from API:', response.data.data);
-            const filteredTeams = response.data.data.filter(user => user.role.name.toLowerCase() === "ketua");
-            console.log('Filtered Teams:', filteredTeams);
-            setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-            setTeams(filteredTeams);
-         }
-      } catch (error) {
-         console.error('Error fetching teams:', error);
+      if (response.data.code === 200 || response.data.code === 201) {
+        console.log("Data from API:", response.data.data);
+        const filteredTeams = response.data.data.filter(
+          (user) => user.role.name.toLowerCase() === "ketua"
+        );
+        console.log("Filtered Teams:", filteredTeams);
+        setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+        setTeams(filteredTeams);
       }
-   };
+    } catch (error) {
+      console.error("Error fetching teams:", error);
+    }
+  };
 
-   useEffect(() => {
-      getTeams();
-   }, [page]);
+  useEffect(() => {
+    getTeams();
+  }, [page]);
 
+  const updateIsLeft = () => {
+    setIsLeft(!isLeft);
+  };
 
-   const updateIsLeft = () => {
-      setIsLeft(!isLeft);
-   }
+  const handleNext = () => {
+    page >= totalPages ? setPage(1) : setPage(page + 1);
+  };
 
-   const handleNext = () => {
-      page >= totalPages ? setPage(1) : setPage(page + 1);
-   };
-
-   return (
-      <>
-         <div className="px-[45px] md:px-0 w-full">
-            <div className="h-[44px] md:h-[108px] bg-[#092C4C] rounded-[15px] mx-auto md-[14px] md:mb-[30px]">
-               <h3 className={`text-[20px] md:text-h3 font-bold text-white flex justify-center items-center h-full`}>
-                  Meet Our Team
-               </h3>
-            </div>
-         </div>
-         <Slider data={teams} />
-      </>
-   );
-}
+  return (
+    <>
+      <div className="px-[45px] md:px-0 w-full">
+        <div
+          className={`w-full max-w-[75%] py-3 md:rounded-[15px] rounded-[6px] bg-[#092C4C] text-white font-bold xl:text-[30px] md:text-[20px] text-[16px] m-auto flex justify-center items-center`}
+        >
+          <h1>Meet Our Team</h1>
+        </div>
+        {/* <div className="h-[44px] md:h-[108px] bg-[#092C4C] rounded-[15px] mx-auto md-[14px] md:mb-[30px]">
+          <h3
+            className={`text-[20px] md:text-h3 font-bold text-white flex justify-center items-center h-full`}
+          >
+            Meet Our Team
+          </h3>
+        </div> */}
+      </div>
+      <Slider data={teams} />
+    </>
+  );
+};
 
 export default Divisions;
-
 
 // "use client";
 // import TeamCard from "@/components/Team/Card/card";
