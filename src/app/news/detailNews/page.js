@@ -1,22 +1,23 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import request from '../../utils/request';
-import moment from 'moment';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import moment from 'moment';
 
+import request from '../../utils/request';  
+import { FormatString } from '../../utils/stringUtils';
+import { host } from '@/components/host';
 import ImageNewsFirstSlider from '@/components/detailNews/imageNewsFirstSlider';
 import RekomendasiNewsSlider from '@/components/detailNews/rekomendasiNewsSlider';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Navbar from '@/components/navbar';
-import Image from 'next/image';
-import styles from '@/app/news/detailNews/detailNewsPage.module.css';
-import { FormatString } from '../../utils/stringUtils';
 import Loading from '@/components/loading';
 import TextNotFound from '@/components/teksNotFound';
 import ImageNotFound from '@/components/imageNotFound';
-import { host } from '@/components/host';
+import styles from '@/app/news/detailNews/detailNewsPage.module.css';
+
 
 export default function DetailNews() {
   const newsId = useSearchParams().get('id');
@@ -103,8 +104,6 @@ export default function DetailNews() {
     }
   }, [description]);
 
-  console.log('newsAlso', newsAlso);
-
   return (
     <>
       <Header />
@@ -117,19 +116,19 @@ export default function DetailNews() {
                 id="title"
                 className="w-full xl:max-w-[1390px] lg:max-w-[66rem] md:max-w-[48rem] sm:max-w-[38rem] max-w-[28rem] px-3 sm:px-0 mx-auto lg:pt-44 md:pt-36 sm:pt-[7rem] pt-[70px]"
               >
-                <h1 className="lg:text-6xl md:text-4xl text-xl text-bluePallete-800 font-black lg:mb-6 mb-2 leading-tight">
-                  <span className="lg:text-6xl md:text-4xl text-3xl"></span>{' '}
+                <h1 className="mb-2 text-xl font-black leading-tight lg:text-6xl md:text-4xl text-bluePallete-800 lg:mb-6">
+                  <span className="text-3xl lg:text-6xl md:text-4xl"></span>{' '}
                   {isLoading ? (
                     <Loading
                       size="w-[70px] h-[70px]"
                       textAlignment="text-center"
                     />
                   ) : title ? (
-                    <h1 className="lg:text-6xl md:text-4xl text-3xl text-bluePallete-800">
+                    <h1 className="text-3xl lg:text-6xl md:text-4xl text-bluePallete-800">
                       {title}
                     </h1>
                   ) : (
-                    <TextNotFound className="lg:text-6xl md:text-4xl text-3xl text-transparent">
+                    <TextNotFound className="text-3xl text-transparent lg:text-6xl md:text-4xl">
                       {''}
                     </TextNotFound>
                   )}
@@ -177,7 +176,7 @@ export default function DetailNews() {
                 </div>
                 <div className="w-full !px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:pl-0 pr-0 xl:pr-[40px]">
                   <div className="lg:mt-14 mt-[53px]">
-                    <div className="flex items-center xl:justify-start justify-center">
+                    <div className="flex items-center justify-center xl:justify-start">
                       <svg
                         className="xl:w-[5opx] xl:h-[50px] w-[40px] h-[40px] "
                         viewBox="0 0 50 50"
@@ -199,23 +198,32 @@ export default function DetailNews() {
                         Top Reads of The Day
                       </h1>
                     </div>
-                    <div className="mt-4 lg:px-0 grid grid-cols-1 gap-5">
+                    <div className="grid grid-cols-1 gap-5 mt-4 lg:px-0">
                       {newsTopData &&
                         newsTopData.slice(0, 3).map((data, index) => (
                           <Link
                             key={index}
                             href={`/news/detailNews?id=${data.id}`}
                           >
-                            <div className="h-full max-h-[90px] xl:max-h-[100px] w-full md:h-[150px] flex justify-between border border-bluePallete-600 bg-white rounded-xl">
-                              <div className=" px-[11px] py-[8px] flex flex-col justify-between ">
+                            <div className="h-[90px] sm:h-[120px] md:h-[150px] xl:h-[100px] max-h-[90px] sm:max-h-[90px] xl:max-h-[100px] w-full flex justify-between  border border-bluePallete-600 bg-white rounded-xl">
+                              <div className="px-[11px] py-[8px] flex flex-col sm:justify-center self-center h-full">
                                 {data?.title ? (
                                   <h1
-                                    className={`${styles.detailTopNewsTitle} !xl:text-[20px] !md:text-[24px] text-[15px] font-semibold overflow-hidden text-bluePallete-800`}
+                                    className={`!line-clamp-2 sm:!line-clamp-3 !xl:text-[20px] !md:text-[24px] text-[15px] font-semibold text-bluePallete-800 ${styles.detailTopNewsTitle}`}
                                   >
                                     {data.title}
                                   </h1>
                                 ) : (
                                   <TextNotFound className="xl:text-[20px] md:text-[14px] text-[12px] text-transparent font-bold">
+                                    {''}
+                                  </TextNotFound>
+                                )}
+                                {date ? (
+                                  <p className="block sm:hidden font-medium text-[12px] sm:text-[14px] text-[#6B6B6B]">
+                                    {moment(date).format('DD MMMM YYYY')}
+                                  </p>
+                                ) : (
+                                  <TextNotFound className="font-medium text-[12px] sm:text-[14px] text-transparent">
                                     {''}
                                   </TextNotFound>
                                 )}
@@ -227,7 +235,7 @@ export default function DetailNews() {
                                   alt="Image News Central Computer Improvement"
                                   responsive="true"
                                   src={host + data.mediaUri}
-                                  className={`${styles.detailTopNewsImage} w-[100px] sm:w-[250px] sm:w-max-[250px] xl:w-[150px] xl:max-w-[150px] xl:h-auto rounded-r-xl object-cover`}
+                                  className={`${styles.detailTopNewsImage} w-[100px] sm:w-[250px] sm:w-max-[250px] xl:w-[150px] xl:max-w-[150px] xl:h-auto rounded-r-xl object-cover border-l-[1px] border-bluePallete-500`}
                                 />
                               ) : (
                                 <ImageNotFound className="w-[100px] sm:w-[250px] sm:w-max-[250px] xl:w-[150px] xl:max-w-[150px] xl:h-auto rounded-r-xl object-cover" />
