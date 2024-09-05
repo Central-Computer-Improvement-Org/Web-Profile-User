@@ -18,6 +18,9 @@ export default function CrewSlider({
   color = 'bg-bluePallete-300',
 }) {
   const size = useWindowSize();
+  const [page, setPage] = useState(1)
+  const [splittedDatas, setSplittedDatas] = useState([])
+  const [datas, setDatas] = useState([])
   const iconArrow = (
     <svg
       className="xl:w-[55px] md:w-[40px] "
@@ -70,17 +73,25 @@ export default function CrewSlider({
 //  }
 
   // const sisaSlide
-  let currentItemIndex = 0;
-  let endSliceIndex = 4;
-  const potongData = crewDatas.slice(currentItemIndex, endSliceIndex);
-  console.log("potongData:", potongData);
+    useEffect(() => {
+        const splited = [
+            crewDatas?.slice(0, 4),
+            crewDatas?.slice(3 + 1)
+        ]
+        setSplittedDatas(splited)
+
+    }, [crewDatas]);
+
 
   const handleNext = () => {
-    if (endSliceIndex >= crewDatas.length) {
-        currentItemIndex = 0;
-        endSliceIndex = 4;
-    }
+      page > 2 ? setPage(1) : setPage(page + 1)
   };
+
+    useEffect(() => {
+        console.info(splittedDatas)
+
+        setDatas(page == 1 ? splittedDatas[0] : splittedDatas[1])
+    }, [splittedDatas, page]);
 
   return crewDatas.length ? (
     <div className="relative">
@@ -157,8 +168,8 @@ export default function CrewSlider({
         modules={[Grid, Navigation, Pagination]}
         className="mySwiper"
       >
-        {crewDatas.length &&
-          crewDatas?.map((data, index) => {
+        {datas?.length &&
+          datas?.map((data, index) => {
             return (
               <SwiperSlide key={index}>
                 <div className="flex items-center justify-center">
@@ -175,7 +186,7 @@ export default function CrewSlider({
       </Swiper>
       <div className="bullets-container"></div>
       <div className={`${styles.test} absolute z-10 top-0 bottom-0 lg:flex items-center justify-center hidden`}>
-        <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
+        <button onClick={handleNext} className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
           {iconArrow}
         </button>
       </div>
