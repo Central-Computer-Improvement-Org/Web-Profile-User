@@ -9,7 +9,7 @@ import styles from '@/components/News/newsComponent.module.css';
 
 const TopRead = ({ title, date, image }) => {
   return (
-    <div className="w-full h-[100px] max-h-[100px] flex flex-row rounded-xl border-[3px] border-greenPallete-400">
+    <div className="w-full h-[100px] max-h-[100px] flex flex-row rounded-xl border-[2px] border-bluePallete-400">
       <div className="p-3 basis-[70%] flex flex-col justify-between">
         {title ? (
           <h1
@@ -39,7 +39,7 @@ const TopRead = ({ title, date, image }) => {
             height={100}
             src={image}
             alt="Thumbnail News Central Computer Improvement"
-            className="w-full h-full max-w-[150px] max-h-[100px] object-cover rounded-r-[10px]"
+            className="w-full h-full max-h-[100px] xl:max-w-[150px] object-cover aspect-video rounded-r-[10px] border-l-[2px] border-bluePallete-500"
           />
         ) : (
           <ImageNotFound

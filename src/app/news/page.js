@@ -49,15 +49,15 @@ export default function News() {
             <div className="w-full h-[5px] mt-2 bg-bluePallete-700 rounded-lg"></div>
 
             <section id="hero-section" className="container relative">
-              <div className=" bg-transparent mt-4 ">
+              <div className="mt-4 bg-transparent">
                 <HeroSection />
               </div>
             </section>
             <div className="xl:mt-[95px] md:mt-[80px] mt-[40px]"></div>
             <section id="article">
               <div className="container">
-                <div className="w-full flex flex-row flex-wrap-reverse  ">
-                  <div className="sm:w-full hidden  mt-5 xl:mt-0 xl:basis-7/12 lg:flex flex-col gap-3">
+                <div className="flex flex-row flex-wrap-reverse w-full ">
+                  <div className="flex-col hidden gap-3 mt-5 sm:w-full xl:mt-0 xl:basis-7/12 lg:flex">
                     {articleDatas &&
                       articleDatas.slice(0, 5).map((data, index) => (
                         <Link
@@ -68,8 +68,8 @@ export default function News() {
                         </Link>
                       ))}
                   </div>
-                  <div className="sm:w-full xl:basis-5/12 px-0 xl:px-8 flex flex-col gap-4">
-                    <div className="flex  items-center justify-center xl:justify-start mb-3">
+                  <div className="flex flex-col gap-4 px-0 sm:w-full xl:basis-5/12 xl:px-8">
+                    <div className="flex items-center justify-center mb-3 xl:justify-start">
                       <svg
                         className="xl:w-[5opx] xl:h-[50px] w-[40px] h-[40px] inline-block "
                         viewBox="0 0 50 50"
@@ -119,14 +119,14 @@ export default function News() {
 
             <section
               id="also-in-news"
-              className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-36 "
+              className="w-full h-auto pt-10 pb-0 sm:pb-32 sm:pt-36"
             >
               <div className="flex items-center justify-center xl:justify-start">
                 <h1 className="text-[25px] lg:text-6xl text-bluePallete-800 font-bold mb-7">
                   Also in News
                 </h1>
               </div>
-              <div className=" lg:hidden flex flex-col gap-4">
+              <div className="flex flex-col gap-4 lg:hidden">
                 {articleDatas &&
                   articleDatas.slice(0, 5).map((data, index) => (
                     <Link key={index} href={`/news/detailNews?id=${data.id}`}>
@@ -141,7 +141,7 @@ export default function News() {
 
             <section
               id="carousel"
-              className="container hidden lg:block  mx-auto w-full relative"
+              className="container relative hidden w-full mx-auto lg:block"
             >
               <HeroSectionSliderSecond />
             </section>
