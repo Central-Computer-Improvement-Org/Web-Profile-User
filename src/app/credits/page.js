@@ -175,7 +175,7 @@ export default function Credits() {
                     </div>
                     {/* Member area */}
                     <div className="mt-[30px] sm:mt-[40px]" />
-                    <div className="w-full border-2">
+                    <div className="w-full">
                       <CrewSlider
                         crewDatas={contributors
                           ?.map((data) => {
