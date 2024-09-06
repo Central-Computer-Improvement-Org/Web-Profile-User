@@ -156,7 +156,7 @@ export default function Home() {
                   </p>
                 ) : (
                   <p className="text-[24px] pr-5 text-bluePallete-600">
-                    Unit Kegiatan Mahasiswa di Telkom University yang berfokus pada bidang ICT (Information, Communication and Technology).
+                      Unit Kegiatan Mahasiswa (UKM) CCI telah berhasil meraih berbagai prestasi yang membanggakan, melalui partisipasi aktif dalam berbagai kompetisi, inovasi program, serta kontribusi nyata dalam pengembangan potensi mahasiswa di berbagai bidang, yang semakin memperkuat reputasinya sebagai salah satu UKM yang unggul di lingkungan kampus.
                   </p>
                 )}
               </div>
@@ -396,9 +396,7 @@ export default function Home() {
                       </h2>
                       <div className="text-[15px] md:text-[20px] lg:text-[24px] text-right lg:text-left leading-5 lg:leading-10 text-mainPrimary">
                         <span>
-                          Unit Kegiatan Mahasiswa Universitas Telkom Central
-                          Computer Improvment telah berhasil membuat project
-                          sebanyak{" "}
+                          UKM CCI juga melaksanakan berbagai proyek, di mana anggota UKM CCI diberikan pelatihan untuk mengembangkan keterampilan dalam merancang dan melaksanakan proyek-proyek tersebut. Melalui bimbingan dan pembelajaran langsung, mereka diajarkan untuk membuat proyek yang inovatif dan bermanfaat, baik untuk pengembangan pribadi maupun kontribusi kepada masyarakat luas.
                         </span>
                         {isLoading ? (
                           <Loading size="w-[10px] h-[10px] sm:w-[20px] sm:h-[20px]" />
