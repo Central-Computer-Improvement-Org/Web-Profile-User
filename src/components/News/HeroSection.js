@@ -59,11 +59,11 @@ const HeroSection = () => {
           >
             {news.slice(0, 4).map((news) => (
               <SwiperSlide
-                className="relative max-h-[625px]  rounded-xl"
+                className="relative max-h-[425px]  rounded-xl"
                 key={news.id}
               >
                 <Link href={`news/detailNews?id=${news.id}`}>
-                  <div className="xl:h-[800px] md:h-[400px] h-[203px] relative">
+                  <div className="xl:h-[700px] md:h-[300px] h-[103px] relative">
                     <Image
                       className="w-full h-full object-cover rounded-xl"
                       layout="fill"
@@ -82,7 +82,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div> */}
-          <div className=" w-full xl:mt-[40px] md:mt-[35px] mt-[10px] ">
+          <div className=" w-full xl:mt-[40px] md:mt-[35px] mt-[10px]" style={{ scale: '50%' }}>
             <div className="flex justify-center items-center bg-transparent">
               <div className="flex justify-center items-center  mx-auto bg-transparent">
                 <div className="swiper-custom-pagination flex justify-center items-center gap-[10px]" />
