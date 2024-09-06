@@ -421,7 +421,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/connect-card.png"
+                          src="assets/home/images/project_1.png"
                           alt="Achievement Central Computer Improvement"
                           responsive="true"
                           width={318}
@@ -456,7 +456,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/connect-card.png"
+                          src="assets/home/images/project_2.png"
                           alt="Member Central Computer Improvement"
                           responsive="true"
                           width={318}
