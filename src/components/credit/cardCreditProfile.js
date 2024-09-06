@@ -9,6 +9,7 @@ export default function CardCreditProfile({
    linkedinUri,
    image,
 }) {
+
    const jobDescription = (jobdes) => {
       let aliasJob;
       if (jobdes === "Ketua") {
@@ -26,7 +27,7 @@ export default function CardCreditProfile({
 
    return (
       <div
-         className={`w-full h-[152px] sm:h-full max-h-[286px] flex gap-5 px-[16px] py-[15px] sm:px-8 sm:py-10 rounded-[15px] ${color}`}
+         className={`w-full max-w-none sm:max-w-[48%] h-[152px] sm:h-full max-h-[286px] flex gap-3 sm:gap-5 px-[16px] py-[15px] sm:px-8 sm:py-10 rounded-[15px] mt-3 ${color}`}
       >
          <div className="basis-[40%] sm:basis-6/12 flex flex-col">
             {jobDescription(jobdes)}
