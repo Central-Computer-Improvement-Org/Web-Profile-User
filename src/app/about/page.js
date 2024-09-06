@@ -28,16 +28,9 @@ export default function Home() {
                            <p
                               className={`mt-[40px] text-justify text-[13px] md:text-[30px] font-medium text-bluePallete-800 break-words`}
                            >
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                              eu neque in ligula gravida pharetra sed et sem. Sed quis eros
-                              non nisl sodales tincidunt. Etiam ultricies ultricies ipsum,
-                              non cursus diam congue sed. Ut placerat erat in elit molestie,
-                              id fermentum velit pellentesque. Quisque pharetra sed velit
-                              egestas laoreet. Phasellus nec euismod quam. Interdum et
-                              malesuada fames ac ante ipsum primis in faucibus. Nulla
-                              facilisi. Vivamus viverra augue tortor, sit amet cursus nunc
-                              porta vel. Maecenas enim magna, fringilla nec volutpat vitae,
-                              tincidunt eget metus.
+                              Sejarah terbentuknya UKM CCI berawal dari gagasan sekelompok mahasiswa yang memiliki ketertarikan yang sama akan teknologi, pada tahun 2006 bertempat di kampus STMB Telkom gegerkalong mulai terbentuk sebuah komunitas yang berfokus pada perkembangan teknologi, seiring berjalannya waktu komunitas ini berhasil disahkan menjadi sebuah UKM pada tahun 2006. Seiring berjalannya waktu UKM CCI IM Telkom mulai menunjukan apresiasinya terhadap institusi yakni dengan terciptanya media kampus yang di beri nama students yang di gagas oleh anggota – anggota CCI dalam bidang web & application development dan di sahkan pada bulan maret tahun 2009. Selain media kampus students 	CCI 	pun 	membantu 	kampus 	dalam pengembangan teknologinya yaitu terciptanya system e- vote untuk pemilihan BEM dan DPM IM Telkom yang menjadikan IM Telkom kampus pertama yang menggunakan
+system e-vote dalam pemilihan ketua BEM dan DPM.
+Central computer improvement adalah unit kegiatan mahasiswa fakultas ekonomi dan bisnis, universitas Telkom yang berfokus kepada perkembangan teknologi saat ini, kegiatan rutin kami yaitu membahas dan bertukar pengetahuan mengenai teknologi di mulai dari gadget, applikasi, hingga pengembangan software dan bertujuan untuk mengembangkan wawasan serta pengetahuan mahasiswa/mahasiswi universitas Telkom dalam bidang teknologi. CCI universitas Telkom memiliki berbagai divisi yaitu divisi media, divisi design, divisi web development, divisi data & research, divisi games & gadget dan divisi networking yang dimana tiap divisi bertanggung jawab untuk menjalankan program kerja tiap divisi yang berguna menambah wawasan dan pengetahuan mengenai teknologi bagi mahasiswa/mahasiswi universitas Telkom serta bagi lingkungan sekitar.
                            </p>
                         </div>
                      </section>
