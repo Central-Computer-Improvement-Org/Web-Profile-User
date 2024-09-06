@@ -58,7 +58,7 @@ export default function CrewSlider({
   console.info(crewDatas)
 
   const handleNext = () => {
-      page > 2 ? setPage(1) : setPage(page + 1)
+      page >= 2 ? setPage(1) : setPage(page + 1)
   };
 
     function onClickFlipCard(index) {
