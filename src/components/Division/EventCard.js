@@ -24,7 +24,6 @@ const mobileColorPattern = ["#152E51", "#11A950"];
 const LIMITER = 6;
 
 const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
-   // const size = useWindowSize();
    const [eventData, setEventData] = useState(null);
    const [flipPosition, setFlipPosition] = useState(null);
    const [colorPattern, setColorPattern] = useState(desktopColorPattern);
@@ -39,29 +38,30 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
          ...(filterByDivisionName && { divisionName: filterByDivisionName }),
          ...(filterByDivisionId && { divisionId: filterByDivisionId }),
       };
-
+      
       await request
          .get("/events", payload)
          .then((response) => {
             if (response.status === 200 || response.status === 201) {
                const filteredData = response.data.data.filter(event => {
                   if (filterByDivisionName) {
-                     return event.division.name === filterByDivisionName;
+                     return event.division?.name === filterByDivisionName;
                   }
                   if (filterByDivisionId) {
-                     return event.division.id === filterByDivisionId;
+                     return event.division?.id === filterByDivisionId;
                   }
                   return true;
                });
-
+               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
                setEventData(filteredData);
-
+               
                if (!filterByDivisionName && !filterByDivisionId) {
                   setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
                }
             } else {
                console.error(JSON.stringify(response.errors));
             }
+            
             // if (response.status === 200 || response.status === 201) {
             //    setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
             //    const filteredData = response.data.data.filter(event => !filterByDivision || event.division.name === filterByDivision);
