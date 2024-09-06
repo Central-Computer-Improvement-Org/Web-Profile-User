@@ -43,13 +43,13 @@ export default function News() {
           <main
             className="h-full px-[40px] md:px-[80px] lg:px-[120px] py-[120px] md:py-[10rem]"
           >
-            <h1 className="text-7xl font-bold text-secondPrimary px-[15px]">
+            <h1 className="text-5xl font-bold text-secondPrimary px-[15px]">
               NEWS
             </h1>
-            <div className="w-full h-[5px] mt-2 bg-bluePallete-700 rounded-lg"></div>
+            <div className="w-full h-[3px] mt-2 bg-bluePallete-700 rounded-lg"></div>
 
-            <section id="hero-section" className="container relative">
-              <div className="mt-4 bg-transparent">
+            <section id="hero-section" className="container relative w-full">
+              <div className="mt-4 bg-transparent content-center justify-items-center items-center">
                 <HeroSection />
               </div>
             </section>

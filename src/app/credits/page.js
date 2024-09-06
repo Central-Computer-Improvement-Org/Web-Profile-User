@@ -95,6 +95,7 @@ export default function Credits() {
                   </div>
                 ) : contributors ? (
                   <div className="flex flex-col w-full md:px-5">
+                    {/* Ketua dan wakil area */}
                     <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
                       {ketuaDesignDatas.length ? (
                         ketuaDesignDatas.length &&
@@ -114,6 +115,7 @@ export default function Credits() {
                         </div>
                       )}
                     </div>
+                    {/* Member area */}
                     <div>
                       <div className="mt-10 sm:mt-[40px]" />
                       <CrewSlider
@@ -151,6 +153,7 @@ export default function Credits() {
                   </div>
                 ) : contributors ? (
                   <div className="flex flex-col w-full md:px-5">
+                    {/* Ketua dan wakil area */}
                     <div className="flex xl:gap-[40px] md:gap-[30px] gap-[16px] md:flex-row flex-col justify-center items-center">
                       {ketuaWebDatas.length ? (
                         ketuaWebDatas.length &&
@@ -170,8 +173,9 @@ export default function Credits() {
                         </div>
                       )}
                     </div>
+                    {/* Member area */}
                     <div className="mt-[30px] sm:mt-[40px]" />
-                    <div>
+                    <div className="w-full">
                       <CrewSlider
                         crewDatas={contributors
                           ?.map((data) => {

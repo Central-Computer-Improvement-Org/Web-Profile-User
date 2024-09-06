@@ -109,8 +109,6 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
    }, [eventData, autoFlipCount]);
 
    const handleNext = () => {
-      console.log("page", page);
-      console.log("totalPages", totalPages);
       page >= totalPages ? setPage(1) : setPage(page + 1);
    };
 
