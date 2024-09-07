@@ -190,7 +190,7 @@ const ProjectData = () => {
           {/* Project Isi Deskripsi */}
           <div className={`h-auto`}>
             {isMovingData || isLoading || !projectData ? (
-              <Skeleton count={3} />
+              <Skeleton count={4} />
             ) : projectData[positionIndex]?.description ? (
               <p
                 className={`font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-white lg:text-black ${styles.projectsDesc}`}
