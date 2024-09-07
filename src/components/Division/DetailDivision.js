@@ -81,12 +81,12 @@ export default function DetailDvision() {
                                        />
                                     ) : data?.name ? (
                                        <h1
-                                          className={`font-black text-[32px] sm:text-[40px] md:text-[70px] lg:text-[90px] text-secondPrimary ${styles.dvisionCardName}`}
+                                          className={`font-black text-[25px] sm:text-[20px] md:text-[50px] lg:text-[70px] text-secondPrimary ${styles.dvisionCardName}`}
                                        >
                                           {data.name}
                                        </h1>
                                     ) : (
-                                       <TextNotFound className="font-black text-[32px] sm:text-[40px] md:text-[70px] lg:text-[90px] text-transparent">
+                                       <TextNotFound className="font-black text-[25px] sm:text-[20px] md:text-[50px] lg:text-[70px] text-transparent">
                                           Nama Divisi
                                        </TextNotFound>
                                     )}
@@ -120,7 +120,7 @@ export default function DetailDvision() {
                                     textAlignment="text-center"
                                  />
                               ) : data?.description ? (
-                                 <p className="font-medium text-[14px] sm:text-[28px] lg:text-[40px] leading-0 md:leading-10 text-bluePallete-800">
+                                 <p className="font-medium text-[10px] sm:text-[22px] lg:text-[25px] leading-0 md:leading-10 text-bluePallete-800">
                                     {data.description}
                                  </p>
                               ) : (

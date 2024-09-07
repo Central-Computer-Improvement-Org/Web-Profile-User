@@ -156,7 +156,7 @@ export default function Home() {
                   </p>
                 ) : (
                   <p className="text-[24px] pr-5 text-bluePallete-600">
-                    Unit Kegiatan Mahasiswa di Telkom University yang berfokus pada bidang ICT (Information, Communication and Technology).
+                      Unit Kegiatan Mahasiswa (UKM) CCI telah berhasil meraih berbagai prestasi yang membanggakan, melalui partisipasi aktif dalam berbagai kompetisi, inovasi program, serta kontribusi nyata dalam pengembangan potensi mahasiswa di berbagai bidang, yang semakin memperkuat reputasinya sebagai salah satu UKM yang unggul di lingkungan kampus.
                   </p>
                 )}
               </div>
@@ -222,7 +222,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/connect-card.png"
+                          src="assets/home/images/award_img_1.jpg"
                           alt="Achievement Central Computer Improvement"
                           responsive="true"
                           width={318}
@@ -257,7 +257,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/connect-card.png"
+                          src="assets/home/images/award_img_2.jpg"
                           alt="Member Central Computer Improvement"
                           responsive="true"
                           width={318}
@@ -361,9 +361,7 @@ export default function Home() {
                             Penghargaan
                           </h2>
                           <p className="text-[24px] leading-9 lg:leading-10 text-mainPrimary">
-                            Unit Kegiatan Mahasiswa Universitas Telkom yang
-                            berfokus pada bidang ICT (Information, Communication
-                            and Technology).
+                            Unit Kegiatan Mahasiswa (UKM) CCI telah berhasil meraih berbagai prestasi yang membanggakan, melalui partisipasi aktif dalam berbagai kompetisi, inovasi program, serta kontribusi nyata dalam pengembangan potensi mahasiswa di berbagai bidang, yang semakin memperkuat reputasinya sebagai salah satu UKM yang unggul di lingkungan kampus.
                           </p>
                         </div>
                       </div>
@@ -376,9 +374,7 @@ export default function Home() {
                       Penghargaan
                     </h2>
                     <p className="text-[15px] lg:text-[24px] text-mainPrimary">
-                      Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus
-                      pada bidang ICT (Information, Communication and
-                      Technology).
+                      Unit Kegiatan Mahasiswa (UKM) CCI telah berhasil meraih berbagai prestasi yang membanggakan, melalui partisipasi aktif dalam berbagai kompetisi, inovasi program, serta kontribusi nyata dalam pengembangan potensi mahasiswa di berbagai bidang, yang semakin memperkuat reputasinya sebagai salah satu UKM yang unggul di lingkungan kampus.
                     </p>
                   </div>
                 </div>
@@ -396,9 +392,7 @@ export default function Home() {
                       </h2>
                       <div className="text-[15px] md:text-[20px] lg:text-[24px] text-right lg:text-left leading-5 lg:leading-10 text-mainPrimary">
                         <span>
-                          Unit Kegiatan Mahasiswa Universitas Telkom Central
-                          Computer Improvment telah berhasil membuat project
-                          sebanyak{" "}
+                          UKM CCI juga melaksanakan berbagai proyek, di mana anggota UKM CCI diberikan pelatihan untuk mengembangkan keterampilan dalam merancang dan melaksanakan proyek-proyek tersebut. Melalui bimbingan dan pembelajaran langsung, mereka diajarkan untuk membuat proyek yang inovatif dan bermanfaat, baik untuk pengembangan pribadi maupun kontribusi kepada masyarakat luas.
                         </span>
                         {isLoading ? (
                           <Loading size="w-[10px] h-[10px] sm:w-[20px] sm:h-[20px]" />
@@ -427,7 +421,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/connect-card.png"
+                          src="assets/home/images/project_1.png"
                           alt="Achievement Central Computer Improvement"
                           responsive="true"
                           width={318}
@@ -462,7 +456,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/connect-card.png"
+                          src="assets/home/images/project_2.png"
                           alt="Member Central Computer Improvement"
                           responsive="true"
                           width={318}

@@ -92,12 +92,12 @@ const ProjectPage = () => {
         <div className="pt-[36px]" />
         <section className="md:px-[0px] px-[14px]">
           <div className="">
-            <h1 className="text-bluePallete-900 xl:text-[50px] lg:text-[40px] md:text-[30px] text-[20px] font-black text-center 2xl:px-[216px] xl:px-[100px] lg:px-[156px] md:px-[107px] sm:px-20 leading-[25px] sm:leading-[30px] md:leading-[42px] xl:leading-[62px]">
+            <h1 className="text-bluePallete-900 xl:text-[40px] lg:text-[30px] md:text-[20px] text-[10px] font-black text-center 2xl:px-[216px] xl:px-[100px] lg:px-[156px] md:px-[107px] sm:px-20 leading-[25px] sm:leading-[30px] md:leading-[42px] xl:leading-[62px]">
               Showcasing Our Work: <br />
               Achievements and Capabilities of Central Computer Improvement
             </h1>
             <div className="lg:pt-[10px] md:pt-[20px] pt-[10px]" />
-            <p className="text-center 2xl:text-[32px] xl:text-[28px] lg:text-[24px] md:text-[20px] text-[12px] font-medium lg:px-[207px] md:px-[77px] sm:px-16 sm:leading-10 leading-[14px]">
+            <p className="text-center 2xl:text-[22px] xl:text-[18px] lg:text-[14px] md:text-[10px] text-[2px] font-medium lg:px-[207px] md:px-[77px] sm:px-16 sm:leading-10 leading-[14px]">
               Explore our diverse projects and witness the passion, creativity,
               and impact of Central Computer Improvement
             </p>
@@ -115,14 +115,14 @@ const ProjectPage = () => {
                 key={index}
                 className={`lg:px-[30px] md:px-[20px] px-[10px] lg:py-[10px] md:py-[8px] py-[5px] ${
                   menuActive.name == data.name
-                    ? 'md:bg-blue-100 bg-transparent'
-                    : 'bg-transparent hover:bg-blue-100'
-                } rounded-[5px] sm:rounded-[10px]`}
+                    ? 'md:bg-blue-100'
+                    : 'hover:bg-blue-50'
+                } bg-blue-200 rounded-[5px] sm:rounded-[10px]`}
                 style={{ cursor: 'pointer' }}
                 onClick={() => setMenuActive(data)}
               >
                 <h1
-                  className={`lg:text-[24px] md:text-[18px] text-[15px] ${
+                  className={`lg:text-[18px] md:text-[15px] text-[12px] ${
                     menuActive.name == data.name
                       ? 'md:font-medium !font-bold'
                       : 'font-medium'
