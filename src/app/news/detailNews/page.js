@@ -23,6 +23,7 @@ export default function DetailNews() {
   const newsId = useSearchParams().get('id');
   const [title, setTitle] = useState();
   const [image, setImage] = useState();
+  const [thumbnail, setThumbnail] = useState('');
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
   const [parsedHTML, setParsedHTML] = useState(null);
@@ -58,6 +59,7 @@ export default function DetailNews() {
         .then((response) => {
           if (response.data.code === 200 || response.data.code === 201) {
             setTitle(response.data.data.title);
+              setThumbnail(response.data.data.mediaUri);
             setImage(response.data.data.detailNewsMedia);
             setDescription(response.data.data.description);
             setDate(response.data.data.createdAt);
@@ -103,6 +105,7 @@ export default function DetailNews() {
       setParsedHTML(null);
     }
   }, [description]);
+
 
   return (
     <>
@@ -152,7 +155,14 @@ export default function DetailNews() {
               </div>
               <div className="w-full xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row flex-col gap-[40px]">
                 <div className="col-span-2 w-full xl:ml-[70px] xl:max-w-[923px] ">
-                  <ImageNewsFirstSlider image={image} />
+                  {image?.length ? <ImageNewsFirstSlider image={image}/> : <Image
+                      src={`${host}${thumbnail}`}
+                      alt="Thumbnail News"
+                      width={0}
+                      height={0}
+                      responsive="true"
+                      className={`w-full h-[400px] rounded-[20px] sm:rounded-lg object-cover ${styles.projectsThumbnailImage}`}
+                  />}
                   <div className="mt-[20px] sm:mt-[30px] md:mt-[40px] px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
                     {parsedHTML && parsedHTML.innerHTML.trim() !== '' ? (
                       <div
@@ -234,7 +244,7 @@ export default function DetailNews() {
                                   height={100}
                                   alt="Image News Central Computer Improvement"
                                   responsive="true"
-                                  src={host + data.mediaUri}
+                                  src={host + data?.mediaUri}
                                   className={`${styles.detailTopNewsImage} w-[100px] sm:w-[250px] sm:w-max-[250px] xl:w-[150px] xl:max-w-[150px] xl:h-auto rounded-r-xl object-cover border-l-[1px] border-bluePallete-500`}
                                 />
                               ) : (
