@@ -179,7 +179,7 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
                            <TeksNotFound className="font-black text-[14px] sm:text-[24px] text-white"></TeksNotFound>
                         )}
                         {event?.name ? (
-                           <p className="text-[8px] sm:text-[16px] font-medium text-white">
+                           <p className="text-[8px] sm:text-[16px] font-medium text-white line-clamp-4">
                               {event.description}
                            </p>
                         ) : (
