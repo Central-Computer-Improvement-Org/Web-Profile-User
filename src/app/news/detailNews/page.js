@@ -69,7 +69,6 @@ export default function DetailNews() {
         .get(`/news?id=${newsId}`)
         .then((response) => {
           if (response.data.code === 200 || response.data.code === 201) {
-            console.log('response :', response.data.data)
             setTitle(response.data.data.title);
             setThumbnail(response.data.data.mediaUri);
             setImage(response.data.data.detailNewsMedia);
