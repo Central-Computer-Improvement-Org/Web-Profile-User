@@ -1,18 +1,20 @@
 "use client";
-import TeamCard from "@/components/Team/Card/card";
 import React, { useState, useEffect } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
+
 import request from "@/app/utils/request";
+import { host } from "@/components/host";
+import TeamCard from "@/components/Team/Card/card";
 import CardCreditProfile from "../credit/cardCreditProfile";
-import { host } from "../host";
 import CrewSlider from "../credit/crewSlider";
 import Slider from "../about/slider";
+
 
 const LIMITER = 6;
 
 const Divisions = () => {
-   const [currentIndex, setCurrentIndex] = useState(0);
    const size = useWindowSize();
+   const [currentIndex, setCurrentIndex] = useState(0);
    const [isLeft, setIsLeft] = useState(false);
    const [teams, setTeams] = useState([]);
    const [page, setPage] = useState(1);
@@ -22,19 +24,16 @@ const Divisions = () => {
       const payload = {
          page: page
       };
+
       try {
          const response = await request.get('/users?roleNameExact=Ketua', { params: payload });
-         console.log('API Response:', response);
-
          if (response.data.code === 200 || response.data.code === 201) {
-            console.log('Data from API:', response.data.data);
             const filteredTeams = response.data.data.filter(user => user.role.name.toLowerCase() === "ketua");
-            console.log('Filtered Teams:', filteredTeams);
             setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
             setTeams(filteredTeams);
          }
       } catch (error) {
-         console.error('Error fetching teams:', error);
+         setTeams([]);
       }
    };
 
@@ -43,13 +42,12 @@ const Divisions = () => {
    }, [page]);
 
 
-   const updateIsLeft = () => {
-      setIsLeft(!isLeft);
-   }
-
-   const handleNext = () => {
-      page >= totalPages ? setPage(1) : setPage(page + 1);
-   };
+   // const updateIsLeft = () => {
+   //    setIsLeft(!isLeft);
+   // };
+   // const handleNext = () => {
+   //    page >= totalPages ? setPage(1) : setPage(page + 1);
+   // };
 
    return (
       <>
