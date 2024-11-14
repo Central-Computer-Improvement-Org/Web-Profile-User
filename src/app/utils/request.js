@@ -45,7 +45,7 @@ const errorHandler = (error) => {
       expiredTokenHandler(); //di uncomment saat sudah integrasi api login
    } else if (error.code === 'ERR_NETWORK') {
       // window.history.pushState({}, 'Redirect Network Error', '/login');
-      console.log(error);
+      console.error(error);
       if (error.response?.status === 401) {
          expiredTokenHandler(); //di uncomment saat sudah integrasi api login
       }

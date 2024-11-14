@@ -1,5 +1,6 @@
+/* uncomment jika dibutuhkan gradasi di hero, dan hapus comment ini */
 /* Section Hero */
-.homeGradasiKanan {
+/* .homeGradasiKanan {
   position: absolute;
   top: -5%;
   left: -20%;
@@ -11,7 +12,7 @@
   top: 15%;
   right: -15%;
   z-index: -1 !important;
-}
+} */
 
 
 

@@ -1,19 +1,17 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Pagination, Autoplay, Navigation } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import './newsSecond.css';
-import Image from 'next/image';
-import request from '@/app/utils/request';
 import { host } from '../host';
-import Link from 'next/link';
+import request from '@/app/utils/request';
+import './newsSecond.css';
+
 
 const HeroSectionSliderSecond = () => {
   const [news, setNews] = useState([]);
@@ -23,7 +21,7 @@ const HeroSectionSliderSecond = () => {
     request
       .get('/news')
       .then(function (res) {
-        if (res.data.code === 200 || res.data.code === 201) {
+        if (res?.data?.code === 200) {
           setNews(res.data.data);
           setIsLoading(false);
         } else {
@@ -31,15 +29,15 @@ const HeroSectionSliderSecond = () => {
         }
       })
       .catch(function (err) {
-        console.log(err);
+        console.error(err);
         setIsLoading(false);
       });
   }, []);
 
   return (
     <>
-      {isLoading ? ( // Tampilkan teks Loading... saat isLoading true
-        <div className="w-full text-slate-500 text-3xl text-center">
+      {isLoading ? (
+        <div className="w-full text-3xl text-center text-slate-500">
           Loading...
         </div>
       ) : (
@@ -61,20 +59,20 @@ const HeroSectionSliderSecond = () => {
               prevEl: '.goprev',
               clickable: true,
             }}
-            className=" w-full rounded-xl"
+            className="w-full rounded-xl"
           >
             {news.map((news) => (
               <SwiperSlide
-                className="relative max-h-[625px]  rounded-xl"
+                className="relative max-h-[625px] rounded-xl"
                 key={news.id}
               >
                 <Link href={`news/detailNews?id=${news.id}`}>
                   <div className="xl:h-[800px] md:h-[400px] h-[203px] relative">
                     <Image
-                      className="w-full h-full object-cover rounded-xl"
+                      className="object-cover w-full h-full rounded-xl"
                       layout="fill"
                       src={host + news.mediaUri}
-                      alt="forest"
+                      alt={"Image " + news.title}
                     />
                   </div>
                 </Link>
@@ -82,12 +80,13 @@ const HeroSectionSliderSecond = () => {
             ))}
           </Swiper>
           <div className=" w-full xl:mt-[40px] md:mt-[35px] mt-[10px] bg-red-500">
-            <div className="flex justify-center items-center bg-transparent">
-              <div className="flex justify-center items-center  mx-auto bg-transparent">
-                <div className="swiper-pagination flex justify-center items-center gap-[10px]" />
+            <div className="flex items-center justify-center bg-transparent">
+              <div className="flex items-center justify-center mx-auto bg-transparent">
+                <div className="swiper-pagination flex justify-center items-center !pt-3 gap-[10px]"/>
               </div>
             </div>
           </div>
+          {/* Custom Button Next  */}
           <div className="absolute z-[1] -right-[5%] top-0 bottom-0 flex items-center justify-center">
             <div className={` cursor-pointer gonext`}>
               <svg
@@ -107,8 +106,8 @@ const HeroSectionSliderSecond = () => {
                 />
               </svg>
             </div>
-            {/* Custom Button Prev  */}
           </div>
+          {/* Custom Button Prev  */}
           <div className="absolute z-[1] -left-[5%] top-0 bottom-0 flex items-center justify-center">
             <div className={`cursor-pointer goprev`}>
               <svg
@@ -128,7 +127,6 @@ const HeroSectionSliderSecond = () => {
                 />
               </svg>
             </div>
-            {/* Custom Button Prev  */}
           </div>
         </div>
       )}

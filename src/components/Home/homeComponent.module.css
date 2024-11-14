@@ -85,7 +85,7 @@
 
 @media only screen and (max-width: 1024px) {
 	.projectContainer {
-		margin-top: 50px !important;
+		margin-top: 100px !important;
 	}
 }
 
@@ -100,7 +100,7 @@
 
 @media only screen and (max-width: 456px) {
 	.projectsContainerThumbnail {
-		top: 2525px !important;
+		top: 2680px !important;
 	}
 	.projectsContainerRepository {
 		margin-top: 10px;
@@ -109,7 +109,25 @@
 
 @media only screen and (max-width: 426px) {
 	.projectsContainerThumbnail {
-		top: 2590px !important;
+		top: 2680px !important;
+	}
+}
+
+@media only screen and (max-width: 424.5px) {
+	.projectsContainerThumbnail {
+		top: 2695px !important;
+	}
+}
+
+@media only screen and (max-width: 422px) {
+	.projectsContainerThumbnail {
+		top: 2745px !important;
+	}
+}
+
+@media only screen and (max-width: 416.5px) {
+	.projectsContainerThumbnail {
+		top: 2795px !important;
 	}
 }
 
@@ -118,7 +136,7 @@
 		margin-top: 215px;
 	}
 	.projectsContainerThumbnail {
-		top: 2590px !important;
+		top: 2800px !important;
 	}
 	.projectsThumbnailImage {
 		max-width: 290px;
@@ -138,7 +156,7 @@
 		max-height: 230px;
 	}
 	.projectsContainerThumbnail {
-		top: 2580px !important;
+		top: 2785px !important;
 	}
 	.projectContainerInfo {
 		margin-top: 160px;
@@ -148,15 +166,22 @@
 	}
 }
 
-@media only screen and (max-width: 376px) {
+@media only screen and (max-width: 375px) {
 	.projectsContainerThumbnail {
-		top: 2610px !important;
+		top: 2800px !important;
 	}
 }
 
+@media only screen and (max-width: 372px) {
+	.projectsContainerThumbnail {
+		top: 2820px !important;
+	}
+}
+
+
 @media only screen and (max-width: 366px) {
 	.projectsContainerThumbnail {
-		top: 2630px !important;
+		top: 2865px !important;
 	}
 }
 
@@ -171,19 +196,31 @@
 
 @media only screen and (max-width: 357px) {
 	.projectsContainerThumbnail {
-		top: 2690px !important;
+		top: 2870px !important;
+	}
+}
+
+@media only screen and (max-width: 353px) {
+	.projectsContainerThumbnail {
+		top: 2910px !important;
+	}
+}
+
+@media only screen and (max-width: 352px) {
+	.projectsContainerThumbnail {
+		top: 2940px !important;
 	}
 }
 
 @media only screen and (max-width: 348px) {
 	.projectsContainerThumbnail {
-		top: 2700px !important;
+		top: 2960px !important;
 	}
 }
 
 @media only screen and (max-width: 343px) {
 	.projectsContainerThumbnail {
-		top: 2740px !important;
+		top: 2955px !important;
 	}
 	.projectContainerInfo {
 		margin-top: 160px;
@@ -191,6 +228,13 @@
 }
 
 @media only screen and (max-width: 335px) {
+	.projectsContainerThumbnail {
+		top: 2975px !important;
+	}
+	.projectsThumbnailImage {
+		max-width: 240px;
+		max-height: 230px;
+	}
 	.projectTitleMobile {
 		font-size: 12px;
 	}
@@ -326,7 +370,7 @@
 }
 
 .newsCardBorder {
-	border-right: 2px solid #234d87;
-	border-left: 2px solid #234d87;
-	border-bottom: 2px solid #234d87;
+	border-right: 1px solid #234d87;
+	border-left: 1px solid #234d87;
+	border-bottom: 1px solid #234d87;
 }

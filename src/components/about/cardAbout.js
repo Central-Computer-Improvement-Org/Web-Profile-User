@@ -3,12 +3,13 @@ import React from 'react';
 
 import styles from '../../components/about/aboutComponent.module.css';
 
+
 export default function CardAbout({ color, jobdes, name, image }) {
    return (
       <div
          className={`${styles.aboutCardContainer} xl:w-[534px] xl:h-[286px] lg:w-[380px] lg:h-[186px] md:w-[100%] md:h-[186px] w-[100%] h-[152px] rounded-[10px] sm:rounded-[15px] ${color} flex justify-between sm:justify-center items-center xl:px-[43px] sm:px-[16px] px-[10px]`}
       >
-         <div className="box-border w-auto sm:w-full h-auto">
+         <div className="box-border w-auto h-auto sm:w-full">
             <p className={`${styles.aboutCardJob} xl:text-[20px] md:text-[16px] text-[15px] font-medium text-bluePallete-800`}>
                {jobdes}
             </p>
@@ -50,4 +51,4 @@ export default function CardAbout({ color, jobdes, name, image }) {
          />
       </div>
    );
-}
+};

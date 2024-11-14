@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-import Loading from "@/components/loading";
+import { host } from "@/components/host";
+import request from "@/app/utils/request";
 import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
-import request from "@/app/utils/request";
-import { host } from "@/components/host";
+import Loading from "@/components/loading";
+
 
 const MemberCard = ({ divisionId }) => {
   const [memberData, setMemberData] = useState(null);
@@ -17,15 +18,15 @@ const MemberCard = ({ divisionId }) => {
     request
       .get("/users?roleNameExact=Ketua")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          const ketuaData = response.data.data.filter(
+        if (response.status === 200) {
+          const ketuaData = response?.data?.data?.filter(
             (item) =>
               item.role.name === "Ketua" && item.divisionId === divisionId
           );
           setMemberData(response.data.data);
           setKetuaData(ketuaData);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
       })
       .catch((error) => {
@@ -37,15 +38,15 @@ const MemberCard = ({ divisionId }) => {
     request
       .get("/users?roleNameExact=Wakil Ketua")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          const wakilData = response.data.data.filter(
+        if (response.status === 200) {
+          const wakilData = response?.data?.data?.filter(
             (item) =>
               item.role.name === "Wakil Ketua" && item.divisionId === divisionId
           );
           setMemberData(response.data.data);
           setWakilData(wakilData);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
       })
       .catch((error) => {
@@ -56,7 +57,7 @@ const MemberCard = ({ divisionId }) => {
   if (!memberData) {
     return (
       <Loading
-        size="w-auto h-auto lg:w-[300px] lg:h-[300px]"
+        size="w-auto h-auto lg:w-[100px] lg:h-[100px]"
         textAlignment="text-center"
       />
     );
@@ -66,7 +67,7 @@ const MemberCard = ({ divisionId }) => {
     <>
       {ketuaData.length > 0 ? (
         <div className="basis-[534px] w-full h-[152px] sm:h-full max-h-[286px] flex gap-5 px-[16px] py-[15px] sm:px-8 sm:py-10 rounded-[15px] bg-greenPallete-300">
-          <div className="basis-6/12 flex flex-col">
+          <div className="flex flex-col basis-6/12">
             <p className="font-medium text-[15px] lg:text-[20px] text-bluePallete-800">
               Ketua Divisi
             </p>
@@ -79,7 +80,6 @@ const MemberCard = ({ divisionId }) => {
                 MUHAMMAD ARYA
               </TextNotFound>
             )}
-            {/* belum ter validasi */}
             <a
               href={ketuaData[0].linkedinUri}
               target="_blank"
@@ -87,14 +87,14 @@ const MemberCard = ({ divisionId }) => {
             >
               <Image
                 className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
-                src="assets/uploads/member/logo/logo-linkedin.png"
+                src="assets/logo/logo_linkedin.png"
                 width={60}
                 height={60}
-                alt="Logo Linkedin Ketua Divisi"
+                alt="Logo Linkedin"
               ></Image>
             </a>
           </div>
-          <div className="basis-6/12 flex items-center justify-end">
+          <div className="flex items-center justify-end basis-6/12">
             {ketuaData[0]?.profileUri ? (
               <Image
                 src={`${host}${ketuaData[0].profileUri}`}
@@ -119,7 +119,7 @@ const MemberCard = ({ divisionId }) => {
 
       {wakilData.length > 0 ? (
         <div className="basis-[534px] w-full h-[152px] sm:h-full max-h-[286px] flex gap-5 px-[16px] py-[15px] sm:px-8 sm:py-10 rounded-[15px] bg-greenPallete-300">
-          <div className="basis-6/12 flex flex-col">
+          <div className="flex flex-col basis-6/12">
             <p className="font-medium text-[15px] lg:text-[20px] text-bluePallete-800">
               Wakil Divisi
             </p>
@@ -140,14 +140,14 @@ const MemberCard = ({ divisionId }) => {
             >
               <Image
                 className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
-                src="assets/uploads/member/logo/logo-linkedin.png"
+                src="assets/logo/logo_linkedin.png"
                 width={60}
                 height={60}
-                alt="Logo Linkedin Wakil Ketua Divisi"
+                alt="Logo Linkedin"
               ></Image>
             </a>
           </div>
-          <div className="basis-6/12 flex items-center justify-end">
+          <div className="flex items-center justify-end basis-6/12">
             {wakilData[0]?.profileUri ? (
               <Image
                 src={`${host}${wakilData[0].profileUri}`}

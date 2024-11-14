@@ -15,6 +15,7 @@ import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
 import styles from "@/components/Home/homeComponent.module.css";
 
+
 const NewsSecondSlider = () => {
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,8 +24,8 @@ const NewsSecondSlider = () => {
     request
       .get("/news")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          const formatDateData = response.data.data.map((item) => {
+        if (response.status === 200) {
+          const formatDateData = response?.data?.data?.map((item) => {
             const createdAt = moment(String(item.createdAt)).format("MMM DD[,] YYYY")
             return {
               ...item,
@@ -39,7 +40,7 @@ const NewsSecondSlider = () => {
           const limitNewsData = sortNewsData.slice(0, 5);
           setNewsData(limitNewsData);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
         setIsLoading(false);
       })
@@ -53,12 +54,12 @@ const NewsSecondSlider = () => {
     <>
       {isLoading ? (
         <Loading
-          size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
+          size="w-[70px] h-[70px] mb-10 sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
           textAlignment="text-center"
         />
       ) : (
         <Swiper
-          slidesPerView={1.6}
+          slidesPerView={1.2}
           spaceBetween={0}
           pagination={false}
           centeredSlides={true}
@@ -68,12 +69,24 @@ const NewsSecondSlider = () => {
               spaceBetween: 10,
             },
             340: {
+              slidesPerView: 1.3,
+              spaceBetween: 10,
+            },
+            355: {
+              slidesPerView: 1.3,
+              spaceBetween: 10,
+            },
+            365: {
+              slidesPerView: 1.4,
+              spaceBetween: 10,
+            },
+            390: {
               slidesPerView: 1.5,
               spaceBetween: 10,
             },
-            380: {
-              slidesPerView: 1.7,
-              spaceBetween: 10,
+            416: {
+              slidesPerView: 1.5,
+              spaceBetween: 20,
             },
             458: {
               slidesPerView: 1.7,
@@ -103,9 +116,8 @@ const NewsSecondSlider = () => {
                       width={222}
                       height={152}
                       src={`${host}${data.mediaUri}`}
+                      priority={true}
                       alt="News Thumbnail Central Computer Improvment"
-                      responsive="true"
-                      loading="lazy"
                       className="w-full h-full max-w-[222px] max-h-[152px] rounded-t-[10px] object-cover"
                     />
                   ) : (
