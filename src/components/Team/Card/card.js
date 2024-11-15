@@ -36,7 +36,7 @@ export default function TeamCard({
                   <div>
                      <Link href={linkedinUri}>
                         <Image
-                           src={`assets/logo/images/logo-linkedin.png`}
+                           src={`assets/logo/logo_linkedin.png`}
                            className={`md:w-[35px] md:h-[35px] lg:w-[60px] lg:h-[60px]`}
                            width={0}
                            height={0}
@@ -75,7 +75,7 @@ export default function TeamCard({
                <div className="relative w-fit">
                   <Link href={linkedinUri} target="_blank">
                      <Image
-                        src={`assets/logo/images/logo-linkedin.png`}
+                        src={`assets/logo/logo_linkedin.png`}
                         className={`w-[20px] h-[20px]`}
                         width={0}
                         height={0}
@@ -87,4 +87,4 @@ export default function TeamCard({
          )}
       </div>
    );
-}
+};

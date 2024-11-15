@@ -40,40 +40,40 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
       };
       
       await request
-         .get("/events", payload)
-         .then((response) => {
-            if (response.status === 200 || response.status === 201) {
-               const filteredData = response.data.data.filter(event => {
-                  if (filterByDivisionName) {
-                     return event.division?.name === filterByDivisionName;
-                  }
-                  if (filterByDivisionId) {
-                     return event.division?.id === filterByDivisionId;
-                  }
-                  return true;
-               });
-               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-               setEventData(filteredData);
-               
-               if (!filterByDivisionName && !filterByDivisionId) {
-                  setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+      .get("/events", payload)
+      .then((response) => {
+         if (response.status === 200) {
+            const filteredData = response.data.data.filter(event => {
+               if (filterByDivisionName) {
+                  return event.division?.name === filterByDivisionName;
                }
-            } else {
-               console.error(JSON.stringify(response.errors));
-            }
+               if (filterByDivisionId) {
+                  return event.division?.id === filterByDivisionId;
+               }
+               return true;
+            });
+            setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+            setEventData(filteredData);
             
-            // if (response.status === 200 || response.status === 201) {
-            //    setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-            //    const filteredData = response.data.data.filter(event => !filterByDivision || event.division.name === filterByDivision);
-            //    setEventData(filteredData);
-            // } else {
-            //    console.error(JSON.stringify(response.errors));
-            // }
-         })
-         .catch((error) => {
-            console.error(error);
-         });
-   }
+            if (!filterByDivisionName && !filterByDivisionId) {
+               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+            }
+         } else {
+            console.error(response.errors);
+         }
+         
+         // if (response.status === 200 || response.status === 201) {
+         //    setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+         //    const filteredData = response.data.data.filter(event => !filterByDivision || event.division.name === filterByDivision);
+         //    setEventData(filteredData);
+         // } else {
+         //    console.error(JSON.stringify(response.errors));
+         // }
+      })
+      .catch((error) => {
+         console.error(error);
+      });
+   };
 
    useEffect(() => {
       getEvents();
@@ -92,7 +92,7 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
 
    function onClickFlipCard(index) {
       setFlipPosition(flipPosition === index ? null : index);
-   }
+   };
 
    useEffect(() => {
       if (eventData && eventData.length > 0 && autoFlipCount < 2) {
@@ -118,7 +118,7 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
             <ImageNotFound className="w-[90px] h-[78px] sm:w-[130px] sm:h-[108px] lg:w-[170px] lg:h-[148px] object-cover" />
          </div>
       );
-   }
+   };
 
    return (
       <>
@@ -155,7 +155,6 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
                               alt={[event.title + " Central Computer Improvement"]}
                               width={517}
                               height={198}
-                              responsive="true"
                               loading="lazy"
                               className="object-cover w-full h-full"
                            />
@@ -179,7 +178,7 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
                            <TeksNotFound className="font-black text-[14px] sm:text-[24px] text-white"></TeksNotFound>
                         )}
                         {event?.name ? (
-                           <p className="text-[8px] sm:text-[16px] font-medium text-white">
+                           <p className="text-[8px] sm:text-[16px] font-medium text-white line-clamp-4">
                               {event.description}
                            </p>
                         ) : (
@@ -190,29 +189,34 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
                </div>
             ))}
          </div>
-         <div className="flex items-center justify-center w-full">
-            <button
-               className={`${styles.eventButton} w-full flex justify-center hover:opacity-75 mt-[20px] sm:mt-[54px] text-white`}
-               onClick={handleNext}
-            >
-               <svg
-                  width="100"
-                  height="100"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-[50px] h-[50px] sm:w-[100px] sm:h-[100px]"
-               >
-                  <circle cx="50" cy="50" r="50" fill="#265290" />
-                  <path
-                     fillRule="evenodd"
-                     clipRule="evenodd"
-                     d="M48.9661 33.2082C49.9729 32.2014 51.6053 32.2014 52.6121 33.2082L68.0808 48.677C69.0876 49.6838 69.0876 51.3162 68.0808 52.323L52.6121 67.7918C51.6053 68.7986 49.9729 68.7986 48.9661 67.7918C47.9592 66.7849 47.9592 65.1526 48.9661 64.1457L60.0337 53.0781H32.7422C31.3183 53.0781 30.1641 51.9239 30.1641 50.5C30.1641 49.0761 31.3183 47.9219 32.7422 47.9219H60.0337L48.9661 36.8543C47.9592 35.8474 47.9592 34.2151 48.9661 33.2082Z"
-                     fill="white"
-                  />
-               </svg>
-            </button >
-         </div>
+         {/* button next */}
+         {
+            totalPages > 1 && (
+               <div className="flex items-center justify-center w-full">
+                  <button
+                     className={`${styles.eventButton} w-full flex justify-center hover:opacity-75 mt-[20px] sm:mt-[54px] text-white`}
+                     onClick={handleNext}
+                  >
+                     <svg
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-[50px] h-[50px] sm:w-[100px] sm:h-[100px]"
+                     >
+                        <circle cx="50" cy="50" r="50" fill="#265290" />
+                        <path
+                           fillRule="evenodd"
+                           clipRule="evenodd"
+                           d="M48.9661 33.2082C49.9729 32.2014 51.6053 32.2014 52.6121 33.2082L68.0808 48.677C69.0876 49.6838 69.0876 51.3162 68.0808 52.323L52.6121 67.7918C51.6053 68.7986 49.9729 68.7986 48.9661 67.7918C47.9592 66.7849 47.9592 65.1526 48.9661 64.1457L60.0337 53.0781H32.7422C31.3183 53.0781 30.1641 51.9239 30.1641 50.5C30.1641 49.0761 31.3183 47.9219 32.7422 47.9219H60.0337L48.9661 36.8543C47.9592 35.8474 47.9592 34.2151 48.9661 33.2082Z"
+                           fill="white"
+                        />
+                     </svg>
+                  </button >
+               </div>
+            )
+         }
       </>
    );
 };

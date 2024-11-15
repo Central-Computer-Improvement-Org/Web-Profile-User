@@ -1,18 +1,17 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Pagination, Autoplay } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import './news.css';
-// import './newsSecond.css';
-import Image from 'next/image';
-import request from '@/app/utils/request';
+
 import { host } from '../host';
-import Link from 'next/link';
+import request from '@/app/utils/request';
+import './news.css';
+import styles from './newsComponent.module.css';
+
 
 const HeroSection = () => {
   const [news, setNews] = useState([]);
@@ -22,7 +21,7 @@ const HeroSection = () => {
     request
       .get('/news')
       .then(function (res) {
-        if (res.data.code === 200 || res.data.code === 201) {
+        if (res?.data?.code === 200) {
           setNews(res.data.data);
           setIsLoading(false);
         } else {
@@ -30,19 +29,19 @@ const HeroSection = () => {
         }
       })
       .catch(function (err) {
-        console.log(err);
+        console.error(err);
         setIsLoading(false);
       });
   }, []);
 
   return (
     <>
-      {isLoading ? ( // Tampilkan teks Loading... saat isLoading true
-        <div className="w-full text-slate-500 text-3xl text-center">
+      {isLoading ? (
+        <div className="w-full text-3xl text-center text-slate-500">
           Loading...
         </div>
       ) : (
-        <div className="bg-transparent ">
+        <div className="bg-transparent">
           <Swiper
             modules={[Pagination, Autoplay]}
             slidesPerView={1}
@@ -51,40 +50,35 @@ const HeroSection = () => {
               el: '.swiper-custom-pagination',
               clickable: true,
             }}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
-            className=" w-full rounded-xl"
+            autoplay={false}
+            // autoplay={{
+            //   delay: 5000,
+            //   disableOnInteraction: false,
+            // }}
+            className="w-full rounded-xl"
           >
             {news.slice(0, 4).map((news) => (
               <SwiperSlide
-                className="relative max-h-[425px]  rounded-xl"
+                className="relative rounded-lg"
                 key={news.id}
               >
                 <Link href={`news/detailNews?id=${news.id}`}>
-                  <div className="xl:h-[700px] md:h-[300px] h-[103px] relative">
+                  <div className={`!w-full xl:h-[700px] md:max-h-[400px] sm:max-h-[300px] sm:h-full relative max-h-[300px] ${styles.heroImage}`}>
                     <Image
-                      className="w-full h-full object-cover rounded-xl"
-                      layout="fill"
-                      src={host + news.mediaUri}
-                      alt="forest"
+                      className="object-cover w-full h-full rounded-xl"
+                      width={1920}
+                      height={1080}
+                      src={`${host}${news.mediaUri}`}
+                      alt={"Image " + news.title}
                     />
                   </div>
                 </Link>
               </SwiperSlide>
             ))}
           </Swiper>
-          {/* <div className=" w-full xl:mt-[25px] md:mt-[20px] mt-[10px] bg-transparent">
-            <div className="flex justify-end items-center bg-transparent">
-              <div className="inline-block  mx-auto bg-transparent swiper-1">
-                <div className="swiper-custom-pagination flex gap-[10px]" />
-              </div>
-            </div>
-          </div> */}
           <div className=" w-full xl:mt-[40px] md:mt-[35px] mt-[10px]" style={{ scale: '50%' }}>
-            <div className="flex justify-center items-center bg-transparent">
-              <div className="flex justify-center items-center  mx-auto bg-transparent">
+            <div className="flex items-center justify-center bg-transparent">
+              <div className="flex items-center justify-center mx-auto bg-transparent">
                 <div className="swiper-custom-pagination flex justify-center items-center gap-[10px]" />
               </div>
             </div>

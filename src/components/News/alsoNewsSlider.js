@@ -1,70 +1,3 @@
-// 'use client';
-
-// import React, { useEffect, useState } from 'react'; // Import useRef
-
-// import Image from 'next/image';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Navigation } from 'swiper/modules';
-// import SwiperCore from 'swiper';
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import styles from '@/components/Home/homeComponent.module.css';
-// import request from '@/app/utils/request';
-// import { host } from '../host';
-// import moment from 'moment';
-// const AlsoNewsSlider = () => {
-//   const [newsData, setNewsData] = useState([]);
-
-//   useEffect(() => {
-//     request
-//       .get('/news')
-//       .then(function (res) {
-//         if (res.data.code === 200 || res.data.code === 201) {
-//           setNewsData(res.data.data);
-//           setIsLoading(false);
-//         } else {
-//           setIsLoading(false);
-//         }
-//       })
-//       .catch(function (err) {
-//         console.log(err);
-//         setIsLoading(false);
-//       });
-//   }, []);
-
-//   return (
-//     <>
-//       <Swiper modules={[Navigation]} spaceBetween={30} slidesPerView={3}>
-//         {newsData.map((news) => (
-//           <SwiperSlide key={news.id}>
-//             <div className="lg:max-h-[276px] h-[276px] border-2 bg-white border-bluePallete-500 rounded-xl overflow-hidden">
-//               <Image
-//                 width={90}
-//                 height={30}
-//                 src={host + news.mediaUri}
-//                 className="w-full h-[162px] object-cover"
-//                 alt={news.media_uri}
-//               />
-//               <div className="bg-red-500 border-t-2 border-bluePallete-500  flex flex-col ">
-//                 <h3 className="grow font-semibold text-bluePallete-500 text-3xl">
-//                   {news.title}
-//                 </h3>
-//                 <p className="">
-//                   {moment(news.createdAt).format('MMM DD[,] YYYY')}
-//                 </p>
-//               </div>
-//             </div>
-//           </SwiperSlide>
-//         ))}
-//       </Swiper>
-//     </>
-//   );
-// };
-
-// export default AlsoNewsSlider;
-
-// ImageNewsFirstSlider
-
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -81,6 +14,9 @@ import { host } from '../host';
 import Link from 'next/link';
 
 const AlsoNewsSlider = () => {
+   const [newsData, setNewsData] = useState([]);
+   const [isLoading, setIsLoading] = useState();
+   
    const iconArrow = (
       <svg
          className="xl:w-[55px] md:w-[40px] "
@@ -97,14 +33,11 @@ const AlsoNewsSlider = () => {
       </svg>
    );
 
-   const [newsData, setNewsData] = useState([]);
-   const [isLoading, setIsLoading] = useState();
-
    useEffect(() => {
       request
          .get('/news')
          .then(function (res) {
-            if (res.data.code === 200 || res.data.code === 201) {
+            if (res.data.code === 200) {
                setNewsData(res.data.data);
                setIsLoading(false);
             } else {
@@ -112,14 +45,14 @@ const AlsoNewsSlider = () => {
             }
          })
          .catch(function (err) {
-            console.log(err);
+            console.error(err);
             setIsLoading(false);
          });
    }, []);
    return (
-      <div className="relative ">
+      <div className="relative">
          <Swiper
-            className={` ${styles.rekomendasiNewsSwiper} rounded-[10px] xl:w-[95%] w-full !ml-0`}
+            className={`${styles.rekomendasiNewsSwiper} rounded-[10px] xl:w-[95%] w-full !ml-0`}
             navigation={{
                nextEl: '.next',
             }}
@@ -140,7 +73,7 @@ const AlsoNewsSlider = () => {
                   spaceBetween: 50, // Spasi antara slide adalah 30px
                },
                1280: {
-                  slidesPerView: 2.6, // Menampilkan tiga slide per tampilan
+                  slidesPerView: 2.6, // Menampilkan 2.6 slide per tampilan
                   spaceBetween: 100, // Spasi antara slide adalah 30px
                },
                1460: {
@@ -154,24 +87,24 @@ const AlsoNewsSlider = () => {
                newsData.map((data, index) => (
                   <SwiperSlide
                      key={index}
-                     className={`cursor-pointer  xl:!mr-[42px] lg:!mr-[20px] md:!mr-[80px] !mr-[20px] ${styles.rekomendasiNewsCardSwiper} xl:!w-[384px] lg:!w-[300px] md:!w-[280px] !w-[200px]`}
+                     className={`cursor-pointer xl:!mr-[42px] lg:!mr-[20px] md:!mr-[80px] !mr-[20px] ${styles.rekomendasiNewsCardSwiper} xl:!w-[384px] lg:!w-[300px] md:!w-[280px] !w-[200px]`}
                   >
                      <Link href={`news/detailNews?id=${data.id}`}>
-                        <div className="bg-white  rounded-[10px]">
+                        <div className="bg-white rounded-[10px]">
                            <div className="h-[162px] ">
                               <Image
                                  src={host + data.mediaUri}
                                  width={0}
                                  height={0}
                                  alt="Thumbnail Image News Central Computer Improvment"
-                                 className="w-full h-full object-cover rounded-t-[10px]"
+                                 className="w-full h-full object-cover rounded-t-[10px] border border-mainPrimary"
                               />
                            </div>
-                           <div className="h-full border border-mainFontColor rounded-b-[10px] p-3 flex flex-col gap-[28px] justify-between">
+                           <div className="h-full border border-mainPrimary rounded-b-[10px] p-3 flex flex-col gap-[28px] justify-between">
                               <h1 className="xl:h-[56px] md:h-[48px] xl:text-xl md:text-[16px] font-semibold text-bluePallete-800">
                                  {FormatString(data.title)}
                               </h1>
-                              <p className="text-sm text-mainFontColor font-medium">
+                              <p className="text-sm font-medium text-mainFontColor">
                                  {moment(String(data.createdAt)).format("MMM DD[,] YYYY")}
                               </p>
                            </div>
@@ -180,7 +113,7 @@ const AlsoNewsSlider = () => {
                   </SwiperSlide>
                ))}
          </Swiper>
-         <div className="absolute z-[1] -right-[2%] top-0 bottom-0 flex items-center justify-center">
+         <div className="absolute z-[1] -right-[4%] top-0 bottom-0 flex items-center justify-center">
             <button className="bg-bluePallete-500 text-transparent rounded-full xl:w-[100px] w-[80px] xl:h-[100px] h-[80px] flex items-center justify-center next">
                {iconArrow}
             </button>

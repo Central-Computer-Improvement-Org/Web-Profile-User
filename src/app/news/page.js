@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
+import { host } from "@/components/host";
+import request from "../utils/request";
 import Header from "@/components/header";
 import Nav from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -11,9 +13,6 @@ import ArticleCard from "@/components/News/ArticleCard";
 import HeroSection from "@/components/News/HeroSection";
 import HeroSectionSliderSecond from "@/components/News/HeroSectionSliderSecond";
 import Loading from "@/components/loading";
-import request from "../utils/request";
-import { host } from "@/components/host";
-// import CarouselSlider from "@/components/News/carouselSlider";
 
 export default function News() {
   const [articleDatas, setArticle] = useState();
@@ -22,7 +21,7 @@ export default function News() {
     request
       .get("/news")
       .then(function (res) {
-        if (res.data.code === 200 || res.data.code === 201) {
+        if (res?.data?.code === 200) {
           setArticle(res.data.data);
           setIsLoading(false);
         } else {
@@ -30,10 +29,11 @@ export default function News() {
         }
       })
       .catch(function (err) {
-        console.log(err);
+        console.error(err);
         setIsLoading(false);
       });
   }, []);
+
   return (
     <>
       <Header />
@@ -43,17 +43,18 @@ export default function News() {
           <main
             className="h-full px-[40px] md:px-[80px] lg:px-[120px] py-[120px] md:py-[10rem]"
           >
-            <h1 className="text-5xl font-bold text-secondPrimary px-[15px]">
+            <h1 className="text-6xl font-black text-secondPrimary px-[15px]">
               NEWS
             </h1>
-            <div className="w-full h-[3px] mt-2 bg-bluePallete-700 rounded-lg"></div>
-
+            <div className="w-full h-[4px] mt-2 bg-bluePallete-700 rounded-xl"></div>
+            {/* hero thumbnail news */}
             <section id="hero-section" className="container relative w-full">
-              <div className="mt-4 bg-transparent content-center justify-items-center items-center">
+              <div className="items-center content-center mt-4 bg-transparent justify-items-cente">
                 <HeroSection />
               </div>
             </section>
-            <div className="xl:mt-[95px] md:mt-[80px] mt-[40px]"></div>
+            <div className="xl:mt-[95px] md:mt-[80px] mt-[40px]" />
+            {/* list article/news with title & top read news of the day */}
             <section id="article">
               <div className="container">
                 <div className="flex flex-row flex-wrap-reverse w-full ">
@@ -92,8 +93,8 @@ export default function News() {
                     {
                       isLoading ? (
                         <Loading
-                          size="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
-                          textAlignment="text-left"
+                          size="w-[50px] h-[50px] sm:w-[70px] sm:h-[70px] lg:w-[100px] lg:h-[100px]"
+                          textAlignment="text-center"
                         />
                       ) : (
                         articleDatas &&
@@ -116,7 +117,7 @@ export default function News() {
                 </div>
               </div>
             </section>
-
+            {/* list another news */}
             <section
               id="also-in-news"
               className="w-full h-auto pt-10 pb-0 sm:pb-32 sm:pt-36"
@@ -138,7 +139,7 @@ export default function News() {
                 <AlsoNewsSlider />
               </div>
             </section>
-
+            {/* Slider news by thumbnail */}
             <section
               id="carousel"
               className="container relative hidden w-full mx-auto lg:block"
@@ -151,4 +152,4 @@ export default function News() {
       <Footer />
     </>
   );
-}
+};

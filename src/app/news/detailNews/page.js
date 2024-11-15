@@ -31,47 +31,59 @@ export default function DetailNews() {
   const [newsAlso, setNewsAlso] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const handleError = () => {
+    setTitle('Title not found');
+    setThumbnail('public/assets/icon/notfound.svg');
+    setImage('public/assets/icon/notfound.svg');
+    setDescription('Description not found');
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     setIsLoading(true);
-
     request
       .get('/news')
-      .then(function (response) {
-        if (response.data.code === 200 || response.data.code === 201) {
+      .then((response) => {
+        if (response.data.code === 200) {
           setNewsAlso(response.data.data || []);
-          setIsLoading(false);
         } else {
-          console.error(JSON.stringify(response.errors));
-          setIsLoading(false);
+          console.warn('Unexpected response code :', response.data.code);
         }
-        setIsLoading(false);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        if (error.response && error.response.status === 404) {
+          console.error('Data not found');
+        } else {
+          console.error('Internal server error, please try again');
+        }
+      })
+      .finally(() => {
         setIsLoading(false);
       });
-  }, [description]);
+  }, [description]);  
 
   useEffect(() => {
-    if (newsId) {
+    if (newsId) { 
+      setIsLoading(true);
       request
         .get(`/news?id=${newsId}`)
         .then((response) => {
-          if (response.data.code === 200 || response.data.code === 201) {
+          if (response.data.code === 200) {
             setTitle(response.data.data.title);
-              setThumbnail(response.data.data.mediaUri);
+            setThumbnail(response.data.data.mediaUri);
             setImage(response.data.data.detailNewsMedia);
             setDescription(response.data.data.description);
             setDate(response.data.data.createdAt);
+            setIsLoading(false);
           } else {
-            console.error(JSON.stringify(response.errors));
+            handleError();
           }
         })
-        .catch((error) => {
-          console.error(error);
+        .catch(() => {
+          handleError();
         });
     } else {
-      console.error('News ID not found');
+      handleError();
     }
   }, [newsId]);
 
@@ -79,18 +91,22 @@ export default function DetailNews() {
     request
       .get('/news')
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
+        if (response.status === 200) {
           const newData = response.data.data;
           const sortedData = newData.sort(
             (a, b) => b.visitedCount - a.visitedCount
           );
           setNewsTopData(sortedData);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.warn('Unexpected response status :', response.data.status);
         }
       })
       .catch((error) => {
-        console.error(error);
+        if (error.response && error.response.status === 404) {
+          console.error('Data not found');
+        } else {
+          console.error('Internal server error, please try again');
+        }
       });
   }, []);
 
@@ -105,8 +121,7 @@ export default function DetailNews() {
       setParsedHTML(null);
     }
   }, [description]);
-
-
+  
   return (
     <>
       <Header />
@@ -114,28 +129,26 @@ export default function DetailNews() {
       <main className="w-full h-auto">
         <span className="block h-full bg-gradientAccentTwo">
           <span className="block h-full bg-gradientDefaultTwo">
-            <section id="headLine" className="w-full md:pb-0 pb-[111px] ">
+            <section id="headLine" className="w-full md:pb-0 sm:pb-[111px] pb-[60px]">
+              {/* Title and date news area */}
               <div
                 id="title"
                 className="w-full xl:max-w-[1390px] lg:max-w-[66rem] md:max-w-[48rem] sm:max-w-[38rem] max-w-[28rem] px-3 sm:px-0 mx-auto lg:pt-44 md:pt-36 sm:pt-[7rem] pt-[70px]"
               >
-                <h1 className="mb-2 text-xl font-black leading-tight lg:text-6xl md:text-4xl text-bluePallete-800 lg:mb-6">
-                  <span className="text-3xl lg:text-6xl md:text-4xl"></span>{' '}
-                  {isLoading ? (
-                    <Loading
-                      size="w-[70px] h-[70px]"
-                      textAlignment="text-center"
-                    />
-                  ) : title ? (
-                    <h1 className="text-3xl lg:text-6xl md:text-4xl text-bluePallete-800">
-                      {title}
-                    </h1>
-                  ) : (
-                    <TextNotFound className="text-3xl text-transparent lg:text-6xl md:text-4xl">
-                      {''}
-                    </TextNotFound>
-                  )}
-                </h1>
+                {isLoading ? (
+                  <Loading
+                    size="w-[70px] h-[70px]"
+                    textAlignment="text-center"
+                  />
+                ) : title ? (
+                  <h1 className="mb-2 text-xl font-black leading-tight lg:text-6xl md:text-4xl text-bluePallete-800 lg:mb-6">
+                    {title}
+                  </h1>
+                ) : (
+                  <TextNotFound className="text-3xl text-transparent lg:text-6xl md:text-4xl">
+                    {''}
+                  </TextNotFound>
+                )}
                 <div className="inline-block border border-bluePallete-600 rounded-full lg:text-[25px] md:text-[14px] text-[10px] text-mainFontColor font-medium lg:px-10 px-[9px] lg:py-2 py-1 bg-[#ffff]">
                   {isLoading ? (
                     <Loading
@@ -143,7 +156,7 @@ export default function DetailNews() {
                       textAlignment="text-center"
                     />
                   ) : date ? (
-                    <h1 className="font-medium lg:text-[25px] md:text-[14px] text-[10px]  lg:px-3 px-[9px] lg:py-[4px] py-1 text-mainFontColor">
+                    <h1 className="font-medium lg:text-[25px] md:text-[14px] text-[10px] lg:px-3 px-[9px] lg:py-[4px] sm:py-1 py-[1px] text-mainFontColor">
                       {moment(String(date)).format('MMM DD[,] YYYY')}
                     </h1>
                   ) : (
@@ -153,17 +166,20 @@ export default function DetailNews() {
                   )}
                 </div>
               </div>
+              {/* Detail news area */}
               <div className="w-full xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row flex-col gap-[40px]">
+                {/* base detail news area */}
                 <div className="col-span-2 w-full xl:ml-[70px] xl:max-w-[923px] ">
+                  {/* hero image slider news */}
                   {image?.length ? <ImageNewsFirstSlider image={image}/> : <Image
                       src={`${host}${thumbnail}`}
                       alt="Thumbnail News"
                       width={0}
                       height={0}
-                      responsive="true"
-                      className={`w-full h-[400px] rounded-[20px] sm:rounded-lg object-cover ${styles.projectsThumbnailImage}`}
+                      className={`w-full h-[200px] sm:h-[400px] lg:h-[500px] xl:h-[400px] rounded-0 sm:rounded-lg object-cover object-top ${styles.projectsThumbnailImage}`}
                   />}
-                  <div className="mt-[20px] sm:mt-[30px] md:mt-[40px] px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
+                  {/* description news */}
+                  <div className="mt-[20px] sm:mt-[30px] md:mt-[40px] px-[15px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
                     {parsedHTML && parsedHTML.innerHTML.trim() !== '' ? (
                       <div
                         dangerouslySetInnerHTML={{
@@ -184,8 +200,9 @@ export default function DetailNews() {
                     )}
                   </div>
                 </div>
+                {/* Top read of the day area */}
                 <div className="w-full !px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:pl-0 pr-0 xl:pr-[40px]">
-                  <div className="lg:mt-14 mt-[53px]">
+                  <div className="lg:mt-14 mt-5 sm:mt-[53px]">
                     <div className="flex items-center justify-center xl:justify-start">
                       <svg
                         className="xl:w-[5opx] xl:h-[50px] w-[40px] h-[40px] "
@@ -215,8 +232,8 @@ export default function DetailNews() {
                             key={index}
                             href={`/news/detailNews?id=${data.id}`}
                           >
-                            <div className="h-[90px] sm:h-[120px] md:h-[150px] xl:h-[100px] max-h-[90px] sm:max-h-[90px] xl:max-h-[100px] w-full flex justify-between  border border-bluePallete-600 bg-white rounded-xl">
-                              <div className="px-[11px] py-[8px] flex flex-col sm:justify-center self-center h-full">
+                            <div className="h-[90px] sm:h-[110px] md:h-[120px] lg:h-[130px] xl:h-[100px] max-h-[90px] sm:max-h-[110px] md:max-h-[120px] lg:max-h-[130px] xl:max-h-[100px] w-full flex justify-between border border-bluePallete-600 bg-white rounded-xl">
+                              <div className="basis-[70%] sm:basis-[80%] xl:basis-[70%] px-[11px] py-[8px] flex flex-col sm:justify-center self-center h-full">
                                 {data?.title ? (
                                   <h1
                                     className={`!line-clamp-2 sm:!line-clamp-3 !xl:text-[20px] !md:text-[24px] text-[15px] font-semibold text-bluePallete-800 ${styles.detailTopNewsTitle}`}
@@ -238,18 +255,21 @@ export default function DetailNews() {
                                   </TextNotFound>
                                 )}
                               </div>
-                              {data?.mediaUri ? (
-                                <Image
-                                  width={150}
-                                  height={100}
-                                  alt="Image News Central Computer Improvement"
-                                  responsive="true"
-                                  src={host + data?.mediaUri}
-                                  className={`${styles.detailTopNewsImage} w-[100px] sm:w-[250px] sm:w-max-[250px] xl:w-[150px] xl:max-w-[150px] xl:h-auto rounded-r-xl object-cover border-l-[1px] border-bluePallete-500`}
-                                />
-                              ) : (
-                                <ImageNotFound className="w-[100px] sm:w-[250px] sm:w-max-[250px] xl:w-[150px] xl:max-w-[150px] xl:h-auto rounded-r-xl object-cover" />
-                              )}
+                              <div className="basis-[30%] sm:basis-[20%] xl:basis-[30%]">
+                                {data?.mediaUri ? (
+                                  <Image
+                                    width={150}
+                                    height={100}
+                                    alt="Image News Central Computer Improvement"
+                                    responsive="true"
+                                    src={host + data?.mediaUri}
+                                    // className={`${styles.detailTopNewsImage} w-full xl:h-auto rounded-r-xl object-cover border-l-[1px] border-bluePallete-500`}
+                                    className={`w-full max-h-[90px] sm:max-h-[110px] md:max-h-[120px] lg:max-h-[130px] xl:max-h-[100px] rounded-r-xl object-cover object-center sm:object-top border-l-[1px] border-bluePallete-500`}
+                                  />
+                                ) : (
+                                  <ImageNotFound className="w-[100px] sm:w-[250px] sm:w-max-[250px] xl:w-[150px] xl:max-w-[150px] xl:h-auto rounded-r-xl object-cover" />
+                                )}
+                              </div>
                             </div>
                           </Link>
                         ))}

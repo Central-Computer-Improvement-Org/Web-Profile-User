@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,10 +13,10 @@ import NewsSecondSlider from "@/components/Home/newsSecondSlider";
 import DivisionFirstSlider from "@/components/Home/divisionFirstSlider";
 import DivisionSecondSlider from "@/components/Home/divisionSecondSlider";
 import ProjectCard from "@/components/Home/projectCard";
-import Loading from "@/components/loading";
 import TextNotFound from "@/components/teksNotFound";
+import Loading from "@/components/loading";
 import styles from "@/app/home/homePage.module.css";
-import LogoCCI from "../../../public/assets/logo/logo-cci.png";
+import logoCCI from '/public/assets/logo/logo_cci.svg';
 
 export default function Home() {
   const [settingsData, setSettingsData] = useState(null);
@@ -31,10 +31,10 @@ export default function Home() {
     request
       .get("/setting")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          setSettingsData(response.data.data);
+        if (response.status === 200) {
+          setSettingsData(response?.data?.data);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
         setIsLoading(false);
       })
@@ -50,10 +50,10 @@ export default function Home() {
     const fetchAwardData = async () => {
       try {
         const response = await request.get("/awards");
-        if (response.status === 200 || response.status === 201) {
-          setAwardData(response.data);
+        if (response.status === 200) {
+          setAwardData(response?.data);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
       } catch (error) {
         console.error(error);
@@ -63,10 +63,10 @@ export default function Home() {
     const fetchMemberData = async () => {
       try {
         const response = await request.get("/users");
-        if (response.status === 200 || response.status === 201) {
-          setMemberData(response.data);
+        if (response.status === 200) {
+          setMemberData(response?.data);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
       } catch (error) {
         console.error(error);
@@ -76,10 +76,10 @@ export default function Home() {
     const fetchProjectData = async () => {
       try {
         const response = await request.get("/projects");
-        if (response.status === 200 || response.status === 201) {
+        if (response.status === 200) {
           setProjectData(response.data);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
       } catch (error) {
         console.error(error);
@@ -98,72 +98,44 @@ export default function Home() {
       <Header />
       <Navbar />
       <main className="w-full h-auto">
-        <section id="hero" className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-[200px]">
+        {/* hero section */}
+        <section id="hero" className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-[170px]">
           <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto flex flex-row flex-wrap">
             <div className="basis-full md:basis-[55%] flex flex-col space-y-10">
               <div className="hidden md:block">
-                {isLoading ? (
-                  <Loading
-                    size="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
-                    textAlignment="text-left"
-                  />
-                ) : settingsData?.logoUri ? (
-                  <Image
-                    src={`${host}${settingsData.logoUri}`}
-                    alt="Logo Central Computer Improvement"
-                    width={291}
-                    height={180}
-                    priority={true}
-                    className="w-auto h-auto md:w-full md:h-[180px] max-w-[291px] max-h-[180px] object-contain"
-                  />
-                ) : (
-                  <Image
-                    src={LogoCCI}
-                    alt="Logo Central Computer Improvement"
-                    width={291}
-                    height={180}
-                    priority={true}
-                    className="w-auto h-auto md:w-full md:h-[180px] max-w-[291px] max-h-[180px] object-contain"
-                  />
-                )}
+                <Image
+                  src={
+                    settingsData?.logoUri
+                      ? `${host}${settingsData.logoUri}`
+                      : logoCCI.src
+                  }
+                  width={291}
+                  height={180}
+                  priority
+                  alt="Logo Central Computer Improvement"
+                  className="w-auto h-auto md:w-full md:h-[180px] max-w-[291px] max-h-[180px] object-contain"
+                />
               </div>
               <div className="flex flex-col space-y-1">
-                {isLoading ? (
-                  <Loading
-                    size="w-[70px] h-[70px]"
-                    textAlignment="text-center md:text-left"
-                  />
-                ) : settingsData?.name ? (
-                  <h1 className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 text-bluePallete-600">
-                    {settingsData.name}
-                  </h1>
-                ) : (
-                  <h1 className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 text-bluePallete-600">
-                    Central Computer Improvment
-                  </h1>
-                )}
+                <h1 className="text-[40px] sm:text-[56px] text-center md:text-left font-bold px-3 sm:px-0 leading-tight sm:leading-normal text-bluePallete-600">
+                  {
+                    settingsData?.name ? settingsData.name : "Central Computer Improvement"
+                  }
+                </h1>
               </div>
               {/* Deskripsi ketika desktop */}
               <div className="hidden md:block">
-                {isLoading ? (
-                  <Loading
-                    size="w-[60px] h-[60px]"
-                    textAlignment="text-left"
-                  />
-                ) : settingsData?.description ? (
-                  <p className="text-[24px] pr-5 text-bluePallete-600">
-                    {settingsData.description}
-                  </p>
-                ) : (
-                  <p className="text-[24px] pr-5 text-bluePallete-600">
-                      Unit Kegiatan Mahasiswa (UKM) CCI telah berhasil meraih berbagai prestasi yang membanggakan, melalui partisipasi aktif dalam berbagai kompetisi, inovasi program, serta kontribusi nyata dalam pengembangan potensi mahasiswa di berbagai bidang, yang semakin memperkuat reputasinya sebagai salah satu UKM yang unggul di lingkungan kampus.
-                  </p>
-                )}
+                <p className="text-[24px] pr-5 text-bluePallete-600">
+                  {
+                    settingsData?.description ? settingsData.description :
+                      "Unit Kegiatan Mahasiswa (UKM) CCI telah berhasil meraih berbagai prestasi yang membanggakan, melalui partisipasi aktif dalam berbagai kompetisi, inovasi program, serta kontribusi nyata dalam pengembangan potensi mahasiswa di berbagai bidang, yang semakin memperkuat reputasinya sebagai salah satu UKM yang unggul di lingkungan kampus."
+                  }
+                </p>
               </div>
             </div>
-            <div className="basis-full md:basis-[45%] flex flex-col flex-wrap items-center justify-center pt-10 md:pt-0">
+            <div className="basis-full md:basis-[45%] flex flex-col items-center justify-center pt-10 md:pt-0">
               <Image
-                src="assets/home/images/hero-banner.png"
+                src="assets/images/home/hero_banner.png"
                 alt="Hero Central Computer Improvement"
                 width={525}
                 height={381}
@@ -172,46 +144,33 @@ export default function Home() {
               />
               {/* Deskripsi ketika mobile */}
               <div className="block md:hidden">
-                {isLoading ? (
-                  <Loading
-                    size="w-[40px] h-[40px]"
-                    textAlignment="text-left"
-                  />
-                ) : settingsData?.description ? (
-                  <p className="text-center text-[20px] sm:text-[24px] pt-10 lg:pt-0 text-bluePallete-600">
-                    {settingsData.description}
-                  </p>
-                ) : (
-                  <TextNotFound className="text-center text-[20px] sm:text-[24px] pt-10 lg:pt-0 text-bluePallete-600"></TextNotFound>
-                )}
+                <p className="text-center text-[20px] sm:text-[24px] pt-10 lg:pt-0 text-bluePallete-600">
+                  {
+                    settingsData?.description ? settingsData.description :
+                      "Unit Kegiatan Mahasiswa (UKM) CCI telah berhasil meraih berbagai prestasi yang membanggakan, melalui partisipasi aktif dalam berbagai kompetisi, inovasi program, serta kontribusi nyata dalam pengembangan potensi mahasiswa di berbagai bidang, yang semakin memperkuat reputasinya sebagai salah satu UKM yang unggul di lingkungan kampus."
+                  }
+                </p>
               </div>
             </div>
           </div>
         </section>
+        {/* content with gradation section */}
         <span className="block h-full bg-gradientAccent">
           <div className="block h-full bg-gradientDefault">
+            {/* connect section */}
             <section id="connect" className="w-full h-auto">
               {/* Layout Section Connect Pertama  */}
               <div
                 id="connect-first"
-                className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto pt-14 sm:pt-32"
+                className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto pt-14 sm:pt-16"
               >
-                {isLoading ? (
-                  <Loading
-                    size="w-[20px] h-[20px] sm:w-[50px] sm:h-[50px]"
-                    textAlignment="text-center"
-                  />
-                ) : settingsData?.name ? (
-                  <h2 className="text-center text-[15px] md:text-[20px] font-semibold text-secondPrimary">
-                    {settingsData.name}
-                  </h2>
-                ) : (
-                  <TextNotFound className="text-center text-[15px] md:text-[20px] font-semibold text-secondPrimary"></TextNotFound>
-                )}
+                <h2 className="text-center text-[15px] md:text-[20px] font-semibold text-secondPrimary">
+                  Central Computer Improvement
+                </h2>
                 <h1 className="text-center text-[25px] md:text-[32px] font-bold text-bluePallete-500">
                   Connect Share Speak Up
                 </h1>
-                <div className="flex flex-row flex-wrap-reverse w-full pt-10 sm:pt-20 lg:pt-32">
+                <div className="flex flex-row flex-wrap-reverse w-full pt-10 sm:pt-20 lg:pt-20">
                   <div className="mt-5 basis-full lg:basis-3/5 sm:mt-10 lg:mt-0">
                     <div
                       className={`w-full flex flex-row justify-evenly items-center space-x-3 lg:space-x-10 mt-10 xl:mt-0 ${styles.connectCardTeks}`}
@@ -222,7 +181,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/award_img_1.jpg"
+                          src="assets/images/home/award_img_1.jpg"
                           alt="Achievement Central Computer Improvement"
                           responsive="true"
                           width={318}
@@ -257,7 +216,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/award_img_2.jpg"
+                          src="assets/images/home/award_img_2.jpg"
                           alt="Member Central Computer Improvement"
                           responsive="true"
                           width={318}
@@ -360,7 +319,7 @@ export default function Home() {
                           <h2 className="text-[40px] font-bold text-mainPrimary">
                             Penghargaan
                           </h2>
-                          <p className="text-[24px] leading-9 lg:leading-10 text-mainPrimary">
+                          <p className="text-[24px] leading-10 lg:leading-9 text-mainPrimary">
                             Unit Kegiatan Mahasiswa (UKM) CCI telah berhasil meraih berbagai prestasi yang membanggakan, melalui partisipasi aktif dalam berbagai kompetisi, inovasi program, serta kontribusi nyata dalam pengembangan potensi mahasiswa di berbagai bidang, yang semakin memperkuat reputasinya sebagai salah satu UKM yang unggul di lingkungan kampus.
                           </p>
                         </div>
@@ -390,15 +349,15 @@ export default function Home() {
                       <h2 className="text-[25px] md:text-[30px] lg:text-[40px] text-right lg:text-left font-bold text-mainPrimary">
                         Jumlah Project
                       </h2>
-                      <div className="text-[15px] md:text-[20px] lg:text-[24px] text-right lg:text-left leading-5 lg:leading-10 text-mainPrimary">
+                      <div className="text-[15px] md:text-[20px] lg:text-[24px] text-left leading-5 lg:leading-10 text-mainPrimary">
                         <span>
-                          UKM CCI juga melaksanakan berbagai proyek, di mana anggota UKM CCI diberikan pelatihan untuk mengembangkan keterampilan dalam merancang dan melaksanakan proyek-proyek tersebut. Melalui bimbingan dan pembelajaran langsung, mereka diajarkan untuk membuat proyek yang inovatif dan bermanfaat, baik untuk pengembangan pribadi maupun kontribusi kepada masyarakat luas.
+                          UKM CCI juga melaksanakan berbagai proyek, di mana anggota UKM CCI diberikan pelatihan untuk mengembangkan keterampilan dalam merancang dan melaksanakan proyek-proyek tersebut. Melalui bimbingan dan pembelajaran langsung, mereka diajarkan untuk membuat proyek yang inovatif dan bermanfaat, baik untuk pengembangan pribadi maupun kontribusi kepada masyarakat luas. Sebanyak 
                         </span>
                         {isLoading ? (
                           <Loading size="w-[10px] h-[10px] sm:w-[20px] sm:h-[20px]" />
                         ) : projectData?.recordsTotal !== undefined &&
                           projectData?.recordsTotal !== null ? (
-                          <span>
+                          <span className="pl-1">
                             {projectData.recordsTotal === 0
                               ? "0"
                               : projectData.recordsTotal}{" "}
@@ -407,7 +366,7 @@ export default function Home() {
                         ) : (
                           <TextNotFound>0+</TextNotFound>
                         )}
-                        <span> yang dilakukan oleh semua divisi yang ada</span>
+                        <span> yang dilakukan oleh semua divisi yang ada.</span>
                       </div>
                     </div>
                   </div>
@@ -421,7 +380,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/project_1.png"
+                          src="assets/images/home/connect_card.png"
                           alt="Achievement Central Computer Improvement"
                           responsive="true"
                           width={318}
@@ -456,7 +415,7 @@ export default function Home() {
                       >
                         <Image
                           className="w-[164px] h-[123px] md:w-[276px] md:h-[257px] xl:w-[318px] xl:h-[287px] rounded-t-[10px] object-cover"
-                          src="assets/home/images/project_2.png"
+                          src="assets/images/home/connect_card.png"
                           alt="Member Central Computer Improvement"
                           responsive="true"
                           width={318}
@@ -490,25 +449,21 @@ export default function Home() {
                 </div>
               </div>
             </section>
-
+            {/* division section */}
             <section
               id="divisionPage"
               className="w-full h-[540px] md:h-[500px] flex justify-center items-start"
             >
               <div className="w-full flex flex-row flex-wrap mt-[50px] md:mt-[70px] xl:mt-[130px]">
-                <div
-                  className={`w-full h-auto basis-full md:basis-[35%] lg:basis-[40%] flex justify-center items-center md:pl-[70px] lg:pl-[40px] xl:pl-[80px] ${styles.divisionContainerTagline}`}
-                >
-                  <h1
-                    className={`font-black text-center text-[30px] lg:text-[50px] xl:text-[60px] text-bluePallete-800 ${styles.divisionTagline}`}
-                  >
+                {/* container tagline */}
+                <div className={`w-full h-auto basis-full md:basis-[35%] lg:basis-[40%] flex justify-center items-center md:pl-[70px] lg:pl-[40px] xl:pl-[50px] 2xl:pl-[250px] ${styles.divisionContainerTagline}`}>
+                  <h1 className={`font-black text-center text-[30px] lg:text-[50px] xl:text-[60px] text-bluePallete-800 leading-tight ${styles.divisionTagline}`}>
                     GET TO KNOW{" "}
                     <span className="text-secondPrimary">OUR DIVISIONS</span>
                   </h1>
                 </div>
-                <div
-                  className={`basis-full md:basis-[65%] lg:basis-[59%] w-auto h-auto sm:max-w-[60%] md:max-w-[65%] lg:max-w-[60%] ${styles.divisionCardContainer}`}
-                >
+                {/* container card */}
+                <div className={`basis-full md:basis-[65%] lg:basis-[59%] w-auto h-auto sm:max-w-[60%] md:max-w-[65%] lg:max-w-[60%] ${styles.divisionCardContainer}`}>
                   <div className="hidden md:block">
                     <DivisionFirstSlider />
                   </div>
@@ -518,30 +473,30 @@ export default function Home() {
                 </div>
               </div>
             </section>
-
+            {/* project section */}               
             <section id="projects" className="w-full h-auto">
               <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md mx-auto px-5 sm:px-0">
                 <div className="w-full flex flex-col space-y-[60px] sm:space-y-[80px] lg:space-y-10 mb-12 sm:mt-0 py-0 sm:py-20">
                   <div className="flex flex-col items-center justify-between w-full h-auto space-y-4 lg:space-y-5">
-                    <h1 className="font-black sm:font-bold text-center text-[20px] sm:text-[26px] md:text-[50px] px-0 lg:px-52 text-bluePallete-800">
+                    <h1 className="font-black sm:font-extrabold text-center text-[20px] leading-tight sm:text-[26px] md:text-[50px] px-0 lg:px-52 text-bluePallete-800">
                       Showcasing Our Work: Achievements and Capabilities of
                       Central Computer Improvement
                     </h1>
-                    <p className="font-semibold sm:font-medium text-center text-[12px] sm:text-[18px] md:text-[30px] px-0 lg:px-32 text-bluePallete-800">
+                    <p className="font-semibold sm:font-medium text-center text-[12px] leading-tight sm:text-[18px] md:text-[30px] px-0 lg:px-32 text-bluePallete-800">
                       Explore our diverse projects and witness the passion,
                       creativity, and impact of Central Computer Improvement
                     </p>
-                    <button className="w-[151px] h-[45px] md:w-[311px] md:h-[90px] text-[12px] md:text-[25px] font-bold rounded-lg text-white bg-bluePallete-800">
-                      <Link className="text-center" href="/projects">
-                        Explore Our Projects
-                      </Link>
-                    </button>
+                    <Link className="text-center" href="/projects">
+                      <button className="w-[151px] h-[45px] md:w-[311px] md:h-[90px] text-[12px] md:text-[25px] font-bold rounded-lg text-white bg-bluePallete-800">
+                          Explore Our Projects
+                      </button>
+                    </Link>
                     <ProjectCard />
                   </div>
                 </div>
               </div>
             </section>
-
+            {/* news section */}
             <section id="news" className="w-full h-auto">
               {/* content ini hanya akan muncul jika ukuran layar diatas ukuran layar handphone */}
               <div className="hidden sm:block">
@@ -566,7 +521,7 @@ export default function Home() {
                 <div className="flex flex-col w-full h-auto">
                   <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md mx-auto px-5 sm:px-0">
                     <div className="w-full flex flex-col spaced-y-5 pb-[30px] sm:pb-[50px] items-center">
-                      <h1 className="text-[22px] sm:text-[50px] lg:text-[80px] text-center font-black text-bluePallete-800">
+                      <h1 className="text-[22px] sm:text-[50px] lg:text-[80px] text-center font-[700] text-bluePallete-800">
                         Keep Up With Our Latest News
                       </h1>
                       <p className="text-[12px] sm:text-[20px] md:text-[30px] text-center font-semibold sm:font-medium md:px-[10px] lg:px-[120px] xl:px-[200px] text-black">
@@ -588,4 +543,4 @@ export default function Home() {
       <Footer />
     </>
   );
-}
+};

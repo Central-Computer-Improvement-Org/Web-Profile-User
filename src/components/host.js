@@ -1,1 +1,1 @@
-export const host = 'http://103.187.147.80:8000'
+export const host = 'https://kanzen523.pythonanywhere.com/';

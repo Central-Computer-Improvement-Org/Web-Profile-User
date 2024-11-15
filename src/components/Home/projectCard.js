@@ -4,11 +4,12 @@ import Image from 'next/image';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import request from '@/app/utils/request';
 import { host } from '@/components/host';
+import request from '@/app/utils/request';
 import TextNotFound from '@/components/teksNotFound';
 import ImageNotFound from '@/components/imageNotFound';
 import styles from '@/components/Home/homeComponent.module.css';
+
 
 const ProjectData = () => {
   const [projectData, setProjectData] = useState(null);
@@ -25,13 +26,13 @@ const ProjectData = () => {
     request
       .get('/projects')
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
+        if (response.status === 200) {
           const sortedData = response.data.data.sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
           setProjectData(sortedData);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
         setIsLoading(false);
       })
@@ -108,13 +109,9 @@ const ProjectData = () => {
 
   return (
     <>
-      <div
-        className={`static w-full h-auto lg:h-[340px] xl:h-auto flex flex-row flex-wrap py-8 px-8 sm:px-10 lg:!mt-11 rounded-[20px] sm:rounded-lg lg:border-[3px] lg:border-bluePallete-600 bg-bluePallete-800 lg:bg-transparent ${styles.projectContainer}`}
-      >
+      <div className={`static w-full h-auto lg:h-[340px] xl:h-auto flex flex-row flex-wrap py-8 px-8 sm:px-10 lg:!mt-11 rounded-[20px] sm:rounded-lg lg:border-[3px] lg:border-bluePallete-600 bg-bluePallete-800 lg:bg-transparent ${styles.projectContainer}`}>
         {/* Project Thumbnail*/}
-        <div
-          className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[2505px] sm:top-[3100px] md:top-[3980px] ${styles.projectsContainerThumbnail}`}
-        >
+        <div className={`absolute lg:top-full lg:static basis-full lg:basis-2/5 flex items-center justify-center inset-x-0 lg:inset-x-full top-[2650px] sm:top-[3100px] md:top-[3920px] ${styles.projectsContainerThumbnail}`}>
           {isMovingData || isLoading || !projectData ? (
             <Skeleton
               width="auto"
@@ -123,11 +120,12 @@ const ProjectData = () => {
             />
           ) : projectData[positionIndex]?.imageUri ? (
             <Image
-              src={`${host}${projectData[positionIndex].imageUri}`}
-              alt="Thumbnail Project Central Computer Improvement"
+              src={
+                projectData[positionIndex]?.imageUri ? `${host}${projectData[positionIndex].imageUri}` : ImageNotFound
+              }
+              alt="Thumbnail Project CCI"
               width={467}
               height={284}
-              responsive="true"
               className={`w-[290px] h-[270px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] max-w-[650px] max-h-[370px] lg:max-w-[467px] lg:max-h-[284px] rounded-[20px] sm:rounded-lg object-cover ${styles.projectsThumbnailImage}`}
             />
           ) : (
@@ -136,11 +134,9 @@ const ProjectData = () => {
             />
           )}
         </div>
-        {/* Project Deskripsi  */}
-        <div
-          className={`basis-full lg:basis-3/5 mt-[180px] sm:mt-[230px] md:mt-[300px] lg:mt-0 pl-0 lg:pl-7 flex flex-col justify-between space-y-2 sm:space-y-5 lg:space-y-0 ${styles.projectContainerInfo}`}
-        >
-          <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center space-y-2 sm:space-y-0">
+        {/* Project Content  */}
+        <div className={`basis-full lg:basis-3/5 mt-[180px] sm:mt-[230px] md:mt-[300px] lg:mt-0 pl-0 lg:pl-7 flex flex-col justify-between space-y-2 sm:space-y-5 lg:space-y-0 ${styles.projectContainerInfo}`}>
+          <div className="flex flex-col items-start justify-start space-y-2 sm:flex-row sm:items-center sm:space-y-0">
             <div className="w-auto h-[39px] sm:h-auto flex flex-row justify-center sm:justify-normal items-center px-3 lg:px-0 py-1 lg:py-0 space-x-1 sm:space-x-2 rounded-[10px] bg-white lg:bg-transparent">
               {/* Project Icon  */}
               <div className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px]">
@@ -152,14 +148,13 @@ const ProjectData = () => {
                     alt="Logo Project Central Computer Improvement"
                     width={50}
                     height={50}
-                    responsive="true"
                     className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-contain"
                   />
                 ) : (
                   <ImageNotFound className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px] lg:w-[50px] lg:h-[50px] object-contain" />
                 )}
               </div>
-              {/* Project Judul */}
+              {/* Project Title */}
               <div className="hidden sm:block ml-[10px]">
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={200} height={20} />
@@ -171,7 +166,7 @@ const ProjectData = () => {
                   <TextNotFound className="font-bold text-[8px] sm:text-[18px] text-transparent"></TextNotFound>
                 )}
               </div>
-              {/* Project Judul Mobile */}
+              {/* Project Title Mobile */}
               <div className={`block sm:hidden`}>
                 {isMovingData || isLoading || !projectData ? (
                   <Skeleton width={100} height={20} />
@@ -187,10 +182,10 @@ const ProjectData = () => {
               </div>
             </div>
           </div>
-          {/* Project Isi Deskripsi */}
+          {/* Project Description */}
           <div className={`h-auto`}>
             {isMovingData || isLoading || !projectData ? (
-              <Skeleton count={4} />
+              <Skeleton count={3} className="my-2" />
             ) : projectData[positionIndex]?.description ? (
               <p
                 className={`font-medium text-start text-[15px] !mt-4 md:!mt-0 lg:text-[20px] leading-[20px] sm:leading-7 md:text-justify overflow-hidden text-white lg:text-black ${styles.projectsDesc}`}
@@ -282,7 +277,7 @@ const ProjectData = () => {
             </div>
           </div>
           {/* Icon Arrow */}
-          <div className="w-full flex justify-end items-center space-x-3 sm:space-x-4">
+          <div className="flex items-center justify-end w-full space-x-3 sm:space-x-4">
             {/* Arrow Kiri */}
             <svg
               onClick={() => handleProjectArrow('left')}

@@ -37,8 +37,8 @@ const SwiperComponent = () => {
     request
       .get("/news")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          const formatDateData = response.data.data.map((item) => {
+        if (response.status === 200) {
+          const formatDateData = response?.data?.data?.map((item) => {
             const createdAt = moment(String(item.createdAt)).format("MMM DD[,] YYYY")
             return {
               ...item,
@@ -53,7 +53,7 @@ const SwiperComponent = () => {
           const limitNewsData = sortNewsData.slice(0, 5);
           setNewsData(limitNewsData);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
         setIsLoading(false);
       })
@@ -118,11 +118,10 @@ const SwiperComponent = () => {
                   {data?.mediaUri ? (
                     <Image
                       src={`${host}${data.mediaUri}`}
-                      alt="News Thumbnail Central Computer Improvment"
                       width={402}
                       height={268}
-                      responsive="true"
-                      loading="lazy"
+                      priority={true}
+                      alt="News Thumbnail Central Computer Improvment"
                       className={
                         index === currentSlide
                           ? `rounded-t-[10px] object-cover`
@@ -133,7 +132,6 @@ const SwiperComponent = () => {
                     <ImageNotFound
                       width={402}
                       height={268}
-                      responsive="true"
                       loading="lazy"
                       className={
                         index === currentSlide
@@ -145,8 +143,8 @@ const SwiperComponent = () => {
                   <div
                     className={
                       index === currentSlide
-                        ? "w-full sm:h-[90px] md:h-auto flex flex-col space-y-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
-                        : "w-full sm:h-[80px] md:h-[100px] lg:h-[119px] flex flex-col justify-between py-[6px] px-[10px] md:py-[6px] md:px-[10px] lg:py-[10px] lg:px-[15px] rounded-b-[10px] border-[2px] border-[#234d87] bg-white"
+                        ? "w-full sm:h-[90px] md:h-[160px] justify-between flex flex-col space-y-5 py-[6px] px-[10px] md:py-[10px] md:px-[15px] rounded-b-[10px] border-[1px] border-[#234d87] bg-white"
+                        : "w-full sm:h-[80px] md:h-[100px] lg:h-[119px] flex flex-col justify-between py-[6px] px-[10px] md:py-[6px] md:px-[10px] lg:py-[10px] lg:px-[15px] rounded-b-[10px] border-[1px] border-[#234d87] bg-white"
                     }
                   >
                     <p
@@ -229,7 +227,8 @@ const SwiperComponent = () => {
               </svg>
             </div>
           </Swiper>
-
+          
+          {/* Custom Style Pagination */}
           <style>
             {`
               .swiper-pagination-bullet-custom {

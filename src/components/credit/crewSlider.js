@@ -10,27 +10,43 @@ export default function CrewSlider({
   crewDatas = [],
   color = 'bg-bluePallete-300',
 }) {
+  const size = useWindowSize();
   const [page, setPage] = useState(1)
   const [splittedDatas, setSplittedDatas] = useState([])
   const [datas, setDatas] = useState([]);
   const [buttonNext, setButtonNext] = useState("bottom-[250px]");
-  const size = useWindowSize();
+  const [isTransition, setIsTransition] = useState(false);
 
   const handleNext = () => {
-    page >= 2 ? setPage(1) : setPage(page + 1)
+    // Jika 'page' sudah mencapai jumlah halaman yang ada di 'splittedDatas',
+    // maka kembalikan ke halaman pertama (1). Jika belum, naikkan halaman ke berikutnya.
+    setIsTransition(true);
+    setTimeout(() => {
+      setPage(prevPage => (prevPage >= splittedDatas.length ? 1 : prevPage + 1));
+      setIsTransition(false);
+    }, 400);
   };
-
+  
   useEffect(() => {
-    const splited = [
-      crewDatas?.slice(0, 4),
-      crewDatas?.slice(3 + 1)
-    ]
-    setSplittedDatas(splited)
+    // Olah untuk memecah/dipisah data bagian yang lebih kecil
+    // dari 'crewDatas' menjadi kelompok-kelompok berisi 4 item
+    const splitDataIntoChunks = (data, chunkSize) => {
+      let result = [];
+      for (let i = 0; i < data.length; i += chunkSize) {
+        result.push(data.slice(i, i + chunkSize)); // Disini data akan diproses dan dimasukan ke kelompok berisi 4 item
+      }
+      return result; // Kembalikan array untuk hasil dari beberapa kelompok data tadi
+    };
+  
+    const splited = splitDataIntoChunks(crewDatas, 4);
+    setSplittedDatas(splited);
   }, [crewDatas]);
-
+  
   useEffect(() => {
-    setDatas(page == 1 ? splittedDatas[0] : splittedDatas[1])
-  }, [splittedDatas, page]);
+    // Disini data akan ditampilkan di halaman sesuai dengan 'page' yang dipilih
+    // 'page - 1' digunakan karena array menggunakan indeks 0
+    setDatas(splittedDatas[page - 1] || []); // Jika tidak ada data, default ke array kosong
+  }, [splittedDatas, page]);  
 
   useEffect(() => {
     if (size.width < 640) {
@@ -39,24 +55,27 @@ export default function CrewSlider({
       } else {
         setButtonNext("bottom-[330px] right-0 ")
       }
-    }else if (size.width < 1024) {
+    } else if (size.width < 1024) {
       if (datas?.length < 3) {
-        setButtonNext("bottom-[60px] right-0 ")
+        setButtonNext("bottom-[60px] right-0")
       } else {
-        setButtonNext("bottom-[160px] right-0 ")
+        setButtonNext("bottom-[160px] right-0")
       }
     } else {
       if (datas?.length < 3) {
-        setButtonNext("bottom-[120px] right-0 ")
+        setButtonNext("bottom-[100px] right-0")
       } else {
-        setButtonNext("bottom-[250px] right-0 ")
+        setButtonNext("bottom-[250px] right-0")
       }
     }
   }, [datas, size.width]);
 
   return crewDatas.length ? (
-    <>
-      <div className="w-full h-auto flex flex-wrap justify-around items-center gap-5 sm:gap-1 lg:gap-7 relative mt-[21px]">
+    <div className="relative mt-[21px]">
+      <div
+        className={`w-full h-auto flex flex-wrap justify-around items-center gap-5 sm:gap-1 lg:gap-7 
+          ${isTransition ? 'opacity-0 transition-opacity duration-300' : 'opacity-100 transition-opacity duration-300'}`}
+      >
         {datas?.map((crew, index) => (
           <CardCreditProfile
             key={index}
@@ -66,6 +85,9 @@ export default function CrewSlider({
             name={crew?.name}
           />
         ))}
+      </div>
+      {/* Custom button Next */}
+      {crewDatas.length > 4 && (
         <div className={`absolute flex items-center justify-center w-fit ${buttonNext}`}>
           <button
             className={`${styles.crewButton} w-full flex justify-center hover:opacity-75 mt-[20px] sm:mt-[54px] text-white`}
@@ -87,13 +109,13 @@ export default function CrewSlider({
                 fill="white"
               />
             </svg>
-          </button >
-        </div>
+          </button>
       </div>
-    </>
+      )}
+    </div>
   ) : (
     <div className="flex justify-center w-[100%]">
       <NotFound className="flex justify-center w-[200px]" />
     </div>
   );
-}
+};
