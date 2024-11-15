@@ -22,13 +22,13 @@ const DivisionSecondSlider = () => {
     request
       .get("/users/divisions")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          const divisioData = response.data.data.filter(
+        if (response.status === 200) {
+          const divisioData = response?.data?.data?.filter(
             (item) => item.name !== "All"
           );
           setDivisionData(divisioData);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
         setIsLoading(false);
       })

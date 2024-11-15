@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 import { host } from "@/components/host";
+import request from "../utils/request";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Navbar from "@/components/navbar";
@@ -9,7 +10,7 @@ import CrewSlider from "@/components/credit/crewSlider";
 import CardCreditProfile from "@/components/credit/cardCreditProfile";
 import ImageNotFound from "@/components/imageNotFound";
 import Loading from "@/components/loading";
-import request from "../utils/request";
+
 
 export default function Credits() {
   const [contributors, setContributors] = useState();
@@ -17,14 +18,14 @@ export default function Credits() {
 
   useEffect(() => {
     request
-      .get("/projects?id=PJT-20240729053353002924")
+      .get("/projects?id=PJT-20241114071930266091")
       .then(function (res) {
-        if (res.data.code === 200 || res.data.code === 201) {
-          setContributors(res.data.data.contributors);
+        if (res.data.code === 200) {
+          setContributors(res?.data?.data?.contributors);
           setIsLoading(false);
         } else {
           setIsLoading(false);
-          console.error(JSON.stringify(res.errors));
+          console.error(res.errors);
         }
       })
       .catch(function (err) {
@@ -35,11 +36,6 @@ export default function Credits() {
 
   const ketuaDesignDatas = contributors
     ?.map((data, index) => {
-      // if (index <= 3) {
-      //   if (data.division != null) {
-      //     return data;
-      //   }
-      // }
       if (data.division != null) {
         return data;
       }

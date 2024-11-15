@@ -27,7 +27,7 @@ const Divisions = () => {
 
       try {
          const response = await request.get('/users?roleNameExact=Ketua', { params: payload });
-         if (response.data.code === 200 || response.data.code === 201) {
+         if (response.data.code === 200) {
             const filteredTeams = response.data.data.filter(user => user.role.name.toLowerCase() === "ketua");
             setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
             setTeams(filteredTeams);
@@ -41,17 +41,9 @@ const Divisions = () => {
       getTeams();
    }, [page]);
 
-
-   // const updateIsLeft = () => {
-   //    setIsLeft(!isLeft);
-   // };
-   // const handleNext = () => {
-   //    page >= totalPages ? setPage(1) : setPage(page + 1);
-   // };
-
    return (
       <>
-         <div className="px-[45px] md:px-0 w-full">
+         <div className="w-full">
             <div className="h-[44px] md:h-[108px] bg-[#092C4C] rounded-[15px] mx-auto md-[14px] md:mb-[30px]">
                <h3 className={`text-[20px] md:text-h3 font-bold text-white flex justify-center items-center h-full`}>
                   Meet Our Team

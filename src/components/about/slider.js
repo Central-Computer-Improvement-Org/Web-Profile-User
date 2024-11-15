@@ -7,9 +7,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './about.css';
 
-import CardAbout from './cardAbout';
 import { host } from '../host';
+import CardAbout from './cardAbout';
 import styles from '../../components/about/aboutComponent.module.css';
+
 
 export default function Slider({ data }) {
    const iconArrow = (
@@ -61,4 +62,4 @@ export default function Slider({ data }) {
          </div>
       </div>
    );
-}
+};

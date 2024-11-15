@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 
-
 export default function CardCreditProfile({
    color,
    jobdes,
@@ -36,24 +35,23 @@ export default function CardCreditProfile({
             </h1>
             <a href={linkedinUri} target="_blank" rel="noopener noreferrer">
                <Image
-                  className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
-                  src="assets/uploads/member/logo/logo-linkedin.png"
+                  src="assets/logo/logo_linkedin.png"
                   width={60}
                   height={60}
                   alt="Logo Linkedin Ketua Divisi"
+                  className="w-[30px] h-[30px] lg:w-[60px] lg:h-[60px] mt-0 sm:mt-5 object-cover"
                ></Image>
             </a>
          </div>
          <div className="basis-[60%] sm:basis-6/12 flex items-center justify-end">
             <Image
                src={image}
-               alt="Profile Image Member Central Computer Improvement"
                width={200}
                height={201}
-               responsive="true"
+               alt="Profile Member CCI"
                className="w-[120px] h-[120px] lg:w-[200px] lg:h-[201px] rounded-[20px] object-cover"
             />
          </div>
       </div>
    );
-}
+};

@@ -2,7 +2,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Suspense } from "react";
 import request from "./utils/request";
-import Loading from "@/components/loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,10 +9,10 @@ export async function generateMetadata() {
    const response = await request
       .get('/setting')
       .then((response) => {
-         if (response.status === 200 || response.status === 201) {
+         if (response.status === 200) {
             return response?.data?.data[0]?.name;
          } else {
-            console.error(JSON.stringify(response.errors));
+            console.error(response.errors);
             return 'Central Computer Improvement';
          }
       })
@@ -45,4 +44,4 @@ export default function RootLayout({ children }) {
          </body>
       </html>
    );
-}
+};

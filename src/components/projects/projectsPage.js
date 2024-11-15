@@ -27,6 +27,7 @@ const ProjectPage = () => {
   const [showProjectData, setShowProjectData] = useState([]);
   const [recordsTotalProject, setRecordsTotalProject] = useState();
   const [divisions, setDivisions] = useState([]);
+  const [isLoadingProjects, setIsLoadingProjects] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   const getDivisions = async () => {
@@ -46,7 +47,7 @@ const ProjectPage = () => {
 
   useEffect(() => {
     const getProjects = async () => {
-      setIsLoading(true);
+      setIsLoadingProjects(true);
       let payload = {
         limit: LIMITER,
         page: page,
@@ -75,7 +76,8 @@ const ProjectPage = () => {
       } catch (error) {
         setShowProjectData([]);
       }
-      setIsLoading(false);
+
+      setIsLoadingProjects(false);
     };
     getProjects();
   }, [menuActive.id, menuActive.name, page]);
@@ -89,12 +91,12 @@ const ProjectPage = () => {
         {/* Title & desc area */}
         <section className="md:px-[0px] px-[14px]">
           <div className="">
-            <h1 className="text-bluePallete-900 xl:text-[40px] lg:text-[30px] md:text-[24px] sm:text-[16px] font-black text-center 2xl:px-[216px] xl:px-[100px] lg:px-[156px] md:px-[107px] sm:px-20 leading-[20px] sm:leading-[24px] md:leading-[30px] xl:leading-[62px]">
+            <h1 className="text-bluePallete-900 xl:text-[40px] lg:text-[30px] md:text-[24px] sm:text-[16px] font-black text-center 2xl:px-[350px] xl:px-[320px] lg:px-[270px] md:px-[150px] sm:px-20 leading-[20px] sm:leading-[24px] md:leading-[30px] xl:leading-[50px]">
               Showcasing Our Work: <br />
               Achievements and Capabilities of Central Computer Improvement
             </h1>
             <div className="lg:pt-[10px] md:pt-[5px] pt-[7px]" />
-            <p className="text-center 2xl:text-[22px] xl:text-[18px] lg:text-[16px] md:text-[14px] text-[10px] font-medium lg:px-[207px] md:px-[77px] sm:px-16 lg:leading-10 md:leading-[20px]">
+            <p className="text-center 2xl:text-[32px] xl:text-[24px] lg:text-[20px] md:text-[18px] sm:text-[14px] text-[10px] font-medium lg:px-[207px] md:px-[77px] sm:px-16 lg:leading-10 md:leading-[20px]">
               Explore our diverse projects and witness the passion, creativity,
               and impact of Central Computer Improvement
             </p>
@@ -104,9 +106,7 @@ const ProjectPage = () => {
         {/* Project image slide area */}
         <div className="lg:pt-[42px] md:pt-[38px] pt-[32px]" />
         {isLoading ? (
-          <div className="w-full h-[70px] sm:h-[100px]">
-
-          </div>
+          <div className="w-full h-[70px] sm:h-[100px]" />
         ) : (
           <ShowcasingProjectSlider image={showProjectData} />
         )}
@@ -137,7 +137,6 @@ const ProjectPage = () => {
               ) : (
                 // Handle notfound v1
                 <div className="w-full h-[10px] sm:h-[20px] border-2" />
-                
                 // Handle notfound v2
                 // <div className="flex items-center justify-center w-full h-[30px] sm:h-[50px]">
                 //   <p className="font-bold text-center text-[14px] sm:text-[16px] lg:text-[20px] text-bluePallete-800">
@@ -147,14 +146,13 @@ const ProjectPage = () => {
               )}
             </div>
           </section>
-        )
-        }
+        )}
 
         {/* Project list by menu division area */}
         <div className="pt-[40px] sm:pt-[50px]" />
         <section className="lg:px-[95px] md:px-[50px] px-[20px] ">
           <div className="flex flex-col lg:gap-[36px] md:gap-[28px] gap-[24px]">
-            {isLoading ? (
+            {isLoadingProjects ? (
               <div className="w-full h-[50px]"></div>
             ) : (
               projectData !== undefined || projectData !== null || !projectData ? (
@@ -205,7 +203,7 @@ const ProjectPage = () => {
                                 <Image
                                   width={0}
                                   height={0}
-                                  alt="project-img"
+                                  alt="project image CCI"
                                   style={{ backgroundSize: 'contain' }}
                                   src={'assets/icon/website.png'}
                                   className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] "
@@ -219,11 +217,11 @@ const ProjectPage = () => {
                               href={data.repositoryUri}
                               className="flex cursor-pointer"
                             >
-                              <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[148px] lg:rounded-[15px] rounded-[5px]  flex items-center justify-center gap-[10px] lg:bg-bluePallete-900 bg-white lg:border-[0px] border border-bluePallete-900">
+                              <div className="md:px-[20px] px-[15px] md:py-[15px] py-[6px] md:w-full w-[148px] lg:rounded-[15px] rounded-[5px] flex items-center justify-center gap-[10px] lg:bg-bluePallete-900 bg-white lg:border-[0px] border border-bluePallete-900">
                                 <Image
                                   width={0}
                                   height={0}
-                                  alt="project-img"
+                                  alt="icon go to website"
                                   style={{ backgroundSize: 'contain' }}
                                   src={'assets/icon/repository.png'}
                                   className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] hidden lg:block "
@@ -231,9 +229,9 @@ const ProjectPage = () => {
                                 <Image
                                   width={0}
                                   height={0}
-                                  alt="project-img"
+                                  alt="icon go to repository"
                                   style={{ backgroundSize: 'contain' }}
-                                  src={'assets/icon/repository-dark.png'}
+                                  src={'assets/icon/repository_dark.png'}
                                   className=" xl:w-[30px] lg:w-[25px] md:w-[30px] w-[13px] xl:h-[30px] lg:h-[25px] md:h-[30px] h-[13px] lg:hidden "
                                 />
                                 <h1 className="xl:text-[25px] lg:text-[18px] md:text-[25px] text-[10px] lg:text-white text-bluePallete-900 font-semibold">
@@ -249,14 +247,14 @@ const ProjectPage = () => {
                 ) : (
                   <div className="flex items-center justify-center w-full h-[50px]">
                     <p className="font-bold text-center text-md sm:text-xl lg:text-3xl text-bluePallete-800">
-                      Data project {menuActive.name} not available
+                      Project {menuActive.name} not available
                     </p>
                   </div>
                 )
               ) : (
                 // Handle notfound v1
                 <div className="w-full h-[10px] sm:h-[20px]" />
-                
+
                 // Handle notfound v2
                 // <div className="flex items-center justify-center w-full h-[30px] sm:h-[50px]">
                 //   <p className="font-bold text-center text-[14px] sm:text-[16px] lg:text-[20px] text-bluePallete-800">

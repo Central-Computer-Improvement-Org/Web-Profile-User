@@ -33,8 +33,8 @@ export default function DetailNews() {
 
   const handleError = () => {
     setTitle('Title not found');
-    setThumbnail('assets/icon/notfound.svg');
-    setImage('assets/icon/notfound.svg');
+    setThumbnail('public/assets/icon/notfound.svg');
+    setImage('public/assets/icon/notfound.svg');
     setDescription('Description not found');
     setIsLoading(false);
   };
@@ -44,7 +44,7 @@ export default function DetailNews() {
     request
       .get('/news')
       .then((response) => {
-        if (response.data.code === 200 || response.data.code === 201) {
+        if (response.data.code === 200) {
           setNewsAlso(response.data.data || []);
         } else {
           console.warn('Unexpected response code :', response.data.code);
@@ -68,7 +68,7 @@ export default function DetailNews() {
       request
         .get(`/news?id=${newsId}`)
         .then((response) => {
-          if (response.data.code === 200 || response.data.code === 201) {
+          if (response.data.code === 200) {
             setTitle(response.data.data.title);
             setThumbnail(response.data.data.mediaUri);
             setImage(response.data.data.detailNewsMedia);
@@ -79,7 +79,7 @@ export default function DetailNews() {
             handleError();
           }
         })
-        .catch((error) => {
+        .catch(() => {
           handleError();
         });
     } else {
@@ -91,7 +91,7 @@ export default function DetailNews() {
     request
       .get('/news')
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
+        if (response.status === 200) {
           const newData = response.data.data;
           const sortedData = newData.sort(
             (a, b) => b.visitedCount - a.visitedCount
@@ -130,7 +130,7 @@ export default function DetailNews() {
         <span className="block h-full bg-gradientAccentTwo">
           <span className="block h-full bg-gradientDefaultTwo">
             <section id="headLine" className="w-full md:pb-0 sm:pb-[111px] pb-[60px]">
-              {/* Title and date area */}
+              {/* Title and date news area */}
               <div
                 id="title"
                 className="w-full xl:max-w-[1390px] lg:max-w-[66rem] md:max-w-[48rem] sm:max-w-[38rem] max-w-[28rem] px-3 sm:px-0 mx-auto lg:pt-44 md:pt-36 sm:pt-[7rem] pt-[70px]"
@@ -168,15 +168,17 @@ export default function DetailNews() {
               </div>
               {/* Detail news area */}
               <div className="w-full xl:pt-[60px] md:pt-[40px] pt-[19px] flex xl:flex-row flex-col gap-[40px]">
+                {/* base detail news area */}
                 <div className="col-span-2 w-full xl:ml-[70px] xl:max-w-[923px] ">
+                  {/* hero image slider news */}
                   {image?.length ? <ImageNewsFirstSlider image={image}/> : <Image
                       src={`${host}${thumbnail}`}
                       alt="Thumbnail News"
                       width={0}
                       height={0}
-                      responsive="true"
                       className={`w-full h-[200px] sm:h-[400px] lg:h-[500px] xl:h-[400px] rounded-0 sm:rounded-lg object-cover object-top ${styles.projectsThumbnailImage}`}
                   />}
+                  {/* description news */}
                   <div className="mt-[20px] sm:mt-[30px] md:mt-[40px] px-[15px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:px-0">
                     {parsedHTML && parsedHTML.innerHTML.trim() !== '' ? (
                       <div
@@ -198,6 +200,7 @@ export default function DetailNews() {
                     )}
                   </div>
                 </div>
+                {/* Top read of the day area */}
                 <div className="w-full !px-[25px] sm:px-[20px] md:px-[30px] lg:px-[50px] xl:pl-0 pr-0 xl:pr-[40px]">
                   <div className="lg:mt-14 mt-5 sm:mt-[53px]">
                     <div className="flex items-center justify-center xl:justify-start">

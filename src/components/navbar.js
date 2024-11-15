@@ -7,13 +7,12 @@ import Image from "next/image";
 
 import { host } from "./host";
 import request from "../app/utils/request";
-import Loading from "@/components/loading";
-import ImageNotFound from "./imageNotFound";
-import LogoCCI from "../../public/assets/logo/logo-cci.png";
+import logoCCI from '/public/assets/logo/logo_cci.svg';
+
 
 const Navbar = () => {
-  const navOutside = useRef();
   const router = useRouter();
+  const navOutside = useRef();
   const [settingsData, setSettingsData] = useState(null);
   const [isClick, setIsClick] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -25,10 +24,10 @@ const Navbar = () => {
     request
       .get("/setting")
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          setSettingsData(response.data.data);
+        if (response.status === 200) {
+          setSettingsData(response?.data?.data);
         } else {
-          console.error(JSON.stringify(response.errors));
+          console.error(response.errors);
         }
         setIsLoading(false);
       })
@@ -48,8 +47,8 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  //handle nav menu scroll ke section division
-  const handleScrollToDivision  = () => {
+  // handle nav menu scroll ke section division
+  const handleScrollToDivision = () => {
     const divisionPage = document.getElementById('divisionPage');
     if (divisionPage) {
       divisionPage.scrollIntoView({ behavior: 'smooth' });
@@ -69,6 +68,7 @@ const Navbar = () => {
     setIsClick(false);
   };
 
+  // effect untuk handle click diluar navbar untuk menutup dropdown menu about us
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -89,36 +89,24 @@ const Navbar = () => {
     <>
       <nav
         ref={navOutside}
-        className="fixed h-[60px] sm:h-[90px] md:h-[120px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 border-b-[1px] border-bluePallete-300 transition-all duration-300 bg-white"
+        className="fixed h-[60px] sm:h-[90px] md:h-[115px] py-4 sm:py-7 md:py-5 top-0 inset-x-0 z-50 border-b-[1px] border-bluePallete-300 transition-all duration-300 bg-white"
       >
         <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md sm:px-0 px-5 mx-auto">
           {/* Desktop menu */}
           <div className="flex items-center justify-between w-full h-full">
             <Link href="/">
-              {isLoading ? (
-                <Loading
-                  size="w-[20px] h-[20px] sm:w-[59px] sm:h-[59px] md:w-[92px] md:h-[92px] cursor-pointer"
-                  textAlignment="text-center"
-                />
-              ) : settingsData?.logoUri ? (
-                <Image
-                  src={`${host}${settingsData.logoUri}`}
-                  alt="Logo Central Computer Improvement"
-                  width={131}
-                  height={72}
-                  responsive="true"
-                  className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer object-contain"
-                />
-              ) : (
-                <Image
-                  src={LogoCCI}
-                  alt="Logo CCI"
-                  width={131}
-                  height={72}
-                  priority={true}
-                  className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer object-contain"
-                />
-              )}
+              <Image
+                src={
+                  settingsData?.logoUri
+                    ? `${host}${settingsData.logoUri}`
+                    : logoCCI.src
+                }
+                width={131}
+                height={72}
+                priority
+                alt="Logo CCI"
+                className="w-[50px] h-[27px] sm:w-[70px] sm:h-[35px] md:w-[131px] md:h-[72px] cursor-pointer object-contain"
+              />
             </Link>
             <div className="items-center hidden space-x-16 md:flex">
               <ul className="items-center hidden space-x-16 md:flex">
@@ -130,11 +118,10 @@ const Navbar = () => {
                   >
                     About Us
                     <svg
-                      className={`ml-2 transition duration-300 ease-in-out hover:fill-bluePallete-700 ${
-                        isDropdownOpen
+                      className={`ml-2 transition duration-300 ease-in-out hover:fill-bluePallete-700 ${isDropdownOpen
                           ? "transform rotate-180 ease-in-out duration-400"
                           : ""
-                      }`}
+                        }`}
                       xmlns="http://www.w3.org/2000/svg"
                       width={12}
                       height={12}
@@ -242,7 +229,7 @@ const Navbar = () => {
                   className="w-full h-full max-w-[56px] max-h-[56px]"
                 >
                   <g fill="none" stroke="white" strokeWidth={1.5}>
-                    <circle cx={12}   cy={12} r={10}></circle>
+                    <circle cx={12} cy={12} r={10}></circle>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -262,11 +249,10 @@ const Navbar = () => {
                   >
                     <p className="font-medium">About Us{" "}</p>
                     <svg
-                      className={`ml-4 w-[28px] h-[14px] transition duration-300 ease-in-out hover:fill-bluePallete-700 ${
-                        isDropdownOpen
+                      className={`ml-4 w-[28px] h-[14px] transition duration-300 ease-in-out hover:fill-bluePallete-700 ${isDropdownOpen
                           ? "transform rotate-180 ease-in-out duration-400"
                           : ""
-                      }`}
+                        }`}
                       xmlns="http://www.w3.org/2000/svg"
                       width={24}
                       height={24}
@@ -285,7 +271,7 @@ const Navbar = () => {
                           <Link
                             href="/about"
                             className="block px-4 text-[25px] rounded text-white"
-                            onClick={(event) => {
+                            onClick={(e) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
                             }}
@@ -296,10 +282,10 @@ const Navbar = () => {
                         <li className="px-4 pt-1">
                           <div
                             className="block px-4 text-[25px] cursor-pointer rounded text-white"
-                            onClick={(event) => {
+                            onClick={(e) => {
                               toggleNavbar();
                               setIsDropdownOpen(false);
-                              handleScrollToDivision ();
+                              handleScrollToDivision();
                             }}
                           >
                             Division
@@ -308,7 +294,7 @@ const Navbar = () => {
                         <li className="px-4 pt-1 pb-2">
                           <div
                             className="block px-4 text-[25px] rounded cursor-pointer text-white"
-                            onClick={(event) => {
+                            onClick={(e) => {
                               toggleNavbar();
                               scrollToContact();
                               setIsDropdownOpen(false);
