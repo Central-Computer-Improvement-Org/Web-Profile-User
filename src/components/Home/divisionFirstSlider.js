@@ -15,30 +15,9 @@ import TextNotFound from "@/components/teksNotFound";
 import styles from "@/components/Home/homeComponent.module.css";
 
 
-const DivisionFirstSlider = () => {
-  const [divisionData, setDivisionData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const DivisionFirstSlider = ({divisionData, isLoading}) => {
   const swiperRef = useRef(null);
 
-  useEffect(() => {
-    request
-      .get("/users/divisions")
-      .then((response) => {
-        if (response.status === 200) {
-          const divisioData = response?.data?.data?.filter(
-            (item) => item.name !== "All"
-          );
-          setDivisionData(divisioData);
-        } else {
-          console.error(response.errors);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
 
   const goNext = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -46,7 +25,7 @@ const DivisionFirstSlider = () => {
     }
   };
 
-  if (divisionData.length === 0) {
+  if (divisionData?.length === 0 || 0) {
     return (
       <div className="w-full h-[351px] md:h-[351px] flex items-center justify-center">
         <h1 className="font-bold text-[24px] text-bluePallete-700">
@@ -89,7 +68,7 @@ const DivisionFirstSlider = () => {
             className={"w-full"}
           >
             {divisionData
-              .filter((v) => v.name !== "All")
+              ?.filter((v) => v.name !== "All")
               .map((data, index) => (
                 <SwiperSlide
                   key={index}

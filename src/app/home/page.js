@@ -23,29 +23,9 @@ export default function Home() {
   const [awardData, setAwardData] = useState(null);
   const [memberData, setMemberData] = useState(null);
   const [projectData, setProjectData] = useState(null);
+  const [divisionData, setDivisionData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    request
-      .get("/setting")
-      .then((response) => {
-        if (response.status === 200) {
-          setSettingsData(response?.data?.data);
-        } else {
-          console.error(response.errors);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
 
     const fetchAwardData = async () => {
       try {
@@ -86,17 +66,59 @@ export default function Home() {
       }
     };
 
-    fetchAwardData();
-    fetchMemberData();
-    fetchProjectData();
+    const fetchSettingData = async () => {
+        request
+            .get("/setting")
+            .then((response) => {
+                if (response.status === 200) {
+                    setSettingsData(response?.data?.data);
+                } else {
+                    console.error(response.errors);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
-    setIsLoading(false);
-  }, []);
+    const fetchDivisionData = async () => {
+        request
+            .get("/users/divisions")
+            .then((response) => {
+                if (response.status === 200) {
+                    const divisioData = response?.data?.data?.filter(
+                        (item) => item.name !== "All"
+                    );
+                    setDivisionData(divisioData);
+                } else {
+                    console.error(response.errors);
+                }
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setIsLoading(false);
+            });
+    }
+
+    useEffect(() => {
+        setIsLoading(true);
+
+        Promise.all([
+            fetchAwardData(),
+            fetchMemberData(),
+            fetchProjectData(),
+            fetchSettingData(),
+            fetchDivisionData()
+        ]).then(([]) => {
+            setIsLoading(false);
+        })
+    }, []);
 
   return (
     <>
       <Header />
-      <Navbar />
+      <Navbar settingData={settingsData}/>
       <main className="w-full h-auto">
         {/* hero section */}
         <section id="hero" className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-[170px]">
@@ -465,10 +487,10 @@ export default function Home() {
                 {/* container card */}
                 <div className={`basis-full md:basis-[65%] lg:basis-[59%] w-auto h-auto sm:max-w-[60%] md:max-w-[65%] lg:max-w-[60%] ${styles.divisionCardContainer}`}>
                   <div className="hidden md:block">
-                    <DivisionFirstSlider />
+                    <DivisionFirstSlider divisioData={divisionData} isLoading={isLoading}/>
                   </div>
                   <div className="block md:hidden">
-                    <DivisionSecondSlider />
+                    <DivisionSecondSlider divisioData={divisionData} isLoading={isLoading}/>
                   </div>
                 </div>
               </div>
@@ -540,7 +562,7 @@ export default function Home() {
           </div>
         </span>
       </main>
-      <Footer />
+      <Footer settingData={settingsData}/>
     </>
   );
 };
