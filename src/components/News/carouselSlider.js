@@ -1,23 +1,19 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
+import Image from 'next/image';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+
 import styles from "@/components/Home/homeComponent.module.css";
-import Image from 'next/image';
 
 const CarouselSlider = () => {
-
   const [getNews, setNews] = useState([])
   const swiperRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
-
 
   const formatDate = (dateString) => {
     const options = { month: 'short', day: 'numeric', year: 'numeric' };
@@ -54,14 +50,12 @@ const CarouselSlider = () => {
     }
   };
 
-
   return (
     <>
-      {isLoading ? ( // Tampilkan teks Loading... saat isLoading true
-        <div className='w-full text-slate-500 text-3xl text-center'>Loading...</div>
+      {isLoading ? (
+        <div className='w-full text-3xl text-center text-slate-500'>Loading...</div>
       ) : (
         <Swiper
-          // install Swiper modules
           modules={[Navigation, Pagination]}
           slidesPerView={1}
           loop={true}
@@ -71,32 +65,27 @@ const CarouselSlider = () => {
           }}
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log('slide change')}
           className='h-[800px]'
         >
 
           {getNews.map((news) => (
             <SwiperSlide className='relative' key={news.id}>
               <div className="h-[800px] relative">
-                <Image className="w-full h-full object-cover rounded-xl" layout="fill" src={news.media_uri} alt="forest" />
+                <Image className="object-cover w-full h-full rounded-xl" layout="fill" src={news.media_uri} alt="forest" />
                 <div className="absolute inset-0 flex flex-col justify-end p-0">
-                  <div className="bg-black bg-opacity-30 p-6 rounded-xl">
+                  <div className="p-6 bg-black bg-opacity-30 rounded-xl">
                     <h1 className="text-6xl font-bold text-white">{news.title}</h1>
                     <h2 className="text-3xl font-bold text-white capitalize">{news.subtitle}</h2>
-                    <div className="absolute top-0 right-0 bottom-0 w-1/4 p-6 bg-black bg-opacity-30">
-                      <p className='text-white text-lg'>{news.description}</p>
-                      <p className='text-white text-lg mt-5 text-end'>{formatDate(news.createdAt)}</p>
+                    <div className="absolute top-0 bottom-0 right-0 w-1/4 p-6 bg-black bg-opacity-30">
+                      <p className='text-lg text-white'>{news.description}</p>
+                      <p className='mt-5 text-lg text-white text-end'>{formatDate(news.createdAt)}</p>
                     </div>
                   </div>
                 </div>
               </div>
             </SwiperSlide>
           ))}
-
-
-
-
+          {/* Custom Button Next  */}
           <div className={`${styles.carouselCustomButtonNext} customButtonPrev  `} onClick={goNext}>
             <svg
               className="lg:h-[80px] lg:w-[80px] xl:h-[100px] xl:w-[100px]"
@@ -136,9 +125,7 @@ const CarouselSlider = () => {
         </Swiper>
       )}
     </>
-
-
   )
-}
+};
 
-export default CarouselSlider
+export default CarouselSlider;

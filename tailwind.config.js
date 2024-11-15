@@ -2,14 +2,17 @@
 
 /** @type {import('tailwindcss').Config} */
 export const content = [
-  './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-  './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-  './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  "./node_modules/flowbite-react/lib/**/*.js",
+   './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+   './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+   './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+   "./node_modules/flowbite-react/lib/**/*.js",
 ];
 
 export const theme = {
    extend: {
+      fontFamily: {
+         sans: ['Inter', 'sans-serif'],
+      },
       colors: {
          mainPrimary: '#2F67B4',
          secondPrimary: '#11A950',
@@ -112,5 +115,5 @@ export const theme = {
 };
 
 export const plugins = [
-  require("flowbite/plugin")
+   require("flowbite/plugin")
 ];

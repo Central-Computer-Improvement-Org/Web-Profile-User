@@ -4,4 +4,4 @@ import ProjectPage from '@/components/projects/projectsPage';
 
 export default function DivisionPage() {
   return <ProjectPage />;
-}
+};

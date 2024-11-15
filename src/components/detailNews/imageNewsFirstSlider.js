@@ -5,11 +5,11 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import './image.css';
 import { host } from '../host';
 import ImageNotFound from '@/components/imageNotFound';
 import Loading from '@/components/loading';
 import styles from '@/components/detailNews/imageNewsFirstSlider.module.css';
+import './image.css';
 
 const ImageNewsFirstSlider = ({ image }) => {
   const swiperRef = useRef(null);
@@ -21,7 +21,7 @@ const ImageNewsFirstSlider = ({ image }) => {
     if (image && image.length > 0) {
       image.forEach((data) => {
         const img = document.createElement('img');
-        img.src = host + data;
+        img.src = host + data.mediaUri;
         img.onload = () => {
           setLoadedImages((prev) => prev + 1);
         };
@@ -33,13 +33,13 @@ const ImageNewsFirstSlider = ({ image }) => {
       setIsLoading(false);
     }
   }, [image]);
-
+  
   useEffect(() => {
     if (image && loadedImages + failedImages === image.length) {
       setIsLoading(false);
     }
   }, [loadedImages, failedImages, image]);
-
+  
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.update();
@@ -90,10 +90,10 @@ const ImageNewsFirstSlider = ({ image }) => {
                     <div className="w-full h-full">
                       {data ? (
                         <Image
-                          src={host + data}
+                          src={host + data.mediaUri}
                           width={0}
                           height={0}
-                          alt="Thumbnail News Central Computer Improvement"
+                          alt="Thumbnail News CCI"
                           className={`${styles.imagesNews} w-full xl:w-[902px] xl:h-[520px] lg:h-[700px] md:h-[530px] sm:h-[330px] h-[280px] xl:rounded-lg object-cover bg-no-repeat`}
                         />
                       ) : (
@@ -105,8 +105,8 @@ const ImageNewsFirstSlider = ({ image }) => {
             </Swiper>
           )}
           <div className=" w-full xl:mt-[40px] md:mt-[35px] mt-[10px] ">
-            <div className="flex justify-center items-center bg-transparent">
-              <div className="flex justify-center items-center  mx-auto bg-transparent">
+            <div className="flex items-center justify-center bg-transparent">
+              <div className="flex items-center justify-center mx-auto bg-transparent">
                 <div className="swiper-custom-pagination flex justify-center items-center gap-[10px]" />
               </div>
             </div>
