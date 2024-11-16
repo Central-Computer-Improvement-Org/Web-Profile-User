@@ -18,35 +18,35 @@ export function Providers({ children }) {
     const [isLoading, setIsLoading] = useState(true);
     const logError = (message, error) => console.error(message, error);
 
-    const fetchSettingDatas = async () => {
-        try {
-            const response = await request.get("/setting");
-            if (response?.status === 200) {
-                setSettingsData(response.data.data);
-            } else {
-                logError("Error fetching settings data:", response?.errors);
-            }
-        } catch (error) {
-            logError("Error fetching settings data:", error);
-        }
-    };
-
-    const fetchContactDatas = async () => {
-        try {
-            const response = await request.get("/contact");
-            if (response?.status === 200) {
-                setContactsData(response.data);
-            } else {
-                logError("Error fetching contact data:", response?.errors);
-            }
-        } catch (error) {
-            logError("Error fetching contact data:", error);
-        }
-    };
-
     useEffect(() => {
         setIsLoading(true);
 
+        const fetchSettingDatas = async () => {
+            try {
+                const response = await request.get("/setting");
+                if (response?.status === 200) {
+                    setSettingsData(response.data.data);
+                } else {
+                    logError("Error fetching settings data:", response?.errors);
+                }
+            } catch (error) {
+                logError("Error fetching settings data:", error);
+            }
+        };
+
+        const fetchContactDatas = async () => {
+            try {
+                const response = await request.get("/contact");
+                if (response?.status === 200) {
+                    setContactsData(response.data);
+                } else {
+                    logError("Error fetching contact data:", response?.errors);
+                }
+            } catch (error) {
+                logError("Error fetching contact data:", error);
+            }
+        };
+        
         // Pakai promise allSettled untuk fetch data secara bersamaan dan ngabaikan error dalam suatu fungsi fetch
         Promise.allSettled([
             fetchSettingDatas(),
