@@ -13,27 +13,7 @@ import request from '@/app/utils/request';
 import './newsSecond.css';
 
 
-const HeroSectionSliderSecond = () => {
-  const [news, setNews] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    request
-      .get('/news')
-      .then(function (res) {
-        if (res?.data?.code === 200) {
-          setNews(res.data.data);
-          setIsLoading(false);
-        } else {
-          setIsLoading(false);
-        }
-      })
-      .catch(function (err) {
-        console.error(err);
-        setIsLoading(false);
-      });
-  }, []);
-
+const HeroSectionSliderSecond = ({ newsDatas, isLoading }) => {
   return (
     <>
       {isLoading ? (
@@ -61,7 +41,7 @@ const HeroSectionSliderSecond = () => {
             }}
             className="w-full rounded-xl"
           >
-            {news.map((news) => (
+            {newsDatas?.map((news) => (
               <SwiperSlide
                 className="relative max-h-[625px] rounded-xl"
                 key={news.id}
@@ -71,7 +51,7 @@ const HeroSectionSliderSecond = () => {
                     <Image
                       className="object-cover w-full h-full rounded-xl"
                       layout="fill"
-                      src={host + news.mediaUri}
+                      src={`${host}${news?.mediaUri}`}
                       alt={"Image " + news.title}
                     />
                   </div>

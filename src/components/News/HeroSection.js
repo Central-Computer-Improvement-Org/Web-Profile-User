@@ -9,31 +9,11 @@ import 'swiper/css/pagination';
 
 import { host } from '../host';
 import request from '@/app/utils/request';
-import './news.css';
 import styles from './newsComponent.module.css';
+import './news.css';
 
 
-const HeroSection = () => {
-  const [news, setNews] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    request
-      .get('/news')
-      .then(function (res) {
-        if (res?.data?.code === 200) {
-          setNews(res.data.data);
-          setIsLoading(false);
-        } else {
-          setIsLoading(false);
-        }
-      })
-      .catch(function (err) {
-        console.error(err);
-        setIsLoading(false);
-      });
-  }, []);
-
+const HeroSection = ({ newsDatas, isLoading }) => {
   return (
     <>
       {isLoading ? (
@@ -57,7 +37,7 @@ const HeroSection = () => {
             // }}
             className="w-full rounded-xl"
           >
-            {news.slice(0, 4).map((news) => (
+            {newsDatas?.slice(0, 4).map((news) => (
               <SwiperSlide
                 className="relative rounded-lg"
                 key={news.id}

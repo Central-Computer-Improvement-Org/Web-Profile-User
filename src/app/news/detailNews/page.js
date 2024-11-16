@@ -5,14 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import moment from 'moment';
 
-import request from '../../utils/request';  
-import { FormatString } from '../../utils/stringUtils';
 import { host } from '@/components/host';
+import request from '../../utils/request';  
 import ImageNewsFirstSlider from '@/components/detailNews/imageNewsFirstSlider';
 import RekomendasiNewsSlider from '@/components/detailNews/rekomendasiNewsSlider';
-import Footer from '@/components/footer';
-import Header from '@/components/header';
-import Navbar from '@/components/navbar';
 import Loading from '@/components/loading';
 import TextNotFound from '@/components/teksNotFound';
 import ImageNotFound from '@/components/imageNotFound';
@@ -33,102 +29,74 @@ export default function DetailNews() {
 
   const handleError = () => {
     setTitle('Title not found');
-    setThumbnail('public/assets/icon/notfound.svg');
-    setImage('public/assets/icon/notfound.svg');
+    setThumbnail('assets/icon/notfound.svg');
+    setImage('assets/icon/notfound.svg');
     setDescription('Description not found');
     setIsLoading(false);
   };
 
   useEffect(() => {
     setIsLoading(true);
-    request
-      .get('/news')
-      .then((response) => {
-        if (response.data.code === 200) {
+  
+    // Mengambil detail news hanya jika `newsId` tersedia dan belum pernah diambil sebelumnya
+    const fetchDetailNews = newsId ? request.get(`/news?id=${newsId}`).then((response) => {
+      if (response?.data?.code === 200) {
+        setTitle(response.data.data.title);
+        setThumbnail(response.data.data.mediaUri);
+        setImage(response.data.data.detailNewsMedia);
+        setDescription(response.data.data.description);
+        setDate(response.data.data.createdAt);
+      } else {
+        handleError();
+      }
+    }).catch(() => {
+      handleError();
+    }) : Promise.resolve(); // Kalau tidak ada newsId, skip request ini
+  
+    const handleDescription = () => {
+      if (description) {
+        const doc = new DOMParser().parseFromString(description, 'text/html');
+        const htmlElement = doc.documentElement;
+        const classNames = Array.from(htmlElement.classList).join(' ');
+        htmlElement.setAttribute('class', classNames);
+        setParsedHTML(htmlElement);
+      } else {
+        setParsedHTML(null);
+      }
+    };
+  
+    // Menangani request untuk data news lainnya
+    const getDataNews = async () => {
+      try {
+        const response = await request.get('/news');
+        if (response?.status === 200) {
           setNewsAlso(response.data.data || []);
+          const newData = response.data.data;
+          const sortedData = newData.sort((a, b) => b.visitedCount - a.visitedCount);
+          setNewsTopData(sortedData);
         } else {
           console.warn('Unexpected response code :', response.data.code);
         }
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 404) {
-          console.error('Data not found');
-        } else {
-          console.error('Internal server error, please try again');
-        }
-      })
+      } catch (error) {
+        console.error('Failed to fetch data news', error);
+      }
+    };
+  
+    // Jalanin semua request bersamaan pakai Promise.all
+    Promise.all([fetchDetailNews, getDataNews()])
       .finally(() => {
+        handleDescription(); // Panggil handleDescription setelah request selesai
         setIsLoading(false);
       });
-  }, [description]);  
-
-  useEffect(() => {
-    if (newsId) { 
-      setIsLoading(true);
-      request
-        .get(`/news?id=${newsId}`)
-        .then((response) => {
-          if (response.data.code === 200) {
-            setTitle(response.data.data.title);
-            setThumbnail(response.data.data.mediaUri);
-            setImage(response.data.data.detailNewsMedia);
-            setDescription(response.data.data.description);
-            setDate(response.data.data.createdAt);
-            setIsLoading(false);
-          } else {
-            handleError();
-          }
-        })
-        .catch(() => {
-          handleError();
-        });
-    } else {
-      handleError();
-    }
-  }, [newsId]);
-
-  useEffect(() => {
-    request
-      .get('/news')
-      .then((response) => {
-        if (response.status === 200) {
-          const newData = response.data.data;
-          const sortedData = newData.sort(
-            (a, b) => b.visitedCount - a.visitedCount
-          );
-          setNewsTopData(sortedData);
-        } else {
-          console.warn('Unexpected response status :', response.data.status);
-        }
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 404) {
-          console.error('Data not found');
-        } else {
-          console.error('Internal server error, please try again');
-        }
-      });
-  }, []);
-
-  useEffect(() => {
-    if (description) {
-      const doc = new DOMParser().parseFromString(description, 'text/html');
-      const htmlElement = doc.documentElement;
-      const classNames = Array.from(htmlElement.classList).join(' ');
-      htmlElement.setAttribute('class', classNames);
-      setParsedHTML(htmlElement);
-    } else {
-      setParsedHTML(null);
-    }
-  }, [description]);
+  
+  }, [newsId, description]);  
   
   return (
     <>
-      <Header />
-      <Navbar />
       <main className="w-full h-auto">
         <span className="block h-full bg-gradientAccentTwo">
           <span className="block h-full bg-gradientDefaultTwo">
+            {/* Main News */}
             <section id="headLine" className="w-full md:pb-0 sm:pb-[111px] pb-[60px]">
               {/* Title and date news area */}
               <div
@@ -261,9 +229,7 @@ export default function DetailNews() {
                                     width={150}
                                     height={100}
                                     alt="Image News Central Computer Improvement"
-                                    responsive="true"
-                                    src={host + data?.mediaUri}
-                                    // className={`${styles.detailTopNewsImage} w-full xl:h-auto rounded-r-xl object-cover border-l-[1px] border-bluePallete-500`}
+                                    src={`${host}${data?.mediaUri}`}
                                     className={`w-full max-h-[90px] sm:max-h-[110px] md:max-h-[120px] lg:max-h-[130px] xl:max-h-[100px] rounded-r-xl object-cover object-center sm:object-top border-l-[1px] border-bluePallete-500`}
                                   />
                                 ) : (
@@ -278,6 +244,7 @@ export default function DetailNews() {
                 </div>
               </div>
             </section>
+            {/* Also in News */}
             <section
               id="rekomendasiNews"
               className="w-full py-[111px] md:block hidden"
@@ -294,7 +261,6 @@ export default function DetailNews() {
           </span>
         </span>
       </main>
-      <Footer />
     </>
   );
-}
+};

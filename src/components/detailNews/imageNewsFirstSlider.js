@@ -35,7 +35,7 @@ const ImageNewsFirstSlider = ({ image }) => {
   }, [image]);
   
   useEffect(() => {
-    if (image && loadedImages + failedImages === image.length) {
+    if (image && loadedImages + failedImages > image.length) {
       setIsLoading(false);
     }
   }, [loadedImages, failedImages, image]);
@@ -57,11 +57,11 @@ const ImageNewsFirstSlider = ({ image }) => {
       }
     }
   }, [isLoading]);
-
+  
   return (
     <>
       {isLoading ? (
-        <div className="w-[600px] h-[500px] flex justify-center items-center">
+        <div className="flex items-center justify-center w-full h-auto">
           <Loading size="w-[150px] h-[150px]" textAlignment="text-center" />
         </div>
       ) : (
@@ -90,7 +90,7 @@ const ImageNewsFirstSlider = ({ image }) => {
                     <div className="w-full h-full">
                       {data ? (
                         <Image
-                          src={host + data.mediaUri}
+                          src={`${host}${data?.mediaUri}`}
                           width={0}
                           height={0}
                           alt="Thumbnail News CCI"

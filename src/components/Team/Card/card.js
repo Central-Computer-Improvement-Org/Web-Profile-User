@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useWindowSize } from '@uidotdev/usehooks';
+
 import { host } from '@/components/host';
 
 export default function TeamCard({
@@ -46,7 +47,7 @@ export default function TeamCard({
                   </div>
                </div>
                <Image
-                  src={host + profileUri}
+                  src={`${host}${profileUri}`}
                   className={`md:w-[132px] md:h-[132px] lg:w-[200px] lg:h-[201.54px] m`}
                   height={0}
                   width={0}
@@ -65,7 +66,7 @@ export default function TeamCard({
                      </p>
                   </div>
                   <Image
-                     src={host + profileUri}
+                     src={`${host}${profileUri}`}
                      className={`w-[55px] h-[55px]`}
                      height={0}
                      width={0}

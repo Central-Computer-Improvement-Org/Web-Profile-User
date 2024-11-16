@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,7 +5,6 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import request from "@/app/utils/request";
 import { host } from "@/components/host";
 import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
@@ -14,8 +12,8 @@ import TextNotFound from "@/components/teksNotFound";
 import styles from "@/components/Home/homeComponent.module.css";
 
 
-const DivisionSecondSlider = ({divisionData, isLoading}) => {
-  if (divisionData?.length === 0 || 0) {
+const DivisionSecondSlider = ({divisionsData, isLoading}) => {
+  if (divisionsData?.length === 0 || 0) {
     return (
       <div className="w-full h-[240px] sm:h-[300px] md:h-[351px] flex items-center justify-center">
         <h1 className="font-bold text-[18px] sm:text-[24px] text-bluePallete-700">
@@ -28,7 +26,7 @@ const DivisionSecondSlider = ({divisionData, isLoading}) => {
   return (
     <>
       {isLoading ? (
-        <Loading size="w-[100px] h-[100px]" textAlignment="text-center" />
+        <Loading size="w-[70px] h-[70px] sm:w-[100px] sm:h-[100px]" textAlignment="text-center !pt-10 sm:pt-0" />
       ) : (
         <Swiper
           style={{
@@ -65,7 +63,7 @@ const DivisionSecondSlider = ({divisionData, isLoading}) => {
           }}
           className="w-full h-[360px]"
         >
-          {divisionData
+          {divisionsData
             ?.filter((v) => v.name !== "All")
             .map((data, index) => (
               <SwiperSlide key={index} className={`w-full my-5 md:my-0`}>

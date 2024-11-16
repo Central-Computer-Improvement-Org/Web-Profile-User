@@ -4,18 +4,14 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { FormatString } from '@/app/utils/stringUtils';
 import { host } from '@/components/host';
+import { FormatString } from '@/app/utils/stringUtils';
 import request from '@/app/utils/request';
-import Footer from '@/components/footer';
-import Header from '@/components/header';
-import Navbar from '@/components/navbar';
 import Pagination from '@/components/projects/pagination';
 import ShowcasingProjectSlider from '@/components/projects/showcasingProjectSlider';
 
 
 const LIMITER = 5;
-
 const ProjectPage = () => {
   const searchParams = useSearchParams();
   const page = searchParams.get('page') ?? '1';
@@ -84,8 +80,6 @@ const ProjectPage = () => {
 
   return (
     <>
-      <Header />
-      <Navbar />
       <main className="w-full h-auto mt-[60px] sm:mt-[90px] md:mt-[120px]">
         <div className="pt-[36px]" />
         {/* Title & desc area */}
@@ -165,10 +159,9 @@ const ProjectPage = () => {
                       <div className="rounded-[10px]">
                         <Image
                           alt="project-img"
-                          src={host + data.imageUri}
+                          src={`${host}${data?.imageUri}`}
                           width={467}
                           height={284}
-                          responsive="true"
                           style={{ backgroundSize: 'contain' }}
                           className={`w-full h-[189px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] lg:!w-[400px]  lg:h-[261px] xl:w-[455px]  xl:h-[311px]  xl:max-w-[455px]  xl:max-h-[311px] rounded-[10px] object-contain`}
                         />
@@ -181,7 +174,7 @@ const ProjectPage = () => {
                                 width={0}
                                 height={0}
                                 alt={`project-logo-${data.name}`}
-                                src={host + data.iconUri}
+                                src={`${host}${data?.iconUri}`}
                                 className="max-w-[50px] max-h-[50px] lg:w-[50px] lg:h-[50px] w-[25px] h-[25px] lg:block hidden object-contain"
                               />
                               <h1 className="xl:text-[30px] lg:text-[25px] md:text-[25px] text-[18px] lg:font-semibold font-bold text-black">
@@ -276,7 +269,6 @@ const ProjectPage = () => {
         </div>
         <div className="pt-[44px] sm:pt-[55px] lg:pt-[88px]" />
       </main>
-      <Footer />
     </>
   );
 };

@@ -100,7 +100,6 @@ const ProjectData = () => {
     }
   }, [isMovingData]);
 
-  // handle rendering data yang tadinya loading setelah data berpindah
   useEffect(() => {
     if (!isMovingData) {
       setIsLoading(false);

@@ -2,7 +2,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import 'dotenv/config'
 
-
 const request = axios.create({
    baseURL: `${process.env.NEXT_PUBLIC_HOST}/api/v1`,
    // uncomment baseURL dibawah ketika running di local, dan comment baseURL dibawah ketika push ke gihtub
@@ -16,6 +15,7 @@ const request = axios.create({
       'Access-Control-Allow-Credentials': 'true',
    },
 });
+
 const requestHandler = (request) => {
    let token = Cookies.get('token');
 

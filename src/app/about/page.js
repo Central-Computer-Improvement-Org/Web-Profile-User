@@ -1,14 +1,9 @@
 import EventCard from "@/components/Division/EventCard";
-import Divisions from "@/components/Team/team";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
-import Nav from "@/components/navbar";
+import IntiDivisions from "@/components/Team/team";
 
-export default function Home() {
+export default function About() {
    return (
       <>
-         <Header />
-         <Nav />
          <main className="w-full h-auto">
             <span className="block h-full bg-gradientAccentTwo">
                <spacn className="block h-full bg-gradientDefaultTwo">
@@ -51,14 +46,13 @@ export default function Home() {
                      </section>
                      <section id="team" className="w-full md:px-0">
                         <div className="container flex flex-col items-center w-full mx-auto">
-                           <Divisions />
+                           <IntiDivisions />
                         </div>
                      </section>
                   </div>
                </spacn>
             </span>
          </main>
-         <Footer />
       </>
    );
 };

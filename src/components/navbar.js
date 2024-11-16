@@ -6,36 +6,16 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { host } from "./host";
-import request from "../app/utils/request";
+import { useSettings } from "@/app/provider";
 import logoCCI from '/public/assets/logo/logo_cci.svg';
 
 
 const Navbar = () => {
   const router = useRouter();
   const navOutside = useRef();
-  const [settingsData, setSettingsData] = useState(null);
+  const { settingsData } = useSettings();
   const [isClick, setIsClick] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    request
-      .get("/setting")
-      .then((response) => {
-        if (response.status === 200) {
-          setSettingsData(response?.data?.data);
-        } else {
-          console.error(response.errors);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
 
   // handle toggle icon navbar untuk mengeluarkan menu navbar saat posisi mobile dari kiri 
   const toggleNavbar = () => {
@@ -49,7 +29,7 @@ const Navbar = () => {
 
   // handle nav menu scroll ke section division
   const handleScrollToDivision = () => {
-    const divisionPage = document.getElementById('divisionPage');
+    const divisionPage = document.getElementById('divisionArea');
     if (divisionPage) {
       divisionPage.scrollIntoView({ behavior: 'smooth' });
     } else {
@@ -61,7 +41,7 @@ const Navbar = () => {
 
   // handle nav nemu scroll ke section contact
   const scrollToContact = () => {
-    const contactLink = document.getElementById("contact");
+    const contactLink = document.getElementById("contactArea");
     if (contactLink) {
       contactLink.scrollIntoView({ behavior: "smooth" });
     }

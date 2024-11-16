@@ -1,52 +1,19 @@
 "use client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { host } from "@/components/host";
-import request from "../app/utils/request";
+import { useSettings } from "@/app/provider";
 import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
-import TextNotFound from "@/components/teksNotFound";
 import logoCCI from '/public/assets/logo/logo_cci.svg';
 
 
 const Footer = () => {
-  const [settingsData, setSettingsData] = useState(null);
-  const [contactData, setContactData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const { settingsData, contactsData, isLoading } = useSettings();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-  
-      try {
-        const settingsResponse = await request.get("/setting");
-        const contactResponse = await request.get("/contact");
-  
-        if (settingsResponse.status === 200) {
-          setSettingsData(settingsResponse.data.data);
-        } else {
-          console.error(settingsResponse.errors);
-        }
-  
-        if (contactResponse.status === 200) {
-          setContactData(contactResponse.data);
-        } else {
-          console.error(contactResponse.errors);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-  
-    fetchData();
-  }, []);  
-  
   return (
-    <footer id="contact" className="w-full h-auto bg-bluePallete-800">
+    <footer id="contactArea" className="w-full h-auto bg-bluePallete-800">
       <div className="w-full xl:max-w-[1300px] lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-md mx-auto px-5 sm:px-0">
         <div className="w-full flex flex-col lg:flex-row justify-between items-end space-y-[20px] sm:space-y-[40px] lg:space-y-0">
           <div className="w-full h-full flex flex-col flex-wrap space-y-[25px] sm:space-y-5 lg:space-y-[80px] justify-between pt-[23px] md:pt-[90px]">
@@ -108,32 +75,35 @@ const Footer = () => {
           {/* contact data*/}
           <div className="flex flex-col items-center justify-between w-full h-full pl-0 space-y-5 basis-full lg:basis-2/5 lg:pl-20">
             <div className="w-[170px] sm:w-[345px] md:w-[385px] flex flex-row justify-between">
-            {contactData?.data?.map((contact, index) => (
-              <a
-                key={index}
-                href={contact.accountUri}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white"
-              >
-                {isLoading ? (
-                  <Loading
-                    size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
-                    textAlignment="text-left"
-                  />
-                ) : contact.iconUri ? (
-                  <Image
-                    src={`${host}${contact.iconUri}`}
-                    alt={`Logo ${contact.name}`}
-                    width={50}
-                    height={50}
-                    className="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px] cursor-pointer object-contain"
-                  />
-                ) : (
-                  <ImageNotFound className="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px] object-contain" />
-                )}
-              </a>
-            ))}
+            {contactsData?.data && contactsData?.data?.length > 0 ? (
+              contactsData.data.map((contact, index) => (
+                <a
+                  key={index}
+                  href={contact.accountUri}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-[35px] h-[35px] sm:w-[70px] sm:h-[70px] rounded border-2 border-white"
+                >
+                  {isLoading ? (
+                    <Loading
+                      size="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px]"
+                      textAlignment="text-left"
+                    />
+                  ) : contact.iconUri ? (
+                    <Image
+                      src={`${host}${contact.iconUri}`}
+                      alt={`Logo ${contact.name}`}
+                      width={50}
+                      height={50}
+                      className="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px] cursor-pointer object-contain"
+                    />
+                  ) : (
+                    <ImageNotFound className="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px] object-contain" />
+                  )}
+                </a>
+            ))) : (
+              <ImageNotFound className="w-[25px] h-[25px] sm:w-[50px] sm:h-[50px] object-contain" />
+            )}
             </div>
             <Link href="/credits">
               <button className="w-[170px] md:w-[385px] h-[15px] sm:h-[24px] md:h-[49px] flex justify-center items-center rounded-[5px] bg-white">

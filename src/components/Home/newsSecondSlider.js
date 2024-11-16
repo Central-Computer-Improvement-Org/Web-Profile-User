@@ -2,60 +2,25 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
 import { host } from "@/components/host";
-import request from "@/app/utils/request";
 import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
 import styles from "@/components/Home/homeComponent.module.css";
 
 
-const NewsSecondSlider = () => {
-  const [newsData, setNewsData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    request
-      .get("/news")
-      .then((response) => {
-        if (response.status === 200) {
-          const formatDateData = response?.data?.data?.map((item) => {
-            const createdAt = moment(String(item.createdAt)).format("MMM DD[,] YYYY")
-            return {
-              ...item,
-              date: createdAt,
-            };
-          });
-          // pengurutan data berdasarkan tanggal data terbaru
-          const sortNewsData = formatDateData.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-          // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
-          const limitNewsData = sortNewsData.slice(0, 5);
-          setNewsData(limitNewsData);
-        } else {
-          console.error(response.errors);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
-
+const NewsSecondSlider = ({ newsData, isLoading }) => {
   return (
     <>
       {isLoading ? (
         <Loading
-          size="w-[70px] h-[70px] mb-10 sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
-          textAlignment="text-center"
+          size="w-[70px] h-[70px] mb-10 sm:w-[150px] sm:h-[150px]"
+          textAlignment="text-center pt-5"
         />
       ) : (
         <Swiper
@@ -104,7 +69,7 @@ const NewsSecondSlider = () => {
           modules={[Pagination]}
           className={"w-full h-[290px]"}
         >
-          {newsData.map((data, index) => (
+          {newsData?.map((data, index) => (
             <SwiperSlide
               key={index}
               className="px-1 !flex !justify-start !items-center !flex-col"
