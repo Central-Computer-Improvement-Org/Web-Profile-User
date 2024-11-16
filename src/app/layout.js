@@ -1,10 +1,15 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
 import { Suspense } from "react";
+import { Inter } from "next/font/google";
+
+import { Providers } from "./provider";
 import request from "./utils/request";
+import Header from "@/components/header";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import "./globals.css";
+
 
 const inter = Inter({ subsets: ["latin"] });
-
 export async function generateMetadata() {
    const response = await request
       .get('/setting')
@@ -24,23 +29,32 @@ export async function generateMetadata() {
    return {
       title: response,
       description:
-         'Unit Kegiatan Mahasiswa Universitas Telkom yang berfokus pada bidang ICT (Information, Communication and Technology).',
+         'test',
    };
-}
+};
 
 export default function RootLayout({ children }) {
    return (
       <html lang="en">
          <body className={inter.className}>
-            <Suspense
-               fallback={
-                  <div>
-                     Loading...
-                  </div>
-               }
-            >
-               {children}
-            </Suspense>
+            <Providers>
+               <div className="flex flex-col min-h-screen">
+               <Header />
+                  <Navbar />
+                  <main className="flex-grow">
+                     <Suspense
+                        fallback={
+                           <div className="flex items-center justify-center text-center">
+                              Loading...
+                           </div>
+                        }
+                     >
+                        {children}
+                     </Suspense>
+                  </main>
+                  <Footer />
+               </div>
+            </Providers>
          </body>
       </html>
    );

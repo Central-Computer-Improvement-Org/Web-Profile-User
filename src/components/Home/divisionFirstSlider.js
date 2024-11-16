@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,7 +7,6 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import request from "@/app/utils/request";
 import { host } from "@/components/host";
 import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
@@ -15,9 +14,8 @@ import TextNotFound from "@/components/teksNotFound";
 import styles from "@/components/Home/homeComponent.module.css";
 
 
-const DivisionFirstSlider = ({divisionData, isLoading}) => {
+const DivisionFirstSlider = ({divisionsData, isLoading}) => {
   const swiperRef = useRef(null);
-
 
   const goNext = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -25,7 +23,7 @@ const DivisionFirstSlider = ({divisionData, isLoading}) => {
     }
   };
 
-  if (divisionData?.length === 0 || 0) {
+  if (divisionsData?.length === 0 || 0) {
     return (
       <div className="w-full h-[351px] md:h-[351px] flex items-center justify-center">
         <h1 className="font-bold text-[24px] text-bluePallete-700">
@@ -33,17 +31,17 @@ const DivisionFirstSlider = ({divisionData, isLoading}) => {
         </h1>
       </div>
     );
-  }
+  };
 
   return (
     <>
       <div className="relative w-full !max-h-fit">
         {/* Pengecekan laoding disini wajib, karena untuk menghindari error fungsi navigation swiper yang membutuhkan data harus wajib ada terlebih dahulu di dalam tag Swiper */}
         {isLoading ? (
-          <Loading
-            size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
-            textAlignment="text-center"
-          />
+            <Loading
+              size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px]"
+              textAlignment="text-center"
+            />
         ) : (
           <Swiper
             ref={swiperRef}
@@ -67,7 +65,7 @@ const DivisionFirstSlider = ({divisionData, isLoading}) => {
             }}
             className={"w-full"}
           >
-            {divisionData
+            {divisionsData
               ?.filter((v) => v.name !== "All")
               .map((data, index) => (
                 <SwiperSlide

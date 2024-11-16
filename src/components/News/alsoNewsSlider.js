@@ -1,22 +1,19 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import moment from 'moment';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import styles from '@/components/detailNews/rekomendasiNewsSlider.module.css';
-import { FormatString } from '@/app/utils/stringUtils';
-import moment from 'moment';
-import request from '@/app/utils/request';
-import { host } from '../host';
-import Link from 'next/link';
 
-const AlsoNewsSlider = () => {
-   const [newsData, setNewsData] = useState([]);
-   const [isLoading, setIsLoading] = useState();
-   
+import { host } from '../host';
+import { FormatString } from '@/app/utils/stringUtils';
+import request from '@/app/utils/request';
+import styles from '@/components/detailNews/rekomendasiNewsSlider.module.css';
+
+const AlsoNewsSlider = ( {newsDatas, isLoading} ) => {
    const iconArrow = (
       <svg
          className="xl:w-[55px] md:w-[40px] "
@@ -32,23 +29,7 @@ const AlsoNewsSlider = () => {
          />
       </svg>
    );
-
-   useEffect(() => {
-      request
-         .get('/news')
-         .then(function (res) {
-            if (res.data.code === 200) {
-               setNewsData(res.data.data);
-               setIsLoading(false);
-            } else {
-               setIsLoading(false);
-            }
-         })
-         .catch(function (err) {
-            console.error(err);
-            setIsLoading(false);
-         });
-   }, []);
+   
    return (
       <div className="relative">
          <Swiper
@@ -83,8 +64,8 @@ const AlsoNewsSlider = () => {
             }}
             modules={[Navigation]}
          >
-            {newsData &&
-               newsData.map((data, index) => (
+            {newsDatas &&
+               newsDatas?.map((data, index) => (
                   <SwiperSlide
                      key={index}
                      className={`cursor-pointer xl:!mr-[42px] lg:!mr-[20px] md:!mr-[80px] !mr-[20px] ${styles.rekomendasiNewsCardSwiper} xl:!w-[384px] lg:!w-[300px] md:!w-[280px] !w-[200px]`}
@@ -93,7 +74,7 @@ const AlsoNewsSlider = () => {
                         <div className="bg-white rounded-[10px]">
                            <div className="h-[162px] ">
                               <Image
-                                 src={host + data.mediaUri}
+                                 src={`${host}${data?.mediaUri}`}
                                  width={0}
                                  height={0}
                                  alt="Thumbnail Image News Central Computer Improvment"

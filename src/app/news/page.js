@@ -4,9 +4,6 @@ import Link from "next/link";
 
 import { host } from "@/components/host";
 import request from "../utils/request";
-import Header from "@/components/header";
-import Nav from "@/components/navbar";
-import Footer from "@/components/footer";
 import AlsoNewsSlider from "@/components/News/alsoNewsSlider";
 import TopRead from "@/components/News/topRead";
 import ArticleCard from "@/components/News/ArticleCard";
@@ -15,14 +12,15 @@ import HeroSectionSliderSecond from "@/components/News/HeroSectionSliderSecond";
 import Loading from "@/components/loading";
 
 export default function News() {
-  const [articleDatas, setArticle] = useState();
+  const [newsDatas, setNewsDatas] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     request
       .get("/news")
       .then(function (res) {
         if (res?.data?.code === 200) {
-          setArticle(res.data.data);
+          setNewsDatas(res.data.data);
           setIsLoading(false);
         } else {
           setIsLoading(false);
@@ -36,8 +34,6 @@ export default function News() {
 
   return (
     <>
-      <Header />
-      <Nav />
       <span className="block h-full bg-gradientAccentTwo">
         <span className="block h-full bg-gradientDefaultTwo">
           <main
@@ -50,17 +46,17 @@ export default function News() {
             {/* hero thumbnail news */}
             <section id="hero-section" className="container relative w-full">
               <div className="items-center content-center mt-4 bg-transparent justify-items-cente">
-                <HeroSection />
+                <HeroSection newsDatas={newsDatas} isLoading={isLoading} />
               </div>
             </section>
             <div className="xl:mt-[95px] md:mt-[80px] mt-[40px]" />
-            {/* list article/news with title & top read news of the day */}
+            {/* list news with title on Top Read News of The Day */}
             <section id="article">
               <div className="container">
                 <div className="flex flex-row flex-wrap-reverse w-full ">
                   <div className="flex-col hidden gap-3 mt-5 sm:w-full xl:mt-0 xl:basis-7/12 lg:flex">
-                    {articleDatas &&
-                      articleDatas.slice(0, 5).map((data, index) => (
+                    {newsDatas &&
+                      newsDatas.slice(0, 5).map((data, index) => (
                         <Link
                           key={index}
                           href={`/news/detailNews?id=${data.id}`}
@@ -97,8 +93,8 @@ export default function News() {
                           textAlignment="text-center"
                         />
                       ) : (
-                        articleDatas &&
-                        articleDatas.slice(0, 3).map((data, index) => (
+                        newsDatas &&
+                        newsDatas.slice(0, 3).map((data, index) => (
                           <Link
                             key={index}
                             href={`/news/detailNews?id=${data.id}`}
@@ -128,15 +124,15 @@ export default function News() {
                 </h1>
               </div>
               <div className="flex flex-col gap-4 lg:hidden">
-                {articleDatas &&
-                  articleDatas.slice(0, 5).map((data, index) => (
+                {newsDatas &&
+                  newsDatas.slice(0, 5).map((data, index) => (
                     <Link key={index} href={`/news/detailNews?id=${data.id}`}>
                       <ArticleCard title={data.title} />
                     </Link>
                   ))}
               </div>
               <div className="hidden lg:block">
-                <AlsoNewsSlider />
+                <AlsoNewsSlider newsDatas={newsDatas} isLoading={isLoading} />
               </div>
             </section>
             {/* Slider news by thumbnail */}
@@ -144,12 +140,11 @@ export default function News() {
               id="carousel"
               className="container relative hidden w-full mx-auto lg:block"
             >
-              <HeroSectionSliderSecond />
+              <HeroSectionSliderSecond newsDatas={newsDatas} isLoading={isLoading} />
             </section>
           </main>
         </span>
       </span>
-      <Footer />
     </>
   );
 };

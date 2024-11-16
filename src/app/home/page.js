@@ -2,123 +2,143 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import moment from "moment";
+import "moment/locale/id";
 
 import { host } from "@/components/host";
 import request from "@/app/utils/request";
-import Header from "@/components/header";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import NewsFirstSlider from "@/components/Home/newsFirstSlider";
 import NewsSecondSlider from "@/components/Home/newsSecondSlider";
 import DivisionFirstSlider from "@/components/Home/divisionFirstSlider";
 import DivisionSecondSlider from "@/components/Home/divisionSecondSlider";
 import ProjectCard from "@/components/Home/projectCard";
+// import SecondProjectCard from "@/components/Home/projectCardSecond";
 import TextNotFound from "@/components/teksNotFound";
 import Loading from "@/components/loading";
 import styles from "@/app/home/homePage.module.css";
 import logoCCI from '/public/assets/logo/logo_cci.svg';
 
+
 export default function Home() {
   const [settingsData, setSettingsData] = useState(null);
-  const [awardData, setAwardData] = useState(null);
-  const [memberData, setMemberData] = useState(null);
-  const [projectData, setProjectData] = useState(null);
-  const [divisionData, setDivisionData] = useState(null);
+  const [awardsData, setAwardsData] = useState(null);
+  const [membersData, setMembersData] = useState(null);
+  const [divisionsData, setDivisionsData] = useState(null);
+  const [projectsData, setProjectsData] = useState(null);
+  const [newsData, setNewsData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const logError = (message, error) => console.error(message, error);
 
-
-    const fetchAwardData = async () => {
-      try {
-        const response = await request.get("/awards");
-        if (response.status === 200) {
-          setAwardData(response?.data);
-        } else {
-          console.error(response.errors);
-        }
-      } catch (error) {
-        console.error(error);
+  const fetchSettingDatas = async () => {
+    try {
+      const response = await request.get("/setting");
+      if (response?.status === 200) {
+        setSettingsData(response.data.data);
+      } else {
+        logError("Error fetching settings data:", response?.errors);
       }
-    };
-
-    const fetchMemberData = async () => {
-      try {
-        const response = await request.get("/users");
-        if (response.status === 200) {
-          setMemberData(response?.data);
-        } else {
-          console.error(response.errors);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const fetchProjectData = async () => {
-      try {
-        const response = await request.get("/projects");
-        if (response.status === 200) {
-          setProjectData(response.data);
-        } else {
-          console.error(response.errors);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const fetchSettingData = async () => {
-        request
-            .get("/setting")
-            .then((response) => {
-                if (response.status === 200) {
-                    setSettingsData(response?.data?.data);
-                } else {
-                    console.error(response.errors);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    } catch (error) {
+      logError("Error fetching settings data:", error);
     }
+  };
 
-    const fetchDivisionData = async () => {
-        request
-            .get("/users/divisions")
-            .then((response) => {
-                if (response.status === 200) {
-                    const divisioData = response?.data?.data?.filter(
-                        (item) => item.name !== "All"
-                    );
-                    setDivisionData(divisioData);
-                } else {
-                    console.error(response.errors);
-                }
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                console.error(error);
-                setIsLoading(false);
-            });
+  const fetchAwardDatas = async () => {
+    try {
+      const response = await request.get("/awards");
+      if (response?.status === 200) {
+        setAwardsData(response.data);
+      } else {
+        logError("Error fetching award data:", response?.errors);
+      }
+    } catch (error) {
+      logError("Error fetching award data:", error);
     }
+  };
 
-    useEffect(() => {
-        setIsLoading(true);
+  const fetchMemberDatas = async () => {
+    try {
+      const response = await request.get("/users");
+      if (response?.status === 200) {
+        setMembersData(response.data);
+      } else {
+        logError("Error fetching member data:", response?.errors);
+      }
+    } catch (error) {
+      logError("Error fetching member data:", error);
+    }
+  };
 
-        Promise.all([
-            fetchAwardData(),
-            fetchMemberData(),
-            fetchProjectData(),
-            fetchSettingData(),
-            fetchDivisionData()
-        ]).then(([]) => {
-            setIsLoading(false);
-        })
-    }, []);
+  const fetchDivisionDatas = async () => {
+    try {
+      const response = await request.get("/users/divisions");
+      if (response?.status === 200) {
+        const filteredData = response.data?.data.filter((item) => item.name !== "All");
+        setDivisionsData(filteredData);
+      } else {
+        logError("Error fetching division data:", response?.errors);
+      }
+    } catch (error) {
+      logError("Error fetching division data:", error);
+    }
+  };
+
+  const fetchProjectDatas = async () => {
+    try {
+      const response = await request.get("/projects");
+      if (response?.status === 200) {
+        setProjectsData(response.data);
+      } else {
+        logError("Error fetching project data:", response?.errors);
+      }
+    } catch (error) {
+      logError("Error fetching project data:", error);
+    }
+  };
+
+  const fetchNewsDatas = async () => {
+    try {
+      const response = await request.get("/news");
+      if (response?.status === 200) {
+        const formatDateData = response?.data?.data?.map((item) => {
+          const createdAt = moment(String(item.createdAt)).format("MMM DD[,] YYYY")
+          return {
+            ...item,
+            date: createdAt,
+          };
+        });
+        // pengurutan data berdasarkan tanggal data terbaru
+        const sortNewsData = formatDateData.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
+        const limitNewsData = sortNewsData.slice(0, 5);
+        setNewsData(limitNewsData);
+      } else {
+        logError("Error fetching news data:", response?.errors);
+      }
+    } catch (error) {
+      logError("Error fetching news data:", error);
+    }
+  };
+  
+  useEffect(() => {
+    setIsLoading(true);
+
+    // Pakai promise allSettled untuk fetch data secara bersamaan dan ngabaikan error dalam suatu fungsi fetch
+    Promise.allSettled([
+      fetchSettingDatas(),
+      fetchAwardDatas(),
+      fetchMemberDatas(),
+      fetchDivisionDatas(),
+      fetchProjectDatas(),
+      fetchNewsDatas()
+    ]).finally(() => {
+      setIsLoading(false);
+    });
+  }, []);
 
   return (
     <>
-      <Header />
-      <Navbar settingData={settingsData}/>
       <main className="w-full h-auto">
         {/* hero section */}
         <section id="hero" className="w-full h-auto pb-20 sm:pb-32 pt-20 sm:pt-[170px]">
@@ -216,12 +236,12 @@ export default function Home() {
                             </p>
                             {isLoading ? (
                               <Loading size="w-[10px] h-[10px] sm:w-[20px] sm:h-[20px]" />
-                            ) : awardData?.recordsTotal !== undefined &&
-                              awardData?.recordsTotal !== null ? (
+                            ) : awardsData?.recordsTotal !== undefined &&
+                              awardsData?.recordsTotal !== null ? (
                               <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                                {awardData.recordsTotal === 0
+                                {awardsData.recordsTotal === 0
                                   ? "0"
-                                  : awardData.recordsTotal}
+                                  : awardsData.recordsTotal}
                                 +
                               </p>
                             ) : (
@@ -251,12 +271,12 @@ export default function Home() {
                             </p>
                             {isLoading ? (
                               <Loading size="w-[10px] h-[10px] sm:w-[20px] sm:h-[20px]" />
-                            ) : memberData?.recordsTotal !== undefined &&
-                              memberData?.recordsTotal !== null ? (
+                            ) : membersData?.recordsTotal !== undefined &&
+                              membersData?.recordsTotal !== null ? (
                               <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                                {memberData.recordsTotal === 0
+                                {membersData.recordsTotal === 0
                                   ? "0"
-                                  : memberData.recordsTotal}
+                                  : membersData.recordsTotal}
                                 +
                               </p>
                             ) : (
@@ -276,12 +296,12 @@ export default function Home() {
                         <div className="flex flex-col items-center space-y-1 basis-1/3 sm:items-start">
                           {isLoading ? (
                             <Loading size="w-[20px] h-[20px] sm:w-[40px] sm:h-[40px]" />
-                          ) : memberData?.recordsTotal !== undefined &&
-                            memberData?.recordsTotal !== null ? (
+                          ) : membersData?.recordsTotal !== undefined &&
+                            membersData?.recordsTotal !== null ? (
                             <h3 className="text-[30px] lg:text-[40px] font-bold text-mainPrimary">
-                              {memberData.recordsTotal === 0
+                              {membersData.recordsTotal === 0
                                 ? "0"
-                                : memberData.recordsTotal}
+                                : membersData.recordsTotal}
                               +
                             </h3>
                           ) : (
@@ -297,12 +317,12 @@ export default function Home() {
                         <div className="flex flex-col items-center space-y-1 basis-1/3 lg:items-start lg:ml-10">
                           {isLoading ? (
                             <Loading size="w-[20px] h-[20px] sm:w-[40px] sm:h-[40px]" />
-                          ) : awardData?.recordsTotal !== undefined &&
-                            awardData?.recordsTotal !== null ? (
+                          ) : awardsData?.recordsTotal !== undefined &&
+                            awardsData?.recordsTotal !== null ? (
                             <h3 className="text-[30px] lg:text-[40px] pl-[5px] sm:pl-0 font-bold text-mainPrimary">
-                              {awardData.recordsTotal === 0
+                              {awardsData.recordsTotal === 0
                                 ? "0"
-                                : awardData.recordsTotal}
+                                : awardsData.recordsTotal}
                               +
                             </h3>
                           ) : (
@@ -318,12 +338,12 @@ export default function Home() {
                         <div className="flex flex-col items-center space-y-1 basis-1/3 sm:items-end lg:items-start lg:ml-5">
                           {isLoading ? (
                             <Loading size="w-[20px] h-[20px] sm:w-[40px] sm:h-[40px]" />
-                          ) : projectData?.recordsTotal !== undefined &&
-                            projectData?.recordsTotal !== null ? (
+                          ) : projectsData?.recordsTotal !== undefined &&
+                            projectsData?.recordsTotal !== null ? (
                             <h3 className="text-[30px] lg:text-[40px] font-bold pl-[5px] sm:pl-0 text-mainPrimary">
-                              {projectData.recordsTotal === 0
+                              {projectsData.recordsTotal === 0
                                 ? "0"
-                                : projectData.recordsTotal}
+                                : projectsData.recordsTotal}
                               +
                             </h3>
                           ) : (
@@ -377,12 +397,12 @@ export default function Home() {
                         </span>
                         {isLoading ? (
                           <Loading size="w-[10px] h-[10px] sm:w-[20px] sm:h-[20px]" />
-                        ) : projectData?.recordsTotal !== undefined &&
-                          projectData?.recordsTotal !== null ? (
+                        ) : projectsData?.recordsTotal !== undefined &&
+                          projectsData?.recordsTotal !== null ? (
                           <span className="pl-1">
-                            {projectData.recordsTotal === 0
+                            {projectsData.recordsTotal === 0
                               ? "0"
-                              : projectData.recordsTotal}{" "}
+                              : projectsData.recordsTotal}{" "}
                             +
                           </span>
                         ) : (
@@ -415,12 +435,12 @@ export default function Home() {
                             </p>
                             {isLoading ? (
                               <Loading size="w-[10px] h-[10px] sm:w-[20px] sm:h-[20px]" />
-                            ) : awardData?.recordsTotal !== undefined &&
-                              awardData?.recordsTotal !== null ? (
+                            ) : awardsData?.recordsTotal !== undefined &&
+                              awardsData?.recordsTotal !== null ? (
                               <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                                {awardData.recordsTotal === 0
+                                {awardsData.recordsTotal === 0
                                   ? "0"
-                                  : awardData.recordsTotal}
+                                  : awardsData.recordsTotal}
                                 +
                               </p>
                             ) : (
@@ -450,12 +470,12 @@ export default function Home() {
                             </p>
                             {isLoading ? (
                               <Loading size="w-[10px] h-[10px] sm:w-[20px] sm:h-[20px]" />
-                            ) : memberData?.recordsTotal !== undefined &&
-                              memberData?.recordsTotal !== null ? (
+                            ) : membersData?.recordsTotal !== undefined &&
+                              membersData?.recordsTotal !== null ? (
                               <p className="text-[13px] md:text-[21px] xl:text-[25px] text-center font-bold px-0 py-3 md:py-5 text-bluePallete-700">
-                                {memberData.recordsTotal === 0
+                                {membersData.recordsTotal === 0
                                   ? "0"
-                                  : memberData.recordsTotal}
+                                  : membersData.recordsTotal}
                                 +
                               </p>
                             ) : (
@@ -473,7 +493,7 @@ export default function Home() {
             </section>
             {/* division section */}
             <section
-              id="divisionPage"
+              id="divisionArea"
               className="w-full h-[540px] md:h-[500px] flex justify-center items-start"
             >
               <div className="w-full flex flex-row flex-wrap mt-[50px] md:mt-[70px] xl:mt-[130px]">
@@ -487,10 +507,10 @@ export default function Home() {
                 {/* container card */}
                 <div className={`basis-full md:basis-[65%] lg:basis-[59%] w-auto h-auto sm:max-w-[60%] md:max-w-[65%] lg:max-w-[60%] ${styles.divisionCardContainer}`}>
                   <div className="hidden md:block">
-                    <DivisionFirstSlider divisioData={divisionData} isLoading={isLoading}/>
+                    <DivisionFirstSlider divisionsData={divisionsData} isLoading={isLoading}/>
                   </div>
                   <div className="block md:hidden">
-                    <DivisionSecondSlider divisioData={divisionData} isLoading={isLoading}/>
+                    <DivisionSecondSlider divisionsData={divisionsData} isLoading={isLoading}/>
                   </div>
                 </div>
               </div>
@@ -514,6 +534,12 @@ export default function Home() {
                       </button>
                     </Link>
                     <ProjectCard />
+                    {/* <div className="hidden lg:block">
+                      <ProjectCard />
+                    </div>
+                    <div className="block lg:hidden">
+                      <SecondProjectCard />
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -533,7 +559,7 @@ export default function Home() {
                     </p>
                     {/* carousel ini hanya akan muncul jika ukuran layar diatas ukuran layar handphone */}
                     <div className="static flex flex-col w-full h-full">
-                      <NewsFirstSlider />
+                      <NewsFirstSlider newsData={newsData} isLoading={isLoading} />
                     </div>
                   </div>
                 </div>
@@ -554,7 +580,7 @@ export default function Home() {
                   </div>
                   {/* carousel ini hanya akan muncul jika ukuran layar masuk ke ukuran layar handphone */}
                   <div className="h-auto">
-                    <NewsSecondSlider />
+                    <NewsSecondSlider newsData={newsData} isLoading={isLoading} />
                   </div>
                 </div>
               </div>
@@ -562,7 +588,6 @@ export default function Home() {
           </div>
         </span>
       </main>
-      <Footer settingData={settingsData}/>
     </>
   );
 };

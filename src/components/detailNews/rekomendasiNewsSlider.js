@@ -7,12 +7,12 @@ import moment from 'moment';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import styles from '@/components/detailNews/rekomendasiNewsSlider.module.css';
-import { FormatString } from '@/app/utils/stringUtils';
 import { host } from '../host';
-import Loading from '@/components/loading';
+import { FormatString } from '@/app/utils/stringUtils';
 import ImageNotFound from '@/components/imageNotFound';
 import TeksNotFound from '@/components/teksNotFound';
+import styles from '@/components/detailNews/rekomendasiNewsSlider.module.css';
+import Loading from '@/components/loading';
 
 const RekomendasiNewsSlider = ({ newsData }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -82,7 +82,7 @@ const RekomendasiNewsSlider = ({ newsData }) => {
                     <div className="h-[162px]">
                       {data.mediaUri ? (
                         <Image
-                          src={host + data.mediaUri}
+                          src={`${host}${data?.mediaUri}`}
                           width={0}
                           height={0}
                           alt="Thumbnail News Central Computer Improvement"
@@ -103,7 +103,7 @@ const RekomendasiNewsSlider = ({ newsData }) => {
                         </TeksNotFound>
                       )}
                       {data.createdAt ? (
-                        <p className="text-sm text-mainFontColor font-medium">
+                        <p className="text-sm font-medium text-mainFontColor">
                           {moment(String(data.createdAt)).format(
                             'MMM DD[,] YYYY'
                           )}

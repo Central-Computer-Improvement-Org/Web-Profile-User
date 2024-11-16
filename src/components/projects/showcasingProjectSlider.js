@@ -3,48 +3,10 @@ import Image from 'next/image';
 
 import { host } from '../host';
 import NotFound from '../imageNotFound';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Autoplay } from 'swiper/modules';
-// import 'swiper/css';
-// import 'swiper/css/pagination';
-// import styles from '@/components/projects/projects.module.css';
 
 export default function ShowcasingProjectSlider({ image, speed }) {
    return (
       <>
-         {/* <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        slidesPerView={'auto'}
-        autoplay={{
-          delay: 1000,
-          disableOnInteraction: false,
-          // startAutoplayOnFirstAction: false,
-          // disableOnInteraction: false,
-          waitForTransition: false,
-          // pauseOnMouseEnter: false,
-        }}
-        loop={true}
-        modules={[Autoplay]}
-        className="mySwiper lg:!h-[208px] md:!h-[158px] !h-[96px]"
-      >
-        {image &&
-          image.map((data, index) => (
-            <SwiperSlide
-              className="lg:!w-[375px] md:!w-[275px] !w-[165px]"
-              key={index}
-            >
-              <Image
-                width={0}
-                height={0}
-                alt="project-img"
-                src={data.imageUri}
-                className="w-full h-full  rounded-[10px]"
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper> */}
-
          <div
             x-data="{}"
             x-init="$nextTick(() => {
@@ -65,7 +27,7 @@ export default function ShowcasingProjectSlider({ image, speed }) {
                            width={0}
                            height={0}
                            alt="Project Logo CCI"
-                           src={host + data.imageUri}
+                           src={`${host}${data?.imageUri}`}
                            className="w-full h-full aspect-video object-cover rounded-[10px]" // Jika gambar yg dinput horizontal
                            // className="w-full h-full aspect-video object-contain rounded-[10px]" // Jika gambar yg dinput kotak
                            priority={true}
@@ -91,13 +53,13 @@ export default function ShowcasingProjectSlider({ image, speed }) {
                         {data.imageUri ? <Image
                            width={0}
                            height={0}
-                           alt="project-img"
-                           src={host + data.imageUri}
+                           src={`${host}${data?.imageUri}`}
+                           alt="Project Logo CCI"
                            className="w-full h-full aspect-video object-cover rounded-[10px]" // Jika gambar yg dinput horizontal 
-                           // className="w-full h-full aspect-video object contain rounded-[10px]" // Jika gambar yg dinput kotak
+                        // className="w-full h-full aspect-video object contain rounded-[10px]" // Jika gambar yg dinput kotak
                         /> : <NotFound />}
                      </li>
-                  )) 
+                  ))
                ) : (
                   <div className="w-full h-[50px]">
                      <NotFound />
@@ -107,4 +69,4 @@ export default function ShowcasingProjectSlider({ image, speed }) {
          </div>
       </>
    );
-}
+};

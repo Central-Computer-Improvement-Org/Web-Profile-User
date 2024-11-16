@@ -5,9 +5,6 @@ import Image from "next/image";
 
 import { host } from "@/components/host";
 import request from "@/app/utils/request";
-import Header from "@/components/header";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import EventCard from "@/components/Division/EventCard";
 import MemberCard from "@/components/Division/MemberCard";
 import Loading from "@/components/loading";
@@ -43,7 +40,7 @@ export default function DetailDvision() {
                setIsLoading(false);
             });
       } else {
-         console.error("Division ID not found");
+         console.log("Division ID not found");
          setIsLoading(false);
       }
    }, [divisionId]);
@@ -61,8 +58,6 @@ export default function DetailDvision() {
 
    return (
       <>
-         <Header />
-         <Navbar />
          <span className="block h-full bg-gradientAccentTwo">
             <div className="block h-full bg-gradientDefaultTwo">
                <main className="w-full h-auto xl:max-w-[75rem] lg:max-w-[67rem] md:max-w-[51rem] sm:max-w-xl max-w-md px-5 sm:px-0 mx-auto">
@@ -172,7 +167,6 @@ export default function DetailDvision() {
                </main>
             </div>
          </span>
-         <Footer />
       </>
    );
 };

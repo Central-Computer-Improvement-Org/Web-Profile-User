@@ -61,14 +61,6 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
          } else {
             console.error(response.errors);
          }
-         
-         // if (response.status === 200 || response.status === 201) {
-         //    setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-         //    const filteredData = response.data.data.filter(event => !filterByDivision || event.division.name === filterByDivision);
-         //    setEventData(filteredData);
-         // } else {
-         //    console.error(JSON.stringify(response.errors));
-         // }
       })
       .catch((error) => {
          console.error(error);

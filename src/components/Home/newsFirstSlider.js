@@ -2,8 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import moment from "moment";
-import "moment/locale/id";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
@@ -12,18 +10,15 @@ import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 
 import { host } from "@/components/host";
-import request from "@/app/utils/request";
 import Loading from "@/components/loading";
 import ImageNotFound from "@/components/imageNotFound";
 import TextNotFound from "@/components/teksNotFound";
 import styles from "@/components/Home/homeComponent.module.css";
 
 
-const SwiperComponent = () => {
+const SwiperComponent = ({ newsData, isLoading }) => {
   const previousButton = useRef(null);
   const nextButton = useRef(null);
-  const [newsData, setNewsData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const pagination = {
@@ -33,42 +28,12 @@ const SwiperComponent = () => {
     },
   };
 
-  useEffect(() => {
-    request
-      .get("/news")
-      .then((response) => {
-        if (response.status === 200) {
-          const formatDateData = response?.data?.data?.map((item) => {
-            const createdAt = moment(String(item.createdAt)).format("MMM DD[,] YYYY")
-            return {
-              ...item,
-              date: createdAt,
-            };
-          });
-          // pengurutan data berdasarkan tanggal data terbaru
-          const sortNewsData = formatDateData.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-          // pengambilan 5 data terbaru bedasarkan tanggal data terbaru
-          const limitNewsData = sortNewsData.slice(0, 5);
-          setNewsData(limitNewsData);
-        } else {
-          console.error(response.errors);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
-
   return (
     <>
       {isLoading ? (
         <Loading
-          size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px]"
-          textAlignment="text-center"
+          size="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] md:w-[170px] md:h-[170px]"
+          textAlignment="text-center sm:pt-10"
         />
       ) : (
         <div className="flex items-center justify-center w-full">
@@ -106,7 +71,7 @@ const SwiperComponent = () => {
             onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
             className="h-[400px] md:h-[600px]"
           >
-            {newsData.map((data, index) => (
+            {newsData?.map((data, index) => (
               <SwiperSlide key={index} className={`${styles.newsSlider}`}>
                 <div
                   className={
@@ -122,22 +87,14 @@ const SwiperComponent = () => {
                       height={268}
                       priority={true}
                       alt="News Thumbnail Central Computer Improvment"
-                      className={
-                        index === currentSlide
-                          ? `rounded-t-[10px] object-cover`
-                          : `rounded-t-[10px] object-cover`
-                      }
+                      className="rounded-t-[10px] object-cover"
                     />
                   ) : (
                     <ImageNotFound
                       width={402}
                       height={268}
                       loading="lazy"
-                      className={
-                        index === currentSlide
-                          ? `rounded-t-[10px] object-cover`
-                          : `rounded-t-[10px] object-cover`
-                      }
+                      className="rounded-t-[10px] object-cover"
                     />
                   )}
                   <div

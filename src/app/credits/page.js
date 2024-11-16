@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import { host } from "@/components/host";
 import request from "../utils/request";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
-import Navbar from "@/components/navbar";
 import CrewSlider from "@/components/credit/crewSlider";
 import CardCreditProfile from "@/components/credit/cardCreditProfile";
 import ImageNotFound from "@/components/imageNotFound";
@@ -64,8 +61,6 @@ export default function Credits() {
 
   return (
     <>
-      <Header />
-      <Navbar />
       <main className="w-full h-auto">
         <span className="block h-full bg-gradientAccentTwo">
           <span className="block h-full bg-gradientDefaultTwo">
@@ -198,7 +193,6 @@ export default function Credits() {
           </span>
         </span>
       </main>
-      <Footer />
     </>
   );
 }
