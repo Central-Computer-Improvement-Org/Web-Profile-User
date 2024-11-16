@@ -31,45 +31,39 @@ const EventCard = ({ filterByDivisionName, filterByDivisionId }) => {
    const [page, setPage] = useState(1);
    const [totalPages, setTotalPages] = useState(0);
 
-   const getEvents = async () => {
-      const payload = {
-         limit: LIMITER,
-         page: page,
-         ...(filterByDivisionName && { divisionName: filterByDivisionName }),
-         ...(filterByDivisionId && { divisionId: filterByDivisionId }),
-      };
-      
-      await request
-      .get("/events", payload)
-      .then((response) => {
-         if (response.status === 200) {
-            const filteredData = response.data.data.filter(event => {
-               if (filterByDivisionName) {
-                  return event.division?.name === filterByDivisionName;
-               }
-               if (filterByDivisionId) {
-                  return event.division?.id === filterByDivisionId;
-               }
-               return true;
-            });
-            setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-            setEventData(filteredData);
-            
-            if (!filterByDivisionName && !filterByDivisionId) {
-               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-            }
-         } else {
-            console.error(response.errors);
-         }
-      })
-      .catch((error) => {
-         console.error(error);
-      });
-   };
-
    useEffect(() => {
+      const getEvents = async () => {
+         const payload = {
+            limit: LIMITER,
+            page: page,
+            ...(filterByDivisionName && { divisionName: filterByDivisionName }),
+            ...(filterByDivisionId && { divisionId: filterByDivisionId }),
+         };
+   
+         try {
+            const response = await request.get("/events", payload);
+            if (response.status === 200) {
+               const filteredData = response.data.data.filter(event => {
+                  if (filterByDivisionName) {
+                     return event.division?.name === filterByDivisionName;
+                  }
+                  if (filterByDivisionId) {
+                     return event.division?.id === filterByDivisionId;
+                  }
+                  return true;
+               });
+               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+               setEventData(filteredData);
+            } else {
+               console.error(response.errors);
+            }
+         } catch (error) {
+            console.error(error);
+         }
+      };
+   
       getEvents();
-   }, [page]);
+   }, [page, filterByDivisionName, filterByDivisionId]);   
 
    const isDesktop = useMediaQuery({ minWidth: 1051 });
 

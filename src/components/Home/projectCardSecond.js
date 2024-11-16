@@ -11,7 +11,7 @@ import ImageNotFound from '@/components/imageNotFound';
 import styles from '@/components/Home/homeComponent.module.css';
 
 
-const projectDataSecond = () => {
+const ProjectDataSecond = () => {
     const [projectData, setProjectData] = useState(null);
     const [positionIndex, setPositionIndex] = useState(0);
     const [isMovingData, setIsMovingData] = useState(false);
@@ -321,4 +321,4 @@ const projectDataSecond = () => {
     );
 };
 
-export default projectDataSecond;
+export default ProjectDataSecond;

@@ -11,26 +11,26 @@ const Divisions = () => {
    const [page, setPage] = useState(1);
    const [totalPages, setTotalPages] = useState(0);
 
-   const getTeams = async () => {
-      const payload = {
-         page: page
-      };
-
-      try {
-         const response = await request.get('/users?roleNameExact=Ketua', { params: payload });
-         if (response?.data?.code === 200) {
-            const filteredTeams = response.data.data.filter(user => user.role.name.toLowerCase() === "ketua");
-            setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
-            setTeams(filteredTeams);
-         }
-      } catch (error) {
-         setTeams([]);
-      }
-   };
-
    useEffect(() => {
+      const getTeams = async () => {
+         const payload = {
+            page: page
+         };
+   
+         try {
+            const response = await request.get('/users?roleNameExact=Ketua', { params: payload });
+            if (response?.data?.code === 200) {
+               const filteredTeams = response.data.data.filter(user => user.role.name.toLowerCase() === "ketua");
+               setTotalPages(Math.ceil(response.data.recordsTotal / LIMITER));
+               setTeams(filteredTeams);
+            }
+         } catch (error) {
+            setTeams([]);
+         }
+      };
+   
       getTeams();
-   }, [page]);
+   }, [page]);   
 
    return (
       <>
