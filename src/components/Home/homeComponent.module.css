@@ -111,6 +111,10 @@
 	.projectsContainerRepository {
 		margin-top: 10px;
 	}
+	.projectsThumbnailImage {
+		width: 250px;
+		height: 250px;
+	}
 }
 
 @media only screen and (max-width: 335px) {

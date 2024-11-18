@@ -30,11 +30,10 @@ const HeroSection = ({ newsDatas, isLoading }) => {
               el: '.swiper-custom-pagination',
               clickable: true,
             }}
-            autoplay={false}
-            // autoplay={{
-            //   delay: 5000,
-            //   disableOnInteraction: false,
-            // }}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
             className="w-full rounded-xl"
           >
             {newsDatas?.slice(0, 4).map((news) => (
