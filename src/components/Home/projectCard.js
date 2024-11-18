@@ -299,7 +299,7 @@ const ProjectData = ({ projectsDataSecond, isLoading }) => {
       </div>
       {/* tampilan mobile / tablet */}
       <div className="block w-full lg:hidden">
-        <div className="relative flex flex-col items-center justify-between w-full h-auto gap-1 bg-gray-200 rounded-2xl">
+        <div className="relative flex flex-col items-center justify-between w-full h-auto gap-1 bg-transparent rounded-2xl">
           <div className="absolute bottom-0 h-[85%] w-full bg-bluePallete-700 rounded-2xl"></div>
             {/* Project Thumbnail */}
             <div className={`relative z-10 w-[290px] h-[270px] sm:w-[480px] sm:h-[267px] md:w-full md:h-[350px] max-w-[650px] max-h-[370px] lg:max-w-[467px] lg:max-h-[284px] rounded-[20px] sm:rounded-lg object-cover ${styles.projectsThumbnailImage}`}>
