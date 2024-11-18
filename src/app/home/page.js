@@ -25,6 +25,7 @@ export default function Home() {
   const [membersData, setMembersData] = useState(null);
   const [divisionsData, setDivisionsData] = useState(null);
   const [projectsData, setProjectsData] = useState(null);
+  const [projectsDataSecond, setProjectsDataSecond] = useState(null);
   const [newsData, setNewsData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const logError = (message, error) => console.error(message, error);
@@ -83,10 +84,17 @@ export default function Home() {
   };
 
   const fetchProjectDatas = async () => {
+    setProjectsDataSecond(null);
+    
     try {
       const response = await request.get("/projects");
       if (response?.status === 200) {
         setProjectsData(response.data);
+        // pengurutan data berdasarkan tanggal data terbaru
+        const sortedData = response.data.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setProjectsDataSecond(sortedData);
       } else {
         logError("Error fetching project data:", response?.errors);
       }
@@ -533,13 +541,7 @@ export default function Home() {
                           Explore Our Projects
                       </button>
                     </Link>
-                    <ProjectCard />
-                    {/* <div className="hidden lg:block">
-                      <ProjectCard />
-                    </div>
-                    <div className="block lg:hidden">
-                      <SecondProjectCard />
-                    </div> */}
+                    <ProjectCard projectsDataSecond={projectsDataSecond} isLoading={isLoading} />
                   </div>
                 </div>
               </div>
