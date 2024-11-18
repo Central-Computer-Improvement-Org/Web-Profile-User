@@ -116,7 +116,7 @@ const ProjectPage = () => {
                 divisions.map((data, index) => (
                   <div
                     key={index}
-                    className={`lg:px-[30px] md:px-[20px] px-[10px] lg:py-[10px] md:py-[8px] py-[5px] ${menuActive.name == data.name ? 'bg-blue-200' : 'hover:bg-blue-200'
+                    className={`lg:px-[30px] md:px-[20px] px-[10px] lg:py-[10px] md:py-[8px] py-[5px] ${menuActive.name == data.name ? 'bg-blue-300' : 'hover:bg-blue-300'
                       } bg-blue-100 rounded-md md:rounded-[10px] cursor-pointer`}
                     onClick={() => setMenuActive(data)}
                   >
