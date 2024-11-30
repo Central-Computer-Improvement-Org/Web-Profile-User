@@ -40,7 +40,7 @@ export default function DetailDvision() {
                setIsLoading(false);
             });
       } else {
-         console.log("Division ID not found");
+         console.error("Division ID not found");
          setIsLoading(false);
       }
    }, [divisionId]);

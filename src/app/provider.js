@@ -23,11 +23,13 @@ export function Providers({ children }) {
 
         const fetchSettingDatas = async () => {
             try {
-                const response = await request.get("/setting");
-                if (response?.status === 200) {
-                    setSettingsData(response.data.data);
-                } else {
-                    logError("Error fetching settings data:", response?.errors);
+                if (settingsData === null) {
+                    const response = await request.get("/setting");
+                    if (response?.status === 200) {
+                        setSettingsData(response.data.data);
+                    } else {
+                        logError("Error fetching settings data:", response?.errors);
+                    }
                 }
             } catch (error) {
                 logError("Error fetching settings data:", error);
@@ -36,11 +38,13 @@ export function Providers({ children }) {
 
         const fetchContactDatas = async () => {
             try {
-                const response = await request.get("/contact");
-                if (response?.status === 200) {
-                    setContactsData(response.data);
-                } else {
-                    logError("Error fetching contact data:", response?.errors);
+                if (contactsData === null) {
+                    const response = await request.get("/contact");
+                    if (response?.status === 200) {
+                        setContactsData(response.data.data);
+                    } else {
+                        logError("Error fetching contact data:", response?.errors);
+                    }
                 }
             } catch (error) {
                 logError("Error fetching contact data:", error);
@@ -49,12 +53,15 @@ export function Providers({ children }) {
         
         // Pakai promise allSettled untuk fetch data secara bersamaan dan ngabaikan error dalam suatu fungsi fetch
         Promise.allSettled([
-            fetchSettingDatas(),
-            fetchContactDatas(),
+            settingsData === null ? fetchSettingDatas() : undefined,
+            contactsData===null ? fetchContactDatas() : undefined
         ]).finally(() => {
             setIsLoading(false);
         });
-    }, []);
+    }, [
+        settingsData,
+        contactsData
+    ]);
 
     return (
         <SettingsContext.Provider value={{ settingsData, contactsData, isLoading }}>

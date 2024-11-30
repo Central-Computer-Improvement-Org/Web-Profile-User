@@ -6,13 +6,13 @@ import moment from "moment";
 import "moment/locale/id";
 
 import { host } from "@/components/host";
+import { useSettings } from "../provider";
 import request from "@/app/utils/request";
 import NewsFirstSlider from "@/components/Home/newsFirstSlider";
 import NewsSecondSlider from "@/components/Home/newsSecondSlider";
 import DivisionFirstSlider from "@/components/Home/divisionFirstSlider";
 import DivisionSecondSlider from "@/components/Home/divisionSecondSlider";
 import ProjectCard from "@/components/Home/projectCard";
-// import SecondProjectCard from "@/components/Home/projectCardSecond";
 import TextNotFound from "@/components/teksNotFound";
 import Loading from "@/components/loading";
 import styles from "@/app/home/homePage.module.css";
@@ -20,7 +20,7 @@ import logoCCI from '/public/assets/logo/logo_cci.svg';
 
 
 export default function Home() {
-  const [settingsData, setSettingsData] = useState(null);
+  const { settingsData } = useSettings();
   const [awardsData, setAwardsData] = useState(null);
   const [membersData, setMembersData] = useState(null);
   const [divisionsData, setDivisionsData] = useState(null);
@@ -29,19 +29,6 @@ export default function Home() {
   const [newsData, setNewsData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const logError = (message, error) => console.error(message, error);
-
-  const fetchSettingDatas = async () => {
-    try {
-      const response = await request.get("/setting");
-      if (response?.status === 200) {
-        setSettingsData(response.data.data);
-      } else {
-        logError("Error fetching settings data:", response?.errors);
-      }
-    } catch (error) {
-      logError("Error fetching settings data:", error);
-    }
-  };
 
   const fetchAwardDatas = async () => {
     try {
@@ -134,7 +121,7 @@ export default function Home() {
 
     // Pakai promise allSettled untuk fetch data secara bersamaan dan ngabaikan error dalam suatu fungsi fetch
     Promise.allSettled([
-      fetchSettingDatas(),
+      // fetchSettingDatas(),
       fetchAwardDatas(),
       fetchMemberDatas(),
       fetchDivisionDatas(),
