@@ -75,8 +75,8 @@ const Footer = () => {
           {/* contact data*/}
           <div className="flex flex-col items-center justify-between w-full h-full pl-0 space-y-5 basis-full lg:basis-2/5 lg:pl-20">
             <div className="w-[170px] sm:w-[345px] md:w-[385px] flex flex-row justify-between">
-            {contactsData?.data && contactsData?.data?.length > 0 ? (
-              contactsData.data.map((contact, index) => (
+            {contactsData && contactsData?.length > 0 ? (
+              contactsData.map((contact, index) => (
                 <a
                   key={index}
                   href={contact.accountUri}
